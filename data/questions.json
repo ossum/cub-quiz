@@ -2070,6 +2070,62 @@
         }
       ],
       "answer": "nature-cub"
+    },
+    {
+      "id": "sw-pigpen-nature-cipher-2",
+      "type": "image-option",
+      "programme": "SW",
+      "advancementId": "SW-14",
+      "question": "Which code says 'sap'?",
+      "image": "images/codes/nature-cipher/CIPHER.png",
+      "imageAlt": "Nature cipher key",
+      "options": [
+        {
+          "id": "nature-map",
+          "image": "images/codes/nature-cipher/MAP.png"
+        },
+        {
+          "id": "nature-sun",
+          "image": "images/codes/nature-cipher/SUN.png"
+        },
+        {
+          "id": "nature-fun",
+          "image": "images/codes/nature-cipher/FUN.png"
+        },
+        {
+          "id": "nature-sap",
+          "image": "images/codes/nature-cipher/SAP.png"
+        }
+      ],
+      "answer": "nature-sap"
+    },
+    {
+      "id": "sw-pigpen-nature-cipher-3",
+      "type": "image-option",
+      "programme": "SW",
+      "advancementId": "SW-14",
+      "question": "Which code says 'map'?",
+      "image": "images/codes/nature-cipher/CIPHER.png",
+      "imageAlt": "Nature cipher key",
+      "options": [
+        {
+          "id": "nature-mud",
+          "image": "images/codes/nature-cipher/MUD.png"
+        },
+        {
+          "id": "nature-fun",
+          "image": "images/codes/nature-cipher/FUN.png"
+        },
+        {
+          "id": "nature-map",
+          "image": "images/codes/nature-cipher/MAP.png"
+        },
+        {
+          "id": "nature-den",
+          "image": "images/codes/nature-cipher/DEN.png"
+        }
+      ],
+      "answer": "nature-map"
     }
   ]
 }
