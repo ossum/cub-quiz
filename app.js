@@ -35,7 +35,8 @@ async function loadData() {
     renderSetup();
   } catch (error) {
     const openedAsFile = window.location.protocol === 'file:';
-    app.innerHTML = `<div class="results"><div class="result-icon" aria-hidden="true">!</div><p class="eyebrow">OOPS! THE TRAIL IS BLOCKED</p><h2>We couldn’t load the quiz.</h2><p class="summary">${openedAsFile ? 'Open the project through a local web server (for example, VS Code Live Server). Browsers block the question files when index.html is opened directly.' : 'Check that data/questions.json and data/advancements.json are in the project, then refresh the page.'}</p><button class="primary" onclick="location.reload()">Try again</button></div>`;
+    const localDiagnostic = ['localhost', '127.0.0.1'].includes(window.location.hostname) ? `<pre style="white-space:pre-wrap;text-align:left;font-size:11px;color:#7b4e26;background:#fff8e8;padding:10px;border-radius:8px;overflow-wrap:anywhere">${escapeHtml(error?.stack || String(error))}</pre>` : '';
+    app.innerHTML = `<div class="results"><div class="result-icon" aria-hidden="true">!</div><p class="eyebrow">OOPS! THE TRAIL IS BLOCKED</p><h2>We couldn’t load the quiz.</h2><p class="summary">${openedAsFile ? 'Open the project through a local web server (for example, VS Code Live Server). Browsers block the question files when index.html is opened directly.' : 'Check that data/questions.json and data/advancements.json are in the project, then refresh the page.'}</p>${localDiagnostic}<button class="primary" onclick="location.reload()">Try again</button></div>`;
   }
 }
 

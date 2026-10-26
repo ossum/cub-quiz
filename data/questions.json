@@ -1,5 +1,4 @@
 {
-  "title": "Edward Shield Challenge",
   "questions": [
     {
       "id": "sw-best-meetings-1",
@@ -82,7 +81,7 @@
       "programme": "SW",
       "advancementId": "SW-55",
       "question": "Which Jungle Book character is shown here?",
-      "image": "images/baloo.png",
+      "image": "images/jungle-characters/baloo.jpg",
       "imageAlt": "A friendly illustrated bear waving",
       "options": [
         "Baloo",
@@ -1429,6 +1428,458 @@
       },
       "sampleSize": 4,
       "explanation": "Some names share the same kind of animal, so use the short clue to find the exact match."
+    },
+    {
+      "id": "sw-flag-colour-black",
+      "type": "multiple-choice",
+      "programme": "SW",
+      "advancementId": "SW-53",
+      "question": "What colour is the part of the South African flag marked by the arrow?",
+      "image": "images/flags/sa-flag-black.png",
+      "imageAlt": "South African flag outline with an arrow pointing to the black section",
+      "options": [
+        "Black",
+        "Blue",
+        "Green",
+        "Red",
+        "White",
+        "Yellow"
+      ],
+      "answer": "Black",
+      "explanation": "The arrow points to the black part of the flag."
+    },
+    {
+      "id": "sw-flag-colour-blue",
+      "type": "multiple-choice",
+      "programme": "SW",
+      "advancementId": "SW-53",
+      "question": "What colour is the part of the South African flag marked by the arrow?",
+      "image": "images/flags/sa-flag-blue.png",
+      "imageAlt": "South African flag outline with an arrow pointing to the blue section",
+      "options": [
+        "Black",
+        "Blue",
+        "Green",
+        "Red",
+        "White",
+        "Yellow"
+      ],
+      "answer": "Blue",
+      "explanation": "The arrow points to the blue part of the flag."
+    },
+    {
+      "id": "sw-flag-colour-green",
+      "type": "multiple-choice",
+      "programme": "SW",
+      "advancementId": "SW-53",
+      "question": "What colour is the part of the South African flag marked by the arrow?",
+      "image": "images/flags/sa-flag-green.png",
+      "imageAlt": "South African flag outline with an arrow pointing to the lower right section",
+      "options": [
+        "Black",
+        "Blue",
+        "Green",
+        "Red",
+        "White",
+        "Yellow"
+      ],
+      "answer": "Blue",
+      "explanation": "The arrow points to the blue part of the flag."
+    },
+    {
+      "id": "sw-flag-colour-red",
+      "type": "multiple-choice",
+      "programme": "SW",
+      "advancementId": "SW-53",
+      "question": "What colour is the part of the South African flag marked by the arrow?",
+      "image": "images/flags/sa-flag-red.png",
+      "imageAlt": "South African flag outline with an arrow pointing to the red section",
+      "options": [
+        "Black",
+        "Blue",
+        "Green",
+        "Red",
+        "White",
+        "Yellow"
+      ],
+      "answer": "Red",
+      "explanation": "The arrow points to the red part of the flag."
+    },
+    {
+      "id": "sw-flag-colour-white",
+      "type": "multiple-choice",
+      "programme": "SW",
+      "advancementId": "SW-53",
+      "question": "What colour is the part of the South African flag marked by the arrow?",
+      "image": "images/flags/sa-flag-white.png",
+      "imageAlt": "South African flag outline with an arrow pointing to the white section",
+      "options": [
+        "Black",
+        "Blue",
+        "Green",
+        "Red",
+        "White",
+        "Yellow"
+      ],
+      "answer": "White",
+      "explanation": "The arrow points to the white part of the flag."
+    },
+    {
+      "id": "sw-flag-colour-yellow",
+      "type": "multiple-choice",
+      "programme": "SW",
+      "advancementId": "SW-53",
+      "question": "What colour is the part of the South African flag marked by the arrow?",
+      "image": "images/flags/sa-flag-yellow.png",
+      "imageAlt": "South African flag outline with an arrow pointing to the yellow section",
+      "options": [
+        "Black",
+        "Blue",
+        "Green",
+        "Red",
+        "White",
+        "Yellow"
+      ],
+      "answer": "Yellow",
+      "explanation": "The arrow points to the yellow part of the flag."
+    },
+    {
+      "id": "sw-question-compass-1",
+      "programme": "SW",
+      "type": "image-dropdown",
+      "question": "Which direction is the pineapple?",
+      "explanation": "",
+      "image": "images/compass-work/compass-8-directions.png",
+      "imageAlt": "Compass with animals on the 8 points",
+      "options": [
+        "North",
+        "South",
+        "East",
+        "West"
+      ],
+      "answer": "North",
+      "advancementId": "SW-40"
+    },
+    {
+      "id": "sw-question-compass-2",
+      "programme": "SW",
+      "type": "image-dropdown",
+      "question": "Which direction is the naughty Bandar-log Monkey?",
+      "explanation": "",
+      "image": "images/compass-work/compass-8-directions.png",
+      "imageAlt": "Compass with animals on the 8 points",
+      "options": [
+        "North",
+        "South",
+        "East",
+        "West"
+      ],
+      "answer": "South",
+      "advancementId": "SW-40"
+    },
+    {
+      "id": "sw-question-compass-3",
+      "programme": "SW",
+      "type": "image-dropdown",
+      "question": "Which direction is Mang the bat?",
+      "explanation": "",
+      "image": "images/compass-work/compass-8-directions.png",
+      "imageAlt": "Compass with animals on the 8 points",
+      "options": [
+        "North",
+        "North-west",
+        "South-west",
+        "West"
+      ],
+      "answer": "North-west",
+      "advancementId": "SW-40"
+    },
+    {
+      "id": "sw-question-compass-4",
+      "programme": "SW",
+      "type": "image-dropdown",
+      "question": "Which direction is the Red Flower (fire!)?",
+      "explanation": "",
+      "image": "images/compass-work/compass-8-directions.png",
+      "imageAlt": "Compass with animals on the 8 points",
+      "options": [
+        "North",
+        "North-west",
+        "South-west",
+        "North-east"
+      ],
+      "answer": "North-east",
+      "advancementId": "SW-40"
+    },
+    {
+      "id": "sw-question-compass-5",
+      "programme": "SW",
+      "type": "image-dropdown",
+      "question": "Which direction is the Akela?",
+      "explanation": "",
+      "image": "images/compass-work/compass-8-directions.png",
+      "imageAlt": "Compass with animals on the 8 points",
+      "options": [
+        "North",
+        "South",
+        "East",
+        "West"
+      ],
+      "answer": "West",
+      "advancementId": "SW-40"
+    },
+    {
+      "id": "sw-question-compass-6",
+      "programme": "SW",
+      "type": "image-dropdown",
+      "question": "Which direction is the pond?",
+      "explanation": "",
+      "image": "images/compass-work/compass-8-directions.png",
+      "imageAlt": "Compass with animals on the 8 points",
+      "options": [
+        "North-east",
+        "South-east",
+        "South-west",
+        "North-west"
+      ],
+      "answer": "South-west",
+      "advancementId": "SW-40"
+    },
+    {
+      "id": "sw-question-compass-7",
+      "programme": "SW",
+      "type": "image-dropdown",
+      "question": "Which direction is Baloo the Bear?",
+      "explanation": "",
+      "image": "images/compass-work/compass-8-directions.png",
+      "imageAlt": "Compass with animals on the 8 points",
+      "options": [
+        "North",
+        "South",
+        "East",
+        "West"
+      ],
+      "answer": "East",
+      "advancementId": "SW-40"
+    },
+    {
+      "id": "sw-question-compass-8",
+      "programme": "SW",
+      "type": "image-dropdown",
+      "question": "Which direction is Kaa the Snake?",
+      "explanation": "",
+      "image": "images/compass-work/compass-8-directions.png",
+      "imageAlt": "Compass with animals on the 8 points",
+      "options": [
+        "North-west",
+        "South-east",
+        "South-west",
+        "West"
+      ],
+      "answer": "South-east",
+      "advancementId": "SW-40"
+    },
+    {
+      "id": "sw-question-compass-9",
+      "programme": "SW",
+      "type": "image-dropdown",
+      "question": "Which way does this compass point?",
+      "explanation": "",
+      "image": "images/compass-work/compass-se.jpg",
+      "imageAlt": "Compass Rose",
+      "options": [
+        "North-west",
+        "South-east",
+        "South-west",
+        "North-east"
+      ],
+      "answer": "South-east",
+      "advancementId": "SW-40"
+    },
+    {
+      "id": "sw-jungle-picture-name-match",
+      "type": "image-match",
+      "programme": "SW",
+      "advancementId": "SW-55",
+      "question": "Match each picture to its Jungle Book character name.",
+      "leftItems": [
+        {
+          "id": "picture-akela",
+          "image": "images/jungle-characters/akela.jpg",
+          "alt": "Picture of the wolf pack leader"
+        },
+        {
+          "id": "picture-bagheera",
+          "image": "images/jungle-characters/bagheera.jpg",
+          "alt": "Picture of a black panther"
+        },
+        {
+          "id": "picture-mang",
+          "image": "images/jungle-characters/mang.jpg",
+          "alt": "Picture of a bat"
+        },
+        {
+          "id": "picture-chil",
+          "image": "images/jungle-characters/chil.jpg",
+          "alt": "A bird, kite"
+        },
+        {
+          "id": "picture-baloo",
+          "image": "images/jungle-characters/baloo.jpg",
+          "alt": "Picture of a bear"
+        },
+        {
+          "id": "picture-raksha",
+          "image": "images/jungle-characters/raksha.jpg",
+          "alt": "Mother wolf"
+        },
+        {
+          "id": "picture-rikki-tikki-tavi",
+          "image": "images/jungle-characters/rikki-tikki-tavi.jpg",
+          "alt": "Mongoose"
+        },
+        {
+          "id": "picture-rama",
+          "image": "images/jungle-characters/rama.ppg",
+          "alt": "Water buffalo"
+        },
+        {
+          "id": "picture-hathi",
+          "image": "images/jungle-characters/hathi.jpg",
+          "alt": "Elephant"
+        },
+        {
+          "id": "picture-kaa",
+          "image": "images/jungle-characters/kaa.jpg",
+          "alt": "Snake"
+        },
+        {
+          "id": "picture-shere-khan",
+          "image": "images/jungle-characters/shere-khan.jpg",
+          "alt": "Tiger"
+        },
+        {
+          "id": "picture-ikki",
+          "image": "images/jungle-characters/ikki.jpg",
+          "alt": "Porcupine"
+        },
+        {
+          "id": "picture-darzee",
+          "image": "images/jungle-characters/darzee.jpg",
+          "alt": "Tailor bird"
+        },
+        {
+          "id": "picture-badar-log",
+          "image": "images/jungle-characters/bandar-log.jpg",
+          "alt": "Naughty Monkeys"
+        },
+        {
+          "id": "picture-tabaqui",
+          "image": "images/jungle-characters/tabaqui.jpg",
+          "alt": "Naughty Jackal"
+        },
+        {
+          "id": "picture-mowgli",
+          "image": "images/jungle-characters/mowgli.jpg",
+          "alt": "Mancub"
+        },
+        {
+          "id": "picture-mao",
+          "image": "images/jungle-characters/mao.jpg",
+          "alt": "Peacock"
+        }
+      ],
+      "rightItems": [
+        {
+          "id": "name-akela",
+          "text": "Akela"
+        },
+        {
+          "id": "name-bagheera",
+          "text": "Bagheera"
+        },
+        {
+          "id": "name-mang",
+          "text": "Mang"
+        },
+        {
+          "id": "name-chil",
+          "text": "Chil"
+        },
+        {
+          "id": "name-baloo",
+          "text": "Baloo"
+        },
+        {
+          "id": "name-raksha",
+          "text": "Raksha"
+        },
+        {
+          "id": "name-rikki-tikki-tavi",
+          "text": "Rikki Tikki Tavi"
+        },
+        {
+          "id": "name-rama",
+          "text": "Rama"
+        },
+        {
+          "id": "name-hathi",
+          "text": "Hathi"
+        },
+        {
+          "id": "name-kaa",
+          "text": "Kaa"
+        },
+        {
+          "id": "name-shere-khan",
+          "text": "Shere Khan"
+        },
+        {
+          "id": "name-darzee",
+          "text": "Darzee"
+        },
+        {
+          "id": "name-ikki",
+          "text": "Ikki"
+        },
+        {
+          "id": "name-badar-log",
+          "text": "Badar-log"
+        },
+        {
+          "id": "name-mao",
+          "text": "Mao"
+        },
+        {
+          "id": "name-mowgli",
+          "text": "Mowgli"
+        },
+        {
+          "id": "name-tabaqui",
+          "text": "Tabaqui"
+        }
+      ],
+      "answer": {
+        "picture-akela": "name-akela",
+        "picture-bagheera": "name-bagheera",
+        "picture-mang": "name-mang",
+        "picture-chil": "name-chil",
+        "picture-baloo": "name-baloo",
+        "picture-raksha": "name-raksha",
+        "picture-rikki-tikki-tavi": "name-rikki-tikki-tavi",
+        "picture-rama": "name-rama",
+        "picture-hathi": "name-hathi",
+        "picture-kaa": "name-kaa",
+        "picture-shere-khan": "name-shere-khan",
+        "picture-badar-log": "name-badar-log",
+        "picture-darzee": "name-darzee",
+        "picture-ikki": "name-ikki",
+        "picture-mao": "name-mao",
+        "picture-mowgli": "name-mowgli",
+        "picture-tabaqui": "name-tabaqui"
+      },
+      "sampleSize": 4,
+      "explanation": "Each round shows four characters selected from the full set."
     }
   ]
 }

@@ -32,7 +32,7 @@ function renderQuestionManager(filter = '') {
   app.innerHTML = `<div class="question-manager editor-page">
     <div class="editor-heading"><div><p class="eyebrow">LEADER TOOL</p><h1>Question bank</h1><p>Changes save in this browser. Download the JSON to keep them in the project.</p></div><button class="secondary" id="manager-done">Back to quiz setup</button></div>
     <div class="editor-toolbar"><button class="primary" id="new-question">Add a question <span aria-hidden="true">＋</span></button><button class="secondary" id="download-question-bank">Download questions.json</button><label class="secondary file-button">Import questions.json<input id="import-question-bank" type="file" accept="application/json,.json"></label><button class="text-button" id="reset-question-bank">Use project version</button></div>
-    <p class="editor-note">Images you upload are stored inside the question data. After downloading, replace <code>data/questions.json</code> in the project. “Use project version” clears browser-only edits after you have updated the project file.</p>
+    <p class="editor-note">Image paths are stored in the question data. Keep the image files in the project (for example, images/flags/). After downloading, replace <code>data/questions.json</code> in the project. “Use project version” clears browser-only edits after you have updated the project file.</p>
     <label class="search-label" for="question-search">Find a question</label><input id="question-search" class="editor-input" type="search" placeholder="Search question text, ID or advancement" value="${escapeAttribute(filter)}">
     <div class="question-list" id="question-list">${visible.map((question) => `<button class="question-list-item" type="button" data-search-text="${escapeAttribute(`${question.id} ${question.question} ${question.programme} ${questionAdvancementLabel(question)}`.toLowerCase())}" data-edit-question="${escapeAttribute(question.id)}"><span><strong>${escapeHtml(question.question || 'Untitled question')}</strong><small>${escapeHtml(question.programme)} · ${escapeHtml(questionAdvancementLabel(question) || 'No advancement')} · ${escapeHtml(question.type)}</small></span><span aria-hidden="true">Edit →</span></button>`).join('')}<p class="editor-empty" id="question-empty" ${visible.length ? 'hidden' : ''}>No questions match that search.</p></div>
     <p class="editor-total">${bank.length} questions in this bank</p>
@@ -73,16 +73,16 @@ function renderQuestionEditor(question, returnTarget = 'manager') {
       <label class="editor-wide">Question text<input class="editor-input" name="question" required value="${escapeAttribute(source.question || '')}" placeholder="Write a short question"></label>
       <label class="editor-wide">Explanation (optional)<textarea class="editor-input" name="explanation" rows="2">${escapeHtml(source.explanation || '')}</textarea></label>
       <section class="editor-type-panel" data-type-panel="multiple-choice" ${type === 'multiple-choice' ? '' : 'hidden'}>
-        <h2>Answer choices</h2><label>Choice style<select class="editor-input" id="editor-choice-mode"><option value="text" ${choiceMode === 'text' ? 'selected' : ''}>Text answers</option><option value="pictures" ${choiceMode === 'pictures' ? 'selected' : ''}>Picture answers</option></select></label>
+        <h2>Answer choices</h2>${renderImageField('prompt-image', source.image || '', source.imageAlt || '', 'Question picture (optional)')}<label>Choice style<select class="editor-input" id="editor-choice-mode"><option value="text" ${choiceMode === 'text' ? 'selected' : ''}>Text answers</option><option value="pictures" ${choiceMode === 'pictures' ? 'selected' : ''}>Picture answers</option></select></label>
         <div data-choice-panel="text" ${choiceMode === 'text' ? '' : 'hidden'}><label>Answer choices, one per line<textarea class="editor-input" name="textOptions" rows="5">${escapeHtml(choiceMode === 'text' ? sourceOptions.join('\n') : '')}</textarea></label><label>Correct answer<input class="editor-input" name="textAnswer" value="${escapeAttribute(choiceMode === 'text' ? source.answer || '' : '')}"></label></div>
-        <div data-choice-panel="pictures" ${choiceMode === 'pictures' ? '' : 'hidden'}><p class="editor-note">Upload each picture or enter its project-relative path. Choose which picture is correct.</p><div id="picture-choice-list">${renderPictureChoiceRows(choices, source.answer)}</div><button type="button" class="secondary" id="add-picture-choice">Add picture choice</button></div>
+        <div data-choice-panel="pictures" ${choiceMode === 'pictures' ? '' : 'hidden'}><p class="editor-note">Enter project-relative image paths. Choosing a file fills its filename only; it does not copy the image into the project. Choose which picture is correct.</p><div id="picture-choice-list">${renderPictureChoiceRows(choices, source.answer)}</div><button type="button" class="secondary" id="add-picture-choice">Add picture choice</button></div>
       </section>
       <section class="editor-type-panel" data-type-panel="image-dropdown" ${type === 'image-dropdown' ? '' : 'hidden'}>
         <h2>Question picture and dropdown answers</h2>${renderImageField('question-image', source.image || '', source.imageAlt || '', 'Question picture')}
         <label>Answer choices, one per line<textarea class="editor-input" name="dropdownOptions" rows="5">${escapeHtml(type === 'image-dropdown' ? (source.options || []).join('\n') : '')}</textarea></label><label>Correct answer<input class="editor-input" name="dropdownAnswer" value="${escapeAttribute(type === 'image-dropdown' ? source.answer || '' : '')}"></label>
       </section>
       <section class="editor-type-panel" data-type-panel="image-match" ${type === 'image-match' ? '' : 'hidden'}>
-        <h2>Matching pairs</h2><label>Pairs shown in each round<input class="editor-input" name="sampleSize" type="number" min="2" value="${source.sampleSize || source.leftItems?.length || 4}"></label><p class="editor-note">Each row is one correct pair. Choose a picture or short text for each side. The app shuffles the right-hand choices.</p><div id="matching-pair-list">${renderMatchingPairRows(pairRows)}</div><button type="button" class="secondary" id="add-matching-pair">Add matching pair</button>
+        <h2>Matching pairs</h2><label>Pairs shown in each round<input class="editor-input" name="sampleSize" type="number" min="2" value="${source.sampleSize || source.leftItems?.length || 4}"></label><p class="editor-note">Each row is one correct pair. Choose a picture or short text for each side. Use paths such as images/example.png; choosing a file fills its filename only and does not copy it into the project. The app shuffles the right-hand choices.</p><div id="matching-pair-list">${renderMatchingPairRows(pairRows)}</div><button type="button" class="secondary" id="add-matching-pair">Add matching pair</button>
       </section>
       <div class="editor-save-row"><p id="editor-error" role="alert"></p><button class="primary" type="submit">Save question <span aria-hidden="true">✓</span></button></div>
     </form>
@@ -116,10 +116,10 @@ function renderQuestionEditor(question, returnTarget = 'manager') {
     renderQuestionEditor(draft, questionEditorReturnTarget);
   }));
   app.querySelectorAll('.editor-kind').forEach((select) => select.addEventListener('change', () => updateEditorSideVisibility(select.closest('.editor-side'))));
-  app.querySelectorAll('[data-upload-image]').forEach((input) => input.addEventListener('change', uploadEditorImage));
+  app.querySelectorAll('[data-upload-image]').forEach((input) => input.addEventListener('change', selectEditorImagePath));
   app.querySelectorAll('[data-choice-field="id"]').forEach((input) => input.addEventListener('input', () => { input.closest('[data-choice-row]').querySelector('[name="picture-answer"]').value = input.value; }));
-  app.querySelectorAll('[data-choice-field="image"], [name="question-image"], [data-pair-value]').forEach((input) => input.addEventListener('input', () => refreshEditorPreview(input)));
-  app.querySelectorAll('[name="question-image-alt"], [data-pair-alt], [data-choice-field="alt"]').forEach((input) => input.addEventListener('input', () => { const preview = input.closest('.editor-image-field, .picture-choice-row, .editor-side')?.querySelector('.editor-preview'); if (preview) preview.alt = input.value; }));
+  app.querySelectorAll('[data-choice-field="image"], [name="prompt-image"], [name="question-image"], [data-pair-value]').forEach((input) => input.addEventListener('input', () => refreshEditorPreview(input)));
+  app.querySelectorAll('[name="prompt-image-alt"], [name="question-image-alt"], [data-pair-alt], [data-choice-field="alt"]').forEach((input) => input.addEventListener('input', () => { const preview = input.closest('.editor-image-field, .picture-choice-row, .editor-side')?.querySelector('.editor-preview'); if (preview) preview.alt = input.value; }));
 }
 function emptyMatchPair() { return { left: { kind: 'image', value: '', alt: '' }, right: { kind: 'image', value: '', alt: '' } }; }
 function filterQuestionList(value) {
@@ -136,17 +136,17 @@ function editorPairsFromQuestion(question) {
   });
 }
 function renderImageField(name, value, alt, label) {
-  return `<div class="editor-image-field"><label>${escapeHtml(label)} path or URL<input class="editor-input" name="${name}" value="${escapeAttribute(value)}" placeholder="images/example.png"></label><label>Image description<input class="editor-input" name="${name}-alt" value="${escapeAttribute(alt)}"></label><label class="file-button secondary">Upload image<input type="file" accept="image/*" data-upload-image="${name}"></label><img class="editor-preview" src="${escapeAttribute(value)}" alt="${escapeAttribute(alt)}" ${value ? '' : 'hidden'}></div>`;
+  return `<div class="editor-image-field"><label>${escapeHtml(label)} path<input class="editor-input" name="${name}" value="${escapeAttribute(value)}" placeholder="images/example.png"></label><small>Selecting a file fills its path only; it does not copy the image into the project. Put it in images/ or edit the path for a subfolder such as images/flags/.</small><label>Image description<input class="editor-input" name="${name}-alt" value="${escapeAttribute(alt)}"></label><label class="file-button secondary">Choose file<input type="file" accept="image/*" data-upload-image="${name}"></label><img class="editor-preview" src="${escapeAttribute(value)}" alt="${escapeAttribute(alt)}" ${value ? '' : 'hidden'}></div>`;
 }
 function renderPictureChoiceRows(options, answer) {
-  return options.map((option, index) => `<div class="picture-choice-row" data-choice-row="${index}"><div class="editor-form-grid"><label>Choice ID<input class="editor-input" data-choice-field="id" value="${escapeAttribute(option.id || `choice-${index + 1}`)}"></label><label>Image path or URL<input class="editor-input" data-choice-field="image" value="${escapeAttribute(option.image || '')}" placeholder="images/example.png"></label><label>Description<input class="editor-input" data-choice-field="alt" value="${escapeAttribute(option.alt || '')}"></label><label class="file-button secondary">Upload image<input type="file" accept="image/*" data-upload-image="choice" data-choice-index="${index}"></label></div><img class="editor-preview" src="${escapeAttribute(option.image || '')}" alt="${escapeAttribute(option.alt || '')}" ${option.image ? '' : 'hidden'}><label class="editor-radio"><input type="radio" name="picture-answer" value="${escapeAttribute(option.id || `choice-${index + 1}`)}" ${answer === option.id ? 'checked' : ''}> Correct answer</label><button type="button" class="text-button" data-remove-picture-choice="${index}" ${options.length <= 2 ? 'disabled' : ''}>Remove choice</button></div>`).join('');
+  return options.map((option, index) => `<div class="picture-choice-row" data-choice-row="${index}"><div class="editor-form-grid"><label>Choice ID<input class="editor-input" data-choice-field="id" value="${escapeAttribute(option.id || `choice-${index + 1}`)}"></label><label>Image path<input class="editor-input" data-choice-field="image" value="${escapeAttribute(option.image || '')}" placeholder="images/example.png"></label><label>Description<input class="editor-input" data-choice-field="alt" value="${escapeAttribute(option.alt || '')}"></label><label class="file-button secondary">Choose file<input type="file" accept="image/*" data-upload-image="choice" data-choice-index="${index}"></label></div><img class="editor-preview" src="${escapeAttribute(option.image || '')}" alt="${escapeAttribute(option.alt || '')}" ${option.image ? '' : 'hidden'}><label class="editor-radio"><input type="radio" name="picture-answer" value="${escapeAttribute(option.id || `choice-${index + 1}`)}" ${answer === option.id ? 'checked' : ''}> Correct answer</label><button type="button" class="text-button" data-remove-picture-choice="${index}" ${options.length <= 2 ? 'disabled' : ''}>Remove choice</button></div>`).join('');
 }
 function renderMatchingPairRows(pairs) {
   return pairs.map((pair, index) => `<div class="matching-pair-row" data-pair-row="${index}"><strong>Pair ${index + 1}</strong>${renderMatchSide('left', pair.left, index)}${renderMatchSide('right', pair.right, index)}<button type="button" class="text-button" data-remove-matching-pair="${index}" ${pairs.length <= 2 ? 'disabled' : ''}>Remove pair</button></div>`).join('');
 }
 function renderMatchSide(side, item, index) {
   const kind = item.kind || 'image'; const isImage = kind === 'image';
-  return `<div class="editor-side"><label>${side === 'left' ? 'Left item' : 'Matching answer'} type<select class="editor-input editor-kind" data-side="${side}" data-index="${index}"><option value="image" ${isImage ? 'selected' : ''}>Picture</option><option value="text" ${!isImage ? 'selected' : ''}>Short text</option></select></label><label>${isImage ? 'Image path or URL' : 'Text'}<input class="editor-input" data-pair-value="${side}" data-index="${index}" value="${escapeAttribute(item.value || '')}" placeholder="${isImage ? 'images/example.png' : 'Short answer'}"></label><label ${isImage ? '' : 'hidden'}>Image description<input class="editor-input" data-pair-alt="${side}" data-index="${index}" value="${escapeAttribute(item.alt || '')}"></label><label class="file-button secondary" ${isImage ? '' : 'hidden'}>Upload image<input type="file" accept="image/*" data-upload-image="pair-${side}" data-pair-index="${index}"></label><img class="editor-preview" src="${escapeAttribute(isImage ? item.value || '' : '')}" alt="${escapeAttribute(item.alt || '')}" ${isImage && item.value ? '' : 'hidden'}></div>`;
+  return `<div class="editor-side"><label>${side === 'left' ? 'Left item' : 'Matching answer'} type<select class="editor-input editor-kind" data-side="${side}" data-index="${index}"><option value="image" ${isImage ? 'selected' : ''}>Picture</option><option value="text" ${!isImage ? 'selected' : ''}>Short text</option></select></label><label>${isImage ? 'Image path' : 'Text'}<input class="editor-input" data-pair-value="${side}" data-index="${index}" value="${escapeAttribute(item.value || '')}" placeholder="${isImage ? 'images/example.png' : 'Short answer'}"></label><label ${isImage ? '' : 'hidden'}>Image description<input class="editor-input" data-pair-alt="${side}" data-index="${index}" value="${escapeAttribute(item.alt || '')}"></label><label class="file-button secondary" ${isImage ? '' : 'hidden'}>Choose file<input type="file" accept="image/*" data-upload-image="pair-${side}" data-pair-index="${index}"></label><img class="editor-preview" src="${escapeAttribute(isImage ? item.value || '' : '')}" alt="${escapeAttribute(item.alt || '')}" ${isImage && item.value ? '' : 'hidden'}></div>`;
 }
 function updateEditorSideVisibility(sideElement) {
   if (!sideElement) return;
@@ -164,9 +164,9 @@ function readQuestionEditorForm() {
   const common = { id: get('id').trim(), programme: get('programme'), advancementIds: get('advancementIds').split(',').map((id) => id.trim()).filter(Boolean), type, question: get('question').trim(), explanation: get('explanation').trim() };
   if (type === 'multiple-choice') {
     const mode = document.querySelector('#editor-choice-mode').value;
-    if (mode === 'text') return { ...common, options: get('textOptions').split(/\r?\n/).map((option) => option.trim()).filter(Boolean), answer: get('textAnswer').trim(), editorChoiceMode: 'text' };
+    if (mode === 'text') return { ...common, image: get('prompt-image').trim(), imageAlt: get('prompt-image-alt').trim(), options: get('textOptions').split(/\r?\n/).map((option) => option.trim()).filter(Boolean), answer: get('textAnswer').trim(), editorChoiceMode: 'text' };
     const options = [...app.querySelectorAll('[data-choice-row]')].map((row) => ({ id: row.querySelector('[data-choice-field="id"]').value.trim(), image: row.querySelector('[data-choice-field="image"]').value.trim(), alt: row.querySelector('[data-choice-field="alt"]').value.trim() }));
-    return { ...common, options, answer: form.querySelector('[name="picture-answer"]:checked')?.value || '', editorChoiceMode: 'pictures' };
+    return { ...common, image: get('prompt-image').trim(), imageAlt: get('prompt-image-alt').trim(), options, answer: form.querySelector('[name="picture-answer"]:checked')?.value || '', editorChoiceMode: 'pictures' };
   }
   if (type === 'image-dropdown') return { ...common, image: get('question-image').trim(), imageAlt: get('question-image-alt').trim(), options: get('dropdownOptions').split(/\r?\n/).map((option) => option.trim()).filter(Boolean), answer: get('dropdownAnswer').trim() };
   const matchPairs = [...app.querySelectorAll('[data-pair-row]')].map((row) => {
@@ -243,26 +243,26 @@ function resetQuestionBankOverride() {
   if (!confirm('Clear browser-only question edits and reload questions.json from the project? Export your changes first if needed.')) return;
   localStorage.removeItem(QUESTION_BANK_STORAGE_KEY); location.reload();
 }
-async function uploadEditorImage(event) {
-  const input = event.target; const file = input.files?.[0]; if (!file) return;
-  try {
-    const bitmap = await createImageBitmap(file); const scale = Math.min(1, 1200 / Math.max(bitmap.width, bitmap.height));
-    const canvas = document.createElement('canvas'); canvas.width = Math.max(1, Math.round(bitmap.width * scale)); canvas.height = Math.max(1, Math.round(bitmap.height * scale));
-    canvas.getContext('2d').drawImage(bitmap, 0, 0, canvas.width, canvas.height); bitmap.close();
-    const blob = await new Promise((resolve, reject) => canvas.toBlob((value) => value ? resolve(value) : reject(new Error('Image conversion failed.')), 'image/png'));
-    const dataUrl = await new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = reject; reader.readAsDataURL(blob); });
-    applyUploadedImage(input, dataUrl);
-  } catch { alert('Could not read that image. Try a PNG or JPG file.'); }
-}
-function applyUploadedImage(input, dataUrl) {
-  const type = input.dataset.uploadImage; let target;
+function selectEditorImagePath(event) {
+  const input = event.target;
+  const file = input.files?.[0];
+  if (!file) return;
+
+  const type = input.dataset.uploadImage;
+  let target;
   if (type === 'question-image') target = document.querySelector('[name="question-image"]');
+  if (type === 'prompt-image') target = document.querySelector('[name="prompt-image"]');
   if (type === 'choice') target = input.closest('.picture-choice-row').querySelector('[data-choice-field="image"]');
   if (type === 'pair-left' || type === 'pair-right') target = input.closest('.editor-side').querySelector('[data-pair-value]');
   if (!target) return;
-  target.value = dataUrl;
+
+  const currentPath = target.value.trim().replace(/\\/g, '/');
+  const folder = currentPath.startsWith('images/') && currentPath.includes('/')
+    ? currentPath.slice(0, currentPath.lastIndexOf('/'))
+    : 'images';
+  target.value = `${folder}/${file.name}`;
   const preview = input.closest('.editor-image-field, .picture-choice-row, .editor-side')?.querySelector('.editor-preview');
-  if (preview) { preview.src = dataUrl; preview.hidden = false; }
+  if (preview) { preview.src = target.value; preview.hidden = false; }
 }
 function refreshEditorPreview(input) {
   const preview = input.closest('.editor-image-field, .picture-choice-row, .editor-side')?.querySelector('.editor-preview');
