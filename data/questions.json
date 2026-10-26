@@ -1734,8 +1734,8 @@
           "alt": "Mother wolf"
         },
         {
-          "id": "picture-rikki-tikki-tavi",
-          "image": "images/jungle-characters/rikki-tikki-tavi.jpg",
+          "id": "picture-rikki",
+          "image": "images/jungle-characters/rikki.jpg",
           "alt": "Mongoose"
         },
         {
@@ -1815,7 +1815,7 @@
           "text": "Raksha"
         },
         {
-          "id": "name-rikki-tikki-tavi",
+          "id": "name-rikki",
           "text": "Rikki Tikki Tavi"
         },
         {
@@ -1866,7 +1866,7 @@
         "picture-chil": "name-chil",
         "picture-baloo": "name-baloo",
         "picture-raksha": "name-raksha",
-        "picture-rikki-tikki-tavi": "name-rikki-tikki-tavi",
+        "picture-rikki": "name-rikki",
         "picture-rama": "name-rama",
         "picture-hathi": "name-hathi",
         "picture-kaa": "name-kaa",
