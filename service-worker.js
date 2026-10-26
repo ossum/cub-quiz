@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cub-quiz-pwa-v1';
+const CACHE_NAME = 'cub-quiz-pwa-v3';
 const SHELL_FILES = [
   './',
   './index.html',
@@ -65,14 +65,21 @@ async function cacheQuestionImages(cache, response) {
     const imagePaths = new Set();
     for (const question of data.questions || []) {
       if (question.image) imagePaths.add(question.image);
+      for (const option of question.options || []) {
+        if (typeof option === 'object' && option.image) imagePaths.add(option.image);
+      }
       for (const item of [...(question.leftItems || []), ...(question.rightItems || [])]) {
         if (item.image) imagePaths.add(item.image);
+      }
+      for (const pair of question.pairs || []) {
+        if (pair.left?.type === 'image' && pair.left.src) imagePaths.add(pair.left.src);
+        if (pair.right?.type === 'image' && pair.right.src) imagePaths.add(pair.right.src);
       }
     }
     const requests = [...imagePaths]
       .filter((path) => path.startsWith('images/'))
       .map((path) => new Request(new URL(path, self.registration.scope)));
-    if (requests.length) await cache.addAll(requests);
+    if (requests.length) await Promise.allSettled(requests.map((request) => cache.add(request)));
   } catch (error) {
     console.warn('Some quiz images could not be cached for offline use.', error);
   }

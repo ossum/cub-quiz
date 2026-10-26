@@ -203,57 +203,61 @@
       "programme": "SW",
       "advancementId": "SW-41",
       "question": "Match each stack to its view from above.",
-      "leftItems": [
+      "explanation": "Look carefully at the colours and how they are arranged.",
+      "pairs": [
         {
           "id": "stack-1",
-          "image": "images/matching/stack-1.png",
-          "alt": "First colourful ring stack"
+          "left": {
+            "type": "image",
+            "src": "images/matching/stack-1.png",
+            "alt": "First colourful ring stack"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/matching/target-2.png",
+            "alt": "Target pattern two: green outer ring, yellow ring, red ring, purple ring and green centre"
+          }
         },
         {
           "id": "stack-2",
-          "image": "images/matching/stack-2.png",
-          "alt": "Second colourful ring stack"
+          "left": {
+            "type": "image",
+            "src": "images/matching/stack-2.png",
+            "alt": "Second colourful ring stack"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/matching/target-1.png",
+            "alt": "Target pattern one: yellow outer ring, red ring, purple ring and green centre"
+          }
         },
         {
           "id": "stack-3",
-          "image": "images/matching/stack-3.png",
-          "alt": "Third colourful ring stack"
+          "left": {
+            "type": "image",
+            "src": "images/matching/stack-3.png",
+            "alt": "Third colourful ring stack"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/matching/target-4.png",
+            "alt": "Target pattern four: purple outer ring, green ring and yellow centre"
+          }
         },
         {
           "id": "stack-4",
-          "image": "images/matching/stack-4.png",
-          "alt": "Fourth colourful ring stack"
+          "left": {
+            "type": "image",
+            "src": "images/matching/stack-4.png",
+            "alt": "Fourth colourful ring stack"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/matching/target-3.png",
+            "alt": "Target pattern three: purple outer ring, yellow ring and green centre"
+          }
         }
-      ],
-      "rightItems": [
-        {
-          "id": "target-1",
-          "image": "images/matching/target-1.png",
-          "alt": "Target pattern one: yellow outer ring, red ring, purple ring and green centre"
-        },
-        {
-          "id": "target-2",
-          "image": "images/matching/target-2.png",
-          "alt": "Target pattern two: green outer ring, yellow ring, red ring, purple ring and green centre"
-        },
-        {
-          "id": "target-3",
-          "image": "images/matching/target-3.png",
-          "alt": "Target pattern three: purple outer ring, yellow ring and green centre"
-        },
-        {
-          "id": "target-4",
-          "image": "images/matching/target-4.png",
-          "alt": "Target pattern four: purple outer ring, green ring and yellow centre"
-        }
-      ],
-      "answer": {
-        "stack-1": "target-2",
-        "stack-2": "target-1",
-        "stack-3": "target-4",
-        "stack-4": "target-3"
-      },
-      "explanation": "Look carefully at the colours and how they are arranged."
+      ]
     },
     {
       "id": "sw-knots-use-match-1",
@@ -266,53 +270,57 @@
         "SW-48"
       ],
       "question": "Match each knot to its use.",
-      "leftItems": [
+      "explanation": "Match each knot picture to the short description.",
+      "pairs": [
         {
           "id": "knot-1",
-          "image": "images/knots/reef-knot.png",
-          "alt": "Picture of Reef Knot"
+          "left": {
+            "type": "image",
+            "src": "images/knots/reef-knot.png",
+            "alt": "Picture of Reef Knot"
+          },
+          "right": {
+            "type": "text",
+            "value": "Ties a parcel"
+          }
         },
         {
           "id": "knot-2",
-          "image": "images/knots/slip-reef.png",
-          "alt": "Picture of Slip Reef Knot"
+          "left": {
+            "type": "image",
+            "src": "images/knots/slip-reef.png",
+            "alt": "Picture of Slip Reef Knot"
+          },
+          "right": {
+            "type": "text",
+            "value": "Ties shoelaces"
+          }
         },
         {
           "id": "knot-3",
-          "image": "images/knots/round-turn-two-half-hitches.png",
-          "alt": "Picture of Round Turn and Two Half Hitches"
+          "left": {
+            "type": "image",
+            "src": "images/knots/round-turn-two-half-hitches.png",
+            "alt": "Picture of Round Turn and Two Half Hitches"
+          },
+          "right": {
+            "type": "text",
+            "value": "Ties a rope to a post"
+          }
         },
         {
           "id": "knot-4",
-          "image": "images/knots/figure-eight.png",
-          "alt": "Picture of Figure-of-Eight Knot"
+          "left": {
+            "type": "image",
+            "src": "images/knots/figure-eight.png",
+            "alt": "Picture of Figure-of-Eight Knot"
+          },
+          "right": {
+            "type": "text",
+            "value": "Stops a rope slipping through"
+          }
         }
-      ],
-      "rightItems": [
-        {
-          "id": "choice-1",
-          "text": "Ties a parcel"
-        },
-        {
-          "id": "choice-2",
-          "text": "Ties shoelaces"
-        },
-        {
-          "id": "choice-3",
-          "text": "Ties a rope to a post"
-        },
-        {
-          "id": "choice-4",
-          "text": "Stops a rope slipping through"
-        }
-      ],
-      "answer": {
-        "knot-1": "choice-1",
-        "knot-2": "choice-2",
-        "knot-3": "choice-3",
-        "knot-4": "choice-4"
-      },
-      "explanation": "Match each knot picture to the short description."
+      ]
     },
     {
       "id": "sw-knots-name-match-1",
@@ -325,53 +333,57 @@
         "SW-48"
       ],
       "question": "Match each knot to its name.",
-      "leftItems": [
+      "explanation": "Match each picture to the correct knot name.",
+      "pairs": [
         {
           "id": "knot-1",
-          "image": "images/knots/reef-knot.png",
-          "alt": "Picture of Reef Knot"
+          "left": {
+            "type": "image",
+            "src": "images/knots/reef-knot.png",
+            "alt": "Picture of Reef Knot"
+          },
+          "right": {
+            "type": "text",
+            "value": "Reef Knot"
+          }
         },
         {
           "id": "knot-2",
-          "image": "images/knots/slip-reef.png",
-          "alt": "Picture of Slip Reef Knot"
+          "left": {
+            "type": "image",
+            "src": "images/knots/slip-reef.png",
+            "alt": "Picture of Slip Reef Knot"
+          },
+          "right": {
+            "type": "text",
+            "value": "Slip Reef Knot"
+          }
         },
         {
           "id": "knot-3",
-          "image": "images/knots/round-turn-two-half-hitches.png",
-          "alt": "Picture of Round Turn and Two Half Hitches"
+          "left": {
+            "type": "image",
+            "src": "images/knots/round-turn-two-half-hitches.png",
+            "alt": "Picture of Round Turn and Two Half Hitches"
+          },
+          "right": {
+            "type": "text",
+            "value": "Round Turn and Two Half Hitches"
+          }
         },
         {
           "id": "knot-4",
-          "image": "images/knots/figure-eight.png",
-          "alt": "Picture of Figure-of-Eight Knot"
+          "left": {
+            "type": "image",
+            "src": "images/knots/figure-eight.png",
+            "alt": "Picture of Figure-of-Eight Knot"
+          },
+          "right": {
+            "type": "text",
+            "value": "Figure-of-Eight Knot"
+          }
         }
-      ],
-      "rightItems": [
-        {
-          "id": "choice-1",
-          "text": "Reef Knot"
-        },
-        {
-          "id": "choice-2",
-          "text": "Slip Reef Knot"
-        },
-        {
-          "id": "choice-3",
-          "text": "Round Turn and Two Half Hitches"
-        },
-        {
-          "id": "choice-4",
-          "text": "Figure-of-Eight Knot"
-        }
-      ],
-      "answer": {
-        "knot-1": "choice-1",
-        "knot-2": "choice-2",
-        "knot-3": "choice-3",
-        "knot-4": "choice-4"
-      },
-      "explanation": "Match each picture to the correct knot name."
+      ]
     },
     {
       "id": "gw-knots-use-match-1",
@@ -384,53 +396,57 @@
         "GW-54"
       ],
       "question": "Match each knot to its use.",
-      "leftItems": [
+      "explanation": "Match each knot picture to the short description.",
+      "pairs": [
         {
           "id": "knot-1",
-          "image": "images/knots/sheet-bend.png",
-          "alt": "Picture of Sheet Bend"
+          "left": {
+            "type": "image",
+            "src": "images/knots/sheet-bend.png",
+            "alt": "Picture of Sheet Bend"
+          },
+          "right": {
+            "type": "text",
+            "value": "Joins ropes of different sizes"
+          }
         },
         {
           "id": "knot-2",
-          "image": "images/knots/fishermans-knot.png",
-          "alt": "Picture of Fisherman's Knot"
+          "left": {
+            "type": "image",
+            "src": "images/knots/fishermans-knot.png",
+            "alt": "Picture of Fisherman's Knot"
+          },
+          "right": {
+            "type": "text",
+            "value": "Joins two similar ropes"
+          }
         },
         {
           "id": "knot-3",
-          "image": "images/knots/bowline.png",
-          "alt": "Picture of Bowline"
+          "left": {
+            "type": "image",
+            "src": "images/knots/bowline.png",
+            "alt": "Picture of Bowline"
+          },
+          "right": {
+            "type": "text",
+            "value": "Makes a fixed loop"
+          }
         },
         {
           "id": "knot-4",
-          "image": "images/knots/sheep-shank.png",
-          "alt": "Picture of Sheep Shank"
+          "left": {
+            "type": "image",
+            "src": "images/knots/sheep-shank.png",
+            "alt": "Picture of Sheep Shank"
+          },
+          "right": {
+            "type": "text",
+            "value": "Shortens a rope"
+          }
         }
-      ],
-      "rightItems": [
-        {
-          "id": "choice-1",
-          "text": "Joins ropes of different sizes"
-        },
-        {
-          "id": "choice-2",
-          "text": "Joins two similar ropes"
-        },
-        {
-          "id": "choice-3",
-          "text": "Makes a fixed loop"
-        },
-        {
-          "id": "choice-4",
-          "text": "Shortens a rope"
-        }
-      ],
-      "answer": {
-        "knot-1": "choice-1",
-        "knot-2": "choice-2",
-        "knot-3": "choice-3",
-        "knot-4": "choice-4"
-      },
-      "explanation": "Match each knot picture to the short description."
+      ]
     },
     {
       "id": "gw-knots-name-match-1",
@@ -443,53 +459,57 @@
         "GW-54"
       ],
       "question": "Match each knot to its name.",
-      "leftItems": [
+      "explanation": "Match each picture to the correct knot name.",
+      "pairs": [
         {
           "id": "knot-1",
-          "image": "images/knots/sheet-bend.png",
-          "alt": "Picture of Sheet Bend"
+          "left": {
+            "type": "image",
+            "src": "images/knots/sheet-bend.png",
+            "alt": "Picture of Sheet Bend"
+          },
+          "right": {
+            "type": "text",
+            "value": "Sheet Bend"
+          }
         },
         {
           "id": "knot-2",
-          "image": "images/knots/fishermans-knot.png",
-          "alt": "Picture of Fisherman's Knot"
+          "left": {
+            "type": "image",
+            "src": "images/knots/fishermans-knot.png",
+            "alt": "Picture of Fisherman's Knot"
+          },
+          "right": {
+            "type": "text",
+            "value": "Fisherman's Knot"
+          }
         },
         {
           "id": "knot-3",
-          "image": "images/knots/bowline.png",
-          "alt": "Picture of Bowline"
+          "left": {
+            "type": "image",
+            "src": "images/knots/bowline.png",
+            "alt": "Picture of Bowline"
+          },
+          "right": {
+            "type": "text",
+            "value": "Bowline"
+          }
         },
         {
           "id": "knot-4",
-          "image": "images/knots/sheep-shank.png",
-          "alt": "Picture of Sheep Shank"
+          "left": {
+            "type": "image",
+            "src": "images/knots/sheep-shank.png",
+            "alt": "Picture of Sheep Shank"
+          },
+          "right": {
+            "type": "text",
+            "value": "Sheep Shank"
+          }
         }
-      ],
-      "rightItems": [
-        {
-          "id": "choice-1",
-          "text": "Sheet Bend"
-        },
-        {
-          "id": "choice-2",
-          "text": "Fisherman's Knot"
-        },
-        {
-          "id": "choice-3",
-          "text": "Bowline"
-        },
-        {
-          "id": "choice-4",
-          "text": "Sheep Shank"
-        }
-      ],
-      "answer": {
-        "knot-1": "choice-1",
-        "knot-2": "choice-2",
-        "knot-3": "choice-3",
-        "knot-4": "choice-4"
-      },
-      "explanation": "Match each picture to the correct knot name."
+      ]
     },
     {
       "id": "sw-trail-sign-water-this-direction-1",
@@ -745,53 +765,57 @@
       "programme": "GW",
       "advancementId": "GW-66",
       "question": "Match each traffic sign to its meaning (set 1 of 4).",
-      "leftItems": [
+      "explanation": "Read each short meaning and connect it to the matching traffic sign.",
+      "pairs": [
         {
           "id": "traffic-circle",
-          "image": "images/traffic-signs/traffic-circle.png",
-          "alt": "Traffic sign: Traffic circle ahead"
+          "left": {
+            "type": "image",
+            "src": "images/traffic-signs/traffic-circle.png",
+            "alt": "Traffic sign: Traffic circle ahead"
+          },
+          "right": {
+            "type": "text",
+            "value": "Traffic circle ahead"
+          }
         },
         {
           "id": "falling-rocks",
-          "image": "images/traffic-signs/falling-rocks.png",
-          "alt": "Traffic sign: Falling rocks"
+          "left": {
+            "type": "image",
+            "src": "images/traffic-signs/falling-rocks.png",
+            "alt": "Traffic sign: Falling rocks"
+          },
+          "right": {
+            "type": "text",
+            "value": "Falling rocks"
+          }
         },
         {
           "id": "slippery-road",
-          "image": "images/traffic-signs/slippery-road.png",
-          "alt": "Traffic sign: Slippery road"
+          "left": {
+            "type": "image",
+            "src": "images/traffic-signs/slippery-road.png",
+            "alt": "Traffic sign: Slippery road"
+          },
+          "right": {
+            "type": "text",
+            "value": "Slippery road"
+          }
         },
         {
           "id": "zebra-crossing",
-          "image": "images/traffic-signs/zebra-crossing.png",
-          "alt": "Traffic sign: Zebra crossing"
+          "left": {
+            "type": "image",
+            "src": "images/traffic-signs/zebra-crossing.png",
+            "alt": "Traffic sign: Zebra crossing"
+          },
+          "right": {
+            "type": "text",
+            "value": "Zebra crossing"
+          }
         }
-      ],
-      "rightItems": [
-        {
-          "id": "meaning-traffic-circle",
-          "text": "Traffic circle ahead"
-        },
-        {
-          "id": "meaning-falling-rocks",
-          "text": "Falling rocks"
-        },
-        {
-          "id": "meaning-slippery-road",
-          "text": "Slippery road"
-        },
-        {
-          "id": "meaning-zebra-crossing",
-          "text": "Zebra crossing"
-        }
-      ],
-      "answer": {
-        "traffic-circle": "meaning-traffic-circle",
-        "falling-rocks": "meaning-falling-rocks",
-        "slippery-road": "meaning-slippery-road",
-        "zebra-crossing": "meaning-zebra-crossing"
-      },
-      "explanation": "Read each short meaning and connect it to the matching traffic sign."
+      ]
     },
     {
       "id": "gw-traffic-signs-match-2",
@@ -799,53 +823,57 @@
       "programme": "GW",
       "advancementId": "GW-66",
       "question": "Match each traffic sign to its meaning (set 2 of 4).",
-      "leftItems": [
+      "explanation": "Read each short meaning and connect it to the matching traffic sign.",
+      "pairs": [
         {
           "id": "give-way",
-          "image": "images/traffic-signs/give-way.png",
-          "alt": "Traffic sign: Yield / give way"
+          "left": {
+            "type": "image",
+            "src": "images/traffic-signs/give-way.png",
+            "alt": "Traffic sign: Yield / give way"
+          },
+          "right": {
+            "type": "text",
+            "value": "Yield / give way"
+          }
         },
         {
           "id": "traffic-lights-ahead",
-          "image": "images/traffic-signs/traffic-lights-ahead.png",
-          "alt": "Traffic sign: Traffic lights ahead"
+          "left": {
+            "type": "image",
+            "src": "images/traffic-signs/traffic-lights-ahead.png",
+            "alt": "Traffic sign: Traffic lights ahead"
+          },
+          "right": {
+            "type": "text",
+            "value": "Traffic lights ahead"
+          }
         },
         {
           "id": "no-entry",
-          "image": "images/traffic-signs/no-entry.png",
-          "alt": "Traffic sign: No entry"
+          "left": {
+            "type": "image",
+            "src": "images/traffic-signs/no-entry.png",
+            "alt": "Traffic sign: No entry"
+          },
+          "right": {
+            "type": "text",
+            "value": "No entry"
+          }
         },
         {
           "id": "stop",
-          "image": "images/traffic-signs/stop.png",
-          "alt": "Traffic sign: Stop"
+          "left": {
+            "type": "image",
+            "src": "images/traffic-signs/stop.png",
+            "alt": "Traffic sign: Stop"
+          },
+          "right": {
+            "type": "text",
+            "value": "Stop"
+          }
         }
-      ],
-      "rightItems": [
-        {
-          "id": "meaning-give-way",
-          "text": "Yield / give way"
-        },
-        {
-          "id": "meaning-traffic-lights-ahead",
-          "text": "Traffic lights ahead"
-        },
-        {
-          "id": "meaning-no-entry",
-          "text": "No entry"
-        },
-        {
-          "id": "meaning-stop",
-          "text": "Stop"
-        }
-      ],
-      "answer": {
-        "give-way": "meaning-give-way",
-        "traffic-lights-ahead": "meaning-traffic-lights-ahead",
-        "no-entry": "meaning-no-entry",
-        "stop": "meaning-stop"
-      },
-      "explanation": "Read each short meaning and connect it to the matching traffic sign."
+      ]
     },
     {
       "id": "gw-traffic-signs-match-3",
@@ -853,53 +881,57 @@
       "programme": "GW",
       "advancementId": "GW-66",
       "question": "Match each traffic sign to its meaning (set 3 of 4).",
-      "leftItems": [
+      "explanation": "Read each short meaning and connect it to the matching traffic sign.",
+      "pairs": [
         {
           "id": "danger",
-          "image": "images/traffic-signs/danger.png",
-          "alt": "Traffic sign: Danger ahead"
+          "left": {
+            "type": "image",
+            "src": "images/traffic-signs/danger.png",
+            "alt": "Traffic sign: Danger ahead"
+          },
+          "right": {
+            "type": "text",
+            "value": "Danger ahead"
+          }
         },
         {
           "id": "no-u-turns",
-          "image": "images/traffic-signs/no-u-turns.png",
-          "alt": "Traffic sign: No U-turns"
+          "left": {
+            "type": "image",
+            "src": "images/traffic-signs/no-u-turns.png",
+            "alt": "Traffic sign: No U-turns"
+          },
+          "right": {
+            "type": "text",
+            "value": "No U-turns"
+          }
         },
         {
           "id": "motorcycles",
-          "image": "images/traffic-signs/motorcycles.png",
-          "alt": "Traffic sign: Motorbikes ahead"
+          "left": {
+            "type": "image",
+            "src": "images/traffic-signs/motorcycles.png",
+            "alt": "Traffic sign: Motorbikes ahead"
+          },
+          "right": {
+            "type": "text",
+            "value": "Motorbikes ahead"
+          }
         },
         {
           "id": "right-turn-off-ahead",
-          "image": "images/traffic-signs/right-turn-off-ahead.png",
-          "alt": "Traffic sign: Right turn off ahead"
+          "left": {
+            "type": "image",
+            "src": "images/traffic-signs/right-turn-off-ahead.png",
+            "alt": "Traffic sign: Right turn off ahead"
+          },
+          "right": {
+            "type": "text",
+            "value": "Right turn off ahead"
+          }
         }
-      ],
-      "rightItems": [
-        {
-          "id": "meaning-danger",
-          "text": "Danger ahead"
-        },
-        {
-          "id": "meaning-no-u-turns",
-          "text": "No U-turns"
-        },
-        {
-          "id": "meaning-motorcycles",
-          "text": "Motorbikes ahead"
-        },
-        {
-          "id": "meaning-right-turn-off-ahead",
-          "text": "Right turn off ahead"
-        }
-      ],
-      "answer": {
-        "danger": "meaning-danger",
-        "no-u-turns": "meaning-no-u-turns",
-        "motorcycles": "meaning-motorcycles",
-        "right-turn-off-ahead": "meaning-right-turn-off-ahead"
-      },
-      "explanation": "Read each short meaning and connect it to the matching traffic sign."
+      ]
     },
     {
       "id": "gw-traffic-signs-match-4",
@@ -907,53 +939,57 @@
       "programme": "GW",
       "advancementId": "GW-66",
       "question": "Match each traffic sign to its meaning (set 4 of 4).",
-      "leftItems": [
+      "explanation": "Read each short meaning and connect it to the matching traffic sign.",
+      "pairs": [
         {
           "id": "highway",
-          "image": "images/traffic-signs/highway.png",
-          "alt": "Traffic sign: Highway"
+          "left": {
+            "type": "image",
+            "src": "images/traffic-signs/highway.png",
+            "alt": "Traffic sign: Highway"
+          },
+          "right": {
+            "type": "text",
+            "value": "Highway"
+          }
         },
         {
           "id": "speed-limit-60",
-          "image": "images/traffic-signs/speed-limit-60.png",
-          "alt": "Traffic sign: Speed limit: 60 kph"
+          "left": {
+            "type": "image",
+            "src": "images/traffic-signs/speed-limit-60.png",
+            "alt": "Traffic sign: Speed limit: 60 kph"
+          },
+          "right": {
+            "type": "text",
+            "value": "Speed limit: 60 kph"
+          }
         },
         {
           "id": "no-entry",
-          "image": "images/traffic-signs/no-entry.png",
-          "alt": "Traffic sign: No entry"
+          "left": {
+            "type": "image",
+            "src": "images/traffic-signs/no-entry.png",
+            "alt": "Traffic sign: No entry"
+          },
+          "right": {
+            "type": "text",
+            "value": "No entry"
+          }
         },
         {
           "id": "stop",
-          "image": "images/traffic-signs/stop.png",
-          "alt": "Traffic sign: Stop"
+          "left": {
+            "type": "image",
+            "src": "images/traffic-signs/stop.png",
+            "alt": "Traffic sign: Stop"
+          },
+          "right": {
+            "type": "text",
+            "value": "Stop"
+          }
         }
-      ],
-      "rightItems": [
-        {
-          "id": "meaning-highway",
-          "text": "Highway"
-        },
-        {
-          "id": "meaning-speed-limit-60",
-          "text": "Speed limit: 60 kph"
-        },
-        {
-          "id": "meaning-no-entry",
-          "text": "No entry"
-        },
-        {
-          "id": "meaning-stop",
-          "text": "Stop"
-        }
-      ],
-      "answer": {
-        "highway": "meaning-highway",
-        "speed-limit-60": "meaning-speed-limit-60",
-        "no-entry": "meaning-no-entry",
-        "stop": "meaning-stop"
-      },
-      "explanation": "Read each short meaning and connect it to the matching traffic sign."
+      ]
     },
     {
       "id": "gw-map-symbols-match",
@@ -961,124 +997,142 @@
       "programme": "GW",
       "advancementId": "GW-49",
       "question": "Match each map symbol to its meaning.",
-      "leftItems": [
+      "sampleSize": 4,
+      "explanation": "Map symbols stand for roads, natural features and useful places.",
+      "pairs": [
         {
           "id": "symbol-highway",
-          "image": "images/map-symbols/highway.png",
-          "alt": "Map symbol for Highway"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/highway.png",
+            "alt": "Map symbol for Highway"
+          },
+          "right": {
+            "type": "text",
+            "value": "Highway"
+          }
         },
         {
           "id": "symbol-major-road",
-          "image": "images/map-symbols/major-road.png",
-          "alt": "Map symbol for Major road"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/major-road.png",
+            "alt": "Map symbol for Major road"
+          },
+          "right": {
+            "type": "text",
+            "value": "Major road"
+          }
         },
         {
           "id": "symbol-secondary-road",
-          "image": "images/map-symbols/secondary-road.png",
-          "alt": "Map symbol for Secondary road"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/secondary-road.png",
+            "alt": "Map symbol for Secondary road"
+          },
+          "right": {
+            "type": "text",
+            "value": "Secondary road"
+          }
         },
         {
           "id": "symbol-river",
-          "image": "images/map-symbols/river.png",
-          "alt": "Map symbol for River"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/river.png",
+            "alt": "Map symbol for River"
+          },
+          "right": {
+            "type": "text",
+            "value": "River"
+          }
         },
         {
           "id": "symbol-bridge",
-          "image": "images/map-symbols/bridge.png",
-          "alt": "Map symbol for Bridge"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/bridge.png",
+            "alt": "Map symbol for Bridge"
+          },
+          "right": {
+            "type": "text",
+            "value": "Bridge"
+          }
         },
         {
           "id": "symbol-light-rail-station",
-          "image": "images/map-symbols/light-rail-station.png",
-          "alt": "Map symbol for Light rail and station"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/light-rail-station.png",
+            "alt": "Map symbol for Light rail and station"
+          },
+          "right": {
+            "type": "text",
+            "value": "Light rail and station"
+          }
         },
         {
           "id": "symbol-train-rail-station",
-          "image": "images/map-symbols/train-rail-station.png",
-          "alt": "Map symbol for Train rail and station"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/train-rail-station.png",
+            "alt": "Map symbol for Train rail and station"
+          },
+          "right": {
+            "type": "text",
+            "value": "Train rail and station"
+          }
         },
         {
           "id": "symbol-grass-field",
-          "image": "images/map-symbols/grass-field.png",
-          "alt": "Map symbol for Grass field"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/grass-field.png",
+            "alt": "Map symbol for Grass field"
+          },
+          "right": {
+            "type": "text",
+            "value": "Grass field"
+          }
         },
         {
           "id": "symbol-sea",
-          "image": "images/map-symbols/sea.png",
-          "alt": "Map symbol for Sea"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/sea.png",
+            "alt": "Map symbol for Sea"
+          },
+          "right": {
+            "type": "text",
+            "value": "Sea"
+          }
         },
         {
           "id": "symbol-forest",
-          "image": "images/map-symbols/forest.png",
-          "alt": "Map symbol for Forest"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/forest.png",
+            "alt": "Map symbol for Forest"
+          },
+          "right": {
+            "type": "text",
+            "value": "Forest"
+          }
         },
         {
           "id": "symbol-google-maps-pointer",
-          "image": "images/map-symbols/google-maps-pointer.png",
-          "alt": "Map symbol for Google Maps pointer"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/google-maps-pointer.png",
+            "alt": "Map symbol for Google Maps pointer"
+          },
+          "right": {
+            "type": "text",
+            "value": "Google Maps pointer"
+          }
         }
-      ],
-      "rightItems": [
-        {
-          "id": "meaning-highway",
-          "text": "Highway"
-        },
-        {
-          "id": "meaning-major-road",
-          "text": "Major road"
-        },
-        {
-          "id": "meaning-secondary-road",
-          "text": "Secondary road"
-        },
-        {
-          "id": "meaning-river",
-          "text": "River"
-        },
-        {
-          "id": "meaning-bridge",
-          "text": "Bridge"
-        },
-        {
-          "id": "meaning-light-rail-station",
-          "text": "Light rail and station"
-        },
-        {
-          "id": "meaning-train-rail-station",
-          "text": "Train rail and station"
-        },
-        {
-          "id": "meaning-grass-field",
-          "text": "Grass field"
-        },
-        {
-          "id": "meaning-sea",
-          "text": "Sea"
-        },
-        {
-          "id": "meaning-forest",
-          "text": "Forest"
-        },
-        {
-          "id": "meaning-google-maps-pointer",
-          "text": "Google Maps pointer"
-        }
-      ],
-      "answer": {
-        "symbol-highway": "meaning-highway",
-        "symbol-major-road": "meaning-major-road",
-        "symbol-secondary-road": "meaning-secondary-road",
-        "symbol-river": "meaning-river",
-        "symbol-bridge": "meaning-bridge",
-        "symbol-light-rail-station": "meaning-light-rail-station",
-        "symbol-train-rail-station": "meaning-train-rail-station",
-        "symbol-grass-field": "meaning-grass-field",
-        "symbol-sea": "meaning-sea",
-        "symbol-forest": "meaning-forest",
-        "symbol-google-maps-pointer": "meaning-google-maps-pointer"
-      },
-      "sampleSize": 4,
-      "explanation": "Map symbols stand for roads, natural features and useful places."
+      ]
     },
     {
       "id": "gw-map-places-match",
@@ -1086,144 +1140,166 @@
       "programme": "GW",
       "advancementId": "GW-49",
       "question": "Match each map icon to the place it represents.",
-      "leftItems": [
+      "sampleSize": 4,
+      "explanation": "Map symbols stand for roads, natural features and useful places.",
+      "pairs": [
         {
           "id": "symbol-police-station",
-          "image": "images/map-symbols/police-station.png",
-          "alt": "Map symbol for Police station"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/police-station.png",
+            "alt": "Map symbol for Police station"
+          },
+          "right": {
+            "type": "text",
+            "value": "Police station"
+          }
         },
         {
           "id": "symbol-fire-station",
-          "image": "images/map-symbols/fire-station.png",
-          "alt": "Map symbol for Fire station"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/fire-station.png",
+            "alt": "Map symbol for Fire station"
+          },
+          "right": {
+            "type": "text",
+            "value": "Fire station"
+          }
         },
         {
           "id": "symbol-hospital",
-          "image": "images/map-symbols/hospital.png",
-          "alt": "Map symbol for Hospital"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/hospital.png",
+            "alt": "Map symbol for Hospital"
+          },
+          "right": {
+            "type": "text",
+            "value": "Hospital"
+          }
         },
         {
           "id": "symbol-library",
-          "image": "images/map-symbols/library.png",
-          "alt": "Map symbol for Library"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/library.png",
+            "alt": "Map symbol for Library"
+          },
+          "right": {
+            "type": "text",
+            "value": "Library"
+          }
         },
         {
           "id": "symbol-post-office",
-          "image": "images/map-symbols/post-office.png",
-          "alt": "Map symbol for Post office"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/post-office.png",
+            "alt": "Map symbol for Post office"
+          },
+          "right": {
+            "type": "text",
+            "value": "Post office"
+          }
         },
         {
           "id": "symbol-airport",
-          "image": "images/map-symbols/airport.png",
-          "alt": "Map symbol for Airport"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/airport.png",
+            "alt": "Map symbol for Airport"
+          },
+          "right": {
+            "type": "text",
+            "value": "Airport"
+          }
         },
         {
           "id": "symbol-shopping-mall",
-          "image": "images/map-symbols/shopping-mall.png",
-          "alt": "Map symbol for Shopping mall"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/shopping-mall.png",
+            "alt": "Map symbol for Shopping mall"
+          },
+          "right": {
+            "type": "text",
+            "value": "Shopping mall"
+          }
         },
         {
           "id": "symbol-information-kiosk",
-          "image": "images/map-symbols/information-kiosk.png",
-          "alt": "Map symbol for Information kiosk"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/information-kiosk.png",
+            "alt": "Map symbol for Information kiosk"
+          },
+          "right": {
+            "type": "text",
+            "value": "Information kiosk"
+          }
         },
         {
           "id": "symbol-parking-area",
-          "image": "images/map-symbols/parking-area.png",
-          "alt": "Map symbol for Parking area"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/parking-area.png",
+            "alt": "Map symbol for Parking area"
+          },
+          "right": {
+            "type": "text",
+            "value": "Parking area"
+          }
         },
         {
           "id": "symbol-swimming-pool",
-          "image": "images/map-symbols/swimming-pool.png",
-          "alt": "Map symbol for Swimming pool"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/swimming-pool.png",
+            "alt": "Map symbol for Swimming pool"
+          },
+          "right": {
+            "type": "text",
+            "value": "Swimming pool"
+          }
         },
         {
           "id": "symbol-public-toilet",
-          "image": "images/map-symbols/public-toilet.png",
-          "alt": "Map symbol for Public toilet"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/public-toilet.png",
+            "alt": "Map symbol for Public toilet"
+          },
+          "right": {
+            "type": "text",
+            "value": "Public toilet"
+          }
         },
         {
           "id": "symbol-telephone",
-          "image": "images/map-symbols/telephone.png",
-          "alt": "Map symbol for Telephone"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/telephone.png",
+            "alt": "Map symbol for Telephone"
+          },
+          "right": {
+            "type": "text",
+            "value": "Telephone"
+          }
         },
         {
           "id": "symbol-petrol-station",
-          "image": "images/map-symbols/petrol-station.png",
-          "alt": "Map symbol for Petrol station"
+          "left": {
+            "type": "image",
+            "src": "images/map-symbols/petrol-station.png",
+            "alt": "Map symbol for Petrol station"
+          },
+          "right": {
+            "type": "text",
+            "value": "Petrol station"
+          }
         }
-      ],
-      "rightItems": [
-        {
-          "id": "meaning-police-station",
-          "text": "Police station"
-        },
-        {
-          "id": "meaning-fire-station",
-          "text": "Fire station"
-        },
-        {
-          "id": "meaning-hospital",
-          "text": "Hospital"
-        },
-        {
-          "id": "meaning-library",
-          "text": "Library"
-        },
-        {
-          "id": "meaning-post-office",
-          "text": "Post office"
-        },
-        {
-          "id": "meaning-airport",
-          "text": "Airport"
-        },
-        {
-          "id": "meaning-shopping-mall",
-          "text": "Shopping mall"
-        },
-        {
-          "id": "meaning-information-kiosk",
-          "text": "Information kiosk"
-        },
-        {
-          "id": "meaning-parking-area",
-          "text": "Parking area"
-        },
-        {
-          "id": "meaning-swimming-pool",
-          "text": "Swimming pool"
-        },
-        {
-          "id": "meaning-public-toilet",
-          "text": "Public toilet"
-        },
-        {
-          "id": "meaning-telephone",
-          "text": "Telephone"
-        },
-        {
-          "id": "meaning-petrol-station",
-          "text": "Petrol station"
-        }
-      ],
-      "answer": {
-        "symbol-police-station": "meaning-police-station",
-        "symbol-fire-station": "meaning-fire-station",
-        "symbol-hospital": "meaning-hospital",
-        "symbol-library": "meaning-library",
-        "symbol-post-office": "meaning-post-office",
-        "symbol-airport": "meaning-airport",
-        "symbol-shopping-mall": "meaning-shopping-mall",
-        "symbol-information-kiosk": "meaning-information-kiosk",
-        "symbol-parking-area": "meaning-parking-area",
-        "symbol-swimming-pool": "meaning-swimming-pool",
-        "symbol-public-toilet": "meaning-public-toilet",
-        "symbol-telephone": "meaning-telephone",
-        "symbol-petrol-station": "meaning-petrol-station"
-      },
-      "sampleSize": 4,
-      "explanation": "Map symbols stand for roads, natural features and useful places."
+      ]
     },
     {
       "id": "gw-jungle-book-character-match",
@@ -1231,203 +1307,241 @@
       "programme": "GW",
       "advancementId": "GW-55",
       "question": "Match each Jungle Book name to its animal and clue.",
-      "leftItems": [
+      "sampleSize": 4,
+      "explanation": "Some names share the same kind of animal, so use the short clue to find the exact match.",
+      "pairs": [
         {
           "id": "name-akela",
-          "text": "Akela"
+          "left": {
+            "type": "text",
+            "value": "Akela"
+          },
+          "right": {
+            "type": "text",
+            "value": "Wolf: pack leader"
+          }
         },
         {
           "id": "name-raksha",
-          "text": "Raksha"
+          "left": {
+            "type": "text",
+            "value": "Raksha"
+          },
+          "right": {
+            "type": "text",
+            "value": "Mother wolf"
+          }
         },
         {
           "id": "name-rama-wolf",
-          "text": "Rama (father wolf)"
+          "left": {
+            "type": "text",
+            "value": "Rama (father wolf)"
+          },
+          "right": {
+            "type": "text",
+            "value": "Father wolf"
+          }
         },
         {
           "id": "name-grey-brother",
-          "text": "Grey Brother"
+          "left": {
+            "type": "text",
+            "value": "Grey Brother"
+          },
+          "right": {
+            "type": "text",
+            "value": "Oldest wolf brother"
+          }
         },
         {
           "id": "name-leela",
-          "text": "Leela"
+          "left": {
+            "type": "text",
+            "value": "Leela"
+          },
+          "right": {
+            "type": "text",
+            "value": "Wolf: Akela's granddaughter"
+          }
         },
         {
           "id": "name-baloo",
-          "text": "Baloo"
+          "left": {
+            "type": "text",
+            "value": "Baloo"
+          },
+          "right": {
+            "type": "text",
+            "value": "Bear"
+          }
         },
         {
           "id": "name-bagheera",
-          "text": "Bagheera"
+          "left": {
+            "type": "text",
+            "value": "Bagheera"
+          },
+          "right": {
+            "type": "text",
+            "value": "Black panther"
+          }
         },
         {
           "id": "name-kaa",
-          "text": "Kaa"
+          "left": {
+            "type": "text",
+            "value": "Kaa"
+          },
+          "right": {
+            "type": "text",
+            "value": "Python"
+          }
         },
         {
           "id": "name-hathi",
-          "text": "Hathi"
+          "left": {
+            "type": "text",
+            "value": "Hathi"
+          },
+          "right": {
+            "type": "text",
+            "value": "Elephant: leader"
+          }
         },
         {
           "id": "name-mang",
-          "text": "Mang"
+          "left": {
+            "type": "text",
+            "value": "Mang"
+          },
+          "right": {
+            "type": "text",
+            "value": "Bat"
+          }
         },
         {
           "id": "name-rama-mysa",
-          "text": "Rama and Mysa"
+          "left": {
+            "type": "text",
+            "value": "Rama and Mysa"
+          },
+          "right": {
+            "type": "text",
+            "value": "Water buffaloes"
+          }
         },
         {
           "id": "name-chil-rann",
-          "text": "Chil or Rann"
+          "left": {
+            "type": "text",
+            "value": "Chil or Rann"
+          },
+          "right": {
+            "type": "text",
+            "value": "Kite: jungle messenger"
+          }
         },
         {
           "id": "name-sahi-ikki",
-          "text": "Sahi or Ikki"
+          "left": {
+            "type": "text",
+            "value": "Sahi or Ikki"
+          },
+          "right": {
+            "type": "text",
+            "value": "Porcupine"
+          }
         },
         {
           "id": "name-tha",
-          "text": "Tha"
+          "left": {
+            "type": "text",
+            "value": "Tha"
+          },
+          "right": {
+            "type": "text",
+            "value": "First elephant"
+          }
         },
         {
           "id": "name-phoana",
-          "text": "Phoana"
+          "left": {
+            "type": "text",
+            "value": "Phoana"
+          },
+          "right": {
+            "type": "text",
+            "value": "Wolf: outside the Seeonee Pack"
+          }
         },
         {
           "id": "name-phao",
-          "text": "Phao"
+          "left": {
+            "type": "text",
+            "value": "Phao"
+          },
+          "right": {
+            "type": "text",
+            "value": "Wolf: Phoana's son"
+          }
         },
         {
           "id": "name-oo",
-          "text": "Oo"
+          "left": {
+            "type": "text",
+            "value": "Oo"
+          },
+          "right": {
+            "type": "text",
+            "value": "Tortoise"
+          }
         },
         {
           "id": "name-mao-mor",
-          "text": "Mao or Mor"
+          "left": {
+            "type": "text",
+            "value": "Mao or Mor"
+          },
+          "right": {
+            "type": "text",
+            "value": "Peacock"
+          }
         },
         {
           "id": "name-won-tolla",
-          "text": "Won-Tolla"
+          "left": {
+            "type": "text",
+            "value": "Won-Tolla"
+          },
+          "right": {
+            "type": "text",
+            "value": "Wolf: warns of dhole attack"
+          }
         },
         {
           "id": "name-chikai",
-          "text": "Chikai"
+          "left": {
+            "type": "text",
+            "value": "Chikai"
+          },
+          "right": {
+            "type": "text",
+            "value": "Rat"
+          }
         },
         {
           "id": "name-ferao",
-          "text": "Ferao"
+          "left": {
+            "type": "text",
+            "value": "Ferao"
+          },
+          "right": {
+            "type": "text",
+            "value": "Woodpecker"
+          }
         }
-      ],
-      "rightItems": [
-        {
-          "id": "animal-akela",
-          "text": "Wolf: pack leader"
-        },
-        {
-          "id": "animal-raksha",
-          "text": "Mother wolf"
-        },
-        {
-          "id": "animal-rama-wolf",
-          "text": "Father wolf"
-        },
-        {
-          "id": "animal-grey-brother",
-          "text": "Oldest wolf brother"
-        },
-        {
-          "id": "animal-leela",
-          "text": "Wolf: Akela's granddaughter"
-        },
-        {
-          "id": "animal-baloo",
-          "text": "Bear"
-        },
-        {
-          "id": "animal-bagheera",
-          "text": "Black panther"
-        },
-        {
-          "id": "animal-kaa",
-          "text": "Python"
-        },
-        {
-          "id": "animal-hathi",
-          "text": "Elephant: leader"
-        },
-        {
-          "id": "animal-mang",
-          "text": "Bat"
-        },
-        {
-          "id": "animal-rama-mysa",
-          "text": "Water buffaloes"
-        },
-        {
-          "id": "animal-chil-rann",
-          "text": "Kite: jungle messenger"
-        },
-        {
-          "id": "animal-sahi-ikki",
-          "text": "Porcupine"
-        },
-        {
-          "id": "animal-tha",
-          "text": "First elephant"
-        },
-        {
-          "id": "animal-phoana",
-          "text": "Wolf: outside the Seeonee Pack"
-        },
-        {
-          "id": "animal-phao",
-          "text": "Wolf: Phoana's son"
-        },
-        {
-          "id": "animal-oo",
-          "text": "Tortoise"
-        },
-        {
-          "id": "animal-mao-mor",
-          "text": "Peacock"
-        },
-        {
-          "id": "animal-won-tolla",
-          "text": "Wolf: warns of dhole attack"
-        },
-        {
-          "id": "animal-chikai",
-          "text": "Rat"
-        },
-        {
-          "id": "animal-ferao",
-          "text": "Woodpecker"
-        }
-      ],
-      "answer": {
-        "name-akela": "animal-akela",
-        "name-raksha": "animal-raksha",
-        "name-rama-wolf": "animal-rama-wolf",
-        "name-grey-brother": "animal-grey-brother",
-        "name-leela": "animal-leela",
-        "name-baloo": "animal-baloo",
-        "name-bagheera": "animal-bagheera",
-        "name-kaa": "animal-kaa",
-        "name-hathi": "animal-hathi",
-        "name-mang": "animal-mang",
-        "name-rama-mysa": "animal-rama-mysa",
-        "name-chil-rann": "animal-chil-rann",
-        "name-sahi-ikki": "animal-sahi-ikki",
-        "name-tha": "animal-tha",
-        "name-phoana": "animal-phoana",
-        "name-phao": "animal-phao",
-        "name-oo": "animal-oo",
-        "name-mao-mor": "animal-mao-mor",
-        "name-won-tolla": "animal-won-tolla",
-        "name-chikai": "animal-chikai",
-        "name-ferao": "animal-ferao"
-      },
-      "sampleSize": 4,
-      "explanation": "Some names share the same kind of animal, so use the short clue to find the exact match."
+      ]
     },
     {
       "id": "sw-flag-colour-black",
@@ -1702,184 +1816,247 @@
       "programme": "SW",
       "advancementId": "SW-55",
       "question": "Match each picture to its Jungle Book character name.",
-      "leftItems": [
+      "sampleSize": 4,
+      "explanation": "Each round shows four characters selected from the full set.",
+      "pairs": [
         {
           "id": "picture-akela",
-          "image": "images/jungle-characters/akela.jpg",
-          "alt": "Picture of the wolf pack leader"
+          "left": {
+            "type": "image",
+            "src": "images/jungle-characters/akela.jpg",
+            "alt": "Picture of the wolf pack leader"
+          },
+          "right": {
+            "type": "text",
+            "value": "Akela"
+          }
         },
         {
           "id": "picture-bagheera",
-          "image": "images/jungle-characters/bagheera.jpg",
-          "alt": "Picture of a black panther"
+          "left": {
+            "type": "image",
+            "src": "images/jungle-characters/bagheera.jpg",
+            "alt": "Picture of a black panther"
+          },
+          "right": {
+            "type": "text",
+            "value": "Bagheera"
+          }
         },
         {
           "id": "picture-mang",
-          "image": "images/jungle-characters/mang.jpg",
-          "alt": "Picture of a bat"
+          "left": {
+            "type": "image",
+            "src": "images/jungle-characters/mang.jpg",
+            "alt": "Picture of a bat"
+          },
+          "right": {
+            "type": "text",
+            "value": "Mang"
+          }
         },
         {
           "id": "picture-chil",
-          "image": "images/jungle-characters/chil.jpg",
-          "alt": "A bird, kite"
+          "left": {
+            "type": "image",
+            "src": "images/jungle-characters/chil.jpg",
+            "alt": "A bird, kite"
+          },
+          "right": {
+            "type": "text",
+            "value": "Chil"
+          }
         },
         {
           "id": "picture-baloo",
-          "image": "images/jungle-characters/baloo.jpg",
-          "alt": "Picture of a bear"
+          "left": {
+            "type": "image",
+            "src": "images/jungle-characters/baloo.jpg",
+            "alt": "Picture of a bear"
+          },
+          "right": {
+            "type": "text",
+            "value": "Baloo"
+          }
         },
         {
           "id": "picture-raksha",
-          "image": "images/jungle-characters/raksha.jpg",
-          "alt": "Mother wolf"
+          "left": {
+            "type": "image",
+            "src": "images/jungle-characters/raksha.jpg",
+            "alt": "Mother wolf"
+          },
+          "right": {
+            "type": "text",
+            "value": "Raksha"
+          }
         },
         {
           "id": "picture-rikki",
-          "image": "images/jungle-characters/rikki.jpg",
-          "alt": "Mongoose"
+          "left": {
+            "type": "image",
+            "src": "images/jungle-characters/rikki.jpg",
+            "alt": "Mongoose"
+          },
+          "right": {
+            "type": "text",
+            "value": "Rikki Tikki Tavi"
+          }
         },
         {
           "id": "picture-rama",
-          "image": "images/jungle-characters/rama.ppg",
-          "alt": "Water buffalo"
+          "left": {
+            "type": "image",
+            "src": "images/jungle-characters/rama.jpg",
+            "alt": "Water buffalo"
+          },
+          "right": {
+            "type": "text",
+            "value": "Rama"
+          }
         },
         {
           "id": "picture-hathi",
-          "image": "images/jungle-characters/hathi.jpg",
-          "alt": "Elephant"
+          "left": {
+            "type": "image",
+            "src": "images/jungle-characters/hathi.jpg",
+            "alt": "Elephant"
+          },
+          "right": {
+            "type": "text",
+            "value": "Hathi"
+          }
         },
         {
           "id": "picture-kaa",
-          "image": "images/jungle-characters/kaa.jpg",
-          "alt": "Snake"
+          "left": {
+            "type": "image",
+            "src": "images/jungle-characters/kaa.jpg",
+            "alt": "Snake"
+          },
+          "right": {
+            "type": "text",
+            "value": "Kaa"
+          }
         },
         {
           "id": "picture-shere-khan",
-          "image": "images/jungle-characters/shere-khan.jpg",
-          "alt": "Tiger"
+          "left": {
+            "type": "image",
+            "src": "images/jungle-characters/shere-khan.jpg",
+            "alt": "Tiger"
+          },
+          "right": {
+            "type": "text",
+            "value": "Shere Khan"
+          }
         },
         {
           "id": "picture-ikki",
-          "image": "images/jungle-characters/ikki.jpg",
-          "alt": "Porcupine"
+          "left": {
+            "type": "image",
+            "src": "images/jungle-characters/ikki.jpg",
+            "alt": "Porcupine"
+          },
+          "right": {
+            "type": "text",
+            "value": "Ikki"
+          }
         },
         {
           "id": "picture-darzee",
-          "image": "images/jungle-characters/darzee.jpg",
-          "alt": "Tailor bird"
+          "left": {
+            "type": "image",
+            "src": "images/jungle-characters/darzee.jpg",
+            "alt": "Tailor bird"
+          },
+          "right": {
+            "type": "text",
+            "value": "Darzee"
+          }
         },
         {
           "id": "picture-badar-log",
-          "image": "images/jungle-characters/bandar-log.jpg",
-          "alt": "Naughty Monkeys"
+          "left": {
+            "type": "image",
+            "src": "images/jungle-characters/bandar-log.jpg",
+            "alt": "Naughty Monkeys"
+          },
+          "right": {
+            "type": "text",
+            "value": "Badar-log"
+          }
         },
         {
           "id": "picture-tabaqui",
-          "image": "images/jungle-characters/tabaqui.jpg",
-          "alt": "Naughty Jackal"
+          "left": {
+            "type": "image",
+            "src": "images/jungle-characters/tabaqui.jpg",
+            "alt": "Naughty Jackal"
+          },
+          "right": {
+            "type": "text",
+            "value": "Tabaqui"
+          }
         },
         {
           "id": "picture-mowgli",
-          "image": "images/jungle-characters/mowgli.jpg",
-          "alt": "Mancub"
+          "left": {
+            "type": "image",
+            "src": "images/jungle-characters/mowgli.jpg",
+            "alt": "Mancub"
+          },
+          "right": {
+            "type": "text",
+            "value": "Mowgli"
+          }
         },
         {
           "id": "picture-mao",
-          "image": "images/jungle-characters/mao.jpg",
-          "alt": "Peacock"
+          "left": {
+            "type": "image",
+            "src": "images/jungle-characters/mao.jpg",
+            "alt": "Peacock"
+          },
+          "right": {
+            "type": "text",
+            "value": "Mao"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sw-pigpen-cub-motto",
+      "type": "image-option",
+      "programme": "SW",
+      "advancementId": "SW-14",
+      "question": "Which code says the Cub motto?",
+      "image": "images/codes/pigpen/pigpen.png",
+      "imageAlt": "Pigpen cipher key",
+      "options": [
+        {
+          "id": "pigpen-doyourbest",
+          "image": "images/codes/pigpen/pigpen-doyourbest.png",
+          "alt": "Pigpen code that says Do your best"
+        },
+        {
+          "id": "pigpen-doyourworst",
+          "image": "images/codes/pigpen/pigpen-doyourworst.png",
+          "alt": "Pigpen code that says Do your worst"
+        },
+        {
+          "id": "pigpen-doyousmell",
+          "image": "images/codes/pigpen/pigpen-doyousmell.png",
+          "alt": "Pigpen code that says Do you smell"
+        },
+        {
+          "id": "pigpen-whoatethecake",
+          "image": "images/codes/pigpen/pigpen-whoatethecake.png",
+          "alt": "Pigpen code that says Who ate the cake"
         }
       ],
-      "rightItems": [
-        {
-          "id": "name-akela",
-          "text": "Akela"
-        },
-        {
-          "id": "name-bagheera",
-          "text": "Bagheera"
-        },
-        {
-          "id": "name-mang",
-          "text": "Mang"
-        },
-        {
-          "id": "name-chil",
-          "text": "Chil"
-        },
-        {
-          "id": "name-baloo",
-          "text": "Baloo"
-        },
-        {
-          "id": "name-raksha",
-          "text": "Raksha"
-        },
-        {
-          "id": "name-rikki",
-          "text": "Rikki Tikki Tavi"
-        },
-        {
-          "id": "name-rama",
-          "text": "Rama"
-        },
-        {
-          "id": "name-hathi",
-          "text": "Hathi"
-        },
-        {
-          "id": "name-kaa",
-          "text": "Kaa"
-        },
-        {
-          "id": "name-shere-khan",
-          "text": "Shere Khan"
-        },
-        {
-          "id": "name-darzee",
-          "text": "Darzee"
-        },
-        {
-          "id": "name-ikki",
-          "text": "Ikki"
-        },
-        {
-          "id": "name-badar-log",
-          "text": "Badar-log"
-        },
-        {
-          "id": "name-mao",
-          "text": "Mao"
-        },
-        {
-          "id": "name-mowgli",
-          "text": "Mowgli"
-        },
-        {
-          "id": "name-tabaqui",
-          "text": "Tabaqui"
-        }
-      ],
-      "answer": {
-        "picture-akela": "name-akela",
-        "picture-bagheera": "name-bagheera",
-        "picture-mang": "name-mang",
-        "picture-chil": "name-chil",
-        "picture-baloo": "name-baloo",
-        "picture-raksha": "name-raksha",
-        "picture-rikki": "name-rikki",
-        "picture-rama": "name-rama",
-        "picture-hathi": "name-hathi",
-        "picture-kaa": "name-kaa",
-        "picture-shere-khan": "name-shere-khan",
-        "picture-badar-log": "name-badar-log",
-        "picture-darzee": "name-darzee",
-        "picture-ikki": "name-ikki",
-        "picture-mao": "name-mao",
-        "picture-mowgli": "name-mowgli",
-        "picture-tabaqui": "name-tabaqui"
-      },
-      "sampleSize": 4,
-      "explanation": "Each round shows four characters selected from the full set."
+      "answer": "pigpen-doyourbest",
+      "explanation": "The Cub motto is “Do your best.”"
     }
   ]
 }

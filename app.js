@@ -149,7 +149,7 @@ function renderSingleAnswer(question) {
     return `${renderQuestionImage(question)}<label class="answer-label" for="answer-select">Choose your answer</label><select class="answer-select" id="answer-select"><option value="">Choose an answer…</option>${options.map((option) => `<option value="${escapeAttribute(option)}">${escapeHtml(option)}</option>`).join('')}</select><div class="next-row"><button class="primary" id="submit-answer" disabled>Check answer <span aria-hidden="true">→</span></button></div>`;
   }
   if (options.length && typeof options[0] === 'object') {
-    return `<div class="answers picture-answers">${options.map((option) => `<button class="answer picture-answer" type="button" data-option="${escapeAttribute(option.id)}" aria-label="${escapeAttribute(option.alt)}"><img src="${escapeAttribute(option.image)}" alt="${escapeAttribute(option.alt)}"></button>`).join('')}</div>`;
+    return `${renderQuestionImage(question)}<div class="answers picture-answers">${options.map((option) => `<button class="answer picture-answer" type="button" data-option="${escapeAttribute(option.id)}" aria-label="${escapeAttribute(option.alt)}"><img src="${escapeAttribute(option.image)}" alt="${escapeAttribute(option.alt)}"></button>`).join('')}</div>`;
   }
   return `${renderQuestionImage(question)}<div class="answers">${options.map((option) => `<button class="answer" data-option="${escapeAttribute(option)}">${escapeHtml(option)}</button>`).join('')}</div>`;
 }
@@ -159,11 +159,14 @@ function renderQuestionImage(question) {
 }
 
 function renderImageMatch(question) {
-  const poolSize = question.leftItems.length;
+  const poolSize = question.pairs.length;
   const sampleSize = Math.max(1, Math.min(Number(question.sampleSize) || poolSize, poolSize));
-  const leftItems = shuffle(question.leftItems).slice(0, sampleSize);
-  const selectedRightIds = new Set(leftItems.map((item) => question.answer[item.id]));
-  const rightItems = shuffle(question.rightItems.filter((item) => selectedRightIds.has(item.id)));
+  const selectedPairs = shuffle(question.pairs).slice(0, sampleSize);
+  const toMatchItem = (side, id) => side.type === 'image'
+    ? { id, image: side.src, alt: side.alt || '' }
+    : { id, text: side.value };
+  const leftItems = selectedPairs.map((pair) => toMatchItem(pair.left, pair.id));
+  const rightItems = shuffle(selectedPairs.map((pair) => toMatchItem(pair.right, pair.id)));
   matchState = { links: {}, activeLeft: null, draggingLeft: null, pointerId: null, pointer: null, checked: false, suppressClickUntil: 0, leftItems, rightItems };
   const instructions = poolSize > sampleSize
     ? `Match these ${sampleSize} pairs. You’ll get a different selection next time.`
@@ -319,15 +322,15 @@ function drawMatchLines() {
     svg.append(line);
   };
   for (const [leftId, rightId] of Object.entries(matchState.links)) {
-    const isCorrect = matchState.checked && questions[index].answer[leftId] === rightId;
+    const isCorrect = matchState.checked && leftId === rightId;
     lineFor(leftId, rightId, matchState.checked ? (isCorrect ? 'correct' : 'incorrect') : 'connected');
-    if (matchState.checked && !isCorrect) lineFor(leftId, questions[index].answer[leftId], 'answer-key');
+    if (matchState.checked && !isCorrect) lineFor(leftId, leftId, 'answer-key');
   }
   if (matchState.draggingLeft && matchState.pointer) lineFor(matchState.draggingLeft, '', 'preview', matchState.pointer);
 }
 
 function checkImageMatches(question) {
-  const correctCount = matchState.leftItems.filter((item) => matchState.links[item.id] === question.answer[item.id]).length;
+  const correctCount = matchState.leftItems.filter((item) => matchState.links[item.id] === item.id).length;
   matchState.checked = true;
   locked = true;
   const correct = correctCount === matchState.leftItems.length;

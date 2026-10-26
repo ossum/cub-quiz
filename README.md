@@ -57,7 +57,7 @@ Use `image` and `imageAlt` with the same `options` and `answer` fields. The app 
 
 ### Match pictures
 
-A Cub can tap an item on the left and then tap its match on the right. A mouse or stylus can drag a line between them. Each item can contain an `image` and `alt`, or short `text`, so picture-to-picture and picture-to-text matching both work. Matching questions use `leftItems`, `rightItems`, and an `answer` object mapping each left item ID to its matching right item ID. A pool may contain more pairs than shown; set `sampleSize` to randomly choose that many pairs each time the question appears:
+A Cub can tap an item on the left and then tap its match on the right. A mouse or stylus can drag a line between them. Each pair keeps both sides together in one object. A side can be an image (type, src, and optional alt) or short text (type and value), so picture-to-picture and picture-to-text matching both work. Set sampleSize to randomly choose that many pairs each time the question appears:
 
 ```json
 {
@@ -66,15 +66,19 @@ A Cub can tap an item on the left and then tap its match on the right. A mouse o
   "programme": "SW",
   "advancementId": "SW-41",
   "question": "Match each picture to its pair.",
-  "leftItems": [
-    {"id": "bird", "image": "images/bird.png", "alt": "A bird"},
-    {"id": "nest", "image": "images/nest.png", "alt": "A nest"}
+  "pairs": [
+    {
+      "id": "bird",
+      "left": {"type": "image", "src": "images/bird.png", "alt": "A bird"},
+      "right": {"type": "image", "src": "images/bird-answer.png", "alt": "A bird"}
+    },
+    {
+      "id": "nest",
+      "left": {"type": "image", "src": "images/nest.png", "alt": "A nest"},
+      "right": {"type": "text", "value": "Nest"}
+    }
   ],
-  "rightItems": [
-    {"id": "nest-copy", "image": "images/nest-answer.png", "alt": "A nest"},
-    {"id": "bird-copy", "image": "images/bird-answer.png", "alt": "A bird"}
-  ],
-  "answer": {"bird": "bird-copy", "nest": "nest-copy"},
+  "sampleSize": 2,
   "explanation": "A bird builds a nest."
 }
 ```
@@ -83,17 +87,17 @@ The starter matching question uses the supplied worksheet artwork and answer key
 
 ### Question fields
 
-- `id`: unique short ID.
-- `type`: `multiple-choice`, `image-dropdown`, or `image-match`. Multiple-choice options can be strings or picture objects (`id`, `image`, `alt`).
-- `programme`: `SW` or `GW`.
-- `advancementId`: programme plus advancement number. For one question shared by several advancements, use `advancementIds`, an array of IDs; the question appears in each focused quiz.
-- `question`: short prompt.
-- `options`: for multiple-choice or image-dropdown questions; `answer` must exactly match one option.
-- `answer`: correct option text for single-answer questions, or left-to-right item ID mapping for image-match.
-- `image` / `imageAlt`: optional picture and its screen-reader description for single-answer questions.
-- `leftItems` / `rightItems`: items to pair in an image-match question; each item has a unique `id` and either `image` with optional `alt` text, or short `text`. The right-side pool should have one item for each answer ID.
-- `sampleSize`: optional number of pairs to randomly display from a larger matching pool; if omitted, all pairs are shown.
-- `explanation`: optional feedback shown after answering.
+- **id**: unique short ID.
+- **type**: multiple-choice, image-option, image-dropdown, or image-match. Multiple-choice and image-option choices can be strings or picture objects.
+- **programme**: SW or GW.
+- **advancementId**: programme plus advancement number. For one question shared by several advancements, use advancementIds, an array of IDs; the question appears in each focused quiz.
+- **question**: short prompt.
+- **options**: for multiple-choice, image-option, or image-dropdown questions; answer must exactly match one option.
+- **answer**: correct option text for single-answer questions. Image-match questions store each correct relationship in the pair itself.
+- **image** / **imageAlt**: picture and its screen-reader description for image-option and image-dropdown questions; optional for multiple-choice. Image-option uses exactly four choices.
+- **pairs**: image-match pairs. Each pair has a unique ID, a left side, and a right side. Image sides use type=image with src and optional alt; text sides use type=text with value.
+- **sampleSize**: optional number of pairs to randomly display from a larger matching pool; if omitted, all pairs are shown.
+- **explanation**: optional feedback shown after answering.
 
 Store image files in `images/` and use project-relative paths. Keep JSON valid: strings use double quotes, and array objects are separated by commas. Question tags must match an ID in `data/advancements.json`.
 
