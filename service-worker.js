@@ -1,0 +1,79 @@
+const CACHE_NAME = 'cub-quiz-pwa-v1';
+const SHELL_FILES = [
+  './',
+  './index.html',
+  './app.js',
+  './question-editor.js',
+  './style.css',
+  './manifest.webmanifest',
+  './data/advancements.json',
+  './data/questions.json',
+  './images/app-icon-192.png',
+  './images/app-icon-512.png'
+];
+
+self.addEventListener('install', (event) => {
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE_NAME);
+    await cache.addAll(SHELL_FILES.map((path) => new Request(new URL(path, self.registration.scope))));
+    await cacheQuestionImages(cache, await fetch(new URL('./data/questions.json', self.registration.scope)));
+    await self.skipWaiting();
+  })());
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil((async () => {
+    const names = await caches.keys();
+    await Promise.all(names.filter((name) => name.startsWith('cub-quiz-pwa-') && name !== CACHE_NAME).map((name) => caches.delete(name)));
+    await self.clients.claim();
+  })());
+});
+
+self.addEventListener('fetch', (event) => {
+  const request = event.request;
+  if (request.method !== 'GET') return;
+  const url = new URL(request.url);
+  if (url.origin !== self.location.origin || !url.href.startsWith(self.registration.scope)) return;
+
+  event.respondWith((async () => {
+    const cache = await caches.open(CACHE_NAME);
+    const isImage = /\/images\//i.test(url.pathname);
+    if (isImage) {
+      const cached = await cache.match(request);
+      if (cached) return cached;
+    }
+    try {
+      const response = await fetch(request);
+      if (response.ok) {
+        await cache.put(request, response.clone());
+        if (url.pathname.endsWith('/data/questions.json')) await cacheQuestionImages(cache, response.clone());
+      }
+      return response;
+    } catch {
+      const cached = await cache.match(request);
+      if (cached) return cached;
+      if (request.mode === 'navigate') return (await cache.match(new URL('./index.html', self.registration.scope))) || Response.error();
+      return new Response('You are offline and this file is not cached yet.', { status: 503, statusText: 'Offline' });
+    }
+  })());
+});
+
+async function cacheQuestionImages(cache, response) {
+  if (!response?.ok) return;
+  try {
+    const data = await response.json();
+    const imagePaths = new Set();
+    for (const question of data.questions || []) {
+      if (question.image) imagePaths.add(question.image);
+      for (const item of [...(question.leftItems || []), ...(question.rightItems || [])]) {
+        if (item.image) imagePaths.add(item.image);
+      }
+    }
+    const requests = [...imagePaths]
+      .filter((path) => path.startsWith('images/'))
+      .map((path) => new Request(new URL(path, self.registration.scope)));
+    if (requests.length) await cache.addAll(requests);
+  } catch (error) {
+    console.warn('Some quiz images could not be cached for offline use.', error);
+  }
+}

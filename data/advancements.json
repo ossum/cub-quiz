@@ -1,0 +1,802 @@
+{
+  "programmes": [
+    {
+      "id": "SW",
+      "name": "Silver Wolf",
+      "categories": [
+        {
+          "id": "awareness",
+          "name": "Awareness",
+          "color": "green",
+          "advancements": [
+            {
+              "id": "SW-1",
+              "number": 1,
+              "name": "Do your best at meetings"
+            },
+            {
+              "id": "SW-2",
+              "number": 2,
+              "name": "Look after yourself outdoors"
+            },
+            {
+              "id": "SW-3",
+              "number": 3,
+              "name": "Throw a ball to someone else"
+            },
+            {
+              "id": "SW-4",
+              "number": 4,
+              "name": "Dribble ball / hit the ball"
+            },
+            {
+              "id": "SW-5",
+              "number": 5,
+              "name": "Learn how to ride a bike"
+            },
+            {
+              "id": "SW-6",
+              "number": 6,
+              "name": "Climb a tree"
+            },
+            {
+              "id": "SW-7",
+              "number": 7,
+              "name": "Learn how to swim / duck dive"
+            },
+            {
+              "id": "SW-8",
+              "number": 8,
+              "name": "Importance of washing hands"
+            },
+            {
+              "id": "SW-9",
+              "number": 9,
+              "name": "Importance of good eating habits"
+            },
+            {
+              "id": "SW-10",
+              "number": 10,
+              "name": "Keep body, etc clean"
+            },
+            {
+              "id": "SW-11",
+              "number": 11,
+              "name": "Know the story of Kim"
+            },
+            {
+              "id": "SW-12",
+              "number": 12,
+              "name": "Sense: Sight and touch"
+            },
+            {
+              "id": "SW-13",
+              "number": 13,
+              "name": "Memory game with Pack"
+            },
+            {
+              "id": "SW-14",
+              "number": 14,
+              "name": "Write and decipher a simple code"
+            },
+            {
+              "id": "SW-15",
+              "number": 15,
+              "name": "Understand outdoor code"
+            },
+            {
+              "id": "SW-16",
+              "number": 16,
+              "name": "Natural materials item"
+            },
+            {
+              "id": "SW-17",
+              "number": 17,
+              "name": "Grow a seed and transplant"
+            },
+            {
+              "id": "SW-18",
+              "number": 18,
+              "name": "What does conservation mean?"
+            },
+            {
+              "id": "SW-19",
+              "number": 19,
+              "name": "Three natural resources"
+            },
+            {
+              "id": "SW-20",
+              "number": 20,
+              "name": "Solution to water pollution"
+            },
+            {
+              "id": "SW-21",
+              "number": 21,
+              "name": "Water / air demonstration"
+            },
+            {
+              "id": "SW-22",
+              "number": 22,
+              "name": "Insects / Underwater creature"
+            }
+          ]
+        },
+        {
+          "id": "community",
+          "name": "Community",
+          "color": "yellow",
+          "advancements": [
+            {
+              "id": "SW-23",
+              "number": 23,
+              "name": "Diary of good turns"
+            },
+            {
+              "id": "SW-24",
+              "number": 24,
+              "name": "Keep your room tidy for one month"
+            },
+            {
+              "id": "SW-25",
+              "number": 25,
+              "name": "Help a leader during Cubs"
+            },
+            {
+              "id": "SW-26",
+              "number": 26,
+              "name": "Make a gift and give it to someone"
+            },
+            {
+              "id": "SW-27",
+              "number": 27,
+              "name": "Sing 3 campfire songs at a campfire"
+            },
+            {
+              "id": "SW-28",
+              "number": 28,
+              "name": "Participate in traditional dancing"
+            },
+            {
+              "id": "SW-29",
+              "number": 29,
+              "name": "Play acting with your six"
+            },
+            {
+              "id": "SW-30",
+              "number": 30,
+              "name": "Joint pack meeting"
+            },
+            {
+              "id": "SW-31",
+              "number": 31,
+              "name": "Learn phrases in another language"
+            },
+            {
+              "id": "SW-32",
+              "number": 32,
+              "name": "Cultural activity with your Pack"
+            }
+          ]
+        },
+        {
+          "id": "outdoor",
+          "name": "Outdoor",
+          "color": "blue",
+          "advancements": [
+            {
+              "id": "SW-33",
+              "number": 33,
+              "name": "Fire safety and striking a match"
+            },
+            {
+              "id": "SW-34",
+              "number": 34,
+              "name": "Lay & light fire and boil water"
+            },
+            {
+              "id": "SW-35",
+              "number": 35,
+              "name": "Use alternative fuel source"
+            },
+            {
+              "id": "SW-36",
+              "number": 36,
+              "name": "Spend the day on a camp"
+            },
+            {
+              "id": "SW-37",
+              "number": 37,
+              "name": "Go on a nature ramble / hike"
+            },
+            {
+              "id": "SW-38",
+              "number": 38,
+              "name": "Two outdoor outings"
+            },
+            {
+              "id": "SW-39",
+              "number": 39,
+              "name": "Sun travel"
+            },
+            {
+              "id": "SW-40",
+              "number": 40,
+              "name": "Know 8 Compass points"
+            },
+            {
+              "id": "SW-41",
+              "number": 41,
+              "name": "Identify object"
+            },
+            {
+              "id": "SW-42",
+              "number": 42,
+              "name": "Draw a simple map of your home"
+            },
+            {
+              "id": "SW-43",
+              "number": 43,
+              "name": "Know make 10 woodcraft signs"
+            },
+            {
+              "id": "SW-44",
+              "number": 44,
+              "name": "Follow a woodcraft trail"
+            },
+            {
+              "id": "SW-45",
+              "number": 45,
+              "name": "Make and use a Reef Knot"
+            },
+            {
+              "id": "SW-46",
+              "number": 46,
+              "name": "Make and use a Slip Reef Knot"
+            },
+            {
+              "id": "SW-47",
+              "number": 47,
+              "name": "Make and use a Round Turn 2 half hitches"
+            },
+            {
+              "id": "SW-48",
+              "number": 48,
+              "name": "Make and use a Figure of 8"
+            },
+            {
+              "id": "SW-49",
+              "number": 49,
+              "name": "Know how to hank a short rope"
+            },
+            {
+              "id": "SW-50",
+              "number": 50,
+              "name": "Three knotting games / activities"
+            },
+            {
+              "id": "SW-51",
+              "number": 51,
+              "name": "Behave during ceremonies"
+            },
+            {
+              "id": "SW-52",
+              "number": 52,
+              "name": "Know sing the national anthem"
+            },
+            {
+              "id": "SW-53",
+              "number": 53,
+              "name": "Draw colour South African flag"
+            },
+            {
+              "id": "SW-54",
+              "number": 54,
+              "name": "Respect your uniform"
+            },
+            {
+              "id": "SW-55",
+              "number": 55,
+              "name": "Eight Jungle Book names and characters"
+            }
+          ]
+        },
+        {
+          "id": "aptitude",
+          "name": "Aptitude",
+          "color": "red",
+          "advancements": [
+            {
+              "id": "SW-56",
+              "number": 56,
+              "name": "Safety rules - water"
+            },
+            {
+              "id": "SW-57",
+              "number": 57,
+              "name": "Dangers swimming in your area"
+            },
+            {
+              "id": "SW-58",
+              "number": 58,
+              "name": "Explain the buddy system"
+            },
+            {
+              "id": "SW-59",
+              "number": 59,
+              "name": "Causes of accidents in the home"
+            },
+            {
+              "id": "SW-60",
+              "number": 60,
+              "name": "Know what to do in an accident"
+            },
+            {
+              "id": "SW-61",
+              "number": 61,
+              "name": "Carry and deliver a message"
+            },
+            {
+              "id": "SW-62",
+              "number": 62,
+              "name": "Pedestrian road rules"
+            },
+            {
+              "id": "SW-63",
+              "number": 63,
+              "name": "Dangers of talking to strangers"
+            },
+            {
+              "id": "SW-64",
+              "number": 64,
+              "name": "Importance of saying 'no'"
+            },
+            {
+              "id": "SW-65",
+              "number": 65,
+              "name": "Alone at home"
+            },
+            {
+              "id": "SW-66",
+              "number": 66,
+              "name": "Importance of getting adult help"
+            },
+            {
+              "id": "SW-67",
+              "number": 67,
+              "name": "Cut and graze treatment"
+            },
+            {
+              "id": "SW-68",
+              "number": 68,
+              "name": "Show how to treat a bleeding nose"
+            },
+            {
+              "id": "SW-69",
+              "number": 69,
+              "name": "Simple emergency kit"
+            },
+            {
+              "id": "SW-70",
+              "number": 70,
+              "name": "Triangular bandage as a sling"
+            },
+            {
+              "id": "SW-71",
+              "number": 71,
+              "name": "Importance of being punctual"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "GW",
+      "name": "Gold Wolf",
+      "categories": [
+        {
+          "id": "awareness",
+          "name": "Awareness",
+          "color": "green",
+          "advancements": [
+            {
+              "id": "GW-1",
+              "number": 1,
+              "name": "Sportsman like attitude in Pack"
+            },
+            {
+              "id": "GW-2",
+              "number": 2,
+              "name": "Dangers sunburn heat exhaustion"
+            },
+            {
+              "id": "GW-3",
+              "number": 3,
+              "name": "Hop in figure of eight"
+            },
+            {
+              "id": "GW-4",
+              "number": 4,
+              "name": "Climb a rope of 3m"
+            },
+            {
+              "id": "GW-5",
+              "number": 5,
+              "name": "Any two Headstand / Handstand"
+            },
+            {
+              "id": "GW-6",
+              "number": 6,
+              "name": "Scout's pace"
+            },
+            {
+              "id": "GW-7",
+              "number": 7,
+              "name": "Swimming"
+            },
+            {
+              "id": "GW-8",
+              "number": 8,
+              "name": "Importance clean drinking water"
+            },
+            {
+              "id": "GW-9",
+              "number": 9,
+              "name": "Discuss prevention diseases"
+            },
+            {
+              "id": "GW-10",
+              "number": 10,
+              "name": "Effects smoking drug abuse alcohol"
+            },
+            {
+              "id": "GW-11",
+              "number": 11,
+              "name": "Learn how to play a board game"
+            },
+            {
+              "id": "GW-12",
+              "number": 12,
+              "name": "Sense training: All five senses"
+            },
+            {
+              "id": "GW-13",
+              "number": 13,
+              "name": "Write and decipher a complex code"
+            },
+            {
+              "id": "GW-14",
+              "number": 14,
+              "name": "Bird feeder or Uses of trees"
+            },
+            {
+              "id": "GW-15",
+              "number": 15,
+              "name": "Endangered Species"
+            },
+            {
+              "id": "GW-16",
+              "number": 16,
+              "name": "Make and use compost"
+            },
+            {
+              "id": "GW-17",
+              "number": 17,
+              "name": "Vegetable bed / Herb garden"
+            },
+            {
+              "id": "GW-18",
+              "number": 18,
+              "name": "Waste / Consume energy"
+            },
+            {
+              "id": "GW-19",
+              "number": 19,
+              "name": "Heat water/cook using solar energy"
+            },
+            {
+              "id": "GW-20",
+              "number": 20,
+              "name": "Make a diorama"
+            },
+            {
+              "id": "GW-21",
+              "number": 21,
+              "name": "Find out and demonstrate acid rain"
+            },
+            {
+              "id": "GW-22",
+              "number": 22,
+              "name": "How plants fight air pollution"
+            }
+          ]
+        },
+        {
+          "id": "community",
+          "name": "Community",
+          "color": "yellow",
+          "advancements": [
+            {
+              "id": "GW-23",
+              "number": 23,
+              "name": "Simple repairs / Repairs badge"
+            },
+            {
+              "id": "GW-24",
+              "number": 24,
+              "name": "Take care of new cub"
+            },
+            {
+              "id": "GW-25",
+              "number": 25,
+              "name": "Make donate gift to worthy cause"
+            },
+            {
+              "id": "GW-26",
+              "number": 26,
+              "name": "Organisation in your community"
+            },
+            {
+              "id": "GW-27",
+              "number": 27,
+              "name": "New helpful tasks for three months"
+            },
+            {
+              "id": "GW-28",
+              "number": 28,
+              "name": "Lead a campfire song at a campfire"
+            },
+            {
+              "id": "GW-29",
+              "number": 29,
+              "name": "Make play simple musical instrument"
+            },
+            {
+              "id": "GW-30",
+              "number": 30,
+              "name": "Write a song or poem"
+            },
+            {
+              "id": "GW-31",
+              "number": 31,
+              "name": "Group, District, Provincial activity"
+            },
+            {
+              "id": "GW-32",
+              "number": 32,
+              "name": "Contact with other Cubs"
+            },
+            {
+              "id": "GW-33",
+              "number": 33,
+              "name": "Find out about cultural groups"
+            }
+          ]
+        },
+        {
+          "id": "outdoor",
+          "name": "Outdoor",
+          "color": "blue",
+          "advancements": [
+            {
+              "id": "GW-34",
+              "number": 34,
+              "name": "Fire safety in the open bush"
+            },
+            {
+              "id": "GW-35",
+              "number": 35,
+              "name": "Fire emergency"
+            },
+            {
+              "id": "GW-36",
+              "number": 36,
+              "name": "Lay and light a fire outdoors"
+            },
+            {
+              "id": "GW-37",
+              "number": 37,
+              "name": "Cook using a conservation stove"
+            },
+            {
+              "id": "GW-38",
+              "number": 38,
+              "name": "Camp out for two nights"
+            },
+            {
+              "id": "GW-39",
+              "number": 39,
+              "name": "Help pitch tent/build a simple shelter"
+            },
+            {
+              "id": "GW-40",
+              "number": 40,
+              "name": "Spend one night in in tent / shelter"
+            },
+            {
+              "id": "GW-41",
+              "number": 41,
+              "name": "Getting lost in the veld"
+            },
+            {
+              "id": "GW-42",
+              "number": 42,
+              "name": "Natural dangers in the veld"
+            },
+            {
+              "id": "GW-43",
+              "number": 43,
+              "name": "Three ways making distress signals"
+            },
+            {
+              "id": "GW-44",
+              "number": 44,
+              "name": "Prepare for and go on a day hike"
+            },
+            {
+              "id": "GW-45",
+              "number": 45,
+              "name": "Take care of and use a compass"
+            },
+            {
+              "id": "GW-46",
+              "number": 46,
+              "name": "Use 2 methods find North outdoors"
+            },
+            {
+              "id": "GW-47",
+              "number": 47,
+              "name": "Follow a compass trail"
+            },
+            {
+              "id": "GW-48",
+              "number": 48,
+              "name": "Use a street map"
+            },
+            {
+              "id": "GW-49",
+              "number": 49,
+              "name": "Know six to ten map symbols"
+            },
+            {
+              "id": "GW-50",
+              "number": 50,
+              "name": "Lay a woodcraft trail using 20 signs"
+            },
+            {
+              "id": "GW-51",
+              "number": 51,
+              "name": "Make and use a Sheet Bend"
+            },
+            {
+              "id": "GW-52",
+              "number": 52,
+              "name": "Make and use a Fisherman's Knot"
+            },
+            {
+              "id": "GW-53",
+              "number": 53,
+              "name": "Make and use a Bowline"
+            },
+            {
+              "id": "GW-54",
+              "number": 54,
+              "name": "Make and use a Sheep Shank"
+            },
+            {
+              "id": "GW-55",
+              "number": 55,
+              "name": "Hank a long rope"
+            },
+            {
+              "id": "GW-56",
+              "number": 56,
+              "name": "Help another Cub with a knot"
+            },
+            {
+              "id": "GW-57",
+              "number": 57,
+              "name": "Know the parts of the flag"
+            },
+            {
+              "id": "GW-58",
+              "number": 58,
+              "name": "Prepare, hoist, break and lower flag"
+            },
+            {
+              "id": "GW-59",
+              "number": 59,
+              "name": "Join the flag to halyard correctly"
+            },
+            {
+              "id": "GW-60",
+              "number": 60,
+              "name": "Jungle character mask and play"
+            }
+          ]
+        },
+        {
+          "id": "aptitude",
+          "name": "Aptitude",
+          "color": "red",
+          "advancements": [
+            {
+              "id": "GW-61",
+              "number": 61,
+              "name": "Make up a game about water safety"
+            },
+            {
+              "id": "GW-62",
+              "number": 62,
+              "name": "Know at least one rescue method"
+            },
+            {
+              "id": "GW-63",
+              "number": 63,
+              "name": "Home safety game or activity"
+            },
+            {
+              "id": "GW-64",
+              "number": 64,
+              "name": "Home safety plan for family"
+            },
+            {
+              "id": "GW-65",
+              "number": 65,
+              "name": "Find out about poisons in the home"
+            },
+            {
+              "id": "GW-66",
+              "number": 66,
+              "name": "Identify 10 traffic signs correctly"
+            },
+            {
+              "id": "GW-67",
+              "number": 67,
+              "name": "Safety as cyclist or passenger in car"
+            },
+            {
+              "id": "GW-68",
+              "number": 68,
+              "name": "Know and understand the four terms"
+            },
+            {
+              "id": "GW-69",
+              "number": 69,
+              "name": "Importance of not giving out info"
+            },
+            {
+              "id": "GW-70",
+              "number": 70,
+              "name": "Texting / posting negative content"
+            },
+            {
+              "id": "GW-71",
+              "number": 71,
+              "name": "Emergency Situation"
+            },
+            {
+              "id": "GW-72",
+              "number": 72,
+              "name": "Local Emergency medical services"
+            },
+            {
+              "id": "GW-73",
+              "number": 73,
+              "name": "Burns, scalds, etc"
+            },
+            {
+              "id": "GW-74",
+              "number": 74,
+              "name": "Stop bleeding"
+            },
+            {
+              "id": "GW-75",
+              "number": 75,
+              "name": "24 hour clock"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1434 @@
+{
+  "title": "Edward Shield Challenge",
+  "questions": [
+    {
+      "id": "sw-best-meetings-1",
+      "type": "multiple-choice",
+      "programme": "SW",
+      "advancementId": "SW-1",
+      "question": "What is one way to do your best at a Cub meeting?",
+      "options": [
+        "Join in and listen when others are speaking",
+        "Try to win every game",
+        "Talk while someone else is explaining",
+        "Leave whenever an activity is difficult"
+      ],
+      "answer": "Join in and listen when others are speaking",
+      "explanation": "Doing your best includes taking part and showing respect to the Pack."
+    },
+    {
+      "id": "sw-washing-hands-1",
+      "type": "multiple-choice",
+      "programme": "SW",
+      "advancementId": "SW-8",
+      "question": "When is it especially important to wash your hands?",
+      "options": [
+        "Before eating and after using the toilet",
+        "Only when your hands look dirty",
+        "Only before bed",
+        "After putting on your shoes"
+      ],
+      "answer": "Before eating and after using the toilet",
+      "explanation": "Washing with soap and water helps remove germs."
+    },
+    {
+      "id": "sw-simple-code-1",
+      "type": "multiple-choice",
+      "programme": "SW",
+      "advancementId": "SW-14",
+      "question": "Using A=1, B=2, C=3 and so on, what word is 2-1-4?",
+      "options": [
+        "BAD",
+        "CAB",
+        "DAB",
+        "BAG"
+      ],
+      "answer": "BAD",
+      "explanation": "2 is B, 1 is A, and 4 is D."
+    },
+    {
+      "id": "sw-conservation-1",
+      "type": "multiple-choice",
+      "programme": "SW",
+      "advancementId": "SW-18",
+      "question": "What does conservation mean?",
+      "options": [
+        "Looking after nature and using resources carefully",
+        "Collecting as many things from nature as possible",
+        "Making sure nobody visits the outdoors",
+        "Using water and electricity without limits"
+      ],
+      "answer": "Looking after nature and using resources carefully",
+      "explanation": "Conservation helps protect nature and the resources people and animals need."
+    },
+    {
+      "id": "sw-compass-1",
+      "type": "multiple-choice",
+      "programme": "SW",
+      "advancementId": "SW-40",
+      "question": "On an eight-point compass, which direction lies halfway between north and east?",
+      "options": [
+        "North-east",
+        "South-east",
+        "North-west",
+        "South-west"
+      ],
+      "answer": "North-east",
+      "explanation": "North-east is one of the four points between the main compass directions."
+    },
+    {
+      "id": "sw-jungle-1",
+      "type": "image-dropdown",
+      "programme": "SW",
+      "advancementId": "SW-55",
+      "question": "Which Jungle Book character is shown here?",
+      "image": "images/baloo.png",
+      "imageAlt": "A friendly illustrated bear waving",
+      "options": [
+        "Baloo",
+        "Bagheera",
+        "Kaa",
+        "Shere Khan"
+      ],
+      "answer": "Baloo",
+      "explanation": "Baloo is the kind bear who teaches Mowgli the ways of the jungle."
+    },
+    {
+      "id": "sw-home-accidents-1",
+      "type": "multiple-choice",
+      "programme": "SW",
+      "advancementId": "SW-59",
+      "question": "Which situation could cause someone to trip at home?",
+      "options": [
+        "A toy left on a staircase",
+        "A book on a shelf",
+        "A cushion on a sofa",
+        "A cup in a cupboard"
+      ],
+      "answer": "A toy left on a staircase",
+      "explanation": "Keeping walkways and stairs clear can help prevent trips and falls."
+    },
+    {
+      "id": "sw-accident-help-1",
+      "type": "multiple-choice",
+      "programme": "SW",
+      "advancementId": "SW-60",
+      "question": "If someone is hurt in an accident, what should you do first?",
+      "options": [
+        "Get a trusted adult to help straight away",
+        "Keep it secret",
+        "Move the person without asking for help",
+        "Give them food"
+      ],
+      "answer": "Get a trusted adult to help straight away",
+      "explanation": "Tell a trusted adult immediately. If someone is in serious danger, get emergency help with an adult."
+    },
+    {
+      "id": "gw-drinking-water-1",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-8",
+      "question": "When you are unsure whether water is safe to drink, what should you do?",
+      "options": [
+        "Ask a trusted adult before drinking it",
+        "Taste it to check",
+        "Add juice to it",
+        "Drink it only if it is cold"
+      ],
+      "answer": "Ask a trusted adult before drinking it",
+      "explanation": "A trusted adult can help make sure your drinking water is safe."
+    },
+    {
+      "id": "gw-fire-safety-1",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-34",
+      "question": "If a campfire spreads beyond its safe area, what should a Cub do?",
+      "options": [
+        "Move away and alert the responsible adult",
+        "Try to put it out alone",
+        "Run closer to see what happened",
+        "Hide it from the Pack"
+      ],
+      "answer": "Move away and alert the responsible adult",
+      "explanation": "Move to a safe place and tell the leader or responsible adult straight away."
+    },
+    {
+      "id": "gw-compass-1",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-45",
+      "question": "What is a compass useful for when you are outdoors?",
+      "options": [
+        "Finding directions",
+        "Measuring how tall a tree is",
+        "Checking the temperature",
+        "Telling how deep a river is"
+      ],
+      "answer": "Finding directions",
+      "explanation": "A compass can help you work out which direction you are facing."
+    },
+    {
+      "id": "gw-home-safety-plan-1",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-64",
+      "question": "What is useful to include in a family home safety plan?",
+      "options": [
+        "A safe way to leave and a place to meet outside",
+        "A list of favourite television shows",
+        "A plan to handle every emergency alone",
+        "A hiding place for medicines"
+      ],
+      "answer": "A safe way to leave and a place to meet outside",
+      "explanation": "Make a plan with your family and practise it with a responsible adult."
+    },
+    {
+      "id": "gw-poisons-1",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-65",
+      "question": "You find a bottle marked with a poison warning. What should you do?",
+      "options": [
+        "Leave it alone and tell a trusted adult",
+        "Open it to find out what is inside",
+        "Move it to another bottle",
+        "Try a tiny amount"
+      ],
+      "answer": "Leave it alone and tell a trusted adult",
+      "explanation": "Never touch or taste unknown chemicals. Tell an adult so they can handle it safely."
+    },
+    {
+      "id": "sw-picture-match-demo-1",
+      "type": "image-match",
+      "programme": "SW",
+      "advancementId": "SW-41",
+      "question": "Match each stack to its view from above.",
+      "leftItems": [
+        {
+          "id": "stack-1",
+          "image": "images/matching/stack-1.png",
+          "alt": "First colourful ring stack"
+        },
+        {
+          "id": "stack-2",
+          "image": "images/matching/stack-2.png",
+          "alt": "Second colourful ring stack"
+        },
+        {
+          "id": "stack-3",
+          "image": "images/matching/stack-3.png",
+          "alt": "Third colourful ring stack"
+        },
+        {
+          "id": "stack-4",
+          "image": "images/matching/stack-4.png",
+          "alt": "Fourth colourful ring stack"
+        }
+      ],
+      "rightItems": [
+        {
+          "id": "target-1",
+          "image": "images/matching/target-1.png",
+          "alt": "Target pattern one: yellow outer ring, red ring, purple ring and green centre"
+        },
+        {
+          "id": "target-2",
+          "image": "images/matching/target-2.png",
+          "alt": "Target pattern two: green outer ring, yellow ring, red ring, purple ring and green centre"
+        },
+        {
+          "id": "target-3",
+          "image": "images/matching/target-3.png",
+          "alt": "Target pattern three: purple outer ring, yellow ring and green centre"
+        },
+        {
+          "id": "target-4",
+          "image": "images/matching/target-4.png",
+          "alt": "Target pattern four: purple outer ring, green ring and yellow centre"
+        }
+      ],
+      "answer": {
+        "stack-1": "target-2",
+        "stack-2": "target-1",
+        "stack-3": "target-4",
+        "stack-4": "target-3"
+      },
+      "explanation": "Look carefully at the colours and how they are arranged."
+    },
+    {
+      "id": "sw-knots-use-match-1",
+      "type": "image-match",
+      "programme": "SW",
+      "advancementIds": [
+        "SW-45",
+        "SW-46",
+        "SW-47",
+        "SW-48"
+      ],
+      "question": "Match each knot to its use.",
+      "leftItems": [
+        {
+          "id": "knot-1",
+          "image": "images/knots/reef-knot.png",
+          "alt": "Picture of Reef Knot"
+        },
+        {
+          "id": "knot-2",
+          "image": "images/knots/slip-reef.png",
+          "alt": "Picture of Slip Reef Knot"
+        },
+        {
+          "id": "knot-3",
+          "image": "images/knots/round-turn-two-half-hitches.png",
+          "alt": "Picture of Round Turn and Two Half Hitches"
+        },
+        {
+          "id": "knot-4",
+          "image": "images/knots/figure-eight.png",
+          "alt": "Picture of Figure-of-Eight Knot"
+        }
+      ],
+      "rightItems": [
+        {
+          "id": "choice-1",
+          "text": "Ties a parcel"
+        },
+        {
+          "id": "choice-2",
+          "text": "Ties shoelaces"
+        },
+        {
+          "id": "choice-3",
+          "text": "Ties a rope to a post"
+        },
+        {
+          "id": "choice-4",
+          "text": "Stops a rope slipping through"
+        }
+      ],
+      "answer": {
+        "knot-1": "choice-1",
+        "knot-2": "choice-2",
+        "knot-3": "choice-3",
+        "knot-4": "choice-4"
+      },
+      "explanation": "Match each knot picture to the short description."
+    },
+    {
+      "id": "sw-knots-name-match-1",
+      "type": "image-match",
+      "programme": "SW",
+      "advancementIds": [
+        "SW-45",
+        "SW-46",
+        "SW-47",
+        "SW-48"
+      ],
+      "question": "Match each knot to its name.",
+      "leftItems": [
+        {
+          "id": "knot-1",
+          "image": "images/knots/reef-knot.png",
+          "alt": "Picture of Reef Knot"
+        },
+        {
+          "id": "knot-2",
+          "image": "images/knots/slip-reef.png",
+          "alt": "Picture of Slip Reef Knot"
+        },
+        {
+          "id": "knot-3",
+          "image": "images/knots/round-turn-two-half-hitches.png",
+          "alt": "Picture of Round Turn and Two Half Hitches"
+        },
+        {
+          "id": "knot-4",
+          "image": "images/knots/figure-eight.png",
+          "alt": "Picture of Figure-of-Eight Knot"
+        }
+      ],
+      "rightItems": [
+        {
+          "id": "choice-1",
+          "text": "Reef Knot"
+        },
+        {
+          "id": "choice-2",
+          "text": "Slip Reef Knot"
+        },
+        {
+          "id": "choice-3",
+          "text": "Round Turn and Two Half Hitches"
+        },
+        {
+          "id": "choice-4",
+          "text": "Figure-of-Eight Knot"
+        }
+      ],
+      "answer": {
+        "knot-1": "choice-1",
+        "knot-2": "choice-2",
+        "knot-3": "choice-3",
+        "knot-4": "choice-4"
+      },
+      "explanation": "Match each picture to the correct knot name."
+    },
+    {
+      "id": "gw-knots-use-match-1",
+      "type": "image-match",
+      "programme": "GW",
+      "advancementIds": [
+        "GW-51",
+        "GW-52",
+        "GW-53",
+        "GW-54"
+      ],
+      "question": "Match each knot to its use.",
+      "leftItems": [
+        {
+          "id": "knot-1",
+          "image": "images/knots/sheet-bend.png",
+          "alt": "Picture of Sheet Bend"
+        },
+        {
+          "id": "knot-2",
+          "image": "images/knots/fishermans-knot.png",
+          "alt": "Picture of Fisherman's Knot"
+        },
+        {
+          "id": "knot-3",
+          "image": "images/knots/bowline.png",
+          "alt": "Picture of Bowline"
+        },
+        {
+          "id": "knot-4",
+          "image": "images/knots/sheep-shank.png",
+          "alt": "Picture of Sheep Shank"
+        }
+      ],
+      "rightItems": [
+        {
+          "id": "choice-1",
+          "text": "Joins ropes of different sizes"
+        },
+        {
+          "id": "choice-2",
+          "text": "Joins two similar ropes"
+        },
+        {
+          "id": "choice-3",
+          "text": "Makes a fixed loop"
+        },
+        {
+          "id": "choice-4",
+          "text": "Shortens a rope"
+        }
+      ],
+      "answer": {
+        "knot-1": "choice-1",
+        "knot-2": "choice-2",
+        "knot-3": "choice-3",
+        "knot-4": "choice-4"
+      },
+      "explanation": "Match each knot picture to the short description."
+    },
+    {
+      "id": "gw-knots-name-match-1",
+      "type": "image-match",
+      "programme": "GW",
+      "advancementIds": [
+        "GW-51",
+        "GW-52",
+        "GW-53",
+        "GW-54"
+      ],
+      "question": "Match each knot to its name.",
+      "leftItems": [
+        {
+          "id": "knot-1",
+          "image": "images/knots/sheet-bend.png",
+          "alt": "Picture of Sheet Bend"
+        },
+        {
+          "id": "knot-2",
+          "image": "images/knots/fishermans-knot.png",
+          "alt": "Picture of Fisherman's Knot"
+        },
+        {
+          "id": "knot-3",
+          "image": "images/knots/bowline.png",
+          "alt": "Picture of Bowline"
+        },
+        {
+          "id": "knot-4",
+          "image": "images/knots/sheep-shank.png",
+          "alt": "Picture of Sheep Shank"
+        }
+      ],
+      "rightItems": [
+        {
+          "id": "choice-1",
+          "text": "Sheet Bend"
+        },
+        {
+          "id": "choice-2",
+          "text": "Fisherman's Knot"
+        },
+        {
+          "id": "choice-3",
+          "text": "Bowline"
+        },
+        {
+          "id": "choice-4",
+          "text": "Sheep Shank"
+        }
+      ],
+      "answer": {
+        "knot-1": "choice-1",
+        "knot-2": "choice-2",
+        "knot-3": "choice-3",
+        "knot-4": "choice-4"
+      },
+      "explanation": "Match each picture to the correct knot name."
+    },
+    {
+      "id": "sw-trail-sign-water-this-direction-1",
+      "type": "multiple-choice",
+      "programme": "SW",
+      "advancementId": "SW-43",
+      "question": "Which trail sign means: Water in this direction?",
+      "options": [
+        {
+          "id": "water-this-direction",
+          "image": "images/trail-signs/water-this-direction.png",
+          "alt": "Water in this direction"
+        },
+        {
+          "id": "turn-left-or-right",
+          "image": "images/trail-signs/turn-left-or-right.png",
+          "alt": "Turn (left or right)"
+        },
+        {
+          "id": "this-way",
+          "image": "images/trail-signs/this-way.png",
+          "alt": "This way"
+        },
+        {
+          "id": "not-this-way",
+          "image": "images/trail-signs/not-this-way.png",
+          "alt": "Not this way"
+        }
+      ],
+      "answer": "water-this-direction",
+      "explanation": "This trail sign means: Water in this direction."
+    },
+    {
+      "id": "sw-trail-sign-turn-left-or-right-1",
+      "type": "multiple-choice",
+      "programme": "SW",
+      "advancementId": "SW-43",
+      "question": "Which trail sign means: Turn (left or right)?",
+      "options": [
+        {
+          "id": "turn-left-or-right",
+          "image": "images/trail-signs/turn-left-or-right.png",
+          "alt": "Turn (left or right)"
+        },
+        {
+          "id": "this-way",
+          "image": "images/trail-signs/this-way.png",
+          "alt": "This way"
+        },
+        {
+          "id": "not-this-way",
+          "image": "images/trail-signs/not-this-way.png",
+          "alt": "Not this way"
+        },
+        {
+          "id": "over-obstacle",
+          "image": "images/trail-signs/over-obstacle.png",
+          "alt": "This way over an obstacle"
+        }
+      ],
+      "answer": "turn-left-or-right",
+      "explanation": "This trail sign means: Turn (left or right)."
+    },
+    {
+      "id": "sw-trail-sign-this-way-1",
+      "type": "multiple-choice",
+      "programme": "SW",
+      "advancementId": "SW-43",
+      "question": "Which trail sign means: This way?",
+      "options": [
+        {
+          "id": "this-way",
+          "image": "images/trail-signs/this-way.png",
+          "alt": "This way"
+        },
+        {
+          "id": "not-this-way",
+          "image": "images/trail-signs/not-this-way.png",
+          "alt": "Not this way"
+        },
+        {
+          "id": "over-obstacle",
+          "image": "images/trail-signs/over-obstacle.png",
+          "alt": "This way over an obstacle"
+        },
+        {
+          "id": "party-split-up",
+          "image": "images/trail-signs/party-split-up.png",
+          "alt": "Party split up"
+        }
+      ],
+      "answer": "this-way",
+      "explanation": "This trail sign means: This way."
+    },
+    {
+      "id": "sw-trail-sign-not-this-way-1",
+      "type": "multiple-choice",
+      "programme": "SW",
+      "advancementId": "SW-43",
+      "question": "Which trail sign means: Not this way?",
+      "options": [
+        {
+          "id": "not-this-way",
+          "image": "images/trail-signs/not-this-way.png",
+          "alt": "Not this way"
+        },
+        {
+          "id": "over-obstacle",
+          "image": "images/trail-signs/over-obstacle.png",
+          "alt": "This way over an obstacle"
+        },
+        {
+          "id": "party-split-up",
+          "image": "images/trail-signs/party-split-up.png",
+          "alt": "Party split up"
+        },
+        {
+          "id": "message-this-way",
+          "image": "images/trail-signs/message-this-way.png",
+          "alt": "Message this way"
+        }
+      ],
+      "answer": "not-this-way",
+      "explanation": "This trail sign means: Not this way."
+    },
+    {
+      "id": "sw-trail-sign-over-obstacle-1",
+      "type": "multiple-choice",
+      "programme": "SW",
+      "advancementId": "SW-43",
+      "question": "Which trail sign means: This way over an obstacle?",
+      "options": [
+        {
+          "id": "over-obstacle",
+          "image": "images/trail-signs/over-obstacle.png",
+          "alt": "This way over an obstacle"
+        },
+        {
+          "id": "party-split-up",
+          "image": "images/trail-signs/party-split-up.png",
+          "alt": "Party split up"
+        },
+        {
+          "id": "message-this-way",
+          "image": "images/trail-signs/message-this-way.png",
+          "alt": "Message this way"
+        },
+        {
+          "id": "gone-home",
+          "image": "images/trail-signs/gone-home.png",
+          "alt": "Gone home"
+        }
+      ],
+      "answer": "over-obstacle",
+      "explanation": "This trail sign means: This way over an obstacle."
+    },
+    {
+      "id": "sw-trail-sign-party-split-up-1",
+      "type": "multiple-choice",
+      "programme": "SW",
+      "advancementId": "SW-43",
+      "question": "Which trail sign means: Party split up?",
+      "options": [
+        {
+          "id": "party-split-up",
+          "image": "images/trail-signs/party-split-up.png",
+          "alt": "Party split up"
+        },
+        {
+          "id": "message-this-way",
+          "image": "images/trail-signs/message-this-way.png",
+          "alt": "Message this way"
+        },
+        {
+          "id": "gone-home",
+          "image": "images/trail-signs/gone-home.png",
+          "alt": "Gone home"
+        },
+        {
+          "id": "water-this-direction",
+          "image": "images/trail-signs/water-this-direction.png",
+          "alt": "Water in this direction"
+        }
+      ],
+      "answer": "party-split-up",
+      "explanation": "This trail sign means: Party split up."
+    },
+    {
+      "id": "sw-trail-sign-message-this-way-1",
+      "type": "multiple-choice",
+      "programme": "SW",
+      "advancementId": "SW-43",
+      "question": "Which trail sign means: Message this way?",
+      "options": [
+        {
+          "id": "message-this-way",
+          "image": "images/trail-signs/message-this-way.png",
+          "alt": "Message this way"
+        },
+        {
+          "id": "gone-home",
+          "image": "images/trail-signs/gone-home.png",
+          "alt": "Gone home"
+        },
+        {
+          "id": "water-this-direction",
+          "image": "images/trail-signs/water-this-direction.png",
+          "alt": "Water in this direction"
+        },
+        {
+          "id": "turn-left-or-right",
+          "image": "images/trail-signs/turn-left-or-right.png",
+          "alt": "Turn (left or right)"
+        }
+      ],
+      "answer": "message-this-way",
+      "explanation": "This trail sign means: Message this way."
+    },
+    {
+      "id": "sw-trail-sign-gone-home-1",
+      "type": "multiple-choice",
+      "programme": "SW",
+      "advancementId": "SW-43",
+      "question": "Which trail sign means: Gone home?",
+      "options": [
+        {
+          "id": "gone-home",
+          "image": "images/trail-signs/gone-home.png",
+          "alt": "Gone home"
+        },
+        {
+          "id": "water-this-direction",
+          "image": "images/trail-signs/water-this-direction.png",
+          "alt": "Water in this direction"
+        },
+        {
+          "id": "turn-left-or-right",
+          "image": "images/trail-signs/turn-left-or-right.png",
+          "alt": "Turn (left or right)"
+        },
+        {
+          "id": "this-way",
+          "image": "images/trail-signs/this-way.png",
+          "alt": "This way"
+        }
+      ],
+      "answer": "gone-home",
+      "explanation": "This trail sign means: Gone home."
+    },
+    {
+      "id": "gw-traffic-signs-match-1",
+      "type": "image-match",
+      "programme": "GW",
+      "advancementId": "GW-66",
+      "question": "Match each traffic sign to its meaning (set 1 of 4).",
+      "leftItems": [
+        {
+          "id": "traffic-circle",
+          "image": "images/traffic-signs/traffic-circle.png",
+          "alt": "Traffic sign: Traffic circle ahead"
+        },
+        {
+          "id": "falling-rocks",
+          "image": "images/traffic-signs/falling-rocks.png",
+          "alt": "Traffic sign: Falling rocks"
+        },
+        {
+          "id": "slippery-road",
+          "image": "images/traffic-signs/slippery-road.png",
+          "alt": "Traffic sign: Slippery road"
+        },
+        {
+          "id": "zebra-crossing",
+          "image": "images/traffic-signs/zebra-crossing.png",
+          "alt": "Traffic sign: Zebra crossing"
+        }
+      ],
+      "rightItems": [
+        {
+          "id": "meaning-traffic-circle",
+          "text": "Traffic circle ahead"
+        },
+        {
+          "id": "meaning-falling-rocks",
+          "text": "Falling rocks"
+        },
+        {
+          "id": "meaning-slippery-road",
+          "text": "Slippery road"
+        },
+        {
+          "id": "meaning-zebra-crossing",
+          "text": "Zebra crossing"
+        }
+      ],
+      "answer": {
+        "traffic-circle": "meaning-traffic-circle",
+        "falling-rocks": "meaning-falling-rocks",
+        "slippery-road": "meaning-slippery-road",
+        "zebra-crossing": "meaning-zebra-crossing"
+      },
+      "explanation": "Read each short meaning and connect it to the matching traffic sign."
+    },
+    {
+      "id": "gw-traffic-signs-match-2",
+      "type": "image-match",
+      "programme": "GW",
+      "advancementId": "GW-66",
+      "question": "Match each traffic sign to its meaning (set 2 of 4).",
+      "leftItems": [
+        {
+          "id": "give-way",
+          "image": "images/traffic-signs/give-way.png",
+          "alt": "Traffic sign: Yield / give way"
+        },
+        {
+          "id": "traffic-lights-ahead",
+          "image": "images/traffic-signs/traffic-lights-ahead.png",
+          "alt": "Traffic sign: Traffic lights ahead"
+        },
+        {
+          "id": "no-entry",
+          "image": "images/traffic-signs/no-entry.png",
+          "alt": "Traffic sign: No entry"
+        },
+        {
+          "id": "stop",
+          "image": "images/traffic-signs/stop.png",
+          "alt": "Traffic sign: Stop"
+        }
+      ],
+      "rightItems": [
+        {
+          "id": "meaning-give-way",
+          "text": "Yield / give way"
+        },
+        {
+          "id": "meaning-traffic-lights-ahead",
+          "text": "Traffic lights ahead"
+        },
+        {
+          "id": "meaning-no-entry",
+          "text": "No entry"
+        },
+        {
+          "id": "meaning-stop",
+          "text": "Stop"
+        }
+      ],
+      "answer": {
+        "give-way": "meaning-give-way",
+        "traffic-lights-ahead": "meaning-traffic-lights-ahead",
+        "no-entry": "meaning-no-entry",
+        "stop": "meaning-stop"
+      },
+      "explanation": "Read each short meaning and connect it to the matching traffic sign."
+    },
+    {
+      "id": "gw-traffic-signs-match-3",
+      "type": "image-match",
+      "programme": "GW",
+      "advancementId": "GW-66",
+      "question": "Match each traffic sign to its meaning (set 3 of 4).",
+      "leftItems": [
+        {
+          "id": "danger",
+          "image": "images/traffic-signs/danger.png",
+          "alt": "Traffic sign: Danger ahead"
+        },
+        {
+          "id": "no-u-turns",
+          "image": "images/traffic-signs/no-u-turns.png",
+          "alt": "Traffic sign: No U-turns"
+        },
+        {
+          "id": "motorcycles",
+          "image": "images/traffic-signs/motorcycles.png",
+          "alt": "Traffic sign: Motorbikes ahead"
+        },
+        {
+          "id": "right-turn-off-ahead",
+          "image": "images/traffic-signs/right-turn-off-ahead.png",
+          "alt": "Traffic sign: Right turn off ahead"
+        }
+      ],
+      "rightItems": [
+        {
+          "id": "meaning-danger",
+          "text": "Danger ahead"
+        },
+        {
+          "id": "meaning-no-u-turns",
+          "text": "No U-turns"
+        },
+        {
+          "id": "meaning-motorcycles",
+          "text": "Motorbikes ahead"
+        },
+        {
+          "id": "meaning-right-turn-off-ahead",
+          "text": "Right turn off ahead"
+        }
+      ],
+      "answer": {
+        "danger": "meaning-danger",
+        "no-u-turns": "meaning-no-u-turns",
+        "motorcycles": "meaning-motorcycles",
+        "right-turn-off-ahead": "meaning-right-turn-off-ahead"
+      },
+      "explanation": "Read each short meaning and connect it to the matching traffic sign."
+    },
+    {
+      "id": "gw-traffic-signs-match-4",
+      "type": "image-match",
+      "programme": "GW",
+      "advancementId": "GW-66",
+      "question": "Match each traffic sign to its meaning (set 4 of 4).",
+      "leftItems": [
+        {
+          "id": "highway",
+          "image": "images/traffic-signs/highway.png",
+          "alt": "Traffic sign: Highway"
+        },
+        {
+          "id": "speed-limit-60",
+          "image": "images/traffic-signs/speed-limit-60.png",
+          "alt": "Traffic sign: Speed limit: 60 kph"
+        },
+        {
+          "id": "no-entry",
+          "image": "images/traffic-signs/no-entry.png",
+          "alt": "Traffic sign: No entry"
+        },
+        {
+          "id": "stop",
+          "image": "images/traffic-signs/stop.png",
+          "alt": "Traffic sign: Stop"
+        }
+      ],
+      "rightItems": [
+        {
+          "id": "meaning-highway",
+          "text": "Highway"
+        },
+        {
+          "id": "meaning-speed-limit-60",
+          "text": "Speed limit: 60 kph"
+        },
+        {
+          "id": "meaning-no-entry",
+          "text": "No entry"
+        },
+        {
+          "id": "meaning-stop",
+          "text": "Stop"
+        }
+      ],
+      "answer": {
+        "highway": "meaning-highway",
+        "speed-limit-60": "meaning-speed-limit-60",
+        "no-entry": "meaning-no-entry",
+        "stop": "meaning-stop"
+      },
+      "explanation": "Read each short meaning and connect it to the matching traffic sign."
+    },
+    {
+      "id": "gw-map-symbols-match",
+      "type": "image-match",
+      "programme": "GW",
+      "advancementId": "GW-49",
+      "question": "Match each map symbol to its meaning.",
+      "leftItems": [
+        {
+          "id": "symbol-highway",
+          "image": "images/map-symbols/highway.png",
+          "alt": "Map symbol for Highway"
+        },
+        {
+          "id": "symbol-major-road",
+          "image": "images/map-symbols/major-road.png",
+          "alt": "Map symbol for Major road"
+        },
+        {
+          "id": "symbol-secondary-road",
+          "image": "images/map-symbols/secondary-road.png",
+          "alt": "Map symbol for Secondary road"
+        },
+        {
+          "id": "symbol-river",
+          "image": "images/map-symbols/river.png",
+          "alt": "Map symbol for River"
+        },
+        {
+          "id": "symbol-bridge",
+          "image": "images/map-symbols/bridge.png",
+          "alt": "Map symbol for Bridge"
+        },
+        {
+          "id": "symbol-light-rail-station",
+          "image": "images/map-symbols/light-rail-station.png",
+          "alt": "Map symbol for Light rail and station"
+        },
+        {
+          "id": "symbol-train-rail-station",
+          "image": "images/map-symbols/train-rail-station.png",
+          "alt": "Map symbol for Train rail and station"
+        },
+        {
+          "id": "symbol-grass-field",
+          "image": "images/map-symbols/grass-field.png",
+          "alt": "Map symbol for Grass field"
+        },
+        {
+          "id": "symbol-sea",
+          "image": "images/map-symbols/sea.png",
+          "alt": "Map symbol for Sea"
+        },
+        {
+          "id": "symbol-forest",
+          "image": "images/map-symbols/forest.png",
+          "alt": "Map symbol for Forest"
+        },
+        {
+          "id": "symbol-google-maps-pointer",
+          "image": "images/map-symbols/google-maps-pointer.png",
+          "alt": "Map symbol for Google Maps pointer"
+        }
+      ],
+      "rightItems": [
+        {
+          "id": "meaning-highway",
+          "text": "Highway"
+        },
+        {
+          "id": "meaning-major-road",
+          "text": "Major road"
+        },
+        {
+          "id": "meaning-secondary-road",
+          "text": "Secondary road"
+        },
+        {
+          "id": "meaning-river",
+          "text": "River"
+        },
+        {
+          "id": "meaning-bridge",
+          "text": "Bridge"
+        },
+        {
+          "id": "meaning-light-rail-station",
+          "text": "Light rail and station"
+        },
+        {
+          "id": "meaning-train-rail-station",
+          "text": "Train rail and station"
+        },
+        {
+          "id": "meaning-grass-field",
+          "text": "Grass field"
+        },
+        {
+          "id": "meaning-sea",
+          "text": "Sea"
+        },
+        {
+          "id": "meaning-forest",
+          "text": "Forest"
+        },
+        {
+          "id": "meaning-google-maps-pointer",
+          "text": "Google Maps pointer"
+        }
+      ],
+      "answer": {
+        "symbol-highway": "meaning-highway",
+        "symbol-major-road": "meaning-major-road",
+        "symbol-secondary-road": "meaning-secondary-road",
+        "symbol-river": "meaning-river",
+        "symbol-bridge": "meaning-bridge",
+        "symbol-light-rail-station": "meaning-light-rail-station",
+        "symbol-train-rail-station": "meaning-train-rail-station",
+        "symbol-grass-field": "meaning-grass-field",
+        "symbol-sea": "meaning-sea",
+        "symbol-forest": "meaning-forest",
+        "symbol-google-maps-pointer": "meaning-google-maps-pointer"
+      },
+      "sampleSize": 4,
+      "explanation": "Map symbols stand for roads, natural features and useful places."
+    },
+    {
+      "id": "gw-map-places-match",
+      "type": "image-match",
+      "programme": "GW",
+      "advancementId": "GW-49",
+      "question": "Match each map icon to the place it represents.",
+      "leftItems": [
+        {
+          "id": "symbol-police-station",
+          "image": "images/map-symbols/police-station.png",
+          "alt": "Map symbol for Police station"
+        },
+        {
+          "id": "symbol-fire-station",
+          "image": "images/map-symbols/fire-station.png",
+          "alt": "Map symbol for Fire station"
+        },
+        {
+          "id": "symbol-hospital",
+          "image": "images/map-symbols/hospital.png",
+          "alt": "Map symbol for Hospital"
+        },
+        {
+          "id": "symbol-library",
+          "image": "images/map-symbols/library.png",
+          "alt": "Map symbol for Library"
+        },
+        {
+          "id": "symbol-post-office",
+          "image": "images/map-symbols/post-office.png",
+          "alt": "Map symbol for Post office"
+        },
+        {
+          "id": "symbol-airport",
+          "image": "images/map-symbols/airport.png",
+          "alt": "Map symbol for Airport"
+        },
+        {
+          "id": "symbol-shopping-mall",
+          "image": "images/map-symbols/shopping-mall.png",
+          "alt": "Map symbol for Shopping mall"
+        },
+        {
+          "id": "symbol-information-kiosk",
+          "image": "images/map-symbols/information-kiosk.png",
+          "alt": "Map symbol for Information kiosk"
+        },
+        {
+          "id": "symbol-parking-area",
+          "image": "images/map-symbols/parking-area.png",
+          "alt": "Map symbol for Parking area"
+        },
+        {
+          "id": "symbol-swimming-pool",
+          "image": "images/map-symbols/swimming-pool.png",
+          "alt": "Map symbol for Swimming pool"
+        },
+        {
+          "id": "symbol-public-toilet",
+          "image": "images/map-symbols/public-toilet.png",
+          "alt": "Map symbol for Public toilet"
+        },
+        {
+          "id": "symbol-telephone",
+          "image": "images/map-symbols/telephone.png",
+          "alt": "Map symbol for Telephone"
+        },
+        {
+          "id": "symbol-petrol-station",
+          "image": "images/map-symbols/petrol-station.png",
+          "alt": "Map symbol for Petrol station"
+        }
+      ],
+      "rightItems": [
+        {
+          "id": "meaning-police-station",
+          "text": "Police station"
+        },
+        {
+          "id": "meaning-fire-station",
+          "text": "Fire station"
+        },
+        {
+          "id": "meaning-hospital",
+          "text": "Hospital"
+        },
+        {
+          "id": "meaning-library",
+          "text": "Library"
+        },
+        {
+          "id": "meaning-post-office",
+          "text": "Post office"
+        },
+        {
+          "id": "meaning-airport",
+          "text": "Airport"
+        },
+        {
+          "id": "meaning-shopping-mall",
+          "text": "Shopping mall"
+        },
+        {
+          "id": "meaning-information-kiosk",
+          "text": "Information kiosk"
+        },
+        {
+          "id": "meaning-parking-area",
+          "text": "Parking area"
+        },
+        {
+          "id": "meaning-swimming-pool",
+          "text": "Swimming pool"
+        },
+        {
+          "id": "meaning-public-toilet",
+          "text": "Public toilet"
+        },
+        {
+          "id": "meaning-telephone",
+          "text": "Telephone"
+        },
+        {
+          "id": "meaning-petrol-station",
+          "text": "Petrol station"
+        }
+      ],
+      "answer": {
+        "symbol-police-station": "meaning-police-station",
+        "symbol-fire-station": "meaning-fire-station",
+        "symbol-hospital": "meaning-hospital",
+        "symbol-library": "meaning-library",
+        "symbol-post-office": "meaning-post-office",
+        "symbol-airport": "meaning-airport",
+        "symbol-shopping-mall": "meaning-shopping-mall",
+        "symbol-information-kiosk": "meaning-information-kiosk",
+        "symbol-parking-area": "meaning-parking-area",
+        "symbol-swimming-pool": "meaning-swimming-pool",
+        "symbol-public-toilet": "meaning-public-toilet",
+        "symbol-telephone": "meaning-telephone",
+        "symbol-petrol-station": "meaning-petrol-station"
+      },
+      "sampleSize": 4,
+      "explanation": "Map symbols stand for roads, natural features and useful places."
+    },
+    {
+      "id": "gw-jungle-book-character-match",
+      "type": "image-match",
+      "programme": "GW",
+      "advancementId": "GW-55",
+      "question": "Match each Jungle Book name to its animal and clue.",
+      "leftItems": [
+        {
+          "id": "name-akela",
+          "text": "Akela"
+        },
+        {
+          "id": "name-raksha",
+          "text": "Raksha"
+        },
+        {
+          "id": "name-rama-wolf",
+          "text": "Rama (father wolf)"
+        },
+        {
+          "id": "name-grey-brother",
+          "text": "Grey Brother"
+        },
+        {
+          "id": "name-leela",
+          "text": "Leela"
+        },
+        {
+          "id": "name-baloo",
+          "text": "Baloo"
+        },
+        {
+          "id": "name-bagheera",
+          "text": "Bagheera"
+        },
+        {
+          "id": "name-kaa",
+          "text": "Kaa"
+        },
+        {
+          "id": "name-hathi",
+          "text": "Hathi"
+        },
+        {
+          "id": "name-mang",
+          "text": "Mang"
+        },
+        {
+          "id": "name-rama-mysa",
+          "text": "Rama and Mysa"
+        },
+        {
+          "id": "name-chil-rann",
+          "text": "Chil or Rann"
+        },
+        {
+          "id": "name-sahi-ikki",
+          "text": "Sahi or Ikki"
+        },
+        {
+          "id": "name-tha",
+          "text": "Tha"
+        },
+        {
+          "id": "name-phoana",
+          "text": "Phoana"
+        },
+        {
+          "id": "name-phao",
+          "text": "Phao"
+        },
+        {
+          "id": "name-oo",
+          "text": "Oo"
+        },
+        {
+          "id": "name-mao-mor",
+          "text": "Mao or Mor"
+        },
+        {
+          "id": "name-won-tolla",
+          "text": "Won-Tolla"
+        },
+        {
+          "id": "name-chikai",
+          "text": "Chikai"
+        },
+        {
+          "id": "name-ferao",
+          "text": "Ferao"
+        }
+      ],
+      "rightItems": [
+        {
+          "id": "animal-akela",
+          "text": "Wolf: pack leader"
+        },
+        {
+          "id": "animal-raksha",
+          "text": "Mother wolf"
+        },
+        {
+          "id": "animal-rama-wolf",
+          "text": "Father wolf"
+        },
+        {
+          "id": "animal-grey-brother",
+          "text": "Oldest wolf brother"
+        },
+        {
+          "id": "animal-leela",
+          "text": "Wolf: Akela's granddaughter"
+        },
+        {
+          "id": "animal-baloo",
+          "text": "Bear"
+        },
+        {
+          "id": "animal-bagheera",
+          "text": "Black panther"
+        },
+        {
+          "id": "animal-kaa",
+          "text": "Python"
+        },
+        {
+          "id": "animal-hathi",
+          "text": "Elephant: leader"
+        },
+        {
+          "id": "animal-mang",
+          "text": "Bat"
+        },
+        {
+          "id": "animal-rama-mysa",
+          "text": "Water buffaloes"
+        },
+        {
+          "id": "animal-chil-rann",
+          "text": "Kite: jungle messenger"
+        },
+        {
+          "id": "animal-sahi-ikki",
+          "text": "Porcupine"
+        },
+        {
+          "id": "animal-tha",
+          "text": "First elephant"
+        },
+        {
+          "id": "animal-phoana",
+          "text": "Wolf: outside the Seeonee Pack"
+        },
+        {
+          "id": "animal-phao",
+          "text": "Wolf: Phoana's son"
+        },
+        {
+          "id": "animal-oo",
+          "text": "Tortoise"
+        },
+        {
+          "id": "animal-mao-mor",
+          "text": "Peacock"
+        },
+        {
+          "id": "animal-won-tolla",
+          "text": "Wolf: warns of dhole attack"
+        },
+        {
+          "id": "animal-chikai",
+          "text": "Rat"
+        },
+        {
+          "id": "animal-ferao",
+          "text": "Woodpecker"
+        }
+      ],
+      "answer": {
+        "name-akela": "animal-akela",
+        "name-raksha": "animal-raksha",
+        "name-rama-wolf": "animal-rama-wolf",
+        "name-grey-brother": "animal-grey-brother",
+        "name-leela": "animal-leela",
+        "name-baloo": "animal-baloo",
+        "name-bagheera": "animal-bagheera",
+        "name-kaa": "animal-kaa",
+        "name-hathi": "animal-hathi",
+        "name-mang": "animal-mang",
+        "name-rama-mysa": "animal-rama-mysa",
+        "name-chil-rann": "animal-chil-rann",
+        "name-sahi-ikki": "animal-sahi-ikki",
+        "name-tha": "animal-tha",
+        "name-phoana": "animal-phoana",
+        "name-phao": "animal-phao",
+        "name-oo": "animal-oo",
+        "name-mao-mor": "animal-mao-mor",
+        "name-won-tolla": "animal-won-tolla",
+        "name-chikai": "animal-chikai",
+        "name-ferao": "animal-ferao"
+      },
+      "sampleSize": 4,
+      "explanation": "Some names share the same kind of animal, so use the short clue to find the exact match."
+    }
+  ]
+}
