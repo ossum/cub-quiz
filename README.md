@@ -1,4 +1,4 @@
-# Edward Shield Cub Quiz
+# Cub Quiz
 
 A reusable, static quiz for South African Cub Scouts. It uses plain HTML, CSS and JavaScript, with the advancement catalogue and question bank kept in JSON. No accounts, backend, build step, external service or dependencies are needed.
 
