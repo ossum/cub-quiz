@@ -2191,16 +2191,13 @@
           "alt": "Leaf"
         }
       ],
-      "sequence": [
-        3,
-        7,
-        13
-      ],
       "explanation": "These are pictograms extracted from the nature cipher. Replace them with Pack pictures when ready.",
       "rows": 4,
       "columns": 4,
       "previewSeconds": 20,
-      "shuffleCells": true
+      "shuffleCells": true,
+      "recallCount": 3,
+      "randomizePrompts": true
     }
   ]
 }

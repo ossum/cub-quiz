@@ -87,7 +87,7 @@ The starter matching question uses the supplied worksheet artwork and answer key
 
 ### Memory grid
 
-A Cub studies a configurable picture grid, then finds three shown pictures in order. `rows`, `columns`, `previewSeconds`, and `shuffleCells` configure its size, preview time, and whether cell positions shuffle each round. `cells` is in original row-major order; `sequence` contains three 1-based square numbers in that original grid, counted left to right and top to bottom. The complete example is `sw-memory-grid-placeholder` in `data/questions.json`, with a 4×4 board, 20-second preview, shuffled pictograms, and SW-13 tag.
+A Cub studies a configurable picture grid, then finds three shown pictures in order. `rows`, `columns`, `previewSeconds`, and `shuffleCells` configure its size, preview time, and whether cell positions shuffle each round. `cells` is in original row-major order. `recallCount` sets how many pictures are tested; `randomizePrompts: true` picks different target pictures and a different prompt order each round. To use fixed targets instead, set it to false and provide `sequence` as 1-based square numbers in original row-major order. The complete example is `sw-memory-grid-placeholder` in `data/questions.json`, with a 4×4 board, 20-second preview, shuffled pictograms, and SW-13 tag.
 
 ### Question fields
 
@@ -101,7 +101,7 @@ A Cub studies a configurable picture grid, then finds three shown pictures in or
 - **image** / **imageAlt**: picture and its screen-reader description for image-option and image-dropdown questions; optional for multiple-choice. Image-option uses exactly four choices.
 - **pairs**: image-match pairs. Each pair has a unique ID, a left side, and a right side. Image sides use type=image with src and optional alt; text sides use type=text with value.
 - **sampleSize**: optional number of pairs to randomly display from a larger matching pool; if omitted, all pairs are shown.
-- **cells** / **sequence**: for memory-grid, `rows × columns` image cells in original row-major order and three 1-based cell numbers to recall in sequence. `previewSeconds` controls how long the images are shown; `shuffleCells` randomizes the positions each round while keeping the same three images as targets.
+- **cells**, **recallCount**, **randomizePrompts**, **sequence**: for memory-grid, `cells` contains `rows × columns` images in original row-major order. `recallCount` sets how many targets to recall. When `randomizePrompts` is true, target pictures and their order are chosen at random each round. When false, `sequence` gives fixed 1-based cell numbers. `previewSeconds` controls display time and `shuffleCells` randomizes board positions.
 - **explanation**: optional feedback shown after answering.
 
 Store image files in `images/` and use project-relative paths. Keep JSON valid: strings use double quotes, and array objects are separated by commas. Question tags must match an ID in `data/advancements.json`.

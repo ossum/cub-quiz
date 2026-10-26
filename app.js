@@ -213,7 +213,13 @@ function renderMemoryGrid(question) {
   const previewSeconds = Math.max(1, Number(question.previewSeconds) || 20);
   const originalCells = question.cells || [];
   const cells = question.shuffleCells === false ? [...originalCells] : shuffle(originalCells);
-  const targetIds = question.sequence.map((cellNumber) => originalCells[cellNumber - 1]?.id);
+  const recallCount = Math.max(1, Math.min(originalCells.length, Number(question.recallCount) || question.sequence?.length || 3));
+  const randomizePrompts = question.randomizePrompts ?? !question.sequence?.length;
+  const targets = randomizePrompts === false
+    ? (question.sequence || []).map((cellNumber) => originalCells[cellNumber - 1]).filter(Boolean)
+    : shuffle(originalCells).slice(0, recallCount);
+  const orderedTargets = randomizePrompts === false ? targets : shuffle(targets);
+  const targetIds = orderedTargets.map((cell) => cell.id);
   const sequence = targetIds.map((id) => cells.findIndex((cell) => cell.id === id) + 1);
   memoryState = { stage: 'preview', secondsLeft: previewSeconds, previewSeconds, rows, columns, cells, sequence, promptIndex: 0, answers: [] };
   return `<section class="memory-stage" id="memory-stage">${renderMemoryGridStage(question)}</section>`;
