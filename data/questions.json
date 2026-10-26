@@ -2057,6 +2057,34 @@
       ],
       "answer": "pigpen-doyourbest",
       "explanation": "The Cub motto is “Do your best.”"
+    },
+    {
+      "id": "sw-pigpen-nature-cipher-1",
+      "type": "image-option",
+      "programme": "SW",
+      "advancementId": "SW-14",
+      "question": "Which code says 'cub'?",
+      "image": "images/codes/nature-cipher/CIPHER.png",
+      "imageAlt": "Nature cipher key",
+      "options": [
+        {
+          "id": "nature-cat",
+          "image": "images/codes/pigpen/CAT.png"
+        },
+        {
+          "id": "nature-cub",
+          "image": "images/codes/pigpen/CUB.png"
+        },
+        {
+          "id": "nature-fun",
+          "image": "images/codes/pigpen/FUN.png"
+        },
+        {
+          "id": "nature-bug",
+          "image": "images/codes/pigpen/BUG.png"
+        }
+      ],
+      "answer": "nature-cub"
     }
   ]
 }
