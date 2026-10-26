@@ -31,21 +31,6 @@
       "explanation": "Washing with soap and water helps remove germs."
     },
     {
-      "id": "sw-simple-code-1",
-      "type": "multiple-choice",
-      "programme": "SW",
-      "advancementId": "SW-14",
-      "question": "Using A=1, B=2, C=3 and so on, what word is 2-1-4?",
-      "options": [
-        "BAD",
-        "CAB",
-        "DAB",
-        "BAG"
-      ],
-      "answer": "BAD",
-      "explanation": "2 is B, 1 is A, and 4 is D."
-    },
-    {
       "id": "sw-conservation-1",
       "type": "multiple-choice",
       "programme": "SW",
@@ -2069,19 +2054,19 @@
       "options": [
         {
           "id": "nature-cat",
-          "image": "images/codes/pigpen/CAT.png"
+          "image": "images/codes/nature-cipher/CAT.png"
         },
         {
           "id": "nature-cub",
-          "image": "images/codes/pigpen/CUB.png"
+          "image": "images/codes/nature-cipher/CUB.png"
         },
         {
           "id": "nature-fun",
-          "image": "images/codes/pigpen/FUN.png"
+          "image": "images/codes/nature-cipher/FUN.png"
         },
         {
           "id": "nature-bug",
-          "image": "images/codes/pigpen/BUG.png"
+          "image": "images/codes/nature-cipher/BUG.png"
         }
       ],
       "answer": "nature-cub"
