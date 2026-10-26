@@ -1987,10 +1987,10 @@
       ]
     },
     {
-      "id": "sw-pigpen-cub-motto",
+      "id": "gw-pigpen-cub-motto",
       "type": "image-option",
-      "programme": "SW",
-      "advancementId": "SW-14",
+      "programme": "GW",
+      "advancementId": "GW-13",
       "question": "Which code says the Cub motto?",
       "image": "images/codes/pigpen/pigpen.png",
       "imageAlt": "Pigpen cipher key",
@@ -2113,135 +2113,94 @@
         {
           "id": "cell-1",
           "image": "images/memory-grid/A.png",
-          "alt": "Placeholder picture A"
+          "alt": "Pawprint"
         },
         {
           "id": "cell-2",
           "image": "images/memory-grid/B.png",
-          "alt": "Placeholder picture B"
+          "alt": "Three leaves"
         },
         {
           "id": "cell-3",
           "image": "images/memory-grid/C.png",
-          "alt": "Placeholder picture C"
+          "alt": "Shell"
         },
         {
           "id": "cell-4",
           "image": "images/memory-grid/D.png",
-          "alt": "Placeholder picture D"
+          "alt": "Feather"
         },
         {
           "id": "cell-5",
           "image": "images/memory-grid/E.png",
-          "alt": "Placeholder picture E"
+          "alt": "Hibiscus flower"
         },
         {
           "id": "cell-6",
           "image": "images/memory-grid/F.png",
-          "alt": "Placeholder picture F"
+          "alt": "Water drop"
         },
         {
           "id": "cell-7",
           "image": "images/memory-grid/G.png",
-          "alt": "Placeholder picture G"
+          "alt": "Moon"
         },
         {
           "id": "cell-8",
           "image": "images/memory-grid/H.png",
-          "alt": "Placeholder picture H"
+          "alt": "Sun"
         },
         {
           "id": "cell-9",
           "image": "images/memory-grid/I.png",
-          "alt": "Placeholder picture I"
+          "alt": "Mountain"
         },
         {
           "id": "cell-10",
           "image": "images/memory-grid/J.png",
-          "alt": "Placeholder picture J"
+          "alt": "Acorn"
         },
         {
           "id": "cell-11",
           "image": "images/memory-grid/K.png",
-          "alt": "Placeholder picture K"
+          "alt": "Spiral vine"
         },
         {
           "id": "cell-12",
           "image": "images/memory-grid/L.png",
-          "alt": "Placeholder picture L"
+          "alt": "Lotus flower"
         },
         {
           "id": "cell-13",
           "image": "images/memory-grid/M.png",
-          "alt": "Placeholder picture M"
+          "alt": "Bamboo"
         },
         {
           "id": "cell-14",
           "image": "images/memory-grid/N.png",
-          "alt": "Placeholder picture N"
+          "alt": "Elephant"
         },
         {
           "id": "cell-15",
           "image": "images/memory-grid/O.png",
-          "alt": "Placeholder picture O"
+          "alt": "Claw marks"
         },
         {
           "id": "cell-16",
           "image": "images/memory-grid/P.png",
-          "alt": "Placeholder picture P"
-        },
-        {
-          "id": "cell-17",
-          "image": "images/memory-grid/Q.png",
-          "alt": "Placeholder picture Q"
-        },
-        {
-          "id": "cell-18",
-          "image": "images/memory-grid/R.png",
-          "alt": "Placeholder picture R"
-        },
-        {
-          "id": "cell-19",
-          "image": "images/memory-grid/S.png",
-          "alt": "Placeholder picture S"
-        },
-        {
-          "id": "cell-20",
-          "image": "images/memory-grid/T.png",
-          "alt": "Placeholder picture T"
-        },
-        {
-          "id": "cell-21",
-          "image": "images/memory-grid/U.png",
-          "alt": "Placeholder picture U"
-        },
-        {
-          "id": "cell-22",
-          "image": "images/memory-grid/V.png",
-          "alt": "Placeholder picture V"
-        },
-        {
-          "id": "cell-23",
-          "image": "images/memory-grid/W.png",
-          "alt": "Placeholder picture W"
-        },
-        {
-          "id": "cell-24",
-          "image": "images/memory-grid/X.png",
-          "alt": "Placeholder picture X"
-        },
-        {
-          "id": "cell-25",
-          "image": "images/memory-grid/Y.png",
-          "alt": "Placeholder picture Y"
+          "alt": "Leaf"
         }
       ],
       "sequence": [
         3,
-        13,
-        23
+        7,
+        13
       ],
-      "explanation": "The letter cards are placeholders to demonstrate the memory game. Replace them with pictures for your Pack."
+      "explanation": "These are pictograms extracted from the nature cipher. Replace them with Pack pictures when ready.",
+      "rows": 4,
+      "columns": 4,
+      "previewSeconds": 20,
+      "shuffleCells": true
     }
   ]
 }

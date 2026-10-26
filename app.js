@@ -208,31 +208,39 @@ function renderMatchItem(item, side, indexInColumn) {
 }
 
 function renderMemoryGrid(question) {
-  memoryState = { stage: 'preview', secondsLeft: 10, promptIndex: 0, answers: [] };
+  const rows = Number(question.rows) || 4;
+  const columns = Number(question.columns) || 4;
+  const previewSeconds = Math.max(1, Number(question.previewSeconds) || 20);
+  const originalCells = question.cells || [];
+  const cells = question.shuffleCells === false ? [...originalCells] : shuffle(originalCells);
+  const targetIds = question.sequence.map((cellNumber) => originalCells[cellNumber - 1]?.id);
+  const sequence = targetIds.map((id) => cells.findIndex((cell) => cell.id === id) + 1);
+  memoryState = { stage: 'preview', secondsLeft: previewSeconds, previewSeconds, rows, columns, cells, sequence, promptIndex: 0, answers: [] };
   return `<section class="memory-stage" id="memory-stage">${renderMemoryGridStage(question)}</section>`;
 }
 function renderMemoryGridStage(question) {
-  const cells = question.cells || [];
+  const cells = memoryState.cells;
+  const gridStyle = `grid-template-columns:repeat(${memoryState.columns},minmax(0,1fr))`;
   if (memoryState.stage === 'preview') {
-    return `<p class="memory-instruction">Study the pictures. They will be hidden in <strong class="memory-countdown" aria-live="polite">10</strong> seconds.</p><div class="memory-grid memory-grid-preview">${cells.map((cell, i) => `<div class="memory-cell"><img src="${escapeAttribute(cell.image)}" alt="${escapeAttribute(cell.alt || `Picture ${i + 1}`)}"></div>`).join('')}</div><div class="next-row"><button type="button" class="primary" id="hide-memory-grid">Hide pictures and start <span aria-hidden="true">→</span></button></div>`;
+    return `<p class="memory-instruction">Study the pictures. They will be hidden in <strong class="memory-countdown" aria-live="polite">${memoryState.secondsLeft}</strong> seconds.</p><div class="memory-grid memory-grid-preview" style="${gridStyle}">${cells.map((cell, i) => `<div class="memory-cell"><img src="${escapeAttribute(cell.image)}" alt="${escapeAttribute(cell.alt || `Picture ${i + 1}`)}"></div>`).join('')}</div><div class="next-row"><button type="button" class="primary" id="hide-memory-grid">Hide pictures and start <span aria-hidden="true">→</span></button></div>`;
   }
   if (memoryState.stage === 'recall') {
-    const cellNumber = question.sequence[memoryState.promptIndex];
+    const cellNumber = memoryState.sequence[memoryState.promptIndex];
     const prompt = cells[cellNumber - 1];
-    return `<p class="memory-instruction">Find where this picture was. <strong>Picture ${memoryState.promptIndex + 1} of ${question.sequence.length}</strong></p><div class="memory-prompt"><img src="${escapeAttribute(prompt.image)}" alt="${escapeAttribute(prompt.alt || `Picture ${cellNumber}`)}"></div><div class="memory-grid memory-grid-recall">${cells.map((_, i) => `<button type="button" class="memory-cell memory-cell-blank" data-memory-cell="${i + 1}" aria-label="Square ${i + 1}"><span>${i + 1}</span></button>`).join('')}</div>`;
+    return `<p class="memory-instruction">Find where this picture was. <strong>Picture ${memoryState.promptIndex + 1} of ${memoryState.sequence.length}</strong></p><div class="memory-prompt"><img src="${escapeAttribute(prompt.image)}" alt="${escapeAttribute(prompt.alt || `Picture ${cellNumber}`)}"></div><div class="memory-grid memory-grid-recall" style="${gridStyle}">${cells.map((_, i) => `<button type="button" class="memory-cell memory-cell-blank" data-memory-cell="${i + 1}" aria-label="Square ${i + 1}"><span>${i + 1}</span></button>`).join('')}</div>`;
   }
-  const targetCells = new Set(question.sequence);
+  const targetCells = new Set(memoryState.sequence);
   const pickedCells = new Map(memoryState.answers.map((cellNumber, i) => [cellNumber, i + 1]));
-  const correctCount = question.sequence.filter((cellNumber, i) => memoryState.answers[i] === cellNumber).length;
-  return `<p class="memory-instruction">Here are the pictures and your choices.</p><div class="memory-grid memory-grid-review">${cells.map((cell, i) => {
+  const correctCount = memoryState.sequence.filter((cellNumber, i) => memoryState.answers[i] === cellNumber).length;
+  return `<p class="memory-instruction">Here are the pictures and your choices.</p><div class="memory-grid memory-grid-review" style="${gridStyle}">${cells.map((cell, i) => {
     const number = i + 1;
     const isTarget = targetCells.has(number);
-    const isCorrect = isTarget && memoryState.answers[question.sequence.indexOf(number)] === number;
+    const isCorrect = isTarget && memoryState.answers[memoryState.sequence.indexOf(number)] === number;
     const pickedFor = pickedCells.get(number);
     const stateClass = isCorrect ? ' memory-cell-correct' : pickedFor ? ' memory-cell-incorrect' : '';
     const marker = isCorrect ? '<span class="memory-result-marker">✓</span>' : pickedFor ? `<span class="memory-result-marker">Pick ${pickedFor}</span>` : '';
     return `<div class="memory-cell${stateClass}"><img src="${escapeAttribute(cell.image)}" alt="${escapeAttribute(cell.alt || `Picture ${number}`)}">${marker}</div>`;
-  }).join('')}</div><div class="memory-sequence-review">${question.sequence.map((cellNumber, i) => `<span class="${memoryState.answers[i] === cellNumber ? 'memory-sequence-correct' : 'memory-sequence-incorrect'}">Picture ${i + 1}: ${memoryState.answers[i] === cellNumber ? 'right square' : `you picked square ${memoryState.answers[i]}`}</span>`).join('')}</div>`;
+  }).join('')}</div><div class="memory-sequence-review">${memoryState.sequence.map((cellNumber, i) => `<span class="${memoryState.answers[i] === cellNumber ? 'memory-sequence-correct' : 'memory-sequence-incorrect'}">Picture ${i + 1}: ${memoryState.answers[i] === cellNumber ? 'right square' : `you picked square ${memoryState.answers[i]}`}</span>`).join('')}</div>`;
 }
 function startMemoryPreviewTimer(question) {
   clearInterval(memoryTimer);
@@ -253,17 +261,17 @@ function chooseMemoryCell(question, cellNumber) {
   if (memoryState?.stage !== 'recall' || locked) return;
   memoryState.answers.push(cellNumber);
   memoryState.promptIndex++;
-  if (memoryState.promptIndex < question.sequence.length) {
+  if (memoryState.promptIndex < memoryState.sequence.length) {
     document.querySelector('#memory-stage').innerHTML = renderMemoryGridStage(question);
     return;
   }
   memoryState.stage = 'review';
   locked = true;
-  const correctCount = question.sequence.filter((number, i) => memoryState.answers[i] === number).length;
-  const correct = correctCount === question.sequence.length;
+  const correctCount = memoryState.sequence.filter((number, i) => memoryState.answers[i] === number).length;
+  const correct = correctCount === memoryState.sequence.length;
   if (correct) score++;
   document.querySelector('#memory-stage').innerHTML = renderMemoryGridStage(question);
-  showFeedback(correct, question, `You found ${correctCount} of ${question.sequence.length} pictures in the right squares. Green marks show correct squares; red marks show different choices.`);
+  showFeedback(correct, question, `You found ${correctCount} of ${memoryState.sequence.length} pictures in the right squares. Green marks show correct squares; red marks show different choices.`);
 }
 function wireImageMatch(question) {
   const board = document.querySelector('#match-board');
