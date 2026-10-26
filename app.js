@@ -6,8 +6,10 @@ let questions = [];
 let index = 0;
 let score = 0;
 let locked = false;
-let selection = { programme: 'SW', mode: 'advancement', advancementId: '' };
+let selection = { programme: 'SW', mode: 'advancement', advancementId: '', randomQuestionCount: 15 };
 let matchState = null;
+let memoryState = null;
+let memoryTimer = null;
 
 const shuffle = (items) => {
   const copy = [...items];
@@ -77,6 +79,7 @@ function renderSetup() {
       <button class="mode-button ${selection.mode === 'advancement' ? 'selected' : ''}" data-mode="advancement" aria-pressed="${selection.mode === 'advancement'}"><strong>One advancement</strong><small>Focus on one numbered skill or topic.</small></button>
       <button class="mode-button ${selection.mode === 'random' ? 'selected' : ''}" data-mode="random" aria-pressed="${selection.mode === 'random'}"><strong>Random ${programme.id} test</strong><small>Questions from this badge, shuffled each time.</small></button>
     </div>
+    ${selection.mode === 'random' ? `<div class="random-count-picker"><label for="random-question-count">Questions in this test</label><div><input id="random-question-count" type="number" min="1" max="${Math.max(1, availableCount)}" value="${Math.min(selection.randomQuestionCount || 15, availableCount || 15)}" ${availableCount ? '' : 'disabled'}><span>of ${availableCount} available</span></div><small>We’ll choose a fresh random set each time.</small></div>` : ''}
     ${selection.mode === 'advancement' ? `<div class="advancement-picker"><label for="advancement-select">3 Choose an advancement</label><select id="advancement-select">${groups}</select>
       ${selected ? `<div class="category-hint"><span class="colour-dot" style="--category-colour:${colours[selected.category.color]}"></span><span>${selected.category.name}</span><span class="hint-separator">•</span><span>${selected.category.color}</span></div>` : ''}
     </div>` : ''}
@@ -93,6 +96,11 @@ function renderSetup() {
     selection.mode = button.dataset.mode;
     renderSetup();
   }));
+  document.querySelector('#random-question-count')?.addEventListener('change', (event) => {
+    const requested = Number(event.target.value);
+    selection.randomQuestionCount = Math.max(1, Math.min(availableCount, Number.isFinite(requested) ? requested : 15));
+    event.target.value = selection.randomQuestionCount;
+  });
   document.querySelector('#advancement-select')?.addEventListener('change', (event) => {
     selection.advancementId = event.target.value;
     renderSetup();
@@ -108,6 +116,12 @@ function startQuiz() {
     return;
   }
   questions = shuffle(matching);
+  if (selection.mode === 'random') {
+    const countField = document.querySelector('#random-question-count');
+    const requested = Number(countField?.value || selection.randomQuestionCount) || 15;
+    selection.randomQuestionCount = requested;
+    questions = questions.slice(0, Math.max(1, Math.min(requested, questions.length)));
+  }
   index = 0;
   score = 0;
   renderQuestion();
@@ -121,8 +135,10 @@ function renderEmptySelection() {
 
 function renderQuestion() {
   window.removeEventListener('resize', drawMatchLines);
+  clearInterval(memoryTimer);
   locked = false;
   matchState = null;
+  memoryState = null;
   const question = questions[index];
   const taggedAdvancements = (question.advancementIds || [question.advancementId]).filter(Boolean).map((id) => getAdvancement(id)).filter(Boolean);
   const advancement = taggedAdvancements[0] || getAdvancement(question.advancementId);
@@ -132,11 +148,12 @@ function renderQuestion() {
     <div class="quiz-top"><span>QUESTION ${index + 1} OF ${questions.length}</span><span class="quiz-tools"><span>✦ ${score} ${score === 1 ? 'star' : 'stars'}</span><button class="text-button quiz-edit-button" id="edit-current-question" type="button">Edit this question</button></span></div>
     <div class="progress-wrap" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="${questions.length}" aria-valuenow="${index + 1}"><div class="progress" style="width:${progress}%"></div></div>
     <div class="question"><div class="advancement-tag" style="--category-colour:${colours[advancement?.category.color] || '#71965d'}">${escapeHtml(tagLabel)}</div><h2>${escapeHtml(question.question)}</h2>
-      ${question.type === 'image-match' ? renderImageMatch(question) : renderSingleAnswer(question)}
+      ${question.type === 'image-match' ? renderImageMatch(question) : question.type === 'memory-grid' ? renderMemoryGrid(question) : renderSingleAnswer(question)}
       <div id="feedback-slot"></div>
     </div>
   </div>`;
   if (question.type === 'image-match') wireImageMatch(question);
+  if (question.type === 'memory-grid') startMemoryPreviewTimer(question);
   if (question.type === 'image-dropdown') {
     const select = document.querySelector('#answer-select');
     select.addEventListener('change', () => { document.querySelector('#submit-answer').disabled = !select.value; });
@@ -190,6 +207,64 @@ function renderMatchItem(item, side, indexInColumn) {
   return `<button class="match-item ${item.text ? 'match-item-choice' : ''}" type="button" data-match-side="${side}" data-item-id="${escapeAttribute(item.id)}" aria-label="${escapeAttribute(label)}">${content}</button>`;
 }
 
+function renderMemoryGrid(question) {
+  memoryState = { stage: 'preview', secondsLeft: 10, promptIndex: 0, answers: [] };
+  return `<section class="memory-stage" id="memory-stage">${renderMemoryGridStage(question)}</section>`;
+}
+function renderMemoryGridStage(question) {
+  const cells = question.cells || [];
+  if (memoryState.stage === 'preview') {
+    return `<p class="memory-instruction">Study the pictures. They will be hidden in <strong class="memory-countdown" aria-live="polite">10</strong> seconds.</p><div class="memory-grid memory-grid-preview">${cells.map((cell, i) => `<div class="memory-cell"><img src="${escapeAttribute(cell.image)}" alt="${escapeAttribute(cell.alt || `Picture ${i + 1}`)}"></div>`).join('')}</div><div class="next-row"><button type="button" class="primary" id="hide-memory-grid">Hide pictures and start <span aria-hidden="true">→</span></button></div>`;
+  }
+  if (memoryState.stage === 'recall') {
+    const cellNumber = question.sequence[memoryState.promptIndex];
+    const prompt = cells[cellNumber - 1];
+    return `<p class="memory-instruction">Find where this picture was. <strong>Picture ${memoryState.promptIndex + 1} of ${question.sequence.length}</strong></p><div class="memory-prompt"><img src="${escapeAttribute(prompt.image)}" alt="${escapeAttribute(prompt.alt || `Picture ${cellNumber}`)}"></div><div class="memory-grid memory-grid-recall">${cells.map((_, i) => `<button type="button" class="memory-cell memory-cell-blank" data-memory-cell="${i + 1}" aria-label="Square ${i + 1}"><span>${i + 1}</span></button>`).join('')}</div>`;
+  }
+  const targetCells = new Set(question.sequence);
+  const pickedCells = new Map(memoryState.answers.map((cellNumber, i) => [cellNumber, i + 1]));
+  const correctCount = question.sequence.filter((cellNumber, i) => memoryState.answers[i] === cellNumber).length;
+  return `<p class="memory-instruction">Here are the pictures and your choices.</p><div class="memory-grid memory-grid-review">${cells.map((cell, i) => {
+    const number = i + 1;
+    const isTarget = targetCells.has(number);
+    const isCorrect = isTarget && memoryState.answers[question.sequence.indexOf(number)] === number;
+    const pickedFor = pickedCells.get(number);
+    const stateClass = isCorrect ? ' memory-cell-correct' : pickedFor ? ' memory-cell-incorrect' : '';
+    const marker = isCorrect ? '<span class="memory-result-marker">✓</span>' : pickedFor ? `<span class="memory-result-marker">Pick ${pickedFor}</span>` : '';
+    return `<div class="memory-cell${stateClass}"><img src="${escapeAttribute(cell.image)}" alt="${escapeAttribute(cell.alt || `Picture ${number}`)}">${marker}</div>`;
+  }).join('')}</div><div class="memory-sequence-review">${question.sequence.map((cellNumber, i) => `<span class="${memoryState.answers[i] === cellNumber ? 'memory-sequence-correct' : 'memory-sequence-incorrect'}">Picture ${i + 1}: ${memoryState.answers[i] === cellNumber ? 'right square' : `you picked square ${memoryState.answers[i]}`}</span>`).join('')}</div>`;
+}
+function startMemoryPreviewTimer(question) {
+  clearInterval(memoryTimer);
+  memoryTimer = setInterval(() => {
+    if (!memoryState || memoryState.stage !== 'preview') { clearInterval(memoryTimer); return; }
+    memoryState.secondsLeft--;
+    const countdown = document.querySelector('.memory-countdown');
+    if (countdown) countdown.textContent = String(memoryState.secondsLeft);
+    if (memoryState.secondsLeft <= 0) enterMemoryRecall(question);
+  }, 1000);
+}
+function enterMemoryRecall(question) {
+  clearInterval(memoryTimer);
+  memoryState.stage = 'recall';
+  document.querySelector('#memory-stage').innerHTML = renderMemoryGridStage(question);
+}
+function chooseMemoryCell(question, cellNumber) {
+  if (memoryState?.stage !== 'recall' || locked) return;
+  memoryState.answers.push(cellNumber);
+  memoryState.promptIndex++;
+  if (memoryState.promptIndex < question.sequence.length) {
+    document.querySelector('#memory-stage').innerHTML = renderMemoryGridStage(question);
+    return;
+  }
+  memoryState.stage = 'review';
+  locked = true;
+  const correctCount = question.sequence.filter((number, i) => memoryState.answers[i] === number).length;
+  const correct = correctCount === question.sequence.length;
+  if (correct) score++;
+  document.querySelector('#memory-stage').innerHTML = renderMemoryGridStage(question);
+  showFeedback(correct, question, `You found ${correctCount} of ${question.sequence.length} pictures in the right squares. Green marks show correct squares; red marks show different choices.`);
+}
 function wireImageMatch(question) {
   const board = document.querySelector('#match-board');
   board.addEventListener('click', (event) => {
@@ -395,6 +470,9 @@ function renderResults() {
 }
 
 app.addEventListener('click', (event) => {
+  if (event.target.closest('#hide-memory-grid')) { enterMemoryRecall(questions[index]); return; }
+  const memoryCell = event.target.closest('[data-memory-cell]');
+  if (memoryCell) { chooseMemoryCell(questions[index], Number(memoryCell.dataset.memoryCell)); return; }
   if (event.target.closest('#edit-current-question')) { renderQuestionEditor(questions[index], 'quiz'); return; }
   if (event.target.closest('.answer')) {
     const button = event.target.closest('.answer');

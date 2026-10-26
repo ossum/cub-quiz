@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cub-quiz-pwa-v3';
+const CACHE_NAME = 'cub-quiz-pwa-v5';
 const SHELL_FILES = [
   './',
   './index.html',
@@ -65,6 +65,9 @@ async function cacheQuestionImages(cache, response) {
     const imagePaths = new Set();
     for (const question of data.questions || []) {
       if (question.image) imagePaths.add(question.image);
+      for (const cell of question.cells || []) {
+        if (cell.image) imagePaths.add(cell.image);
+      }
       for (const option of question.options || []) {
         if (typeof option === 'object' && option.image) imagePaths.add(option.image);
       }

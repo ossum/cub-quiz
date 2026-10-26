@@ -45,6 +45,7 @@ function questionAdvancementLabel(question) {
   }).join(', ');
 }
 function renderQuestionManager(filter = '') {
+  clearInterval(memoryTimer);
   const query = filter.trim().toLowerCase();
   const visible = bank.filter((question) => `${question.id} ${question.question} ${question.programme} ${questionAdvancementLabel(question)}`.toLowerCase().includes(query));
   app.innerHTML = `<div class="question-manager editor-page">
@@ -67,6 +68,7 @@ function renderQuestionManager(filter = '') {
   }));
 }
 function renderQuestionEditor(question, returnTarget = 'manager') {
+  clearInterval(memoryTimer);
   window.removeEventListener('resize', drawMatchLines);
   const source = structuredClone(question || defaultEditorQuestion());
   questionEditorReturnTarget = returnTarget;
@@ -78,6 +80,8 @@ function renderQuestionEditor(question, returnTarget = 'manager') {
   const choiceMode = sourceOptions[0] && typeof sourceOptions[0] === 'object' ? 'pictures' : 'text';
   const choices = choiceMode === 'pictures' ? source.options : [1, 2, 3, 4].map((i) => ({ id: `choice-${i}`, image: '', alt: '' }));
   const pairRows = editorPairsFromQuestion(source);
+  const memoryPaths = source.cells?.map((cell) => cell.image) || source.memoryImagePaths || Array.from({ length: 25 }, (_, i) => `images/memory-grid/${String.fromCharCode(65 + i)}.png`);
+  const memorySequence = source.sequence || source.memorySequence || [3, 13, 23];
   const programmeOptions = catalogue.map((item) => `<option value="${item.id}" ${item.id === programme ? 'selected' : ''}>${escapeHtml(item.name)} (${item.id})</option>`).join('');
   app.innerHTML = `<div class="question-editor editor-page">
     <div class="editor-heading"><div><p class="eyebrow">LEADER TOOL</p><h1>${question ? 'Edit question' : 'Add a question'}</h1><p>Fill in the question, its advancement and the answer choices.</p></div><button class="secondary" id="cancel-question-editor">Cancel</button></div>
@@ -86,7 +90,7 @@ function renderQuestionEditor(question, returnTarget = 'manager') {
         <label>Question ID<input class="editor-input" name="id" required value="${escapeAttribute(source.id || '')}"><small>Short and unique, for example gw-road-sign-1.</small></label>
         <label>Programme<select class="editor-input" name="programme">${programmeOptions}</select></label>
         <label>Advancement ID(s)<input class="editor-input" name="advancementIds" required value="${escapeAttribute(advancementIds.join(', '))}"><small>Use one ID, or a comma-separated list for a shared question.</small></label>
-        <label>Question type<select class="editor-input" id="editor-question-type" name="type"><option value="multiple-choice" ${type === 'multiple-choice' ? 'selected' : ''}>Choose an answer</option><option value="image-option" ${type === 'image-option' ? 'selected' : ''}>Picture with four choices</option><option value="image-dropdown" ${type === 'image-dropdown' ? 'selected' : ''}>Picture and dropdown</option><option value="image-match" ${type === 'image-match' ? 'selected' : ''}>Matching</option></select></label>
+        <label>Question type<select class="editor-input" id="editor-question-type" name="type"><option value="multiple-choice" ${type === 'multiple-choice' ? 'selected' : ''}>Choose an answer</option><option value="image-option" ${type === 'image-option' ? 'selected' : ''}>Picture with four choices</option><option value="image-dropdown" ${type === 'image-dropdown' ? 'selected' : ''}>Picture and dropdown</option><option value="image-match" ${type === 'image-match' ? 'selected' : ''}>Matching</option><option value="memory-grid" ${type === 'memory-grid' ? 'selected' : ''}>Memory grid</option></select></label>
       </div>
       <label class="editor-wide">Question text<input class="editor-input" name="question" required value="${escapeAttribute(source.question || '')}" placeholder="Write a short question"></label>
       <label class="editor-wide">Explanation (optional)<textarea class="editor-input" name="explanation" rows="2">${escapeHtml(source.explanation || '')}</textarea></label>
@@ -102,6 +106,9 @@ function renderQuestionEditor(question, returnTarget = 'manager') {
       <section class="editor-type-panel" data-type-panel="image-match" ${type === 'image-match' ? '' : 'hidden'}>
         <h2>Matching pairs</h2><label>Pairs shown in each round<input class="editor-input" name="sampleSize" type="number" min="2" value="${source.sampleSize || source.pairs?.length || source.leftItems?.length || 4}"></label><p class="editor-note">Each row is one correct pair. Choose a picture or short text for each side. Use paths such as images/example.png; choosing a file fills its filename only and does not copy it into the project. The app shuffles the right-hand choices.</p><div id="matching-pair-list">${renderMatchingPairRows(pairRows)}</div><button type="button" class="secondary" id="add-matching-pair">Add matching pair</button>
       </section>
+      <section class="editor-type-panel" data-type-panel="memory-grid" ${type === 'memory-grid' ? '' : 'hidden'}>
+        <h2>Memory grid</h2><p class="editor-note">Enter one image path per line, from top-left to bottom-right. There must be 25 paths. Then enter the three square numbers to show, in order. Placeholder paths use A.png through Y.png in images/memory-grid/.</p><label>Grid images (25 paths)<textarea class="editor-input" name="memoryImages" rows="10">${escapeHtml(memoryPaths.join('\n'))}</textarea></label><label>Three pictures to recall (square numbers 1–25, in order)<input class="editor-input" name="memorySequence" value="${escapeAttribute(memorySequence.join(', '))}" placeholder="3, 13, 23"></label>
+      </section>
       <div class="editor-save-row"><p id="editor-error" role="alert"></p><button class="primary" type="submit">Save question <span aria-hidden="true">✓</span></button></div>
     </form>
   </div>`;
@@ -111,7 +118,8 @@ function renderQuestionEditor(question, returnTarget = 'manager') {
     const draft = readQuestionEditorForm(); draft.type = event.target.value;
     if (['multiple-choice', 'image-option'].includes(draft.type)) { draft.options = ['Option 1', 'Option 2', 'Option 3', 'Option 4']; draft.answer = ''; }
     else if (draft.type === 'image-dropdown') { draft.image = ''; draft.imageAlt = ''; draft.options = ['Option 1', 'Option 2', 'Option 3', 'Option 4']; draft.answer = ''; }
-    else { draft.matchPairs = [1, 2, 3, 4].map((pair) => emptyMatchPair('pair-' + pair)); }
+    else if (draft.type === 'image-match') { draft.matchPairs = [1, 2, 3, 4].map((pair) => emptyMatchPair('pair-' + pair)); }
+    else if (draft.type === 'memory-grid') { draft.memoryImagePaths = Array.from({ length: 25 }, (_, i) => `images/memory-grid/${String.fromCharCode(65 + i)}.png`); draft.memorySequence = [3, 13, 23]; if (draft.programme === 'SW') draft.advancementIds = ['SW-13']; }
     renderQuestionEditor(draft, questionEditorReturnTarget);
   });
   document.querySelector('#editor-choice-mode')?.addEventListener('change', (event) => {
@@ -195,6 +203,7 @@ function readQuestionEditorForm() {
     return { ...common, image: get('prompt-image').trim(), imageAlt: get('prompt-image-alt').trim(), options, answer: form.querySelector('[name="picture-answer"]:checked')?.value || '', editorChoiceMode: 'pictures' };
   }
   if (type === 'image-dropdown') return { ...common, image: get('question-image').trim(), imageAlt: get('question-image-alt').trim(), options: get('dropdownOptions').split(/\r?\n/).map((option) => option.trim()).filter(Boolean), answer: get('dropdownAnswer').trim() };
+  if (type === 'memory-grid') return { ...common, memoryImagePaths: get('memoryImages').split(/\r?\n/).map((path) => path.trim()), memorySequence: get('memorySequence').split(/[,\s]+/).map(Number).filter(Number.isFinite) };
   const matchPairs = [...app.querySelectorAll('[data-pair-row]')].map((row) => {
     const side = (name) => { const kind = row.querySelector(`.editor-kind[data-side="${name}"]`).value; return { kind, value: row.querySelector(`[data-pair-value="${name}"]`).value.trim(), alt: row.querySelector(`[data-pair-alt="${name}"]`)?.value.trim() || '' }; };
     return { id: row.dataset.pairId, left: side('left'), right: side('right') };
@@ -202,9 +211,13 @@ function readQuestionEditorForm() {
   return { ...common, matchPairs, sampleSize: Number(get('sampleSize')) || 0 };
 }
 function questionFromEditorDraft(draft) {
-  const { advancementIds, editorChoiceMode, matchPairs, sampleSize, ...question } = draft;
+  const { advancementIds, editorChoiceMode, matchPairs, sampleSize, memoryImagePaths, memorySequence, ...question } = draft;
   if (advancementIds.length === 1) question.advancementId = advancementIds[0]; else question.advancementIds = advancementIds;
   delete question.editorChoiceMode;
+  if (question.type === 'memory-grid') {
+    question.cells = memoryImagePaths.map((image, index) => ({ id: `cell-${index + 1}`, image, alt: image.split(/[\\/]/).pop().replace(/\.[^.]+$/, '') || `Picture ${index + 1}` }));
+    question.sequence = memorySequence;
+  }
   if (question.type === 'image-match') {
     const toSide = (side) => side.kind === 'image'
       ? { type: 'image', src: side.value, alt: side.alt }
@@ -240,6 +253,10 @@ function validateEditorDraft(draft, question) {
       if (new Set(question.options.map((item) => item.id)).size !== question.options.length) return 'Picture choice IDs must be unique.';
       if (!question.options.some((item) => item.id === question.answer)) return 'Choose the correct picture.';
     }
+  }
+  if (question.type === 'memory-grid') {
+    if (question.cells.length !== 25 || question.cells.some((cell) => !cell.image)) return 'Add an image path for all 25 grid squares.';
+    if (question.sequence.length !== 3 || question.sequence.some((number) => !Number.isInteger(number) || number < 1 || number > 25) || new Set(question.sequence).size !== 3) return 'Choose three different square numbers between 1 and 25, in order.';
   }
   if (question.type === 'image-dropdown' && (!question.image || question.options.length < 2 || !question.options.includes(question.answer))) return 'Add a question picture, at least two dropdown choices, and a correct answer from the list.';
   if (question.type === 'image-match') {

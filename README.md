@@ -85,10 +85,14 @@ A Cub can tap an item on the left and then tap its match on the right. A mouse o
 
 The starter matching question uses the supplied worksheet artwork and answer key: stack 1 → target 2, stack 2 → target 1, stack 3 → target 4, and stack 4 → target 3.
 
+### Memory grid
+
+A Cub studies a 5×5 picture grid for 10 seconds (or hides it sooner), then finds three shown pictures in order. `cells` contains exactly 25 images in row-major order. `sequence` contains the three 1-based square numbers, counted left to right and top to bottom. The complete working example is `sw-memory-grid-placeholder` in `data/questions.json`; it includes all 25 A–Y placeholder cards and is tagged SW-13. Replace those files with Pack images when ready.
+
 ### Question fields
 
 - **id**: unique short ID.
-- **type**: multiple-choice, image-option, image-dropdown, or image-match. Multiple-choice and image-option choices can be strings or picture objects.
+- **type**: multiple-choice, image-option, image-dropdown, image-match, or memory-grid. Multiple-choice and image-option choices can be strings or picture objects.
 - **programme**: SW or GW.
 - **advancementId**: programme plus advancement number. For one question shared by several advancements, use advancementIds, an array of IDs; the question appears in each focused quiz.
 - **question**: short prompt.
@@ -97,6 +101,7 @@ The starter matching question uses the supplied worksheet artwork and answer key
 - **image** / **imageAlt**: picture and its screen-reader description for image-option and image-dropdown questions; optional for multiple-choice. Image-option uses exactly four choices.
 - **pairs**: image-match pairs. Each pair has a unique ID, a left side, and a right side. Image sides use type=image with src and optional alt; text sides use type=text with value.
 - **sampleSize**: optional number of pairs to randomly display from a larger matching pool; if omitted, all pairs are shown.
+- **cells** / **sequence**: for memory-grid, 25 image cells in row-major order and three 1-based cell numbers to recall in sequence. The grid displays for 10 seconds before recall starts; the Cub can hide it sooner.
 - **explanation**: optional feedback shown after answering.
 
 Store image files in `images/` and use project-relative paths. Keep JSON valid: strings use double quotes, and array objects are separated by commas. Question tags must match an ID in `data/advancements.json`.
