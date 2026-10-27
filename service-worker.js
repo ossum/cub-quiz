@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cub-quiz-pwa-v16';
+const CACHE_NAME = 'cub-quiz-pwa-v17';
 const SHELL_FILES = [
   './',
   './index.html',
@@ -9,7 +9,10 @@ const SHELL_FILES = [
   './data/advancements.json',
   './data/questions.json',
   './images/app-icon-192.png',
-  './images/app-icon-512.png'
+  './images/app-icon-512.png',
+  './images/badges/burrowup.png',
+  './images/badges/silverwolf.png',
+  './images/badges/goldwolf.png'
 ];
 
 self.addEventListener('install', (event) => {

@@ -55,7 +55,7 @@ function writeQuestionBankOverride() {
   catch { return false; }
 }
 function defaultEditorQuestion() {
-  const programme = selection.programme || 'SW';
+  const programme = ['MEM', 'SW', 'GW'].includes(selection.programme) ? selection.programme : 'SW';
   const advancementId = catalogue.find((item) => item.id === programme)?.categories[0]?.advancements[0]?.id || `${programme}-1`;
   return { id: `${programme.toLowerCase()}-question-${Date.now()}`, type: 'multiple-choice', programme, advancementId, question: '', options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'], answer: '', explanation: '' };
 }
@@ -291,7 +291,7 @@ function questionFromEditorDraft(draft) {
 }
 function validateEditorDraft(draft, question) {
   if (!question.id || !question.question) return 'Add a question ID and question text.';
-  if (!['SW', 'GW'].includes(question.programme)) return 'Choose SW or GW.';
+  if (!['MEM', 'SW', 'GW'].includes(question.programme)) return 'Choose Membership, SW or GW.';
   if (!draft.advancementIds.length) return 'Add at least one advancement ID.';
   const validIds = catalogue.flatMap((p) => p.categories.flatMap((category) => category.advancements.map((item) => item.id)));
   if (draft.advancementIds.some((id) => !validIds.includes(id))) return 'One or more advancement IDs are not in the catalogue.';

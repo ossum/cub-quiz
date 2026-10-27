@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-27.5",
+  "version": "2026-10-27T21:34:05.706Z",
   "questions": [
     {
       "id": "sw-best-meetings-1",
@@ -659,15 +659,17 @@
     },
     {
       "id": "sw-trail-sign-party-split-up-1",
-      "type": "multiple-choice",
       "programme": "SW",
-      "advancementId": "SW-43",
+      "type": "multiple-choice",
       "question": "Which trail sign means: Party split up?",
+      "explanation": "This trail sign means: Party split up.",
+      "image": "",
+      "imageAlt": "",
       "options": [
         {
           "id": "party-split-up",
           "image": "images/trail-signs/party-split-up.png",
-          "alt": "Party split up"
+          "alt": "Group split up"
         },
         {
           "id": "message-this-way",
@@ -686,7 +688,7 @@
         }
       ],
       "answer": "party-split-up",
-      "explanation": "This trail sign means: Party split up."
+      "advancementId": "SW-43"
     },
     {
       "id": "sw-trail-sign-message-this-way-1",
@@ -1276,12 +1278,16 @@
     },
     {
       "id": "gw-jungle-book-character-match",
-      "type": "image-pairs",
       "programme": "GW",
-      "advancementId": "GW-55",
+      "type": "image-pairs",
       "question": "Match each Jungle Book name to its animal and clue.",
-      "sampleSize": 4,
       "explanation": "Some names share the same kind of animal, so use the short clue to find the exact match.",
+      "image": "",
+      "imageAlt": "",
+      "advancementId": "GW-55",
+      "allowReversal": true,
+      "sampleSize": 4,
+      "optionCount": 4,
       "pairs": [
         {
           "id": "name-akela",
@@ -1291,7 +1297,7 @@
           },
           "right": {
             "type": "text",
-            "value": "Wolf: pack leader"
+            "value": "Wolf Pack Leader"
           }
         },
         {
@@ -1309,11 +1315,11 @@
           "id": "name-rama-wolf",
           "left": {
             "type": "text",
-            "value": "Rama (father wolf)"
+            "value": "Rama"
           },
           "right": {
             "type": "text",
-            "value": "Father wolf"
+            "value": "Water Buffalo"
           }
         },
         {
@@ -1335,7 +1341,7 @@
           },
           "right": {
             "type": "text",
-            "value": "Wolf: Akela's granddaughter"
+            "value": "Akela's granddaughter"
           }
         },
         {
@@ -1394,17 +1400,6 @@
           }
         },
         {
-          "id": "name-rama-mysa",
-          "left": {
-            "type": "text",
-            "value": "Rama and Mysa"
-          },
-          "right": {
-            "type": "text",
-            "value": "Water buffaloes"
-          }
-        },
-        {
           "id": "name-chil-rann",
           "left": {
             "type": "text",
@@ -1412,7 +1407,7 @@
           },
           "right": {
             "type": "text",
-            "value": "Kite: jungle messenger"
+            "value": "Kite, the jungle messenger bird"
           }
         },
         {
@@ -1427,69 +1422,14 @@
           }
         },
         {
-          "id": "name-tha",
-          "left": {
-            "type": "text",
-            "value": "Tha"
-          },
-          "right": {
-            "type": "text",
-            "value": "First elephant"
-          }
-        },
-        {
-          "id": "name-phoana",
-          "left": {
-            "type": "text",
-            "value": "Phoana"
-          },
-          "right": {
-            "type": "text",
-            "value": "Wolf: outside the Seeonee Pack"
-          }
-        },
-        {
-          "id": "name-phao",
-          "left": {
-            "type": "text",
-            "value": "Phao"
-          },
-          "right": {
-            "type": "text",
-            "value": "Wolf: Phoana's son"
-          }
-        },
-        {
-          "id": "name-oo",
-          "left": {
-            "type": "text",
-            "value": "Oo"
-          },
-          "right": {
-            "type": "text",
-            "value": "Tortoise"
-          }
-        },
-        {
           "id": "name-mao-mor",
           "left": {
             "type": "text",
-            "value": "Mao or Mor"
+            "value": "Mao"
           },
           "right": {
             "type": "text",
             "value": "Peacock"
-          }
-        },
-        {
-          "id": "name-won-tolla",
-          "left": {
-            "type": "text",
-            "value": "Won-Tolla"
-          },
-          "right": {
-            "type": "text",
-            "value": "Wolf: warns of dhole attack"
           }
         },
         {
@@ -1514,8 +1454,7 @@
             "value": "Woodpecker"
           }
         }
-      ],
-      "allowReversal": true
+      ]
     },
     {
       "id": "sw-flag-colour-black",
@@ -2751,6 +2690,39 @@
         }
       ],
       "explanation": "Only light fires with a responsible adult and follow the rules for your area. The leader should make sure the fire is completely out before everyone leaves."
+    },
+    {
+      "id": "mem-salute-01",
+      "programme": "MEM",
+      "type": "multiple-choice",
+      "question": "Cub Salute",
+      "explanation": "Which salute is correct?",
+      "image": "",
+      "imageAlt": "",
+      "options": [
+        {
+          "id": "choice-1",
+          "image": "images/salutes/cub-sign.jpg",
+          "alt": "Two finger sign in air with right hand"
+        },
+        {
+          "id": "choice-2",
+          "image": "images/salutes/cub-salute.jpg",
+          "alt": "Two finger sign to head with right hand"
+        },
+        {
+          "id": "choice-3",
+          "image": "images/salutes/scout-salute.jpg",
+          "alt": "Three finger sign in air with right hand"
+        },
+        {
+          "id": "choice-4",
+          "image": "images/salutes/cub-salute-wrong.jpg",
+          "alt": "Two finger sign in air with left hand"
+        }
+      ],
+      "answer": "choice-1",
+      "advancementId": "MEM-5"
     }
   ]
 }

@@ -1,6 +1,58 @@
 {
-  "version": "2026-10-27.1",
+  "version": "2026-10-27.2",
   "programmes": [
+    {
+      "id": "MEM",
+      "name": "Membership",
+      "categories": [
+        {
+          "id": "membership",
+          "name": "Membership",
+          "advancements": [
+            {
+              "id": "MEM-1",
+              "number": 1,
+              "name": "The Cub Law"
+            },
+            {
+              "id": "MEM-2",
+              "number": 2,
+              "name": "The Cub Promise"
+            },
+            {
+              "id": "MEM-3",
+              "number": 3,
+              "name": "The Cub Motto"
+            },
+            {
+              "id": "MEM-4",
+              "number": 4,
+              "name": "The Left Handshake"
+            },
+            {
+              "id": "MEM-5",
+              "number": 5,
+              "name": "The Salute"
+            },
+            {
+              "id": "MEM-6",
+              "number": 6,
+              "name": "The Grand Howl"
+            },
+            {
+              "id": "MEM-7",
+              "number": 7,
+              "name": "How did Cubbing Start?"
+            },
+            {
+              "id": "MEM-8",
+              "number": 8,
+              "name": "Mowgli's Brothers"
+            }
+          ]
+        }
+      ]
+    },
     {
       "id": "SW",
       "name": "Silver Wolf",
