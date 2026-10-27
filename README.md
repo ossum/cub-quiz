@@ -22,7 +22,7 @@ On iPhone or iPad, open the site in Safari, tap Share, then Add to Home Screen. 
 
 ## Using the quiz
 
-Choose Silver Wolf (SW) or Gold Wolf (GW), then choose one advancement, a random test of up to 15 questions, or Challenge mode. Challenge mode draws from the selected programme’s question bank, costs one life for a wrong answer, and continues until all lives are lost. It starts with three lives; choose 1–10 before starting. Correct answers add to the score. Challenge mode shuffles a question deck and reshuffles it when exhausted. Add any number of separate questions with the same advancement tag; a focused quiz includes all of them and shuffles their order.
+Choose Silver Wolf (SW), Gold Wolf (GW), or the combined SW + GW pool, then choose one advancement, a random test of up to 15 questions, or Challenge mode. The combined pool offers Random and Challenge modes and draws questions from both programmes. Challenge mode draws from the selected programme’s question bank (or both banks in SW + GW mode), costs one life for a wrong answer, and continues until all lives are lost. It starts with three lives; choose 1–10 before starting. Correct answers add to the score. Challenge mode shuffles a question deck and reshuffles it when exhausted. Add any number of separate questions with the same advancement tag; a focused quiz includes all of them and shuffles their order.
 
 The selector lists all 71 testable SW and 75 GW advancements. The starter bank has 36 SW and 15 GW sample questions, so many advancement choices will show a message until questions are added. The count on the setup screen shows how many questions are ready for the current choice.
 
@@ -63,7 +63,6 @@ A Cub can tap an item on the left and then tap its match on the right. A mouse o
 {
   "id": "sw-picture-match-1",
   "type": "image-pairs",
-  "format": "image-match",
   "programme": "SW",
   "advancementId": "SW-41",
   "question": "Match each picture to its pair.",
@@ -80,6 +79,8 @@ A Cub can tap an item on the left and then tap its match on the right. A mouse o
     }
   ],
   "sampleSize": 2,
+  "optionCount": 2,
+  "allowReversal": true,
   "explanation": "A bird builds a nest."
 }
 ```
@@ -99,9 +100,9 @@ A Cub studies a configurable picture grid, then finds three shown pictures in or
 - **question**: short prompt.
 - **options**: for multiple-choice and image-dropdown questions; answer must exactly match one option.
 - **answer**: correct option text for single-answer questions. Image-pairs store each correct relationship in the pair itself.
-- **image** / **imageAlt**: optional top-level picture and screen-reader description; shown with either image-pairs format whenever supplied.
-- **pairs**: shared image-pairs pool. Each pair has a unique ID, a left prompt, and its correct right answer. Image sides use type=image with src and optional alt; text sides use type=text with value. Set **format** to image-match to show several pairs, or image-option to show one left prompt with its correct right answer and distractors from other pairs.
-- **sampleSize**: optional number of pairs to randomly display from a larger image-match pool; if omitted, all pairs are shown. **optionCount** configures the number of choices for image-option pools (default 4).
+- **image** / **imageAlt**: optional top-level picture and screen-reader description; shown whenever supplied.
+- **pairs**: shared image-pairs pool. Each pair has a unique ID, a left item, and its correct right item. Image sides use type=image with src and optional alt; text sides use type=text with value. The quiz randomly presents a matching round, a left-to-right choice, or a right-to-left choice.
+- **sampleSize**: number of pairs shown in a matching round (default: all pairs). **optionCount** sets the number of choices in single-answer rounds (default 4). **allowReversal** defaults to true; set it to false to disable right-to-left questions for that pool.
 - **cells**, **recallCount**, **randomizePrompts**, **sequence**: for memory-grid, `cells` contains `rows × columns` images in original row-major order. `recallCount` sets how many targets to recall. When `randomizePrompts` is true, target pictures and their order are chosen at random each round. When false, `sequence` gives fixed 1-based cell numbers. `previewSeconds` controls display time and `shuffleCells` randomizes board positions.
 - **explanation**: optional feedback shown after answering.
 
@@ -126,4 +127,4 @@ Question content and images are stored locally. Use images you have permission t
 
 ## Before publishing
 
-Run the site over HTTP or HTTPS. Verify the PWA manifest and service worker on localhost or the published HTTPS site, then test offline after its first online load. Try focused knot quizzes for SW 45–48 and GW 51–54, an advancement with no questions yet, random SW and GW tests, image dropdowns, SW-43 picture choices, GW-49 map-symbol pools, GW-55 random Jungle Book matches, GW-66 traffic sign matches, and both image-pairs formats. SW 45–48 and GW 51–54 each share a four-knot matching round for uses and another for names. Check correct and incorrect feedback, progress, final score, restart, and image loading. GitHub Pages serves these files as a static site; no build or secret configuration is required.
+Run the site over HTTP or HTTPS. Verify the PWA manifest and service worker on localhost or the published HTTPS site, then test offline after its first online load. Try focused knot quizzes for SW 45–48 and GW 51–54, an advancement with no questions yet, random SW and GW tests, image dropdowns, SW-43 picture choices, GW-49 map-symbol pools, GW-55 random Jungle Book matches, GW-66 traffic sign matches, and all three image-pairs presentations. SW 45–48 and GW 51–54 each share a four-knot matching round for uses and another for names. Check correct and incorrect feedback, progress, final score, restart, and image loading. GitHub Pages serves these files as a static site; no build or secret configuration is required.

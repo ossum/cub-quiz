@@ -7,9 +7,15 @@ function legacyMatchItemToSide(item) {
     ? { type: 'image', src: item.image, alt: item.alt || '' }
     : { type: 'text', value: item?.text || '' };
 }
+function normalizePairQuestion(question) {
+  if (!question || question.type !== 'image-pairs') return question;
+  const { format, ...normalized } = question;
+  normalized.allowReversal = question.allowReversal !== false;
+  return normalized;
+}
 function migrateLegacyImageMatch(question) {
-  if (!question || question.type !== 'image-match') return question;
-  if (Array.isArray(question.pairs)) return { ...question, type: 'image-pairs', format: question.format || 'image-match' };
+  if (!question || question.type !== 'image-match') return normalizePairQuestion(question);
+  if (Array.isArray(question.pairs)) return normalizePairQuestion({ ...question, type: 'image-pairs' });
   if (!Array.isArray(question.leftItems) || !Array.isArray(question.rightItems) || !question.answer) return question;
   const pairs = question.leftItems.map((left, index) => {
     const rightId = question.answer[left.id];
@@ -19,7 +25,7 @@ function migrateLegacyImageMatch(question) {
   });
   if (pairs.some((pair) => !pair)) return question;
   const { leftItems, rightItems, answer, ...rest } = question;
-  return { ...rest, type: 'image-pairs', format: 'image-match', pairs };
+  return normalizePairQuestion({ ...rest, type: 'image-pairs', pairs });
 }
 function migrateQuestionBank(questions) {
   let normalized = questions.map(migrateLegacyImageMatch);
@@ -35,7 +41,7 @@ function migrateQuestionBank(questions) {
     normalized = normalized.filter((question) => !question.id.startsWith('sw-pigpen-nature-cipher-'));
     normalized.push({ id: 'sw-nature-cipher-pool', type: 'image-pairs', format: 'image-option', programme: 'SW', advancementId: 'SW-14', question: 'Which code spells this word?', image: oldNature[0].image, imageAlt: oldNature[0].imageAlt || '', optionCount: 4, pairs: words.map((word) => ({ id: 'nature-' + word.toLowerCase(), left: { type: 'text', value: word.toLowerCase() }, right: { type: 'image', src: 'images/codes/nature-cipher/' + word + '.png', alt: 'Nature cipher spelling ' + word.toLowerCase() } })) });
   }
-  return normalized;
+  return normalized.map(normalizePairQuestion);
 }
 function readQuestionBankOverride() {
   try {
@@ -91,8 +97,8 @@ function renderQuestionEditor(question, returnTarget = 'manager') {
   questionEditorReturnTarget = returnTarget;
   questionEditorOriginalId = question?.id || null;
   const type = source.type === 'image-match' ? 'image-pairs' : (source.type || 'multiple-choice');
-  const pairFormat = source.pairFormat || source.format || (source.type === 'image-option' ? 'image-option' : 'image-match');
-  const pairOptionCount = source.optionCount || 4;
+  const pairOptionCount = Math.min(source.optionCount || 4, source.matchPairs?.length || source.pairs?.length || 4);
+  const pairAllowReversal = source.allowReversal !== false;
   const programme = source.programme || selection.programme;
   const advancementIds = source.advancementIds || [source.advancementId].filter(Boolean);
   const sourceOptions = Array.isArray(source.options) ? source.options : [];
@@ -129,7 +135,7 @@ function renderQuestionEditor(question, returnTarget = 'manager') {
         <label>Answer choices, one per line<textarea class="editor-input" name="dropdownOptions" rows="5">${escapeHtml(type === 'image-dropdown' ? (source.options || []).join('\n') : '')}</textarea></label><label>Correct answer<input class="editor-input" name="dropdownAnswer" value="${escapeAttribute(type === 'image-dropdown' ? source.answer || '' : '')}"></label>
       </section>
       <section class="editor-type-panel" data-type-panel="image-pairs" ${type === 'image-pairs' ? '' : 'hidden'}>
-        <h2>Pair question pool</h2>${renderImageField('pair-prompt-image', source.image || '', source.imageAlt || '', 'Top-level image (optional)')}<label>Presentation format<select class="editor-input" name="pair-format"><option value="image-match" ${pairFormat === 'image-match' ? 'selected' : ''}>Match all shown pairs</option><option value="image-option" ${pairFormat === 'image-option' ? 'selected' : ''}>Choose one answer</option></select></label><div data-pair-format-panel="image-match" ${pairFormat === 'image-match' ? '' : 'hidden'}><label>Pairs shown in each round<input class="editor-input" name="sampleSize" type="number" min="2" value="${source.sampleSize || source.pairs?.length || 4}"></label></div><div data-pair-format-panel="image-option" ${pairFormat === 'image-option' ? '' : 'hidden'}><label>Answer choices shown<input class="editor-input" name="optionCount" type="number" min="2" value="${pairOptionCount}"></label><p class="editor-note">The app picks one left-side prompt and shows its matching right-side answer with distractors from the other pairs.</p></div><p class="editor-note">Each row is one prompt and its correct answer. Choose a picture or short text for each side. Top-level image is optional and appears with either format when supplied.</p><div id="matching-pair-list">${renderMatchingPairRows(pairRows)}</div><button type="button" class="secondary" id="add-matching-pair">Add pair</button>
+        <h2>Pair question pool</h2>${renderImageField('pair-prompt-image', source.image || '', source.imageAlt || '', 'Top-level image (optional)')}<div class="editor-form-grid"><label>Pairs shown in a matching round<input class="editor-input" name="sampleSize" type="number" min="2" value="${source.sampleSize || source.pairs?.length || 4}"></label><label>Choices in a single-answer round<input class="editor-input" name="optionCount" type="number" min="2" value="${pairOptionCount}"></label></div><label class="editor-radio"><input type="checkbox" name="allowReversal" ${pairAllowReversal ? 'checked' : ''}> Allow reversed questions (show a right-side item and ask for its left-side match)</label><p class="editor-note">The quiz randomly chooses between a matching round, a left-to-right single-answer question, and (when enabled) a reversed single-answer question. Each row is one prompt and its correct match. Top-level image is optional.</p><div id="matching-pair-list">${renderMatchingPairRows(pairRows)}</div><button type="button" class="secondary" id="add-matching-pair">Add pair</button>
       </section>
       <section class="editor-type-panel" data-type-panel="memory-grid" ${type === 'memory-grid' ? '' : 'hidden'}>
         <h2>Memory grid</h2><div class="editor-form-grid"><label>Rows<input class="editor-input" name="memoryRows" type="number" min="1" max="10" value="${memoryRows}"></label><label>Columns<input class="editor-input" name="memoryColumns" type="number" min="1" max="10" value="${memoryColumns}"></label><label>Picture display time (seconds)<input class="editor-input" name="memoryPreviewSeconds" type="number" min="1" max="120" value="${memoryPreviewSeconds}"></label><label class="editor-radio"><input type="checkbox" name="memoryShuffle" ${memoryShuffle ? 'checked' : ''}> Shuffle picture positions each round</label></div><p class="editor-note">Enter one path per square, from top-left to bottom-right. The number of paths must equal rows × columns. The app can choose random pictures and order each round, or use the fixed squares below. Placeholder paths use A.png through P.png in images/memory-grid/.</p><label>Grid images (paths)<textarea class="editor-input" name="memoryImages" rows="10">${escapeHtml(memoryPaths.join('\n'))}</textarea></label><div class="editor-form-grid"><label>Pictures to recall each round<input class="editor-input" name="memoryRecallCount" type="number" min="1" max="100" value="${memoryRecallCount}"></label><label class="editor-radio"><input type="checkbox" name="memoryRandomizePrompts" ${memoryRandomizePrompts ? 'checked' : ''}> Randomize target pictures and their order each round</label></div><label data-fixed-memory-sequence ${memoryRandomizePrompts ? 'hidden' : ''}>Fixed target squares (only used when random targets are off; numbers follow the original grid order)<input class="editor-input" name="memorySequence" value="${escapeAttribute(memorySequence.join(', '))}" placeholder="3, 7, 13"></label>
@@ -143,11 +149,10 @@ function renderQuestionEditor(question, returnTarget = 'manager') {
     const draft = readQuestionEditorForm(); draft.type = event.target.value;
     if (['multiple-choice', 'image-option'].includes(draft.type)) { draft.options = ['Option 1', 'Option 2', 'Option 3', 'Option 4']; draft.answer = ''; }
     else if (draft.type === 'image-dropdown') { draft.image = ''; draft.imageAlt = ''; draft.options = ['Option 1', 'Option 2', 'Option 3', 'Option 4']; draft.answer = ''; }
-    else if (draft.type === 'image-pairs') { draft.matchPairs = [1, 2, 3, 4].map((pair) => emptyMatchPair('pair-' + pair)); draft.pairFormat = 'image-match'; draft.optionCount = 4; }
+    else if (draft.type === 'image-pairs') { draft.matchPairs = [1, 2, 3, 4].map((pair) => emptyMatchPair('pair-' + pair)); draft.allowReversal = true; draft.optionCount = 4; draft.sampleSize = 4; }
     else if (draft.type === 'memory-grid') { draft.memoryImagePaths = Array.from({ length: 16 }, (_, i) => `images/memory-grid/${String.fromCharCode(65 + i)}.png`); draft.memorySequence = [3, 7, 13]; draft.memoryRecallCount = 3; draft.memoryRandomizePrompts = true; draft.memoryRows = 4; draft.memoryColumns = 4; draft.memoryPreviewSeconds = 20; draft.memoryShuffle = true; if (draft.programme === 'SW') draft.advancementIds = ['SW-13']; }
     renderQuestionEditor(draft, questionEditorReturnTarget);
   });
-  document.querySelector('[name="pair-format"]')?.addEventListener('change', (event) => { app.querySelectorAll('[data-pair-format-panel]').forEach((panel) => { panel.hidden = panel.dataset.pairFormatPanel !== event.target.value; }); });
   document.querySelector('[name="memoryRandomizePrompts"]')?.addEventListener('change', (event) => { const fixed = document.querySelector('[data-fixed-memory-sequence]'); if (fixed) fixed.hidden = event.target.checked; });
   document.querySelector('#editor-choice-mode')?.addEventListener('change', (event) => {
     app.querySelectorAll('[data-choice-panel]').forEach((element) => { element.hidden = element.dataset.choicePanel !== event.target.value; });
@@ -235,7 +240,7 @@ function readQuestionEditorForm() {
       const side = (name) => { const kind = row.querySelector(`.editor-kind[data-side="${name}"]`).value; return { kind, value: row.querySelector(`[data-pair-value="${name}"]`).value.trim(), alt: row.querySelector(`[data-pair-alt="${name}"]`)?.value.trim() || '' }; };
       return { id: row.dataset.pairId, left: side('left'), right: side('right') };
     });
-    return { ...common, image: get('pair-prompt-image').trim(), imageAlt: get('pair-prompt-image-alt').trim(), pairFormat: get('pair-format'), optionCount: Number(get('optionCount')) || 4, matchPairs, sampleSize: Number(get('sampleSize')) || 0 };
+    return { ...common, image: get('pair-prompt-image').trim(), imageAlt: get('pair-prompt-image-alt').trim(), allowReversal: form.elements.namedItem('allowReversal')?.checked === true, optionCount: Number(get('optionCount')) || 4, matchPairs, sampleSize: Number(get('sampleSize')) || 0 };
   }
   if (type === 'memory-grid') return { ...common, memoryImagePaths: get('memoryImages').split(/\r?\n/).map((path) => path.trim()), memorySequence: get('memorySequence').split(/[,\s]+/).map(Number).filter(Number.isFinite), memoryRows: Number(get('memoryRows')), memoryColumns: Number(get('memoryColumns')), memoryPreviewSeconds: Number(get('memoryPreviewSeconds')), memoryShuffle: form.elements.namedItem('memoryShuffle')?.checked === true, memoryRecallCount: Number(get('memoryRecallCount')), memoryRandomizePrompts: form.elements.namedItem('memoryRandomizePrompts')?.checked === true };
   const matchPairs = [...app.querySelectorAll('[data-pair-row]')].map((row) => {
@@ -245,7 +250,7 @@ function readQuestionEditorForm() {
   return { ...common, matchPairs, sampleSize: Number(get('sampleSize')) || 0 };
 }
 function questionFromEditorDraft(draft) {
-  const { advancementIds, editorChoiceMode, matchPairs, sampleSize, pairFormat, optionCount, memoryImagePaths, memorySequence, memoryRows, memoryColumns, memoryPreviewSeconds, memoryShuffle, memoryRecallCount, memoryRandomizePrompts, ...question } = draft;
+  const { advancementIds, editorChoiceMode, matchPairs, sampleSize, optionCount, allowReversal, memoryImagePaths, memorySequence, memoryRows, memoryColumns, memoryPreviewSeconds, memoryShuffle, memoryRecallCount, memoryRandomizePrompts, ...question } = draft;
   if (advancementIds.length === 1) question.advancementId = advancementIds[0]; else question.advancementIds = advancementIds;
   delete question.editorChoiceMode;
   if (question.type === 'memory-grid') {
@@ -262,8 +267,10 @@ function questionFromEditorDraft(draft) {
     const toSide = (side) => side.kind === 'image'
       ? { type: 'image', src: side.value, alt: side.alt }
       : { type: 'text', value: side.value };
-    question.format = pairFormat;
-    if (pairFormat === 'image-match') question.sampleSize = sampleSize; else question.optionCount = optionCount;
+    delete question.format;
+    question.allowReversal = allowReversal !== false;
+    question.sampleSize = sampleSize;
+    question.optionCount = optionCount;
     question.pairs = matchPairs.map((pair, index) => ({
       id: pair.id || ('pair-' + (index + 1)),
       left: toSide(pair.left),
@@ -304,10 +311,13 @@ function validateEditorDraft(draft, question) {
   }
   if (question.type === 'image-dropdown' && (!question.image || question.options.length < 2 || !question.options.includes(question.answer))) return 'Add a question picture, at least two dropdown choices, and a correct answer from the list.';
   if (question.type === 'image-pairs') {
-    if (!['image-match', 'image-option'].includes(question.format)) return 'Choose a pair question format.';
     if (!question.pairs || question.pairs.length < 2) return 'Add at least two matching pairs.';
-    if (question.format === 'image-match' && (question.sampleSize < 2 || question.sampleSize > question.pairs.length)) return 'Choose a display size between two pairs and the number of pairs in the pool.';
-    if (question.format === 'image-option' && (!Number.isInteger(question.optionCount) || question.optionCount < 2 || question.optionCount > new Set(question.pairs.map((pair) => pair.right.type === 'image' ? `image:${pair.right.src}` : `text:${pair.right.value.toLowerCase()}`)).size)) return 'Answer choices must be at least two and no more than the unique answers in the pool.';
+    if (question.sampleSize < 2 || question.sampleSize > question.pairs.length) return 'Choose a matching round size between two pairs and the number of pairs in the pool.';
+    if (!Number.isInteger(question.optionCount) || question.optionCount < 2) return 'Choose at least two answer choices.';
+    const sideKey = (side) => side.type === 'image' ? `image:${side.src}` : `text:${String(side.value || '').trim().toLowerCase()}`;
+    const rightCount = new Set(question.pairs.map((pair) => sideKey(pair.right))).size;
+    const leftCount = new Set(question.pairs.map((pair) => sideKey(pair.left))).size;
+    if (question.optionCount > rightCount || (question.allowReversal && question.optionCount > leftCount)) return 'Each answer side needs enough unique items for the selected number of choices.';
     if (new Set(question.pairs.map((pair) => pair.id)).size !== question.pairs.length) return 'Pair IDs must be unique.';
     if (question.pairs.some((pair) => [pair.left, pair.right].some((side) => side.type === 'image' ? !side.src : !side.value))) return 'Complete both sides of every matching pair.';
     if (question.pairs.some((pair) => [pair.left, pair.right].some((side) => side.type === 'image' && !side.alt))) return 'Add a short description for each picture.';

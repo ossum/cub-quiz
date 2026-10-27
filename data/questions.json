@@ -243,7 +243,7 @@
           }
         }
       ],
-      "format": "image-match"
+      "allowReversal": true
     },
     {
       "id": "sw-knots-use-match-1",
@@ -307,7 +307,7 @@
           }
         }
       ],
-      "format": "image-match"
+      "allowReversal": true
     },
     {
       "id": "sw-knots-name-match-1",
@@ -371,7 +371,7 @@
           }
         }
       ],
-      "format": "image-match"
+      "allowReversal": true
     },
     {
       "id": "gw-knots-use-match-1",
@@ -435,7 +435,7 @@
           }
         }
       ],
-      "format": "image-match"
+      "allowReversal": true
     },
     {
       "id": "gw-knots-name-match-1",
@@ -499,7 +499,7 @@
           }
         }
       ],
-      "format": "image-match"
+      "allowReversal": true
     },
     {
       "id": "sw-trail-sign-water-this-direction-1",
@@ -806,7 +806,7 @@
           }
         }
       ],
-      "format": "image-match"
+      "allowReversal": true
     },
     {
       "id": "gw-traffic-signs-match-2",
@@ -865,7 +865,7 @@
           }
         }
       ],
-      "format": "image-match"
+      "allowReversal": true
     },
     {
       "id": "gw-traffic-signs-match-3",
@@ -924,7 +924,7 @@
           }
         }
       ],
-      "format": "image-match"
+      "allowReversal": true
     },
     {
       "id": "gw-traffic-signs-match-4",
@@ -983,7 +983,7 @@
           }
         }
       ],
-      "format": "image-match"
+      "allowReversal": true
     },
     {
       "id": "gw-map-symbols-match",
@@ -1103,7 +1103,7 @@
           }
         }
       ],
-      "format": "image-match"
+      "allowReversal": true
     },
     {
       "id": "gw-map-places-match",
@@ -1271,7 +1271,7 @@
           }
         }
       ],
-      "format": "image-match"
+      "allowReversal": true
     },
     {
       "id": "gw-jungle-book-character-match",
@@ -1514,7 +1514,7 @@
           }
         }
       ],
-      "format": "image-match"
+      "allowReversal": true
     },
     {
       "id": "sw-flag-colour-black",
@@ -1856,7 +1856,7 @@
           "id": "picture-raksha",
           "left": {
             "type": "image",
-            "src": "images/jungle-characters/raksha.jpg",
+            "src": "images/jungle-characters/rakhsha.jpg",
             "alt": "Mother wolf"
           },
           "right": {
@@ -1997,7 +1997,7 @@
           }
         }
       ],
-      "format": "image-match"
+      "allowReversal": true
     },
     {
       "id": "sw-memory-grid-placeholder",
@@ -2098,7 +2098,6 @@
     {
       "id": "gw-pigpen-code-pool",
       "type": "image-pairs",
-      "format": "image-option",
       "programme": "GW",
       "advancementId": "GW-13",
       "question": "Which code matches this phrase?",
@@ -2155,12 +2154,12 @@
           }
         }
       ],
-      "explanation": "Use the Pigpen key to read each code."
+      "explanation": "Use the Pigpen key to read each code.",
+      "allowReversal": true
     },
     {
       "id": "sw-nature-cipher-pool",
       "type": "image-pairs",
-      "format": "image-option",
       "programme": "SW",
       "advancementId": "SW-14",
       "question": "Which code spells this word?",
@@ -2312,7 +2311,8 @@
             "alt": "Nature cipher spelling sun"
           }
         }
-      ]
+      ],
+      "allowReversal": true
     }
   ]
 }

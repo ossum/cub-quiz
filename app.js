@@ -31,7 +31,7 @@ async function loadData() {
     if (!questionResponse.ok || !advancementResponse.ok) throw new Error('The quiz files could not be found.');
     const questionData = await questionResponse.json();
     const advancementData = await advancementResponse.json();
-    bank = (readQuestionBankOverride() || questionData.questions).map(migrateLegacyImageMatch);
+    bank = (readQuestionBankOverride() || questionData.questions).map(migrateLegacyImageMatch).map(normalizePairQuestion);
     catalogue = advancementData.programmes;
     if (!Array.isArray(bank) || !Array.isArray(catalogue) || !catalogue.length) throw new Error('The quiz data is not in the expected format.');
     const firstAvailable = bank.find((question) => question.programme === selection.programme);
@@ -44,12 +44,14 @@ async function loadData() {
   }
 }
 
-function getProgramme() {
-  return catalogue.find((programme) => programme.id === selection.programme);
+function getProgramme(id = selection.programme) {
+  if (id === 'BOTH') return { id: 'BOTH', name: 'SW + GW' };
+  return catalogue.find((programme) => programme.id === id);
 }
 
-function getAdvancement(id = selection.advancementId) {
-  for (const category of getProgramme()?.categories || []) {
+function getAdvancement(id = selection.advancementId, programmeId = selection.programme) {
+  const programmes = programmeId === 'BOTH' ? catalogue : catalogue.filter((programme) => programme.id === programmeId);
+  for (const programme of programmes) for (const category of programme.categories) {
     const advancement = category.advancements.find((item) => item.id === id);
     if (advancement) return { ...advancement, category };
   }
@@ -57,7 +59,7 @@ function getAdvancement(id = selection.advancementId) {
 }
 
 function questionsForSelection() {
-  return bank.filter((question) => question.programme === selection.programme &&
+  return bank.filter((question) => (selection.programme === 'BOTH' || question.programme === selection.programme) &&
     (['random', 'challenge'].includes(selection.mode) || question.advancementId === selection.advancementId || question.advancementIds?.includes(selection.advancementId)));
 }
 
@@ -66,34 +68,40 @@ function renderSetup() {
   if (!programme) return;
   const availableCount = questionsForSelection().length;
   const selected = getAdvancement();
-  const groups = programme.categories.map((category) => `<optgroup label="${escapeHtml(category.name)} • ${escapeHtml(category.color)}">
+  const groups = (programme.categories || []).map((category) => `<optgroup label="${escapeHtml(category.name)} • ${escapeHtml(category.color)}">
     ${category.advancements.map((advancement) => `<option value="${advancement.id}" ${advancement.id === selection.advancementId ? 'selected' : ''}>${advancement.number}. ${escapeHtml(advancement.name)}</option>`).join('')}
   </optgroup>`).join('');
 
   app.innerHTML = `<div class="setup">
-    <div class="setup-heading"><p class="eyebrow">YOUR NEXT CUB ADVENTURE</p><h1>Choose a challenge</h1><p>Practise one advancement, take a random ${programme.name} test, or try Challenge mode.</p></div>
+    <div class="setup-heading"><p class="eyebrow">YOUR NEXT CUB ADVENTURE</p><h1>Choose a challenge</h1><p>${selection.programme === 'BOTH' ? 'Mix Silver Wolf and Gold Wolf questions in one random test or Challenge mode.' : `Practise one advancement, take a random ${programme.name} test, or try Challenge mode.`}</p></div>
     <div class="step-label"><span>1</span> Choose a Wolf badge</div>
     <div class="choice-row" role="group" aria-label="Choose a Wolf badge">
       ${catalogue.map((option) => `<button class="choice-button ${option.id === programme.id ? 'selected' : ''}" data-programme="${option.id}" aria-pressed="${option.id === programme.id}"><span class="choice-icon">${option.id === 'SW' ? '✦' : '★'}</span><span><strong>${option.name}</strong><small>${option.id} • ${option.categories.reduce((sum, category) => sum + category.advancements.length, 0)} advancements</small></span></button>`).join('')}
+      <button class="choice-button choice-button-both ${selection.programme === 'BOTH' ? 'selected' : ''}" data-programme="BOTH" aria-pressed="${selection.programme === 'BOTH'}"><span class="choice-icon">✦★</span><span><strong>SW + GW</strong><small>Draw from both question banks</small></span></button>
     </div>
     <div class="step-label"><span>2</span> Choose your quiz</div>
     <div class="mode-row" role="group" aria-label="Choose quiz type">
-      <button class="mode-button ${selection.mode === 'advancement' ? 'selected' : ''}" data-mode="advancement" aria-pressed="${selection.mode === 'advancement'}"><strong>One advancement</strong><small>Focus on one numbered skill or topic.</small></button>
-      <button class="mode-button ${selection.mode === 'random' ? 'selected' : ''}" data-mode="random" aria-pressed="${selection.mode === 'random'}"><strong>Random ${programme.id} test</strong><small>Choose up to 15 shuffled questions.</small></button>
-      <button class="mode-button ${selection.mode === 'challenge' ? 'selected' : ''}" data-mode="challenge" aria-pressed="${selection.mode === 'challenge'}"><strong>Challenge mode</strong><small>Keep going; a wrong answer costs a life.</small></button>
+      ${selection.programme === 'BOTH' ? '' : `<button class="mode-button ${selection.mode === 'advancement' ? 'selected' : ''}" data-mode="advancement" aria-pressed="${selection.mode === 'advancement'}"><strong>One advancement</strong><small>Focus on one numbered skill or topic.</small></button>`}
+      <button class="mode-button ${selection.mode === 'random' ? 'selected' : ''}" data-mode="random" aria-pressed="${selection.mode === 'random'}"><strong>Random ${selection.programme === 'BOTH' ? 'SW + GW' : programme.id} test</strong><small>Choose up to 15 shuffled questions${selection.programme === 'BOTH' ? ' from both banks' : ''}.</small></button>
+      <button class="mode-button ${selection.mode === 'challenge' ? 'selected' : ''}" data-mode="challenge" aria-pressed="${selection.mode === 'challenge'}"><strong>Challenge mode</strong><small>Keep going${selection.programme === 'BOTH' ? ' through both banks' : ''}; a wrong answer costs a life.</small></button>
     </div>
     ${selection.mode === 'random' ? `<div class="random-count-picker"><label for="random-question-count">Questions in this test</label><div><input id="random-question-count" type="number" min="1" max="${Math.max(1, availableCount)}" value="${Math.min(selection.randomQuestionCount || 15, availableCount || 15)}" ${availableCount ? '' : 'disabled'}><span>of ${availableCount} available</span></div><small>We’ll choose a fresh random set each time.</small></div>` : ''}
     ${selection.mode === 'challenge' ? `<div class="random-count-picker challenge-lives-picker"><label for="challenge-lives">Starting lives</label><div><input id="challenge-lives" type="number" min="1" max="10" value="${selection.challengeLives || 3}"><span>Choose 1–10 lives</span></div><small>Correct answers add to your score. The challenge ends when no lives remain.</small></div>` : ''}
     ${selection.mode === 'advancement' ? `<div class="advancement-picker"><label for="advancement-select">3 Choose an advancement</label><select id="advancement-select">${groups}</select>
       ${selected ? `<div class="category-hint"><span class="colour-dot" style="--category-colour:${colours[selected.category.color]}"></span><span>${selected.category.name}</span><span class="hint-separator">•</span><span>${selected.category.color}</span></div>` : ''}
     </div>` : ''}
-    <div class="setup-bottom"><p class="question-count">${availableCount ? `${availableCount} ${availableCount === 1 ? 'question' : 'questions'} ready` : 'No questions added for this choice yet'}</p><div class="setup-actions"><button class="secondary" id="manage-questions">Manage questions</button><button class="primary" id="start" ${!availableCount || (selection.mode === 'advancement' && !selection.advancementId) ? 'disabled' : ''}>Start ${selection.mode === 'challenge' ? 'challenge' : selection.mode === 'random' ? `${programme.id} test` : 'quiz'} <span aria-hidden="true">→</span></button></div></div>
+    <div class="setup-bottom"><p class="question-count">${availableCount ? `${availableCount} ${availableCount === 1 ? 'question' : 'questions'} ready` : 'No questions added for this choice yet'}</p><div class="setup-actions"><button class="secondary" id="manage-questions">Manage questions</button><button class="primary" id="start" ${!availableCount || (selection.mode === 'advancement' && !selection.advancementId) ? 'disabled' : ''}>Start ${selection.mode === 'challenge' ? 'challenge' : selection.mode === 'random' ? `${selection.programme === 'BOTH' ? 'SW + GW' : programme.id} test` : 'quiz'} <span aria-hidden="true">→</span></button></div></div>
   </div>`;
 
   app.querySelectorAll('[data-programme]').forEach((button) => button.addEventListener('click', () => {
     selection.programme = button.dataset.programme;
-    const firstQuestion = bank.find((question) => question.programme === selection.programme);
-    selection.advancementId = firstQuestion?.advancementId || firstQuestion?.advancementIds?.[0] || '';
+    if (selection.programme === 'BOTH') {
+      selection.advancementId = '';
+      if (selection.mode === 'advancement') selection.mode = 'random';
+    } else {
+      const firstQuestion = bank.find((question) => question.programme === selection.programme);
+      selection.advancementId = firstQuestion?.advancementId || firstQuestion?.advancementIds?.[0] || '';
+    }
     renderSetup();
   }));
   app.querySelectorAll('[data-mode]').forEach((button) => button.addEventListener('click', () => {
@@ -139,7 +147,7 @@ function startQuiz() {
 
 function renderEmptySelection() {
   const advancement = getAdvancement();
-  app.innerHTML = `<div class="results"><div class="result-icon" aria-hidden="true">✎</div><p class="eyebrow">QUESTION BANK IN PROGRESS</p><h2>We haven’t added these questions yet.</h2><p class="summary">${selection.mode !== 'advancement' ? `There are no ${selection.programme} questions in the bank yet.` : `${escapeHtml(selection.programme)} ${advancement.number}: ${escapeHtml(advancement.name)} is ready for questions.`} Ask your Cub leader to add questions for this topic.</p><button class="primary" id="back-to-setup">Choose another challenge</button></div>`;
+  app.innerHTML = `<div class="results"><div class="result-icon" aria-hidden="true">✎</div><p class="eyebrow">QUESTION BANK IN PROGRESS</p><h2>We haven’t added these questions yet.</h2><p class="summary">${selection.mode !== 'advancement' ? `There are no ${selection.programme === 'BOTH' ? 'SW + GW' : selection.programme} questions in the bank yet.` : `${escapeHtml(selection.programme)} ${advancement.number}: ${escapeHtml(advancement.name)} is ready for questions.`} Ask your Cub leader to add questions for this topic.</p><button class="primary" id="back-to-setup">Choose another challenge</button></div>`;
   document.querySelector('#back-to-setup').addEventListener('click', renderSetup);
 }
 
@@ -151,8 +159,10 @@ function renderQuestion() {
   pairOptionState = null;
   memoryState = null;
   const question = questions[index];
+  const pairPresentation = question.type === 'image-pairs' ? choosePairPresentation(question) : null;
+  const questionText = pairPresentation && pairPresentation !== 'match' ? 'Choose the item that matches.' : question.question;
   const taggedAdvancements = (question.advancementIds || [question.advancementId]).filter(Boolean).map((id) => getAdvancement(id)).filter(Boolean);
-  const advancement = taggedAdvancements[0] || getAdvancement(question.advancementId);
+  const advancement = taggedAdvancements[0] || getAdvancement(question.advancementId, question.programme);
   const tagLabel = taggedAdvancements.length > 1 ? `${question.programme} · ${advancement.category.name} · ${taggedAdvancements.map((item) => item.number).join(', ')}` : advancement ? `${question.programme} ${advancement.number} · ${advancement.category.name}` : question.programme;
   const progress = challengeState ? 0 : Math.round(((index + 1) / questions.length) * 100);
   const questionHeading = challengeState ? `CHALLENGE · QUESTION ${challengeState.questionsAnswered + 1}` : `QUESTION ${index + 1} OF ${questions.length}`;
@@ -160,12 +170,12 @@ function renderQuestion() {
   app.innerHTML = `<div class="quiz">
     <div class="quiz-top"><span>${questionHeading}</span><span class="quiz-tools">${scoreAndLives}${challengeState ? '' : '<button class="text-button quiz-edit-button" id="edit-current-question" type="button">Edit this question</button>'}</span></div>
     ${challengeState ? '' : `<div class="progress-wrap" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="${questions.length}" aria-valuenow="${index + 1}"><div class="progress" style="width:${progress}%"></div></div>`}
-    <div class="question"><div class="advancement-tag" style="--category-colour:${colours[advancement?.category.color] || '#71965d'}">${escapeHtml(tagLabel)}</div><h2>${escapeHtml(question.question)}</h2>
-      ${question.type === 'image-pairs' ? renderImagePairs(question) : question.type === 'image-match' ? `${renderQuestionImage(question)}${renderImageMatch(question)}` : question.type === 'memory-grid' ? renderMemoryGrid(question) : renderSingleAnswer(question)}
+    <div class="question"><div class="advancement-tag" style="--category-colour:${colours[advancement?.category.color] || '#71965d'}">${escapeHtml(tagLabel)}</div><h2>${escapeHtml(questionText)}</h2>
+      ${question.type === 'image-pairs' ? renderImagePairs(question, pairPresentation) : question.type === 'image-match' ? `${renderQuestionImage(question)}${renderImageMatch(question)}` : question.type === 'memory-grid' ? renderMemoryGrid(question) : renderSingleAnswer(question)}
       <div id="feedback-slot"></div>
     </div>
   </div>`;
-  if (question.type === 'image-match' || (question.type === 'image-pairs' && question.format === 'image-match')) wireImageMatch(question);
+  if (question.type === 'image-match' || (question.type === 'image-pairs' && pairPresentation === 'match')) wireImageMatch(question);
   if (question.type === 'memory-grid') startMemoryPreviewTimer(question);
   if (question.type === 'image-dropdown') {
     const select = document.querySelector('#answer-select');
@@ -188,8 +198,16 @@ function renderQuestionImage(question) {
   return question.image ? `<img class="question-image" src="${escapeAttribute(question.image)}" alt="${escapeAttribute(question.imageAlt || '')}">` : '';
 }
 
-function renderImagePairs(question) {
-  return `${renderQuestionImage(question)}${question.format === 'image-option' ? renderPairOption(question) : renderImageMatch(question)}`;
+function choosePairPresentation(question) {
+  const presentations = question.allowReversal === false ? ['match', 'forward'] : ['match', 'forward', 'reverse'];
+  return presentations[Math.floor(Math.random() * presentations.length)];
+}
+function renderImagePairs(question, presentation) {
+  if (presentation === 'match') {
+    pairOptionState = { presentation };
+    return `${renderQuestionImage(question)}${renderImageMatch(question)}`;
+  }
+  return `${renderQuestionImage(question)}${renderPairOption(question, presentation === 'reverse')}`;
 }
 function renderPairSide(side) {
   if (side.type === 'image') return `<img src="${escapeAttribute(side.src)}" alt="${escapeAttribute(side.alt || '')}">`;
@@ -198,19 +216,24 @@ function renderPairSide(side) {
 function pairAnswerKey(side) {
   return side.type === 'image' ? `image:${side.src}` : `text:${String(side.value || '').trim().toLowerCase()}`;
 }
-function renderPairOption(question) {
+function renderPairOption(question, reverse = false) {
+  const promptName = reverse ? 'right' : 'left';
+  const answerName = reverse ? 'left' : 'right';
   const pair = shuffle(question.pairs)[0];
+  const promptSide = pair[promptName];
+  const correctAnswer = pair[answerName];
   const optionCount = Math.max(2, Math.min(Number(question.optionCount) || 4, question.pairs.length));
-  const correctKey = pairAnswerKey(pair.right);
+  const correctKey = pairAnswerKey(correctAnswer);
   const uniqueDistractors = new Map();
   for (const candidate of shuffle(question.pairs.filter((item) => item.id !== pair.id))) {
-    const key = pairAnswerKey(candidate.right);
+    const answer = candidate[answerName];
+    const key = pairAnswerKey(answer);
     if (key !== correctKey && !uniqueDistractors.has(key)) uniqueDistractors.set(key, candidate);
   }
   const choices = shuffle([pair, ...[...uniqueDistractors.values()].slice(0, optionCount - 1)]);
-  pairOptionState = { answerId: pair.id };
-  const allPictures = choices.every((choice) => choice.right.type === 'image');
-  return `<div class="pair-option-prompt">${renderPairSide(pair.left)}</div><div class="answers ${allPictures ? 'picture-answers' : 'pair-option-answers'}">${choices.map((choice) => `<button class="answer ${choice.right.type === 'image' ? 'picture-answer' : 'pair-option-text'}" type="button" data-option="${escapeAttribute(choice.id)}" aria-label="${escapeAttribute(choice.right.alt || choice.right.value || 'Answer option')}">${choice.right.type === 'image' ? `<img src="${escapeAttribute(choice.right.src)}" alt="${escapeAttribute(choice.right.alt || '')}">` : escapeHtml(choice.right.value || '')}</button>`).join('')}</div>`;
+  pairOptionState = { presentation: reverse ? 'reverse' : 'forward', answerId: pair.id };
+  const allPictures = choices.every((choice) => choice[answerName].type === 'image');
+  return `<div class="pair-option-prompt">${renderPairSide(promptSide)}</div><div class="answers ${allPictures ? 'picture-answers' : 'pair-option-answers'}">${choices.map((choice) => { const answer = choice[answerName]; return `<button class="answer ${answer.type === 'image' ? 'picture-answer' : 'pair-option-text'}" type="button" data-option="${escapeAttribute(choice.id)}" aria-label="${escapeAttribute(answer.alt || answer.value || 'Answer option')}">${answer.type === 'image' ? `<img src="${escapeAttribute(answer.src)}" alt="${escapeAttribute(answer.alt || '')}">` : escapeHtml(answer.value || '')}</button>`; }).join('')}</div>`;
 }
 function renderImageMatch(question) {
   const poolSize = question.pairs.length;
@@ -548,7 +571,7 @@ app.addEventListener('click', (event) => {
     const question = questions[index];
     const options = question.options;
     const label = button.dataset.option;
-    const answerQuestion = question.type === 'image-pairs' && question.format === 'image-option' ? { ...question, answer: pairOptionState?.answerId } : question;
+    const answerQuestion = question.type === 'image-pairs' && pairOptionState && pairOptionState.presentation !== 'match' ? { ...question, answer: pairOptionState.answerId } : question;
     chooseAnswer(button, label, answerQuestion);
   }
   if (event.target.closest('#submit-answer')) submitDropdown(questions[index]);
