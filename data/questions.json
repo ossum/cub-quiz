@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-27T21:34:05.706Z",
+  "version": "2026-10-27.6",
   "questions": [
     {
       "id": "sw-best-meetings-1",
@@ -659,17 +659,15 @@
     },
     {
       "id": "sw-trail-sign-party-split-up-1",
-      "programme": "SW",
       "type": "multiple-choice",
+      "programme": "SW",
+      "advancementId": "SW-43",
       "question": "Which trail sign means: Party split up?",
-      "explanation": "This trail sign means: Party split up.",
-      "image": "",
-      "imageAlt": "",
       "options": [
         {
           "id": "party-split-up",
           "image": "images/trail-signs/party-split-up.png",
-          "alt": "Group split up"
+          "alt": "Party split up"
         },
         {
           "id": "message-this-way",
@@ -688,7 +686,7 @@
         }
       ],
       "answer": "party-split-up",
-      "advancementId": "SW-43"
+      "explanation": "This trail sign means: Party split up."
     },
     {
       "id": "sw-trail-sign-message-this-way-1",
@@ -1278,16 +1276,12 @@
     },
     {
       "id": "gw-jungle-book-character-match",
-      "programme": "GW",
       "type": "image-pairs",
-      "question": "Match each Jungle Book name to its animal and clue.",
-      "explanation": "Some names share the same kind of animal, so use the short clue to find the exact match.",
-      "image": "",
-      "imageAlt": "",
+      "programme": "GW",
       "advancementId": "GW-55",
-      "allowReversal": true,
+      "question": "Match each Jungle Book name to its animal and clue.",
       "sampleSize": 4,
-      "optionCount": 4,
+      "explanation": "Some names share the same kind of animal, so use the short clue to find the exact match.",
       "pairs": [
         {
           "id": "name-akela",
@@ -1297,7 +1291,7 @@
           },
           "right": {
             "type": "text",
-            "value": "Wolf Pack Leader"
+            "value": "Wolf: pack leader"
           }
         },
         {
@@ -1315,11 +1309,11 @@
           "id": "name-rama-wolf",
           "left": {
             "type": "text",
-            "value": "Rama"
+            "value": "Rama (father wolf)"
           },
           "right": {
             "type": "text",
-            "value": "Water Buffalo"
+            "value": "Father wolf"
           }
         },
         {
@@ -1341,7 +1335,7 @@
           },
           "right": {
             "type": "text",
-            "value": "Akela's granddaughter"
+            "value": "Wolf: Akela's granddaughter"
           }
         },
         {
@@ -1400,6 +1394,17 @@
           }
         },
         {
+          "id": "name-rama-mysa",
+          "left": {
+            "type": "text",
+            "value": "Rama and Mysa"
+          },
+          "right": {
+            "type": "text",
+            "value": "Water buffaloes"
+          }
+        },
+        {
           "id": "name-chil-rann",
           "left": {
             "type": "text",
@@ -1407,7 +1412,7 @@
           },
           "right": {
             "type": "text",
-            "value": "Kite, the jungle messenger bird"
+            "value": "Kite: jungle messenger"
           }
         },
         {
@@ -1422,14 +1427,69 @@
           }
         },
         {
+          "id": "name-tha",
+          "left": {
+            "type": "text",
+            "value": "Tha"
+          },
+          "right": {
+            "type": "text",
+            "value": "First elephant"
+          }
+        },
+        {
+          "id": "name-phoana",
+          "left": {
+            "type": "text",
+            "value": "Phoana"
+          },
+          "right": {
+            "type": "text",
+            "value": "Wolf: outside the Seeonee Pack"
+          }
+        },
+        {
+          "id": "name-phao",
+          "left": {
+            "type": "text",
+            "value": "Phao"
+          },
+          "right": {
+            "type": "text",
+            "value": "Wolf: Phoana's son"
+          }
+        },
+        {
+          "id": "name-oo",
+          "left": {
+            "type": "text",
+            "value": "Oo"
+          },
+          "right": {
+            "type": "text",
+            "value": "Tortoise"
+          }
+        },
+        {
           "id": "name-mao-mor",
           "left": {
             "type": "text",
-            "value": "Mao"
+            "value": "Mao or Mor"
           },
           "right": {
             "type": "text",
             "value": "Peacock"
+          }
+        },
+        {
+          "id": "name-won-tolla",
+          "left": {
+            "type": "text",
+            "value": "Won-Tolla"
+          },
+          "right": {
+            "type": "text",
+            "value": "Wolf: warns of dhole attack"
           }
         },
         {
@@ -1454,7 +1514,8 @@
             "value": "Woodpecker"
           }
         }
-      ]
+      ],
+      "allowReversal": true
     },
     {
       "id": "sw-flag-colour-black",
