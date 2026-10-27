@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cub-quiz-pwa-v12';
+const CACHE_NAME = 'cub-quiz-pwa-v13';
 const SHELL_FILES = [
   './',
   './index.html',
@@ -15,8 +15,8 @@ const SHELL_FILES = [
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
-    await cache.addAll(SHELL_FILES.map((path) => new Request(new URL(path, self.registration.scope))));
-    await cacheQuestionImages(cache, await fetch(new URL('./data/questions.json', self.registration.scope)));
+    await cache.addAll(SHELL_FILES.map((path) => new Request(new URL(path, self.registration.scope), { cache: 'reload' })));
+    await cacheQuestionImages(cache, await fetch(new URL('./data/questions.json', self.registration.scope), { cache: 'no-cache' }));
     await self.skipWaiting();
   })());
 });
@@ -43,7 +43,7 @@ self.addEventListener('fetch', (event) => {
       if (cached) return cached;
     }
     try {
-      const response = await fetch(request);
+      const response = await fetch(request, { cache: 'no-cache' });
       if (response.ok) {
         await cache.put(request, response.clone());
         if (url.pathname.endsWith('/data/questions.json')) await cacheQuestionImages(cache, response.clone());
@@ -81,7 +81,7 @@ async function cacheQuestionImages(cache, response) {
     }
     const requests = [...imagePaths]
       .filter((path) => path.startsWith('images/'))
-      .map((path) => new Request(new URL(path, self.registration.scope)));
+      .map((path) => new Request(new URL(path, self.registration.scope), { cache: 'reload' }));
     if (requests.length) await Promise.allSettled(requests.map((request) => cache.add(request)));
   } catch (error) {
     console.warn('Some quiz images could not be cached for offline use.', error);

@@ -28,3 +28,5 @@
 .pair-option-prompt{display:flex;align-items:center;justify-content:center;min-height:112px;margin:0 0 16px;padding:12px;border:2px solid #e7ece5;border-radius:14px;background:#fff;color:#30473d;text-align:center;font-size:clamp(18px,3vw,24px);font-weight:800}.pair-option-prompt img{display:block;width:100%;max-height:220px;object-fit:contain}.pair-option-answers .pair-option-text{min-height:72px;text-align:center}
 
 .choice-button-both{grid-column:1/-1}
+
+.data-version{display:inline-block;margin-left:7px;color:#a1aaa0;font-size:10px;font-weight:600;letter-spacing:.02em}

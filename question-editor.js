@@ -1,6 +1,7 @@
 const QUESTION_BANK_STORAGE_KEY = 'edward-cub-quiz-question-bank-v1';
 let questionEditorReturnTarget = 'manager';
 let questionEditorOriginalId = null;
+let questionOverrideVersion = '';
 
 function legacyMatchItemToSide(item) {
   return item?.image
@@ -46,11 +47,11 @@ function migrateQuestionBank(questions) {
 function readQuestionBankOverride() {
   try {
     const saved = JSON.parse(localStorage.getItem(QUESTION_BANK_STORAGE_KEY) || 'null');
-    return Array.isArray(saved?.questions) ? migrateQuestionBank(saved.questions) : null;
+    return Array.isArray(saved?.questions) ? { version: saved.version || '', questions: migrateQuestionBank(saved.questions) } : null;
   } catch { return null; }
 }
 function writeQuestionBankOverride() {
-  try { localStorage.setItem(QUESTION_BANK_STORAGE_KEY, JSON.stringify({ questions: bank })); return true; }
+  try { questionOverrideVersion = new Date().toISOString(); localStorage.setItem(QUESTION_BANK_STORAGE_KEY, JSON.stringify({ version: questionOverrideVersion, questions: bank })); return true; }
   catch { return false; }
 }
 function defaultEditorQuestion() {
@@ -331,11 +332,16 @@ function saveQuestionFromEditor(event) {
   const existingIndex = bank.findIndex((item) => item.id === questionEditorOriginalId);
   if (existingIndex >= 0) bank[existingIndex] = question; else bank.push(question);
   if (!writeQuestionBankOverride()) alert('The question is saved for this session, but browser storage is full. Download questions.json now to keep it.');
+  else { servedDataVersions.questions = `local edits ${questionOverrideVersion}`; renderDataVersion(); }
   if (questionEditorReturnTarget === 'quiz') { questions[index] = question; renderQuestion(); } else renderQuestionManager();
 }
 function cancelQuestionEditor() { if (questionEditorReturnTarget === 'quiz') renderQuestion(); else renderQuestionManager(); }
 function downloadQuestionBank() {
-  const blob = new Blob([`${JSON.stringify({ questions: bank }, null, 2)}\n`], { type: 'application/json' }); const url = URL.createObjectURL(blob);
+  const version = new Date().toISOString();
+  questionOverrideVersion = version;
+  servedDataVersions.questions = `local edits ${version}`;
+  renderDataVersion();
+  const blob = new Blob([`${JSON.stringify({ version, questions: bank }, null, 2)}\n`], { type: 'application/json' }); const url = URL.createObjectURL(blob);
   const link = document.createElement('a'); link.href = url; link.download = 'questions.json'; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 async function importQuestionBank(event) {

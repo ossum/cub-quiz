@@ -12,6 +12,7 @@ let matchState = null;
 let pairOptionState = null;
 let memoryState = null;
 let memoryTimer = null;
+let servedDataVersions = { questions: 'unknown', advancements: 'unknown' };
 
 const shuffle = (items) => {
   const copy = [...items];
@@ -25,13 +26,20 @@ const shuffle = (items) => {
 async function loadData() {
   try {
     const [questionResponse, advancementResponse] = await Promise.all([
-      fetch('./data/questions.json'),
-      fetch('./data/advancements.json')
+      fetch('./data/questions.json', { cache: 'no-store' }),
+      fetch('./data/advancements.json', { cache: 'no-store' })
     ]);
     if (!questionResponse.ok || !advancementResponse.ok) throw new Error('The quiz files could not be found.');
     const questionData = await questionResponse.json();
     const advancementData = await advancementResponse.json();
-    bank = (readQuestionBankOverride() || questionData.questions).map(migrateLegacyImageMatch).map(normalizePairQuestion);
+    const questionOverride = readQuestionBankOverride();
+    questionOverrideVersion = questionOverride?.version || '';
+    bank = (questionOverride?.questions || questionData.questions).map(migrateLegacyImageMatch).map(normalizePairQuestion);
+    servedDataVersions = {
+      questions: questionOverride ? `local edits${questionOverride.version ? ` ${questionOverride.version}` : ''}` : questionData.version || 'unversioned',
+      advancements: advancementData.version || 'unversioned'
+    };
+    renderDataVersion();
     catalogue = advancementData.programmes;
     if (!Array.isArray(bank) || !Array.isArray(catalogue) || !catalogue.length) throw new Error('The quiz data is not in the expected format.');
     const firstAvailable = bank.find((question) => question.programme === selection.programme);
@@ -42,6 +50,14 @@ async function loadData() {
     const localDiagnostic = ['localhost', '127.0.0.1'].includes(window.location.hostname) ? `<pre style="white-space:pre-wrap;text-align:left;font-size:11px;color:#7b4e26;background:#fff8e8;padding:10px;border-radius:8px;overflow-wrap:anywhere">${escapeHtml(error?.stack || String(error))}</pre>` : '';
     app.innerHTML = `<div class="results"><div class="result-icon" aria-hidden="true">!</div><p class="eyebrow">OOPS! THE TRAIL IS BLOCKED</p><h2>We couldn’t load the quiz.</h2><p class="summary">${openedAsFile ? 'Open the project through a local web server (for example, VS Code Live Server). Browsers block the question files when index.html is opened directly.' : 'Check that data/questions.json and data/advancements.json are in the project, then refresh the page.'}</p>${localDiagnostic}<button class="primary" onclick="location.reload()">Try again</button></div>`;
   }
+}
+
+function renderDataVersion() {
+  const label = document.querySelector('#data-version');
+  if (!label) return;
+  const sameVersion = servedDataVersions.questions === servedDataVersions.advancements;
+  label.textContent = sameVersion ? `Data v${servedDataVersions.questions}` : `Questions ${servedDataVersions.questions} · Advancements ${servedDataVersions.advancements}`;
+  label.title = `Question data: ${servedDataVersions.questions}; advancement data: ${servedDataVersions.advancements}`;
 }
 
 function getProgramme(id = selection.programme) {
@@ -587,6 +603,7 @@ loadData();
 if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./service-worker.js', { scope: './', updateViaCache: 'none' })
+      .then((registration) => registration.update())
       .catch((error) => console.warn('Offline support could not be enabled.', error));
   });
 }
