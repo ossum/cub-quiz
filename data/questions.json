@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-27T22:11:08.188Z",
+  "version": "2026-10-27T22:31:08.579Z",
   "questions": [
     {
       "id": "sw-best-meetings-1",
@@ -2740,6 +2740,69 @@
       ],
       "answer": "choice-2",
       "advancementId": "MEM-5"
+    },
+    {
+      "id": "gw-question-clocks-01",
+      "programme": "GW",
+      "type": "image-pairs",
+      "question": "Match a digital time to an analog time",
+      "explanation": "",
+      "image": "",
+      "imageAlt": "",
+      "advancementId": "GW-75",
+      "allowReversal": true,
+      "sampleSize": 4,
+      "optionCount": 4,
+      "pairs": [
+        {
+          "id": "pair-1",
+          "left": {
+            "type": "image",
+            "src": "images/time/analogue-02-45.jpg",
+            "alt": "Analog watch"
+          },
+          "right": {
+            "type": "text",
+            "value": "2:45 PM"
+          }
+        },
+        {
+          "id": "pair-2",
+          "left": {
+            "type": "image",
+            "src": "images/time/analogue-05-15.jpg",
+            "alt": "Analog watch"
+          },
+          "right": {
+            "type": "text",
+            "value": "17:15"
+          }
+        },
+        {
+          "id": "pair-3",
+          "left": {
+            "type": "image",
+            "src": "images/time/analogue-07-45.jpg",
+            "alt": "Analog watch"
+          },
+          "right": {
+            "type": "text",
+            "value": "7:45 AM"
+          }
+        },
+        {
+          "id": "pair-4",
+          "left": {
+            "type": "image",
+            "src": "images/time/analogue-12-00.jpg",
+            "alt": "Analog watch"
+          },
+          "right": {
+            "type": "text",
+            "value": "Midnight"
+          }
+        }
+      ]
     }
   ]
 }

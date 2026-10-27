@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-27.7",
+  "version": "2026-10-27T22:11:08.188Z",
   "questions": [
     {
       "id": "sw-best-meetings-1",
@@ -1276,12 +1276,16 @@
     },
     {
       "id": "gw-jungle-book-character-match",
-      "type": "image-pairs",
       "programme": "GW",
-      "advancementId": "GW-55",
+      "type": "image-pairs",
       "question": "Match each Jungle Book name to its animal and clue.",
-      "sampleSize": 4,
       "explanation": "Some names share the same kind of animal, so use the short clue to find the exact match.",
+      "image": "",
+      "imageAlt": "",
+      "advancementId": "GW-55",
+      "allowReversal": true,
+      "sampleSize": 4,
+      "optionCount": 4,
       "pairs": [
         {
           "id": "name-akela",
@@ -1291,7 +1295,7 @@
           },
           "right": {
             "type": "text",
-            "value": "Wolf: pack leader"
+            "value": "Wolf pack leader"
           }
         },
         {
@@ -1303,17 +1307,6 @@
           "right": {
             "type": "text",
             "value": "Mother wolf"
-          }
-        },
-        {
-          "id": "name-rama-wolf",
-          "left": {
-            "type": "text",
-            "value": "Rama (father wolf)"
-          },
-          "right": {
-            "type": "text",
-            "value": "Father wolf"
           }
         },
         {
@@ -1335,7 +1328,7 @@
           },
           "right": {
             "type": "text",
-            "value": "Wolf: Akela's granddaughter"
+            "value": "Akela's granddaughter"
           }
         },
         {
@@ -1412,7 +1405,7 @@
           },
           "right": {
             "type": "text",
-            "value": "Kite: jungle messenger"
+            "value": "Kite, jungle messenger bird"
           }
         },
         {
@@ -1438,39 +1431,6 @@
           }
         },
         {
-          "id": "name-phoana",
-          "left": {
-            "type": "text",
-            "value": "Phoana"
-          },
-          "right": {
-            "type": "text",
-            "value": "Wolf: outside the Seeonee Pack"
-          }
-        },
-        {
-          "id": "name-phao",
-          "left": {
-            "type": "text",
-            "value": "Phao"
-          },
-          "right": {
-            "type": "text",
-            "value": "Wolf: Phoana's son"
-          }
-        },
-        {
-          "id": "name-oo",
-          "left": {
-            "type": "text",
-            "value": "Oo"
-          },
-          "right": {
-            "type": "text",
-            "value": "Tortoise"
-          }
-        },
-        {
           "id": "name-mao-mor",
           "left": {
             "type": "text",
@@ -1479,17 +1439,6 @@
           "right": {
             "type": "text",
             "value": "Peacock"
-          }
-        },
-        {
-          "id": "name-won-tolla",
-          "left": {
-            "type": "text",
-            "value": "Won-Tolla"
-          },
-          "right": {
-            "type": "text",
-            "value": "Wolf: warns of dhole attack"
           }
         },
         {
@@ -1514,8 +1463,7 @@
             "value": "Woodpecker"
           }
         }
-      ],
-      "allowReversal": true
+      ]
     },
     {
       "id": "sw-flag-colour-black",
@@ -2790,7 +2738,7 @@
           "alt": "Two finger sign in air with left hand"
         }
       ],
-      "answer": "choice-1",
+      "answer": "choice-2",
       "advancementId": "MEM-5"
     }
   ]
