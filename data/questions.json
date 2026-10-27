@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-27.1",
+  "version": "2026-10-27.3",
   "questions": [
     {
       "id": "sw-best-meetings-1",
@@ -2314,6 +2314,397 @@
         }
       ],
       "allowReversal": true
+    },
+    {
+      "id": "gw65-poison-01",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-65",
+      "question": "What is a poison?",
+      "options": [
+        "Something that only tastes bad",
+        "Something that can make you sick, hurt you or kill you",
+        "Something that always smells bad",
+        "Something that only hurts grown-ups"
+      ],
+      "answer": "Something that can make you sick, hurt you or kill you"
+    },
+    {
+      "id": "gw65-poison-02",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-65",
+      "question": "Can you tell if something is poisonous just by looking at it?",
+      "options": [
+        "Yes, poisons are always brightly coloured",
+        "Yes, poisons always have warning labels",
+        "No, poisons can look like food or drinks",
+        "Yes, poisonous things always look dangerous"
+      ],
+      "answer": "No, poisons can look like food or drinks"
+    },
+    {
+      "id": "gw65-poison-03",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-65",
+      "question": "Can a nice smell tell you that something is safe?",
+      "options": [
+        "Yes, nice smells are always safe",
+        "No, some nice-smelling products are poisonous",
+        "Yes, if it smells like lemon, it is safe",
+        "No, because all poisons smell terrible"
+      ],
+      "answer": "No, some nice-smelling products are poisonous"
+    },
+    {
+      "id": "gw65-poison-04",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-65",
+      "question": "You find a liquid in an old cooldrink bottle. What should you do?",
+      "options": [
+        "Taste a tiny bit",
+        "Smell it to identify it",
+        "Ask a friend to try it",
+        "Leave it alone and tell an adult"
+      ],
+      "answer": "Leave it alone and tell an adult"
+    },
+    {
+      "id": "gw65-poison-05",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-65",
+      "question": "How can a poison get into your body besides through your mouth?",
+      "options": [
+        "Only through your ears",
+        "Through your skin, eyes or lungs",
+        "Only through your hair",
+        "It cannot get in any other way"
+      ],
+      "answer": "Through your skin, eyes or lungs"
+    },
+    {
+      "id": "gw65-poison-06",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-65",
+      "question": "Which of these could be a poison found at home?",
+      "options": [
+        "Bleach",
+        "A clean towel",
+        "A storybook",
+        "A wooden spoon"
+      ],
+      "answer": "Bleach"
+    },
+    {
+      "id": "gw65-poison-07",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-65",
+      "question": "What should you do before taking medicine?",
+      "options": [
+        "Take it if the colour looks familiar",
+        "Ask a friend if it is the right one",
+        "Get an adult to give it to you",
+        "Take two to be extra healthy"
+      ],
+      "answer": "Get an adult to give it to you"
+    },
+    {
+      "id": "gw65-poison-08",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-65",
+      "question": "Your little brother is holding an open bottle of tablets. What should you do?",
+      "options": [
+        "Let him play with them",
+        "Find an adult immediately and tell them what happened",
+        "Hide the bottle and say nothing",
+        "Give him a sweet instead and walk away"
+      ],
+      "answer": "Find an adult immediately and tell them what happened"
+    },
+    {
+      "id": "gw65-poison-09",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-65",
+      "question": "Your friend dares you to eat a wild mushroom. What should you do?",
+      "options": [
+        "Eat it if it looks like one from a shop",
+        "Take a small bite first",
+        "Ask your friend to taste it first",
+        "Do not eat it; wild mushrooms can be poisonous"
+      ],
+      "answer": "Do not eat it; wild mushrooms can be poisonous"
+    },
+    {
+      "id": "gw65-poison-10",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-65",
+      "question": "Which nice-smelling product could poison you if you drank it?",
+      "options": [
+        "Perfume",
+        "Water from a clean glass",
+        "Fresh milk",
+        "Plain drinking water"
+      ],
+      "answer": "Perfume"
+    },
+    {
+      "id": "gw65-poison-11",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-65",
+      "question": "Can eating too many vitamins make you sick?",
+      "options": [
+        "No, vitamins are always harmless",
+        "Only if they taste bad",
+        "Yes, too many can harm you",
+        "No, you can eat as many as you like"
+      ],
+      "answer": "Yes, too many can harm you"
+    },
+    {
+      "id": "gw65-poison-12",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-65",
+      "question": "Grandma leaves her medicine in her handbag. Your baby sister can reach the bag. What is the safest thing to do?",
+      "options": [
+        "Let your sister look inside",
+        "Put the bag somewhere locked or out of her reach",
+        "Move the pills into a sweet packet",
+        "Tell your sister not to touch it and do nothing else"
+      ],
+      "answer": "Put the bag somewhere locked or out of her reach"
+    },
+    {
+      "id": "gw65-poison-13",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-65",
+      "question": "What should you do if cleaning fumes are making you feel unwell?",
+      "options": [
+        "Stay there and breathe deeply",
+        "Mix another cleaner with it",
+        "Tell an adult and move away to fresh air if safe",
+        "Light a match to remove the smell"
+      ],
+      "answer": "Tell an adult and move away to fresh air if safe"
+    },
+    {
+      "id": "gw65-poison-14",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-65",
+      "question": "What does the word \"fatal\" mean?",
+      "options": [
+        "Very smelly",
+        "Causing death",
+        "Safe for children",
+        "Making you sleepy"
+      ],
+      "answer": "Causing death"
+    },
+    {
+      "id": "gw65-poison-15",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-65",
+      "question": "Which of these sea animals can sting or bite and inject venom?",
+      "options": [
+        "A sardine",
+        "A harmless seashell",
+        "A bluebottle",
+        "A piece of seaweed"
+      ],
+      "answer": "A bluebottle"
+    },
+    {
+      "id": "gw65-poison-16",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-65",
+      "question": "Someone gets a poisonous chemical in their eye. What should you do?",
+      "options": [
+        "Rub the eye hard",
+        "Put soap in the eye",
+        "Wait until tomorrow",
+        "Tell an adult, rinse the eye with clean running water right away for at least 20 minutes, and get Poison Centre or emergency advice"
+      ],
+      "answer": "Tell an adult, rinse the eye with clean running water right away for at least 20 minutes, and get Poison Centre or emergency advice",
+      "explanation": "Rinse the eye under clean running water for at least 20 minutes, then get Poison Centre or emergency advice. South African Department of Health guidance recommends immediate flushing."
+    },
+    {
+      "id": "gw65-poison-17",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-65",
+      "question": "Which berries are safest to eat?",
+      "options": [
+        "Unknown berries from a park bush",
+        "Berries a friend found in the garden",
+        "Berries from a sealed shop-bought food packet",
+        "Any berries that birds eat"
+      ],
+      "answer": "Berries from a sealed shop-bought food packet"
+    },
+    {
+      "id": "gw65-poison-18",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-65",
+      "question": "Is it safe to give your dog medicine made for people?",
+      "options": [
+        "Yes, if you give half a tablet",
+        "Yes, if the dog is big",
+        "No, human medicines can harm dogs",
+        "Yes, if the dog looks sick"
+      ],
+      "answer": "No, human medicines can harm dogs"
+    },
+    {
+      "id": "gw65-poison-19",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-65",
+      "question": "Someone may have swallowed poison. What should you do?",
+      "options": [
+        "Make them vomit straight away",
+        "Give them milk to cancel out the poison",
+        "Wait to see if they get sick",
+        "Get urgent professional help and follow their instructions"
+      ],
+      "answer": "Get urgent professional help and follow their instructions",
+      "explanation": "Do not try to make the person vomit or give a home remedy. Get urgent professional advice."
+    },
+    {
+      "id": "gw65-poison-20",
+      "type": "multiple-choice",
+      "programme": "GW",
+      "advancementId": "GW-65",
+      "question": "What is the safest rule for unknown products, plants and berries?",
+      "options": [
+        "Don't touch, don't taste, ask first",
+        "Smell it before touching it",
+        "Try a tiny amount",
+        "Ask a friend to test it"
+      ],
+      "answer": "Don't touch, don't taste, ask first"
+    },
+    {
+      "id": "sw59-home-hazards-match",
+      "type": "image-pairs",
+      "programme": "SW",
+      "advancementId": "SW-59",
+      "question": "Match each home hazard to the risk it could cause.",
+      "sampleSize": 4,
+      "optionCount": 4,
+      "allowReversal": true,
+      "pairs": [
+        {
+          "id": "toaster-cord",
+          "left": {
+            "type": "image",
+            "src": "images/sw59-home-hazards/toaster-cord.svg",
+            "alt": "Toaster cord hanging over the table edge"
+          },
+          "right": {
+            "type": "text",
+            "value": "The hot toaster could be pulled down and burn someone."
+          }
+        },
+        {
+          "id": "pot-handle",
+          "left": {
+            "type": "image",
+            "src": "images/sw59-home-hazards/pot-handle.svg",
+            "alt": "A hot pot handle sticking out from the stove"
+          },
+          "right": {
+            "type": "text",
+            "value": "Someone could knock the pot over and be burned by hot food."
+          }
+        },
+        {
+          "id": "open-oven",
+          "left": {
+            "type": "image",
+            "src": "images/sw59-home-hazards/open-oven.svg",
+            "alt": "An oven door left open"
+          },
+          "right": {
+            "type": "text",
+            "value": "Someone could trip over it or touch the hot oven."
+          }
+        },
+        {
+          "id": "water-electric",
+          "left": {
+            "type": "image",
+            "src": "images/sw59-home-hazards/water-electric.svg",
+            "alt": "Water spilled beside an electrical appliance"
+          },
+          "right": {
+            "type": "text",
+            "value": "Water near electricity could cause an electric shock."
+          }
+        },
+        {
+          "id": "chemicals-reachable",
+          "left": {
+            "type": "image",
+            "src": "images/sw59-home-hazards/chemicals-reachable.svg",
+            "alt": "Medicine and cleaning products left where a child can reach"
+          },
+          "right": {
+            "type": "text",
+            "value": "A child could swallow them and be poisoned."
+          }
+        },
+        {
+          "id": "knife-edge",
+          "left": {
+            "type": "image",
+            "src": "images/sw59-home-hazards/knife-edge.svg",
+            "alt": "A knife left near the edge of a table"
+          },
+          "right": {
+            "type": "text",
+            "value": "The knife could fall and cut someone."
+          }
+        },
+        {
+          "id": "wet-floor",
+          "left": {
+            "type": "image",
+            "src": "images/sw59-home-hazards/wet-floor.svg",
+            "alt": "A wet, slippery patch on the kitchen floor"
+          },
+          "right": {
+            "type": "text",
+            "value": "Someone could slip and hurt themselves."
+          }
+        },
+        {
+          "id": "open-cupboard",
+          "left": {
+            "type": "image",
+            "src": "images/sw59-home-hazards/open-cupboard.svg",
+            "alt": "A cupboard door left open at head height"
+          },
+          "right": {
+            "type": "text",
+            "value": "Someone could bump their head on the open door."
+          }
+        }
+      ],
+      "explanation": "Look for things that can fall, burn, poison, cut, trip or shock someone."
     }
   ]
 }

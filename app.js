@@ -34,9 +34,14 @@ async function loadData() {
     const advancementData = await advancementResponse.json();
     const questionOverride = readQuestionBankOverride();
     questionOverrideVersion = questionOverride?.version || '';
-    bank = (questionOverride?.questions || questionData.questions).map(migrateLegacyImageMatch).map(normalizePairQuestion);
+    const projectQuestions = questionData.questions.map(migrateLegacyImageMatch).map(normalizePairQuestion);
+    if (questionOverride) {
+      const overrideQuestions = questionOverride.questions.map(migrateLegacyImageMatch).map(normalizePairQuestion);
+      const overrideIds = new Set(overrideQuestions.map((question) => question.id));
+      bank = [...overrideQuestions, ...projectQuestions.filter((question) => !overrideIds.has(question.id))];
+    } else bank = projectQuestions;
     servedDataVersions = {
-      questions: questionOverride ? `local edits${questionOverride.version ? ` ${questionOverride.version}` : ''}` : questionData.version || 'unversioned',
+      questions: questionOverride ? `local edits${questionOverride.version ? ` ${questionOverride.version}` : ''} + project ${questionData.version || 'unversioned'}` : questionData.version || 'unversioned',
       advancements: advancementData.version || 'unversioned'
     };
     renderDataVersion();
