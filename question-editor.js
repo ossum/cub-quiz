@@ -8,7 +8,8 @@ function legacyMatchItemToSide(item) {
     : { type: 'text', value: item?.text || '' };
 }
 function migrateLegacyImageMatch(question) {
-  if (!question || question.type !== 'image-match' || Array.isArray(question.pairs)) return question;
+  if (!question || question.type !== 'image-match') return question;
+  if (Array.isArray(question.pairs)) return { ...question, type: 'image-pairs', format: question.format || 'image-match' };
   if (!Array.isArray(question.leftItems) || !Array.isArray(question.rightItems) || !question.answer) return question;
   const pairs = question.leftItems.map((left, index) => {
     const rightId = question.answer[left.id];
@@ -18,12 +19,28 @@ function migrateLegacyImageMatch(question) {
   });
   if (pairs.some((pair) => !pair)) return question;
   const { leftItems, rightItems, answer, ...rest } = question;
-  return { ...rest, pairs };
+  return { ...rest, type: 'image-pairs', format: 'image-match', pairs };
+}
+function migrateQuestionBank(questions) {
+  let normalized = questions.map(migrateLegacyImageMatch);
+  const legacyPigpen = normalized.find((question) => question.id === 'gw-pigpen-cub-motto' && question.type === 'image-option');
+  if (legacyPigpen && !normalized.some((question) => question.id === 'gw-pigpen-code-pool')) {
+    const phrases = { 'pigpen-doyourbest': 'Do your best', 'pigpen-doyourworst': 'Do your worst', 'pigpen-doyousmell': 'Do you smell', 'pigpen-whoatethecake': 'Who ate the cake' };
+    normalized = normalized.filter((question) => question.id !== legacyPigpen.id);
+    normalized.push({ id: 'gw-pigpen-code-pool', type: 'image-pairs', format: 'image-option', programme: 'GW', advancementId: 'GW-13', question: 'Which code matches this phrase?', image: legacyPigpen.image, imageAlt: legacyPigpen.imageAlt, optionCount: 4, pairs: legacyPigpen.options.map((option) => ({ id: option.id, left: { type: 'text', value: phrases[option.id] || option.id }, right: { type: 'image', src: option.image, alt: option.alt || '' } })) });
+  }
+  const oldNature = normalized.filter((question) => question.id.startsWith('sw-pigpen-nature-cipher-') && question.type === 'image-option');
+  if (oldNature.length && !normalized.some((question) => question.id === 'sw-nature-cipher-pool')) {
+    const words = ['BAT','BUG','CAP','CAT','CUB','DEN','FUN','HUG','MAP','MUD','SAP','SUN'];
+    normalized = normalized.filter((question) => !question.id.startsWith('sw-pigpen-nature-cipher-'));
+    normalized.push({ id: 'sw-nature-cipher-pool', type: 'image-pairs', format: 'image-option', programme: 'SW', advancementId: 'SW-14', question: 'Which code spells this word?', image: oldNature[0].image, imageAlt: oldNature[0].imageAlt || '', optionCount: 4, pairs: words.map((word) => ({ id: 'nature-' + word.toLowerCase(), left: { type: 'text', value: word.toLowerCase() }, right: { type: 'image', src: 'images/codes/nature-cipher/' + word + '.png', alt: 'Nature cipher spelling ' + word.toLowerCase() } })) });
+  }
+  return normalized;
 }
 function readQuestionBankOverride() {
   try {
     const saved = JSON.parse(localStorage.getItem(QUESTION_BANK_STORAGE_KEY) || 'null');
-    return Array.isArray(saved?.questions) ? saved.questions.map(migrateLegacyImageMatch) : null;
+    return Array.isArray(saved?.questions) ? migrateQuestionBank(saved.questions) : null;
   } catch { return null; }
 }
 function writeQuestionBankOverride() {
@@ -73,7 +90,9 @@ function renderQuestionEditor(question, returnTarget = 'manager') {
   const source = structuredClone(question || defaultEditorQuestion());
   questionEditorReturnTarget = returnTarget;
   questionEditorOriginalId = question?.id || null;
-  const type = source.type || 'multiple-choice';
+  const type = source.type === 'image-match' ? 'image-pairs' : (source.type || 'multiple-choice');
+  const pairFormat = source.pairFormat || source.format || (source.type === 'image-option' ? 'image-option' : 'image-match');
+  const pairOptionCount = source.optionCount || 4;
   const programme = source.programme || selection.programme;
   const advancementIds = source.advancementIds || [source.advancementId].filter(Boolean);
   const sourceOptions = Array.isArray(source.options) ? source.options : [];
@@ -96,7 +115,7 @@ function renderQuestionEditor(question, returnTarget = 'manager') {
         <label>Question ID<input class="editor-input" name="id" required value="${escapeAttribute(source.id || '')}"><small>Short and unique, for example gw-road-sign-1.</small></label>
         <label>Programme<select class="editor-input" name="programme">${programmeOptions}</select></label>
         <label>Advancement ID(s)<input class="editor-input" name="advancementIds" required value="${escapeAttribute(advancementIds.join(', '))}"><small>Use one ID, or a comma-separated list for a shared question.</small></label>
-        <label>Question type<select class="editor-input" id="editor-question-type" name="type"><option value="multiple-choice" ${type === 'multiple-choice' ? 'selected' : ''}>Choose an answer</option><option value="image-option" ${type === 'image-option' ? 'selected' : ''}>Picture with four choices</option><option value="image-dropdown" ${type === 'image-dropdown' ? 'selected' : ''}>Picture and dropdown</option><option value="image-match" ${type === 'image-match' ? 'selected' : ''}>Matching</option><option value="memory-grid" ${type === 'memory-grid' ? 'selected' : ''}>Memory grid</option></select></label>
+        <label>Question type<select class="editor-input" id="editor-question-type" name="type"><option value="multiple-choice" ${type === 'multiple-choice' ? 'selected' : ''}>Choose an answer</option><option value="image-dropdown" ${type === 'image-dropdown' ? 'selected' : ''}>Picture and dropdown</option><option value="image-pairs" ${type === 'image-pairs' ? 'selected' : ''}>Pair question pool</option><option value="memory-grid" ${type === 'memory-grid' ? 'selected' : ''}>Memory grid</option></select></label>
       </div>
       <label class="editor-wide">Question text<input class="editor-input" name="question" required value="${escapeAttribute(source.question || '')}" placeholder="Write a short question"></label>
       <label class="editor-wide">Explanation (optional)<textarea class="editor-input" name="explanation" rows="2">${escapeHtml(source.explanation || '')}</textarea></label>
@@ -109,8 +128,8 @@ function renderQuestionEditor(question, returnTarget = 'manager') {
         <h2>Question picture and dropdown answers</h2>${renderImageField('question-image', source.image || '', source.imageAlt || '', 'Question picture')}
         <label>Answer choices, one per line<textarea class="editor-input" name="dropdownOptions" rows="5">${escapeHtml(type === 'image-dropdown' ? (source.options || []).join('\n') : '')}</textarea></label><label>Correct answer<input class="editor-input" name="dropdownAnswer" value="${escapeAttribute(type === 'image-dropdown' ? source.answer || '' : '')}"></label>
       </section>
-      <section class="editor-type-panel" data-type-panel="image-match" ${type === 'image-match' ? '' : 'hidden'}>
-        <h2>Matching pairs</h2><label>Pairs shown in each round<input class="editor-input" name="sampleSize" type="number" min="2" value="${source.sampleSize || source.pairs?.length || source.leftItems?.length || 4}"></label><p class="editor-note">Each row is one correct pair. Choose a picture or short text for each side. Use paths such as images/example.png; choosing a file fills its filename only and does not copy it into the project. The app shuffles the right-hand choices.</p><div id="matching-pair-list">${renderMatchingPairRows(pairRows)}</div><button type="button" class="secondary" id="add-matching-pair">Add matching pair</button>
+      <section class="editor-type-panel" data-type-panel="image-pairs" ${type === 'image-pairs' ? '' : 'hidden'}>
+        <h2>Pair question pool</h2>${renderImageField('pair-prompt-image', source.image || '', source.imageAlt || '', 'Top-level image (optional)')}<label>Presentation format<select class="editor-input" name="pair-format"><option value="image-match" ${pairFormat === 'image-match' ? 'selected' : ''}>Match all shown pairs</option><option value="image-option" ${pairFormat === 'image-option' ? 'selected' : ''}>Choose one answer</option></select></label><div data-pair-format-panel="image-match" ${pairFormat === 'image-match' ? '' : 'hidden'}><label>Pairs shown in each round<input class="editor-input" name="sampleSize" type="number" min="2" value="${source.sampleSize || source.pairs?.length || 4}"></label></div><div data-pair-format-panel="image-option" ${pairFormat === 'image-option' ? '' : 'hidden'}><label>Answer choices shown<input class="editor-input" name="optionCount" type="number" min="2" value="${pairOptionCount}"></label><p class="editor-note">The app picks one left-side prompt and shows its matching right-side answer with distractors from the other pairs.</p></div><p class="editor-note">Each row is one prompt and its correct answer. Choose a picture or short text for each side. Top-level image is optional and appears with either format when supplied.</p><div id="matching-pair-list">${renderMatchingPairRows(pairRows)}</div><button type="button" class="secondary" id="add-matching-pair">Add pair</button>
       </section>
       <section class="editor-type-panel" data-type-panel="memory-grid" ${type === 'memory-grid' ? '' : 'hidden'}>
         <h2>Memory grid</h2><div class="editor-form-grid"><label>Rows<input class="editor-input" name="memoryRows" type="number" min="1" max="10" value="${memoryRows}"></label><label>Columns<input class="editor-input" name="memoryColumns" type="number" min="1" max="10" value="${memoryColumns}"></label><label>Picture display time (seconds)<input class="editor-input" name="memoryPreviewSeconds" type="number" min="1" max="120" value="${memoryPreviewSeconds}"></label><label class="editor-radio"><input type="checkbox" name="memoryShuffle" ${memoryShuffle ? 'checked' : ''}> Shuffle picture positions each round</label></div><p class="editor-note">Enter one path per square, from top-left to bottom-right. The number of paths must equal rows × columns. The app can choose random pictures and order each round, or use the fixed squares below. Placeholder paths use A.png through P.png in images/memory-grid/.</p><label>Grid images (paths)<textarea class="editor-input" name="memoryImages" rows="10">${escapeHtml(memoryPaths.join('\n'))}</textarea></label><div class="editor-form-grid"><label>Pictures to recall each round<input class="editor-input" name="memoryRecallCount" type="number" min="1" max="100" value="${memoryRecallCount}"></label><label class="editor-radio"><input type="checkbox" name="memoryRandomizePrompts" ${memoryRandomizePrompts ? 'checked' : ''}> Randomize target pictures and their order each round</label></div><label data-fixed-memory-sequence ${memoryRandomizePrompts ? 'hidden' : ''}>Fixed target squares (only used when random targets are off; numbers follow the original grid order)<input class="editor-input" name="memorySequence" value="${escapeAttribute(memorySequence.join(', '))}" placeholder="3, 7, 13"></label>
@@ -124,10 +143,11 @@ function renderQuestionEditor(question, returnTarget = 'manager') {
     const draft = readQuestionEditorForm(); draft.type = event.target.value;
     if (['multiple-choice', 'image-option'].includes(draft.type)) { draft.options = ['Option 1', 'Option 2', 'Option 3', 'Option 4']; draft.answer = ''; }
     else if (draft.type === 'image-dropdown') { draft.image = ''; draft.imageAlt = ''; draft.options = ['Option 1', 'Option 2', 'Option 3', 'Option 4']; draft.answer = ''; }
-    else if (draft.type === 'image-match') { draft.matchPairs = [1, 2, 3, 4].map((pair) => emptyMatchPair('pair-' + pair)); }
+    else if (draft.type === 'image-pairs') { draft.matchPairs = [1, 2, 3, 4].map((pair) => emptyMatchPair('pair-' + pair)); draft.pairFormat = 'image-match'; draft.optionCount = 4; }
     else if (draft.type === 'memory-grid') { draft.memoryImagePaths = Array.from({ length: 16 }, (_, i) => `images/memory-grid/${String.fromCharCode(65 + i)}.png`); draft.memorySequence = [3, 7, 13]; draft.memoryRecallCount = 3; draft.memoryRandomizePrompts = true; draft.memoryRows = 4; draft.memoryColumns = 4; draft.memoryPreviewSeconds = 20; draft.memoryShuffle = true; if (draft.programme === 'SW') draft.advancementIds = ['SW-13']; }
     renderQuestionEditor(draft, questionEditorReturnTarget);
   });
+  document.querySelector('[name="pair-format"]')?.addEventListener('change', (event) => { app.querySelectorAll('[data-pair-format-panel]').forEach((panel) => { panel.hidden = panel.dataset.pairFormatPanel !== event.target.value; }); });
   document.querySelector('[name="memoryRandomizePrompts"]')?.addEventListener('change', (event) => { const fixed = document.querySelector('[data-fixed-memory-sequence]'); if (fixed) fixed.hidden = event.target.checked; });
   document.querySelector('#editor-choice-mode')?.addEventListener('change', (event) => {
     app.querySelectorAll('[data-choice-panel]').forEach((element) => { element.hidden = element.dataset.choicePanel !== event.target.value; });
@@ -151,8 +171,8 @@ function renderQuestionEditor(question, returnTarget = 'manager') {
   app.querySelectorAll('.editor-kind').forEach((select) => select.addEventListener('change', () => updateEditorSideVisibility(select.closest('.editor-side'))));
   app.querySelectorAll('[data-upload-image]').forEach((input) => input.addEventListener('change', selectEditorImagePath));
   app.querySelectorAll('[data-choice-field="id"]').forEach((input) => input.addEventListener('input', () => { input.closest('[data-choice-row]').querySelector('[name="picture-answer"]').value = input.value; }));
-  app.querySelectorAll('[data-choice-field="image"], [name="prompt-image"], [name="question-image"], [data-pair-value]').forEach((input) => input.addEventListener('input', () => refreshEditorPreview(input)));
-  app.querySelectorAll('[name="prompt-image-alt"], [name="question-image-alt"], [data-pair-alt], [data-choice-field="alt"]').forEach((input) => input.addEventListener('input', () => { const preview = input.closest('.editor-image-field, .picture-choice-row, .editor-side')?.querySelector('.editor-preview'); if (preview) preview.alt = input.value; }));
+  app.querySelectorAll('[data-choice-field="image"], [name="prompt-image"], [name="question-image"], [name="pair-prompt-image"], [data-pair-value]').forEach((input) => input.addEventListener('input', () => refreshEditorPreview(input)));
+  app.querySelectorAll('[name="prompt-image-alt"], [name="question-image-alt"], [name="pair-prompt-image-alt"], [data-pair-alt], [data-choice-field="alt"]').forEach((input) => input.addEventListener('input', () => { const preview = input.closest('.editor-image-field, .picture-choice-row, .editor-side')?.querySelector('.editor-preview'); if (preview) preview.alt = input.value; }));
 }
 function emptyMatchPair(id = '') { return { id, left: { kind: 'image', value: '', alt: '' }, right: { kind: 'image', value: '', alt: '' } }; }
 function filterQuestionList(value) {
@@ -163,7 +183,7 @@ function filterQuestionList(value) {
 function editorPairsFromQuestion(question) {
   if (question.matchPairs) return question.matchPairs;
   const normalized = migrateLegacyImageMatch(question);
-  if (question.type !== 'image-match' || !Array.isArray(normalized.pairs)) {
+  if (normalized.type !== 'image-pairs' || !Array.isArray(normalized.pairs)) {
     return [1, 2, 3, 4].map((index) => emptyMatchPair(`pair-${index}`));
   }
   return normalized.pairs.map((pair) => ({
@@ -210,6 +230,13 @@ function readQuestionEditorForm() {
     return { ...common, image: get('prompt-image').trim(), imageAlt: get('prompt-image-alt').trim(), options, answer: form.querySelector('[name="picture-answer"]:checked')?.value || '', editorChoiceMode: 'pictures' };
   }
   if (type === 'image-dropdown') return { ...common, image: get('question-image').trim(), imageAlt: get('question-image-alt').trim(), options: get('dropdownOptions').split(/\r?\n/).map((option) => option.trim()).filter(Boolean), answer: get('dropdownAnswer').trim() };
+  if (type === 'image-pairs') {
+    const matchPairs = [...app.querySelectorAll('[data-pair-row]')].map((row) => {
+      const side = (name) => { const kind = row.querySelector(`.editor-kind[data-side="${name}"]`).value; return { kind, value: row.querySelector(`[data-pair-value="${name}"]`).value.trim(), alt: row.querySelector(`[data-pair-alt="${name}"]`)?.value.trim() || '' }; };
+      return { id: row.dataset.pairId, left: side('left'), right: side('right') };
+    });
+    return { ...common, image: get('pair-prompt-image').trim(), imageAlt: get('pair-prompt-image-alt').trim(), pairFormat: get('pair-format'), optionCount: Number(get('optionCount')) || 4, matchPairs, sampleSize: Number(get('sampleSize')) || 0 };
+  }
   if (type === 'memory-grid') return { ...common, memoryImagePaths: get('memoryImages').split(/\r?\n/).map((path) => path.trim()), memorySequence: get('memorySequence').split(/[,\s]+/).map(Number).filter(Number.isFinite), memoryRows: Number(get('memoryRows')), memoryColumns: Number(get('memoryColumns')), memoryPreviewSeconds: Number(get('memoryPreviewSeconds')), memoryShuffle: form.elements.namedItem('memoryShuffle')?.checked === true, memoryRecallCount: Number(get('memoryRecallCount')), memoryRandomizePrompts: form.elements.namedItem('memoryRandomizePrompts')?.checked === true };
   const matchPairs = [...app.querySelectorAll('[data-pair-row]')].map((row) => {
     const side = (name) => { const kind = row.querySelector(`.editor-kind[data-side="${name}"]`).value; return { kind, value: row.querySelector(`[data-pair-value="${name}"]`).value.trim(), alt: row.querySelector(`[data-pair-alt="${name}"]`)?.value.trim() || '' }; };
@@ -218,7 +245,7 @@ function readQuestionEditorForm() {
   return { ...common, matchPairs, sampleSize: Number(get('sampleSize')) || 0 };
 }
 function questionFromEditorDraft(draft) {
-  const { advancementIds, editorChoiceMode, matchPairs, sampleSize, memoryImagePaths, memorySequence, memoryRows, memoryColumns, memoryPreviewSeconds, memoryShuffle, memoryRecallCount, memoryRandomizePrompts, ...question } = draft;
+  const { advancementIds, editorChoiceMode, matchPairs, sampleSize, pairFormat, optionCount, memoryImagePaths, memorySequence, memoryRows, memoryColumns, memoryPreviewSeconds, memoryShuffle, memoryRecallCount, memoryRandomizePrompts, ...question } = draft;
   if (advancementIds.length === 1) question.advancementId = advancementIds[0]; else question.advancementIds = advancementIds;
   delete question.editorChoiceMode;
   if (question.type === 'memory-grid') {
@@ -231,11 +258,12 @@ function questionFromEditorDraft(draft) {
     question.previewSeconds = memoryPreviewSeconds;
     question.shuffleCells = memoryShuffle;
   }
-  if (question.type === 'image-match') {
+  if (question.type === 'image-pairs') {
     const toSide = (side) => side.kind === 'image'
       ? { type: 'image', src: side.value, alt: side.alt }
       : { type: 'text', value: side.value };
-    question.sampleSize = sampleSize;
+    question.format = pairFormat;
+    if (pairFormat === 'image-match') question.sampleSize = sampleSize; else question.optionCount = optionCount;
     question.pairs = matchPairs.map((pair, index) => ({
       id: pair.id || ('pair-' + (index + 1)),
       left: toSide(pair.left),
@@ -275,9 +303,11 @@ function validateEditorDraft(draft, question) {
     if (question.randomizePrompts === false && (!question.sequence || question.sequence.length !== question.recallCount || question.sequence.some((number) => !Number.isInteger(number) || number < 1 || number > question.cells.length) || new Set(question.sequence).size !== question.sequence.length)) return 'Choose a different valid square for each fixed target picture.';
   }
   if (question.type === 'image-dropdown' && (!question.image || question.options.length < 2 || !question.options.includes(question.answer))) return 'Add a question picture, at least two dropdown choices, and a correct answer from the list.';
-  if (question.type === 'image-match') {
+  if (question.type === 'image-pairs') {
+    if (!['image-match', 'image-option'].includes(question.format)) return 'Choose a pair question format.';
     if (!question.pairs || question.pairs.length < 2) return 'Add at least two matching pairs.';
-    if (question.sampleSize < 2 || question.sampleSize > question.pairs.length) return 'Choose a display size between two pairs and the number of pairs in the pool.';
+    if (question.format === 'image-match' && (question.sampleSize < 2 || question.sampleSize > question.pairs.length)) return 'Choose a display size between two pairs and the number of pairs in the pool.';
+    if (question.format === 'image-option' && (!Number.isInteger(question.optionCount) || question.optionCount < 2 || question.optionCount > new Set(question.pairs.map((pair) => pair.right.type === 'image' ? `image:${pair.right.src}` : `text:${pair.right.value.toLowerCase()}`)).size)) return 'Answer choices must be at least two and no more than the unique answers in the pool.';
     if (new Set(question.pairs.map((pair) => pair.id)).size !== question.pairs.length) return 'Pair IDs must be unique.';
     if (question.pairs.some((pair) => [pair.left, pair.right].some((side) => side.type === 'image' ? !side.src : !side.value))) return 'Complete both sides of every matching pair.';
     if (question.pairs.some((pair) => [pair.left, pair.right].some((side) => side.type === 'image' && !side.alt))) return 'Add a short description for each picture.';
@@ -303,7 +333,7 @@ async function importQuestionBank(event) {
   try {
     const data = JSON.parse(await file.text()); if (!Array.isArray(data.questions)) throw new Error('The file needs a questions array.');
     const ids = data.questions.map((question) => question.id); if (ids.some((id) => !id) || new Set(ids).size !== ids.length) throw new Error('Every question needs a unique ID.');
-    bank = data.questions.map(migrateLegacyImageMatch); if (!writeQuestionBankOverride()) alert('Imported for this session, but browser storage is full. Download the question bank to keep it.'); renderQuestionManager();
+    bank = migrateQuestionBank(data.questions); if (!writeQuestionBankOverride()) alert('Imported for this session, but browser storage is full. Download the question bank to keep it.'); renderQuestionManager();
   } catch (error) { alert(`Could not import this question bank: ${error.message}`); }
 }
 function resetQuestionBankOverride() {
@@ -319,6 +349,7 @@ function selectEditorImagePath(event) {
   let target;
   if (type === 'question-image') target = document.querySelector('[name="question-image"]');
   if (type === 'prompt-image') target = document.querySelector('[name="prompt-image"]');
+  if (type === 'pair-prompt-image') target = document.querySelector('[name="pair-prompt-image"]');
   if (type === 'choice') target = input.closest('.picture-choice-row').querySelector('[data-choice-field="image"]');
   if (type === 'pair-left' || type === 'pair-right') target = input.closest('.editor-side').querySelector('[data-pair-value]');
   if (!target) return;
@@ -338,3 +369,5 @@ function refreshEditorPreview(input) {
   preview.src = input.value;
   preview.hidden = !imageKind || !input.value;
 }
+
+

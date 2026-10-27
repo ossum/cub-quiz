@@ -184,7 +184,7 @@
     },
     {
       "id": "sw-picture-match-demo-1",
-      "type": "image-match",
+      "type": "image-pairs",
       "programme": "SW",
       "advancementId": "SW-41",
       "question": "Match each stack to its view from above.",
@@ -242,11 +242,12 @@
             "alt": "Target pattern three: purple outer ring, yellow ring and green centre"
           }
         }
-      ]
+      ],
+      "format": "image-match"
     },
     {
       "id": "sw-knots-use-match-1",
-      "type": "image-match",
+      "type": "image-pairs",
       "programme": "SW",
       "advancementIds": [
         "SW-45",
@@ -305,11 +306,12 @@
             "value": "Stops a rope slipping through"
           }
         }
-      ]
+      ],
+      "format": "image-match"
     },
     {
       "id": "sw-knots-name-match-1",
-      "type": "image-match",
+      "type": "image-pairs",
       "programme": "SW",
       "advancementIds": [
         "SW-45",
@@ -368,11 +370,12 @@
             "value": "Figure-of-Eight Knot"
           }
         }
-      ]
+      ],
+      "format": "image-match"
     },
     {
       "id": "gw-knots-use-match-1",
-      "type": "image-match",
+      "type": "image-pairs",
       "programme": "GW",
       "advancementIds": [
         "GW-51",
@@ -431,11 +434,12 @@
             "value": "Shortens a rope"
           }
         }
-      ]
+      ],
+      "format": "image-match"
     },
     {
       "id": "gw-knots-name-match-1",
-      "type": "image-match",
+      "type": "image-pairs",
       "programme": "GW",
       "advancementIds": [
         "GW-51",
@@ -494,7 +498,8 @@
             "value": "Sheep Shank"
           }
         }
-      ]
+      ],
+      "format": "image-match"
     },
     {
       "id": "sw-trail-sign-water-this-direction-1",
@@ -746,7 +751,7 @@
     },
     {
       "id": "gw-traffic-signs-match-1",
-      "type": "image-match",
+      "type": "image-pairs",
       "programme": "GW",
       "advancementId": "GW-66",
       "question": "Match each traffic sign to its meaning (set 1 of 4).",
@@ -800,11 +805,12 @@
             "value": "Zebra crossing"
           }
         }
-      ]
+      ],
+      "format": "image-match"
     },
     {
       "id": "gw-traffic-signs-match-2",
-      "type": "image-match",
+      "type": "image-pairs",
       "programme": "GW",
       "advancementId": "GW-66",
       "question": "Match each traffic sign to its meaning (set 2 of 4).",
@@ -858,11 +864,12 @@
             "value": "Stop"
           }
         }
-      ]
+      ],
+      "format": "image-match"
     },
     {
       "id": "gw-traffic-signs-match-3",
-      "type": "image-match",
+      "type": "image-pairs",
       "programme": "GW",
       "advancementId": "GW-66",
       "question": "Match each traffic sign to its meaning (set 3 of 4).",
@@ -916,11 +923,12 @@
             "value": "Right turn off ahead"
           }
         }
-      ]
+      ],
+      "format": "image-match"
     },
     {
       "id": "gw-traffic-signs-match-4",
-      "type": "image-match",
+      "type": "image-pairs",
       "programme": "GW",
       "advancementId": "GW-66",
       "question": "Match each traffic sign to its meaning (set 4 of 4).",
@@ -974,11 +982,12 @@
             "value": "Stop"
           }
         }
-      ]
+      ],
+      "format": "image-match"
     },
     {
       "id": "gw-map-symbols-match",
-      "type": "image-match",
+      "type": "image-pairs",
       "programme": "GW",
       "advancementId": "GW-49",
       "question": "Match each map symbol to its meaning.",
@@ -1093,11 +1102,12 @@
             "value": "Google Maps pointer"
           }
         }
-      ]
+      ],
+      "format": "image-match"
     },
     {
       "id": "gw-map-places-match",
-      "type": "image-match",
+      "type": "image-pairs",
       "programme": "GW",
       "advancementId": "GW-49",
       "question": "Match each map icon to the place it represents.",
@@ -1260,11 +1270,12 @@
             "value": "Petrol station"
           }
         }
-      ]
+      ],
+      "format": "image-match"
     },
     {
       "id": "gw-jungle-book-character-match",
-      "type": "image-match",
+      "type": "image-pairs",
       "programme": "GW",
       "advancementId": "GW-55",
       "question": "Match each Jungle Book name to its animal and clue.",
@@ -1502,7 +1513,8 @@
             "value": "Woodpecker"
           }
         }
-      ]
+      ],
+      "format": "image-match"
     },
     {
       "id": "sw-flag-colour-black",
@@ -1773,7 +1785,7 @@
     },
     {
       "id": "sw-jungle-picture-name-match",
-      "type": "image-match",
+      "type": "image-pairs",
       "programme": "SW",
       "advancementId": "SW-55",
       "question": "Match each picture to its Jungle Book character name.",
@@ -1984,124 +1996,8 @@
             "value": "Mao"
           }
         }
-      ]
-    },
-    {
-      "id": "gw-pigpen-cub-motto",
-      "type": "image-option",
-      "programme": "GW",
-      "advancementId": "GW-13",
-      "question": "Which code says the Cub motto?",
-      "image": "images/codes/pigpen/pigpen.png",
-      "imageAlt": "Pigpen cipher key",
-      "options": [
-        {
-          "id": "pigpen-doyourbest",
-          "image": "images/codes/pigpen/pigpen-doyourbest.png",
-          "alt": "Pigpen code that says Do your best"
-        },
-        {
-          "id": "pigpen-doyourworst",
-          "image": "images/codes/pigpen/pigpen-doyourworst.png",
-          "alt": "Pigpen code that says Do your worst"
-        },
-        {
-          "id": "pigpen-doyousmell",
-          "image": "images/codes/pigpen/pigpen-doyousmell.png",
-          "alt": "Pigpen code that says Do you smell"
-        },
-        {
-          "id": "pigpen-whoatethecake",
-          "image": "images/codes/pigpen/pigpen-whoatethecake.png",
-          "alt": "Pigpen code that says Who ate the cake"
-        }
       ],
-      "answer": "pigpen-doyourbest",
-      "explanation": "The Cub motto is “Do your best.”"
-    },
-    {
-      "id": "sw-pigpen-nature-cipher-1",
-      "type": "image-option",
-      "programme": "SW",
-      "advancementId": "SW-14",
-      "question": "Which code says 'cub'?",
-      "image": "images/codes/nature-cipher/CIPHER.png",
-      "imageAlt": "Nature cipher key",
-      "options": [
-        {
-          "id": "nature-cat",
-          "image": "images/codes/nature-cipher/CAT.png"
-        },
-        {
-          "id": "nature-cub",
-          "image": "images/codes/nature-cipher/CUB.png"
-        },
-        {
-          "id": "nature-fun",
-          "image": "images/codes/nature-cipher/FUN.png"
-        },
-        {
-          "id": "nature-bug",
-          "image": "images/codes/nature-cipher/BUG.png"
-        }
-      ],
-      "answer": "nature-cub"
-    },
-    {
-      "id": "sw-pigpen-nature-cipher-2",
-      "type": "image-option",
-      "programme": "SW",
-      "advancementId": "SW-14",
-      "question": "Which code says 'sap'?",
-      "image": "images/codes/nature-cipher/CIPHER.png",
-      "imageAlt": "Nature cipher key",
-      "options": [
-        {
-          "id": "nature-map",
-          "image": "images/codes/nature-cipher/MAP.png"
-        },
-        {
-          "id": "nature-sun",
-          "image": "images/codes/nature-cipher/SUN.png"
-        },
-        {
-          "id": "nature-fun",
-          "image": "images/codes/nature-cipher/FUN.png"
-        },
-        {
-          "id": "nature-sap",
-          "image": "images/codes/nature-cipher/SAP.png"
-        }
-      ],
-      "answer": "nature-sap"
-    },
-    {
-      "id": "sw-pigpen-nature-cipher-3",
-      "type": "image-option",
-      "programme": "SW",
-      "advancementId": "SW-14",
-      "question": "Which code says 'map'?",
-      "image": "images/codes/nature-cipher/CIPHER.png",
-      "imageAlt": "Nature cipher key",
-      "options": [
-        {
-          "id": "nature-mud",
-          "image": "images/codes/nature-cipher/MUD.png"
-        },
-        {
-          "id": "nature-fun",
-          "image": "images/codes/nature-cipher/FUN.png"
-        },
-        {
-          "id": "nature-map",
-          "image": "images/codes/nature-cipher/MAP.png"
-        },
-        {
-          "id": "nature-den",
-          "image": "images/codes/nature-cipher/DEN.png"
-        }
-      ],
-      "answer": "nature-map"
+      "format": "image-match"
     },
     {
       "id": "sw-memory-grid-placeholder",
@@ -2198,6 +2094,225 @@
       "shuffleCells": true,
       "recallCount": 3,
       "randomizePrompts": true
+    },
+    {
+      "id": "gw-pigpen-code-pool",
+      "type": "image-pairs",
+      "format": "image-option",
+      "programme": "GW",
+      "advancementId": "GW-13",
+      "question": "Which code matches this phrase?",
+      "image": "images/codes/pigpen/pigpen.png",
+      "imageAlt": "Pigpen cipher key",
+      "optionCount": 4,
+      "pairs": [
+        {
+          "id": "pigpen-doyourbest",
+          "left": {
+            "type": "text",
+            "value": "Do your best"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/pigpen/pigpen-doyourbest.png",
+            "alt": "Pigpen code that says Do your best"
+          }
+        },
+        {
+          "id": "pigpen-doyourworst",
+          "left": {
+            "type": "text",
+            "value": "Do your worst"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/pigpen/pigpen-doyourworst.png",
+            "alt": "Pigpen code that says Do your worst"
+          }
+        },
+        {
+          "id": "pigpen-doyousmell",
+          "left": {
+            "type": "text",
+            "value": "Do you smell"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/pigpen/pigpen-doyousmell.png",
+            "alt": "Pigpen code that says Do you smell"
+          }
+        },
+        {
+          "id": "pigpen-whoatethecake",
+          "left": {
+            "type": "text",
+            "value": "Who ate the cake"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/pigpen/pigpen-whoatethecake.png",
+            "alt": "Pigpen code that says Who ate the cake"
+          }
+        }
+      ],
+      "explanation": "Use the Pigpen key to read each code."
+    },
+    {
+      "id": "sw-nature-cipher-pool",
+      "type": "image-pairs",
+      "format": "image-option",
+      "programme": "SW",
+      "advancementId": "SW-14",
+      "question": "Which code spells this word?",
+      "image": "images/codes/nature-cipher/CIPHER.png",
+      "imageAlt": "Nature cipher key",
+      "optionCount": 4,
+      "pairs": [
+        {
+          "id": "nature-bat",
+          "left": {
+            "type": "text",
+            "value": "bat"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/BAT.png",
+            "alt": "Nature cipher spelling bat"
+          }
+        },
+        {
+          "id": "nature-bug",
+          "left": {
+            "type": "text",
+            "value": "bug"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/BUG.png",
+            "alt": "Nature cipher spelling bug"
+          }
+        },
+        {
+          "id": "nature-cap",
+          "left": {
+            "type": "text",
+            "value": "cap"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/CAP.png",
+            "alt": "Nature cipher spelling cap"
+          }
+        },
+        {
+          "id": "nature-cat",
+          "left": {
+            "type": "text",
+            "value": "cat"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/CAT.png",
+            "alt": "Nature cipher spelling cat"
+          }
+        },
+        {
+          "id": "nature-cub",
+          "left": {
+            "type": "text",
+            "value": "cub"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/CUB.png",
+            "alt": "Nature cipher spelling cub"
+          }
+        },
+        {
+          "id": "nature-den",
+          "left": {
+            "type": "text",
+            "value": "den"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/DEN.png",
+            "alt": "Nature cipher spelling den"
+          }
+        },
+        {
+          "id": "nature-fun",
+          "left": {
+            "type": "text",
+            "value": "fun"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/FUN.png",
+            "alt": "Nature cipher spelling fun"
+          }
+        },
+        {
+          "id": "nature-hug",
+          "left": {
+            "type": "text",
+            "value": "hug"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/HUG.png",
+            "alt": "Nature cipher spelling hug"
+          }
+        },
+        {
+          "id": "nature-map",
+          "left": {
+            "type": "text",
+            "value": "map"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/MAP.png",
+            "alt": "Nature cipher spelling map"
+          }
+        },
+        {
+          "id": "nature-mud",
+          "left": {
+            "type": "text",
+            "value": "mud"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/MUD.png",
+            "alt": "Nature cipher spelling mud"
+          }
+        },
+        {
+          "id": "nature-sap",
+          "left": {
+            "type": "text",
+            "value": "sap"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/SAP.png",
+            "alt": "Nature cipher spelling sap"
+          }
+        },
+        {
+          "id": "nature-sun",
+          "left": {
+            "type": "text",
+            "value": "sun"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/SUN.png",
+            "alt": "Nature cipher spelling sun"
+          }
+        }
+      ]
     }
   ]
 }

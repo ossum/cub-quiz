@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cub-quiz-pwa-v7';
+const CACHE_NAME = 'cub-quiz-pwa-v9';
 const SHELL_FILES = [
   './',
   './index.html',

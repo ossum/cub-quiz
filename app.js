@@ -6,8 +6,10 @@ let questions = [];
 let index = 0;
 let score = 0;
 let locked = false;
-let selection = { programme: 'SW', mode: 'advancement', advancementId: '', randomQuestionCount: 15 };
+let selection = { programme: 'SW', mode: 'advancement', advancementId: '', randomQuestionCount: 15, challengeLives: 3 };
+let challengeState = null;
 let matchState = null;
+let pairOptionState = null;
 let memoryState = null;
 let memoryTimer = null;
 
@@ -29,7 +31,7 @@ async function loadData() {
     if (!questionResponse.ok || !advancementResponse.ok) throw new Error('The quiz files could not be found.');
     const questionData = await questionResponse.json();
     const advancementData = await advancementResponse.json();
-    bank = readQuestionBankOverride() || questionData.questions;
+    bank = (readQuestionBankOverride() || questionData.questions).map(migrateLegacyImageMatch);
     catalogue = advancementData.programmes;
     if (!Array.isArray(bank) || !Array.isArray(catalogue) || !catalogue.length) throw new Error('The quiz data is not in the expected format.');
     const firstAvailable = bank.find((question) => question.programme === selection.programme);
@@ -56,7 +58,7 @@ function getAdvancement(id = selection.advancementId) {
 
 function questionsForSelection() {
   return bank.filter((question) => question.programme === selection.programme &&
-    (selection.mode === 'random' || question.advancementId === selection.advancementId || question.advancementIds?.includes(selection.advancementId)));
+    (['random', 'challenge'].includes(selection.mode) || question.advancementId === selection.advancementId || question.advancementIds?.includes(selection.advancementId)));
 }
 
 function renderSetup() {
@@ -69,7 +71,7 @@ function renderSetup() {
   </optgroup>`).join('');
 
   app.innerHTML = `<div class="setup">
-    <div class="setup-heading"><p class="eyebrow">YOUR NEXT CUB ADVENTURE</p><h1>Choose a challenge</h1><p>Practise one advancement or mix it up with a random ${programme.name} test.</p></div>
+    <div class="setup-heading"><p class="eyebrow">YOUR NEXT CUB ADVENTURE</p><h1>Choose a challenge</h1><p>Practise one advancement, take a random ${programme.name} test, or try Challenge mode.</p></div>
     <div class="step-label"><span>1</span> Choose a Wolf badge</div>
     <div class="choice-row" role="group" aria-label="Choose a Wolf badge">
       ${catalogue.map((option) => `<button class="choice-button ${option.id === programme.id ? 'selected' : ''}" data-programme="${option.id}" aria-pressed="${option.id === programme.id}"><span class="choice-icon">${option.id === 'SW' ? '✦' : '★'}</span><span><strong>${option.name}</strong><small>${option.id} • ${option.categories.reduce((sum, category) => sum + category.advancements.length, 0)} advancements</small></span></button>`).join('')}
@@ -77,13 +79,15 @@ function renderSetup() {
     <div class="step-label"><span>2</span> Choose your quiz</div>
     <div class="mode-row" role="group" aria-label="Choose quiz type">
       <button class="mode-button ${selection.mode === 'advancement' ? 'selected' : ''}" data-mode="advancement" aria-pressed="${selection.mode === 'advancement'}"><strong>One advancement</strong><small>Focus on one numbered skill or topic.</small></button>
-      <button class="mode-button ${selection.mode === 'random' ? 'selected' : ''}" data-mode="random" aria-pressed="${selection.mode === 'random'}"><strong>Random ${programme.id} test</strong><small>Questions from this badge, shuffled each time.</small></button>
+      <button class="mode-button ${selection.mode === 'random' ? 'selected' : ''}" data-mode="random" aria-pressed="${selection.mode === 'random'}"><strong>Random ${programme.id} test</strong><small>Choose up to 15 shuffled questions.</small></button>
+      <button class="mode-button ${selection.mode === 'challenge' ? 'selected' : ''}" data-mode="challenge" aria-pressed="${selection.mode === 'challenge'}"><strong>Challenge mode</strong><small>Keep going; a wrong answer costs a life.</small></button>
     </div>
     ${selection.mode === 'random' ? `<div class="random-count-picker"><label for="random-question-count">Questions in this test</label><div><input id="random-question-count" type="number" min="1" max="${Math.max(1, availableCount)}" value="${Math.min(selection.randomQuestionCount || 15, availableCount || 15)}" ${availableCount ? '' : 'disabled'}><span>of ${availableCount} available</span></div><small>We’ll choose a fresh random set each time.</small></div>` : ''}
+    ${selection.mode === 'challenge' ? `<div class="random-count-picker challenge-lives-picker"><label for="challenge-lives">Starting lives</label><div><input id="challenge-lives" type="number" min="1" max="10" value="${selection.challengeLives || 3}"><span>Choose 1–10 lives</span></div><small>Correct answers add to your score. The challenge ends when no lives remain.</small></div>` : ''}
     ${selection.mode === 'advancement' ? `<div class="advancement-picker"><label for="advancement-select">3 Choose an advancement</label><select id="advancement-select">${groups}</select>
       ${selected ? `<div class="category-hint"><span class="colour-dot" style="--category-colour:${colours[selected.category.color]}"></span><span>${selected.category.name}</span><span class="hint-separator">•</span><span>${selected.category.color}</span></div>` : ''}
     </div>` : ''}
-    <div class="setup-bottom"><p class="question-count">${availableCount ? `${availableCount} ${availableCount === 1 ? 'question' : 'questions'} ready` : 'No questions added for this choice yet'}</p><div class="setup-actions"><button class="secondary" id="manage-questions">Manage questions</button><button class="primary" id="start" ${selection.mode === 'advancement' && !selection.advancementId ? 'disabled' : ''}>Start ${selection.mode === 'random' ? `${programme.id} test` : 'quiz'} <span aria-hidden="true">→</span></button></div></div>
+    <div class="setup-bottom"><p class="question-count">${availableCount ? `${availableCount} ${availableCount === 1 ? 'question' : 'questions'} ready` : 'No questions added for this choice yet'}</p><div class="setup-actions"><button class="secondary" id="manage-questions">Manage questions</button><button class="primary" id="start" ${!availableCount || (selection.mode === 'advancement' && !selection.advancementId) ? 'disabled' : ''}>Start ${selection.mode === 'challenge' ? 'challenge' : selection.mode === 'random' ? `${programme.id} test` : 'quiz'} <span aria-hidden="true">→</span></button></div></div>
   </div>`;
 
   app.querySelectorAll('[data-programme]').forEach((button) => button.addEventListener('click', () => {
@@ -96,6 +100,10 @@ function renderSetup() {
     selection.mode = button.dataset.mode;
     renderSetup();
   }));
+  document.querySelector('#challenge-lives')?.addEventListener('change', (event) => {
+    selection.challengeLives = Math.max(1, Math.min(10, Number(event.target.value) || 3));
+    event.target.value = selection.challengeLives;
+  });
   document.querySelector('#random-question-count')?.addEventListener('change', (event) => {
     const requested = Number(event.target.value);
     selection.randomQuestionCount = Math.max(1, Math.min(availableCount, Number.isFinite(requested) ? requested : 15));
@@ -116,6 +124,8 @@ function startQuiz() {
     return;
   }
   questions = shuffle(matching);
+  challengeState = selection.mode === 'challenge' ? { lives: Math.max(1, Math.min(10, Number(document.querySelector('#challenge-lives')?.value || selection.challengeLives) || 3)), totalLives: Math.max(1, Math.min(10, Number(document.querySelector('#challenge-lives')?.value || selection.challengeLives) || 3)), questionsAnswered: 0 } : null;
+  if (challengeState) selection.challengeLives = challengeState.totalLives;
   if (selection.mode === 'random') {
     const countField = document.querySelector('#random-question-count');
     const requested = Number(countField?.value || selection.randomQuestionCount) || 15;
@@ -129,7 +139,7 @@ function startQuiz() {
 
 function renderEmptySelection() {
   const advancement = getAdvancement();
-  app.innerHTML = `<div class="results"><div class="result-icon" aria-hidden="true">✎</div><p class="eyebrow">QUESTION BANK IN PROGRESS</p><h2>We haven’t added these questions yet.</h2><p class="summary">${selection.mode === 'random' ? `There are no ${selection.programme} questions in the bank yet.` : `${escapeHtml(selection.programme)} ${advancement.number}: ${escapeHtml(advancement.name)} is ready for questions.`} Ask your Cub leader to add questions for this topic.</p><button class="primary" id="back-to-setup">Choose another challenge</button></div>`;
+  app.innerHTML = `<div class="results"><div class="result-icon" aria-hidden="true">✎</div><p class="eyebrow">QUESTION BANK IN PROGRESS</p><h2>We haven’t added these questions yet.</h2><p class="summary">${selection.mode !== 'advancement' ? `There are no ${selection.programme} questions in the bank yet.` : `${escapeHtml(selection.programme)} ${advancement.number}: ${escapeHtml(advancement.name)} is ready for questions.`} Ask your Cub leader to add questions for this topic.</p><button class="primary" id="back-to-setup">Choose another challenge</button></div>`;
   document.querySelector('#back-to-setup').addEventListener('click', renderSetup);
 }
 
@@ -138,21 +148,24 @@ function renderQuestion() {
   clearInterval(memoryTimer);
   locked = false;
   matchState = null;
+  pairOptionState = null;
   memoryState = null;
   const question = questions[index];
   const taggedAdvancements = (question.advancementIds || [question.advancementId]).filter(Boolean).map((id) => getAdvancement(id)).filter(Boolean);
   const advancement = taggedAdvancements[0] || getAdvancement(question.advancementId);
   const tagLabel = taggedAdvancements.length > 1 ? `${question.programme} · ${advancement.category.name} · ${taggedAdvancements.map((item) => item.number).join(', ')}` : advancement ? `${question.programme} ${advancement.number} · ${advancement.category.name}` : question.programme;
-  const progress = Math.round(((index + 1) / questions.length) * 100);
+  const progress = challengeState ? 0 : Math.round(((index + 1) / questions.length) * 100);
+  const questionHeading = challengeState ? `CHALLENGE · QUESTION ${challengeState.questionsAnswered + 1}` : `QUESTION ${index + 1} OF ${questions.length}`;
+  const scoreAndLives = challengeState ? `<span>♥ ${challengeState.lives} ${challengeState.lives === 1 ? 'life' : 'lives'}</span><span>✦ ${score} correct</span>` : `<span>✦ ${score} ${score === 1 ? 'star' : 'stars'}</span>`;
   app.innerHTML = `<div class="quiz">
-    <div class="quiz-top"><span>QUESTION ${index + 1} OF ${questions.length}</span><span class="quiz-tools"><span>✦ ${score} ${score === 1 ? 'star' : 'stars'}</span><button class="text-button quiz-edit-button" id="edit-current-question" type="button">Edit this question</button></span></div>
-    <div class="progress-wrap" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="${questions.length}" aria-valuenow="${index + 1}"><div class="progress" style="width:${progress}%"></div></div>
+    <div class="quiz-top"><span>${questionHeading}</span><span class="quiz-tools">${scoreAndLives}${challengeState ? '' : '<button class="text-button quiz-edit-button" id="edit-current-question" type="button">Edit this question</button>'}</span></div>
+    ${challengeState ? '' : `<div class="progress-wrap" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="${questions.length}" aria-valuenow="${index + 1}"><div class="progress" style="width:${progress}%"></div></div>`}
     <div class="question"><div class="advancement-tag" style="--category-colour:${colours[advancement?.category.color] || '#71965d'}">${escapeHtml(tagLabel)}</div><h2>${escapeHtml(question.question)}</h2>
-      ${question.type === 'image-match' ? renderImageMatch(question) : question.type === 'memory-grid' ? renderMemoryGrid(question) : renderSingleAnswer(question)}
+      ${question.type === 'image-pairs' ? renderImagePairs(question) : question.type === 'image-match' ? `${renderQuestionImage(question)}${renderImageMatch(question)}` : question.type === 'memory-grid' ? renderMemoryGrid(question) : renderSingleAnswer(question)}
       <div id="feedback-slot"></div>
     </div>
   </div>`;
-  if (question.type === 'image-match') wireImageMatch(question);
+  if (question.type === 'image-match' || (question.type === 'image-pairs' && question.format === 'image-match')) wireImageMatch(question);
   if (question.type === 'memory-grid') startMemoryPreviewTimer(question);
   if (question.type === 'image-dropdown') {
     const select = document.querySelector('#answer-select');
@@ -175,6 +188,30 @@ function renderQuestionImage(question) {
   return question.image ? `<img class="question-image" src="${escapeAttribute(question.image)}" alt="${escapeAttribute(question.imageAlt || '')}">` : '';
 }
 
+function renderImagePairs(question) {
+  return `${renderQuestionImage(question)}${question.format === 'image-option' ? renderPairOption(question) : renderImageMatch(question)}`;
+}
+function renderPairSide(side) {
+  if (side.type === 'image') return `<img src="${escapeAttribute(side.src)}" alt="${escapeAttribute(side.alt || '')}">`;
+  return `<span>${escapeHtml(side.value || '')}</span>`;
+}
+function pairAnswerKey(side) {
+  return side.type === 'image' ? `image:${side.src}` : `text:${String(side.value || '').trim().toLowerCase()}`;
+}
+function renderPairOption(question) {
+  const pair = shuffle(question.pairs)[0];
+  const optionCount = Math.max(2, Math.min(Number(question.optionCount) || 4, question.pairs.length));
+  const correctKey = pairAnswerKey(pair.right);
+  const uniqueDistractors = new Map();
+  for (const candidate of shuffle(question.pairs.filter((item) => item.id !== pair.id))) {
+    const key = pairAnswerKey(candidate.right);
+    if (key !== correctKey && !uniqueDistractors.has(key)) uniqueDistractors.set(key, candidate);
+  }
+  const choices = shuffle([pair, ...[...uniqueDistractors.values()].slice(0, optionCount - 1)]);
+  pairOptionState = { answerId: pair.id };
+  const allPictures = choices.every((choice) => choice.right.type === 'image');
+  return `<div class="pair-option-prompt">${renderPairSide(pair.left)}</div><div class="answers ${allPictures ? 'picture-answers' : 'pair-option-answers'}">${choices.map((choice) => `<button class="answer ${choice.right.type === 'image' ? 'picture-answer' : 'pair-option-text'}" type="button" data-option="${escapeAttribute(choice.id)}" aria-label="${escapeAttribute(choice.right.alt || choice.right.value || 'Answer option')}">${choice.right.type === 'image' ? `<img src="${escapeAttribute(choice.right.src)}" alt="${escapeAttribute(choice.right.alt || '')}">` : escapeHtml(choice.right.value || '')}</button>`).join('')}</div>`;
+}
 function renderImageMatch(question) {
   const poolSize = question.pairs.length;
   const sampleSize = Math.max(1, Math.min(Number(question.sampleSize) || poolSize, poolSize));
@@ -459,14 +496,32 @@ function submitDropdown(question) {
 
 function showFeedback(correct, question, detail = '') {
   const slot = document.querySelector('#feedback-slot');
-  const heading = correct ? 'Brilliant! That’s right.' : 'Good try! The answer is shown in green.';
-  slot.innerHTML = `<div class="feedback ${correct ? 'good' : 'try'}" role="status"><strong>${heading}</strong>${detail ? `<p>${escapeHtml(detail)}</p>` : ''}${question.explanation ? `<p>${escapeHtml(question.explanation)}</p>` : ''}</div><div class="next-row"><button class="primary" id="next">${index + 1 === questions.length ? 'See my score' : 'Next question'} <span aria-hidden="true">→</span></button></div>`;
+  if (challengeState) {
+    challengeState.questionsAnswered++;
+    if (!correct) challengeState.lives = Math.max(0, challengeState.lives - 1);
+  }
+  const heading = challengeState && challengeState.lives === 0 ? 'No lives left — challenge complete!' : correct ? 'Brilliant! That’s right.' : 'Good try! The answer is shown in green.';
+  slot.innerHTML = `<div class="feedback ${correct ? 'good' : 'try'}" role="status"><strong>${heading}</strong>${detail ? `<p>${escapeHtml(detail)}</p>` : ''}${question.explanation ? `<p>${escapeHtml(question.explanation)}</p>` : ''}</div><div class="next-row"><button class="primary" id="next">${challengeState ? (challengeState.lives === 0 ? 'See challenge score' : 'Next question') : index + 1 === questions.length ? 'See my score' : 'Next question'} <span aria-hidden="true">→</span></button></div>`;
   document.querySelector('#next').addEventListener('click', advanceQuestion);
 }
 
 function advanceQuestion() {
+  if (challengeState?.lives === 0) { renderChallengeResults(); return; }
+  if (challengeState) {
+    index++;
+    if (index >= questions.length) { questions = shuffle(questionsForSelection()); index = 0; }
+    renderQuestion();
+    return;
+  }
   index++;
   if (index < questions.length) renderQuestion(); else renderResults();
+}
+
+function renderChallengeResults() {
+  const programme = getProgramme();
+  app.innerHTML = `<div class="results challenge-results"><div class="result-icon" aria-hidden="true">♥</div><p class="eyebrow">CHALLENGE COMPLETE</p><h2>Keep up the great work!</h2><p class="score">${score} successful ${score === 1 ? 'answer' : 'answers'}</p><p class="challenge-lives-summary">Lives remaining: ${challengeState.lives} of ${challengeState.totalLives}</p><p class="summary">${escapeHtml(programme.name)} Challenge Mode<br>You answered ${challengeState.questionsAnswered} ${challengeState.questionsAnswered === 1 ? 'question' : 'questions'}.</p><div class="result-actions"><button class="primary" id="restart">Play again <span aria-hidden="true">↻</span></button><button class="secondary" id="change-test">Choose another test</button></div></div>`;
+  document.querySelector('#restart').addEventListener('click', startQuiz);
+  document.querySelector('#change-test').addEventListener('click', renderSetup);
 }
 
 function renderResults() {
@@ -493,7 +548,8 @@ app.addEventListener('click', (event) => {
     const question = questions[index];
     const options = question.options;
     const label = button.dataset.option;
-    chooseAnswer(button, label, question);
+    const answerQuestion = question.type === 'image-pairs' && question.format === 'image-option' ? { ...question, answer: pairOptionState?.answerId } : question;
+    chooseAnswer(button, label, answerQuestion);
   }
   if (event.target.closest('#submit-answer')) submitDropdown(questions[index]);
 });
