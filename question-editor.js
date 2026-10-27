@@ -122,7 +122,7 @@ function renderQuestionEditor(question, returnTarget = 'manager') {
         <label>Question ID<input class="editor-input" name="id" required value="${escapeAttribute(source.id || '')}"><small>Short and unique, for example gw-road-sign-1.</small></label>
         <label>Programme<select class="editor-input" name="programme">${programmeOptions}</select></label>
         <label>Advancement ID(s)<input class="editor-input" name="advancementIds" required value="${escapeAttribute(advancementIds.join(', '))}"><small>Use one ID, or a comma-separated list for a shared question.</small></label>
-        <label>Question type<select class="editor-input" id="editor-question-type" name="type"><option value="multiple-choice" ${type === 'multiple-choice' ? 'selected' : ''}>Choose an answer</option><option value="image-dropdown" ${type === 'image-dropdown' ? 'selected' : ''}>Picture and dropdown</option><option value="image-pairs" ${type === 'image-pairs' ? 'selected' : ''}>Pair question pool</option><option value="memory-grid" ${type === 'memory-grid' ? 'selected' : ''}>Memory grid</option></select></label>
+        <label>Question type<select class="editor-input" id="editor-question-type" name="type"><option value="multiple-choice" ${type === 'multiple-choice' ? 'selected' : ''}>Choose an answer</option><option value="image-dropdown" ${type === 'image-dropdown' ? 'selected' : ''}>Picture and dropdown</option><option value="image-pairs" ${type === 'image-pairs' ? 'selected' : ''}>Pair question pool</option><option value="memory-grid" ${type === 'memory-grid' ? 'selected' : ''}>Memory grid</option><option value="ordering" ${type === 'ordering' ? 'selected' : ''}>Put steps in order</option></select></label>
       </div>
       <label class="editor-wide">Question text<input class="editor-input" name="question" required value="${escapeAttribute(source.question || '')}" placeholder="Write a short question"></label>
       <label class="editor-wide">Explanation (optional)<textarea class="editor-input" name="explanation" rows="2">${escapeHtml(source.explanation || '')}</textarea></label>
@@ -138,6 +138,9 @@ function renderQuestionEditor(question, returnTarget = 'manager') {
       <section class="editor-type-panel" data-type-panel="image-pairs" ${type === 'image-pairs' ? '' : 'hidden'}>
         <h2>Pair question pool</h2>${renderImageField('pair-prompt-image', source.image || '', source.imageAlt || '', 'Top-level image (optional)')}<div class="editor-form-grid"><label>Pairs shown in a matching round<input class="editor-input" name="sampleSize" type="number" min="2" value="${source.sampleSize || source.pairs?.length || 4}"></label><label>Choices in a single-answer round<input class="editor-input" name="optionCount" type="number" min="2" value="${pairOptionCount}"></label></div><label class="editor-radio"><input type="checkbox" name="allowReversal" ${pairAllowReversal ? 'checked' : ''}> Allow reversed questions (show a right-side item and ask for its left-side match)</label><p class="editor-note">The quiz randomly chooses between a matching round, a left-to-right single-answer question, and (when enabled) a reversed single-answer question. Each row is one prompt and its correct match. Top-level image is optional.</p><div id="matching-pair-list">${renderMatchingPairRows(pairRows)}</div><button type="button" class="secondary" id="add-matching-pair">Add pair</button>
       </section>
+      <section class="editor-type-panel" data-type-panel="ordering" ${type === 'ordering' ? '' : 'hidden'}>
+        <h2>Put steps in order</h2><p class="editor-note">Enter one step per line as: step text | JPG image path | image description. The saved order is the correct order; cards are shuffled for each quiz round.</p><label>Steps<textarea class="editor-input" name="orderingSteps" rows="8">${escapeHtml((source.steps || []).map((step) => `${step.text || ''} | ${step.image || ''} | ${step.alt || ''}`).join('\n'))}</textarea></label>
+      </section>
       <section class="editor-type-panel" data-type-panel="memory-grid" ${type === 'memory-grid' ? '' : 'hidden'}>
         <h2>Memory grid</h2><div class="editor-form-grid"><label>Rows<input class="editor-input" name="memoryRows" type="number" min="1" max="10" value="${memoryRows}"></label><label>Columns<input class="editor-input" name="memoryColumns" type="number" min="1" max="10" value="${memoryColumns}"></label><label>Picture display time (seconds)<input class="editor-input" name="memoryPreviewSeconds" type="number" min="1" max="120" value="${memoryPreviewSeconds}"></label><label class="editor-radio"><input type="checkbox" name="memoryShuffle" ${memoryShuffle ? 'checked' : ''}> Shuffle picture positions each round</label></div><p class="editor-note">Enter one path per square, from top-left to bottom-right. The number of paths must equal rows × columns. The app can choose random pictures and order each round, or use the fixed squares below. Placeholder paths use A.png through P.png in images/memory-grid/.</p><label>Grid images (paths)<textarea class="editor-input" name="memoryImages" rows="10">${escapeHtml(memoryPaths.join('\n'))}</textarea></label><div class="editor-form-grid"><label>Pictures to recall each round<input class="editor-input" name="memoryRecallCount" type="number" min="1" max="100" value="${memoryRecallCount}"></label><label class="editor-radio"><input type="checkbox" name="memoryRandomizePrompts" ${memoryRandomizePrompts ? 'checked' : ''}> Randomize target pictures and their order each round</label></div><label data-fixed-memory-sequence ${memoryRandomizePrompts ? 'hidden' : ''}>Fixed target squares (only used when random targets are off; numbers follow the original grid order)<input class="editor-input" name="memorySequence" value="${escapeAttribute(memorySequence.join(', '))}" placeholder="3, 7, 13"></label>
       </section>
@@ -151,6 +154,7 @@ function renderQuestionEditor(question, returnTarget = 'manager') {
     if (['multiple-choice', 'image-option'].includes(draft.type)) { draft.options = ['Option 1', 'Option 2', 'Option 3', 'Option 4']; draft.answer = ''; }
     else if (draft.type === 'image-dropdown') { draft.image = ''; draft.imageAlt = ''; draft.options = ['Option 1', 'Option 2', 'Option 3', 'Option 4']; draft.answer = ''; }
     else if (draft.type === 'image-pairs') { draft.matchPairs = [1, 2, 3, 4].map((pair) => emptyMatchPair('pair-' + pair)); draft.allowReversal = true; draft.optionCount = 4; draft.sampleSize = 4; }
+    else if (draft.type === 'ordering') { draft.steps = ['Clear the area and check the rules', 'Collect a bucket of sand or water', 'Build the fire', 'Cook the food', 'Make sure the fire is completely out', 'Leave the area'].map((text, i) => ({ id: `step-${i + 1}`, text, image: ['images/gw-fire-safety/clear-area-rules.jpg','images/gw-fire-safety/collect-sand-water.jpg','images/gw-fire-safety/build-fire.jpg','images/gw-fire-safety/cook-food.jpg','images/gw-fire-safety/extinguish-fire-completely.jpg','images/gw-fire-safety/leave-area.jpg'][i], alt: text })); draft.programme = 'GW'; draft.advancementIds = ['GW-34']; }
     else if (draft.type === 'memory-grid') { draft.memoryImagePaths = Array.from({ length: 16 }, (_, i) => `images/memory-grid/${String.fromCharCode(65 + i)}.png`); draft.memorySequence = [3, 7, 13]; draft.memoryRecallCount = 3; draft.memoryRandomizePrompts = true; draft.memoryRows = 4; draft.memoryColumns = 4; draft.memoryPreviewSeconds = 20; draft.memoryShuffle = true; if (draft.programme === 'SW') draft.advancementIds = ['SW-13']; }
     renderQuestionEditor(draft, questionEditorReturnTarget);
   });
@@ -243,6 +247,7 @@ function readQuestionEditorForm() {
     });
     return { ...common, image: get('pair-prompt-image').trim(), imageAlt: get('pair-prompt-image-alt').trim(), allowReversal: form.elements.namedItem('allowReversal')?.checked === true, optionCount: Number(get('optionCount')) || 4, matchPairs, sampleSize: Number(get('sampleSize')) || 0 };
   }
+  if (type === 'ordering') return { ...common, orderingSteps: get('orderingSteps').split(/\r?\n/).map((line) => line.split('|').map((part) => part.trim())).filter((parts) => parts.some(Boolean)).map((parts, index) => ({ id: `step-${index + 1}`, text: parts[0] || '', image: parts[1] || '', alt: parts[2] || parts[0] || '' })) };
   if (type === 'memory-grid') return { ...common, memoryImagePaths: get('memoryImages').split(/\r?\n/).map((path) => path.trim()), memorySequence: get('memorySequence').split(/[,\s]+/).map(Number).filter(Number.isFinite), memoryRows: Number(get('memoryRows')), memoryColumns: Number(get('memoryColumns')), memoryPreviewSeconds: Number(get('memoryPreviewSeconds')), memoryShuffle: form.elements.namedItem('memoryShuffle')?.checked === true, memoryRecallCount: Number(get('memoryRecallCount')), memoryRandomizePrompts: form.elements.namedItem('memoryRandomizePrompts')?.checked === true };
   const matchPairs = [...app.querySelectorAll('[data-pair-row]')].map((row) => {
     const side = (name) => { const kind = row.querySelector(`.editor-kind[data-side="${name}"]`).value; return { kind, value: row.querySelector(`[data-pair-value="${name}"]`).value.trim(), alt: row.querySelector(`[data-pair-alt="${name}"]`)?.value.trim() || '' }; };
@@ -251,9 +256,10 @@ function readQuestionEditorForm() {
   return { ...common, matchPairs, sampleSize: Number(get('sampleSize')) || 0 };
 }
 function questionFromEditorDraft(draft) {
-  const { advancementIds, editorChoiceMode, matchPairs, sampleSize, optionCount, allowReversal, memoryImagePaths, memorySequence, memoryRows, memoryColumns, memoryPreviewSeconds, memoryShuffle, memoryRecallCount, memoryRandomizePrompts, ...question } = draft;
+  const { advancementIds, editorChoiceMode, matchPairs, sampleSize, optionCount, allowReversal, memoryImagePaths, memorySequence, memoryRows, memoryColumns, memoryPreviewSeconds, memoryShuffle, memoryRecallCount, memoryRandomizePrompts, orderingSteps, ...question } = draft;
   if (advancementIds.length === 1) question.advancementId = advancementIds[0]; else question.advancementIds = advancementIds;
   delete question.editorChoiceMode;
+  if (question.type === 'ordering') question.steps = orderingSteps;
   if (question.type === 'memory-grid') {
     question.cells = memoryImagePaths.map((image, index) => ({ id: `cell-${index + 1}`, image, alt: image.split(/[\\/]/).pop().replace(/\.[^.]+$/, '') || `Picture ${index + 1}` }));
     question.recallCount = memoryRecallCount;
@@ -302,6 +308,11 @@ function validateEditorDraft(draft, question) {
       if (new Set(question.options.map((item) => item.id)).size !== question.options.length) return 'Picture choice IDs must be unique.';
       if (!question.options.some((item) => item.id === question.answer)) return 'Choose the correct picture.';
     }
+  }
+  if (question.type === 'ordering') {
+    if (!Array.isArray(question.steps) || question.steps.length < 2) return 'Add at least two steps.';
+    if (question.steps.some((step) => !step.text || !step.image || !step.alt)) return 'Each step needs text, an image path, and an image description.';
+    if (new Set(question.steps.map((step) => step.id)).size !== question.steps.length) return 'Step IDs must be unique.';
   }
   if (question.type === 'memory-grid') {
     if (!Number.isInteger(question.rows) || question.rows < 1 || question.rows > 10 || !Number.isInteger(question.columns) || question.columns < 1 || question.columns > 10) return 'Rows and columns must each be between 1 and 10.';

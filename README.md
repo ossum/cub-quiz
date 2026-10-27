@@ -24,7 +24,7 @@ On iPhone or iPad, open the site in Safari, tap Share, then Add to Home Screen. 
 
 Choose Silver Wolf (SW), Gold Wolf (GW), or the combined SW + GW pool, then choose one advancement, a random test of up to 15 questions, or Challenge mode. The combined pool offers Random and Challenge modes and draws questions from both programmes. Challenge mode draws from the selected programme’s question bank (or both banks in SW + GW mode), costs one life for a wrong answer, and continues until all lives are lost. It starts with three lives; choose 1–10 before starting. Correct answers add to the score. Challenge mode shuffles a question deck and reshuffles it when exhausted. Add any number of separate questions with the same advancement tag; a focused quiz includes all of them and shuffles their order.
 
-The selector lists all 71 testable SW and 75 GW advancements. SW-59 now has an eight-scene illustrated home-hazard pool, showing four matches per round. The starter bank has 36 SW and 15 GW sample questions, so many advancement choices will show a message until questions are added. The count on the setup screen shows how many questions are ready for the current choice.
+The selector lists all 71 testable SW and 75 GW advancements. SW-59 now has eight JPG home-hazard placeholders, showing four matches per round; replace the numbered photos in `images/sw59-home-hazards/` when ready. The starter bank has 36 SW and 16 GW sample questions, so many advancement choices will show a message until questions are added. The count on the setup screen shows how many questions are ready for the current choice.
 
 ## Add or edit questions
 
@@ -91,10 +91,12 @@ The starter image-match question uses the supplied worksheet artwork and answer 
 
 A Cub studies a configurable picture grid, then finds three shown pictures in order. `rows`, `columns`, `previewSeconds`, and `shuffleCells` configure its size, preview time, and whether cell positions shuffle each round. `cells` is in original row-major order. `recallCount` sets how many pictures are tested; `randomizePrompts: true` picks different target pictures and a different prompt order each round. To use fixed targets instead, set it to false and provide `sequence` as 1-based square numbers in original row-major order. The complete example is `sw-memory-grid-placeholder` in `data/questions.json`, with a 4×4 board, 20-second preview, shuffled pictograms, and SW-13 tag.
 
+An ordering question stores the correct sequence in `steps`; each step has an `id`, child-friendly `text`, JPG `image` path and `alt` description. The quiz shuffles the cards each round. Children can drag by the grip or use the arrow buttons to order them. See `gw-fire-safety-order-1` for the GW-34 fire safety example.
+
 ### Question fields
 
 - **id**: unique short ID.
-- **type**: multiple-choice, image-dropdown, image-pairs, or memory-grid.
+- **type**: multiple-choice, image-dropdown, image-pairs, memory-grid, or ordering.
 - **programme**: SW or GW.
 - **advancementId**: programme plus advancement number. For one question shared by several advancements, use advancementIds, an array of IDs; the question appears in each focused quiz.
 - **question**: short prompt.
@@ -120,7 +122,7 @@ Question content and images are stored locally. Use images you have permission t
 
 - `index.html` — page shell.
 - `style.css` — responsive visual design.
-- `app.js` — quiz selection, question rendering, matching, feedback and scoring.
+- `app.js` — quiz selection, question rendering, matching, ordering, feedback and scoring.
 - `question-editor.js` — leader question bank manager, editor, browser storage and JSON import/export.
 - `manifest.webmanifest` and `service-worker.js` — installable app details and offline cache.
 - `data/advancements.json` — editable programmes and advancement catalogue.

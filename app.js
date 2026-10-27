@@ -11,6 +11,8 @@ let challengeState = null;
 let matchState = null;
 let pairOptionState = null;
 let memoryState = null;
+let orderingState = null;
+let orderingPointer = null;
 let memoryTimer = null;
 let servedDataVersions = { questions: 'unknown', advancements: 'unknown' };
 
@@ -179,6 +181,8 @@ function renderQuestion() {
   matchState = null;
   pairOptionState = null;
   memoryState = null;
+  orderingState = null;
+  orderingPointer = null;
   const question = questions[index];
   const pairPresentation = question.type === 'image-pairs' ? choosePairPresentation(question) : null;
   const questionText = pairPresentation && pairPresentation !== 'match' ? 'Choose the item that matches.' : question.question;
@@ -192,7 +196,7 @@ function renderQuestion() {
     <div class="quiz-top"><span>${questionHeading}</span><span class="quiz-tools">${scoreAndLives}${challengeState ? '' : '<button class="text-button quiz-edit-button" id="edit-current-question" type="button">Edit this question</button>'}</span></div>
     ${challengeState ? '' : `<div class="progress-wrap" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="${questions.length}" aria-valuenow="${index + 1}"><div class="progress" style="width:${progress}%"></div></div>`}
     <div class="question"><div class="advancement-tag" style="--category-colour:${colours[advancement?.category.color] || '#71965d'}">${escapeHtml(tagLabel)}</div><h2>${escapeHtml(questionText)}</h2>
-      ${question.type === 'image-pairs' ? renderImagePairs(question, pairPresentation) : question.type === 'image-match' ? `${renderQuestionImage(question)}${renderImageMatch(question)}` : question.type === 'memory-grid' ? renderMemoryGrid(question) : renderSingleAnswer(question)}
+      ${question.type === 'ordering' ? renderOrderingQuestion(question) : question.type === 'image-pairs' ? renderImagePairs(question, pairPresentation) : question.type === 'image-match' ? `${renderQuestionImage(question)}${renderImageMatch(question)}` : question.type === 'memory-grid' ? renderMemoryGrid(question) : renderSingleAnswer(question)}
       <div id="feedback-slot"></div>
     </div>
   </div>`;
@@ -202,6 +206,33 @@ function renderQuestion() {
     const select = document.querySelector('#answer-select');
     select.addEventListener('change', () => { document.querySelector('#submit-answer').disabled = !select.value; });
   }
+}
+
+
+function renderOrderingQuestion(question) {
+  orderingState = shuffle(question.steps || []).map((step) => step.id);
+  return `<p class="order-instructions">Drag the pictures into the right order. You can also use the arrow buttons.</p><ol class="order-list" id="order-list" aria-label="Steps in your chosen order">${renderOrderingCards(question)}</ol><div class="next-row"><button class="primary" id="check-order">Check order <span aria-hidden="true">→</span></button></div>`;
+}
+function renderOrderingCards(question) {
+  const byId = new Map(question.steps.map((step) => [step.id, step]));
+  return orderingState.map((id, index) => {
+    const step = byId.get(id);
+    return `<li class="order-card" data-order-id="${escapeAttribute(step.id)}" aria-label="${escapeAttribute(step.text)}. Position ${index + 1}"><span class="order-grip" aria-hidden="true">⠿</span><img src="${escapeAttribute(step.image)}" alt="${escapeAttribute(step.alt || step.text)}"><span class="order-card-text">${escapeHtml(step.text)}</span><span class="order-controls"><button type="button" class="order-move" data-order-move="-1" aria-label="Move ${escapeAttribute(step.text)} earlier" ${index === 0 ? 'disabled' : ''}>↑</button><button type="button" class="order-move" data-order-move="1" aria-label="Move ${escapeAttribute(step.text)} later" ${index === question.steps.length - 1 ? 'disabled' : ''}>↓</button></span></li>`;
+  }).join('');
+}
+function refreshOrderingCards(question) {
+  const list = document.querySelector('#order-list');
+  if (list) list.innerHTML = renderOrderingCards(question);
+}
+function checkOrderingAnswer(question) {
+  if (locked) return;
+  locked = true;
+  const correctOrder = question.steps.map((step) => step.id);
+  const correct = orderingState.length === correctOrder.length && orderingState.every((id, index) => id === correctOrder[index]);
+  if (correct) score++;
+  document.querySelectorAll('#order-list .order-card').forEach((card) => card.classList.add(correct ? 'order-correct' : 'order-review'));
+  const detail = correct ? 'You put every step in the right order.' : `The correct order is: ${question.steps.map((step) => step.text).join(' → ')}.`;
+  showFeedback(correct, question, detail);
 }
 
 function renderSingleAnswer(question) {
@@ -583,6 +614,15 @@ function renderResults() {
 }
 
 app.addEventListener('click', (event) => {
+  const moveButton = event.target.closest('[data-order-move]');
+  if (moveButton && orderingState && !locked) {
+    const card = moveButton.closest('.order-card');
+    const from = orderingState.indexOf(card.dataset.orderId);
+    const to = from + Number(moveButton.dataset.orderMove);
+    if (to >= 0 && to < orderingState.length) { [orderingState[from], orderingState[to]] = [orderingState[to], orderingState[from]]; refreshOrderingCards(questions[index]); }
+    return;
+  }
+  if (event.target.closest('#check-order')) { checkOrderingAnswer(questions[index]); return; }
   if (event.target.closest('#hide-memory-grid')) { enterMemoryRecall(questions[index]); return; }
   const memoryCell = event.target.closest('[data-memory-cell]');
   if (memoryCell) { chooseMemoryCell(questions[index], Number(memoryCell.dataset.memoryCell)); return; }
@@ -597,6 +637,31 @@ app.addEventListener('click', (event) => {
   }
   if (event.target.closest('#submit-answer')) submitDropdown(questions[index]);
 });
+
+
+app.addEventListener('pointerdown', (event) => {
+  const grip = event.target.closest('.order-grip');
+  const card = grip?.closest('.order-card');
+  if (!card || locked || !orderingState) return;
+  orderingPointer = { id: card.dataset.orderId, pointerId: event.pointerId };
+  app.setPointerCapture(event.pointerId);
+  card.classList.add('order-dragging');
+  event.preventDefault();
+});
+app.addEventListener('pointerup', (event) => {
+  if (!orderingPointer || event.pointerId !== orderingPointer.pointerId) return;
+  const draggedId = orderingPointer.id;
+  document.querySelector(`[data-order-id="${CSS.escape(draggedId)}"]`)?.classList.remove('order-dragging');
+  orderingPointer = null;
+  const target = document.elementFromPoint(event.clientX, event.clientY)?.closest('.order-card');
+  if (!target || target.dataset.orderId === draggedId || locked) return;
+  const from = orderingState.indexOf(draggedId);
+  const to = orderingState.indexOf(target.dataset.orderId);
+  if (from < 0 || to < 0) return;
+  [orderingState[from], orderingState[to]] = [orderingState[to], orderingState[from]];
+  refreshOrderingCards(questions[index]);
+});
+app.addEventListener('pointercancel', () => { if (orderingPointer) { document.querySelector(`[data-order-id="${CSS.escape(orderingPointer.id)}"]`)?.classList.remove('order-dragging'); orderingPointer = null; } });
 
 function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);

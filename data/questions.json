@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-27.3",
+  "version": "2026-10-27.5",
   "questions": [
     {
       "id": "sw-best-meetings-1",
@@ -2611,7 +2611,7 @@
           "id": "toaster-cord",
           "left": {
             "type": "image",
-            "src": "images/sw59-home-hazards/toaster-cord.svg",
+            "src": "images/sw59-home-hazards/toaster-cord.jpg",
             "alt": "Toaster cord hanging over the table edge"
           },
           "right": {
@@ -2623,7 +2623,7 @@
           "id": "pot-handle",
           "left": {
             "type": "image",
-            "src": "images/sw59-home-hazards/pot-handle.svg",
+            "src": "images/sw59-home-hazards/pot-handle.jpg",
             "alt": "A hot pot handle sticking out from the stove"
           },
           "right": {
@@ -2635,7 +2635,7 @@
           "id": "open-oven",
           "left": {
             "type": "image",
-            "src": "images/sw59-home-hazards/open-oven.svg",
+            "src": "images/sw59-home-hazards/open-oven.jpg",
             "alt": "An oven door left open"
           },
           "right": {
@@ -2647,7 +2647,7 @@
           "id": "water-electric",
           "left": {
             "type": "image",
-            "src": "images/sw59-home-hazards/water-electric.svg",
+            "src": "images/sw59-home-hazards/water-electric.jpg",
             "alt": "Water spilled beside an electrical appliance"
           },
           "right": {
@@ -2659,7 +2659,7 @@
           "id": "chemicals-reachable",
           "left": {
             "type": "image",
-            "src": "images/sw59-home-hazards/chemicals-reachable.svg",
+            "src": "images/sw59-home-hazards/chemicals-reachable.jpg",
             "alt": "Medicine and cleaning products left where a child can reach"
           },
           "right": {
@@ -2671,7 +2671,7 @@
           "id": "knife-edge",
           "left": {
             "type": "image",
-            "src": "images/sw59-home-hazards/knife-edge.svg",
+            "src": "images/sw59-home-hazards/knife-edge.jpg",
             "alt": "A knife left near the edge of a table"
           },
           "right": {
@@ -2683,7 +2683,7 @@
           "id": "wet-floor",
           "left": {
             "type": "image",
-            "src": "images/sw59-home-hazards/wet-floor.svg",
+            "src": "images/sw59-home-hazards/wet-floor.jpg",
             "alt": "A wet, slippery patch on the kitchen floor"
           },
           "right": {
@@ -2695,7 +2695,7 @@
           "id": "open-cupboard",
           "left": {
             "type": "image",
-            "src": "images/sw59-home-hazards/open-cupboard.svg",
+            "src": "images/sw59-home-hazards/open-cupboard.jpg",
             "alt": "A cupboard door left open at head height"
           },
           "right": {
@@ -2705,6 +2705,52 @@
         }
       ],
       "explanation": "Look for things that can fall, burn, poison, cut, trip or shock someone."
+    },
+    {
+      "id": "gw-fire-safety-order-1",
+      "type": "ordering",
+      "programme": "GW",
+      "advancementId": "GW-34",
+      "question": "Put the fire-safety steps in the right order.",
+      "steps": [
+        {
+          "id": "clear-rules",
+          "text": "Clear the area and check the fire rules",
+          "image": "images/gw-fire-safety/clear-area-rules.jpg",
+          "alt": "Clear the area and check the fire rules before lighting a fire"
+        },
+        {
+          "id": "collect-sand-water",
+          "text": "Collect a bucket of sand or water",
+          "image": "images/gw-fire-safety/collect-sand-water.jpg",
+          "alt": "A bucket of sand or water ready beside the fire area"
+        },
+        {
+          "id": "build-fire",
+          "text": "Build the fire",
+          "image": "images/gw-fire-safety/build-fire.jpg",
+          "alt": "Build the fire safely in the cleared area"
+        },
+        {
+          "id": "cook-food",
+          "text": "Cook the food",
+          "image": "images/gw-fire-safety/cook-food.jpg",
+          "alt": "Cook food over the supervised fire"
+        },
+        {
+          "id": "put-out-fire",
+          "text": "Make sure the fire is completely out",
+          "image": "images/gw-fire-safety/extinguish-fire-completely.jpg",
+          "alt": "Make sure the fire is completely out, following the leader’s instructions"
+        },
+        {
+          "id": "leave-area",
+          "text": "Leave the area tidy and safe",
+          "image": "images/gw-fire-safety/leave-area.jpg",
+          "alt": "Leave the fire area tidy after checking the fire is out"
+        }
+      ],
+      "explanation": "Only light fires with a responsible adult and follow the rules for your area. The leader should make sure the fire is completely out before everyone leaves."
     }
   ]
 }
