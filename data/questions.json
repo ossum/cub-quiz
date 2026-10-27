@@ -2615,8 +2615,9 @@
             "alt": "Toaster cord hanging over the table edge"
           },
           "right": {
-            "type": "text",
-            "value": "The hot toaster could be pulled down and burn someone."
+            "type": "image",
+            "src": "images/sw59-home-hazards/toaster-cord-danger.jpg",
+            "alt": "Toaster cord hanging over the table edge"
           }
         },
         {
@@ -2627,8 +2628,9 @@
             "alt": "A hot pot handle sticking out from the stove"
           },
           "right": {
-            "type": "text",
-            "value": "Someone could knock the pot over and be burned by hot food."
+            "type": "image",
+            "src": "images/sw59-home-hazards/pot-handle-danger.jpg",
+            "alt": "A hot pot handle sticking out from the stove"
           }
         },
         {
@@ -2639,8 +2641,9 @@
             "alt": "An oven door left open"
           },
           "right": {
-            "type": "text",
-            "value": "Someone could trip over it or touch the hot oven."
+            "type": "image",
+            "src": "images/sw59-home-hazards/open-oven-danger.jpg",
+            "alt": "An oven door left open"
           }
         },
         {
@@ -2651,8 +2654,9 @@
             "alt": "Water spilled beside an electrical appliance"
           },
           "right": {
-            "type": "text",
-            "value": "Water near electricity could cause an electric shock."
+            "type": "image",
+            "src": "images/sw59-home-hazards/water-electric-danger.jpg",
+            "alt": "Water spilled beside an electrical appliance"
           }
         },
         {
@@ -2663,8 +2667,9 @@
             "alt": "Medicine and cleaning products left where a child can reach"
           },
           "right": {
-            "type": "text",
-            "value": "A child could swallow them and be poisoned."
+            "type": "image",
+            "src": "images/sw59-home-hazards/chemicals-reachable-danger.jpg",
+            "alt": "Medicine and cleaning products left where a child can reach"
           }
         },
         {
@@ -2675,8 +2680,9 @@
             "alt": "A knife left near the edge of a table"
           },
           "right": {
-            "type": "text",
-            "value": "The knife could fall and cut someone."
+            "type": "image",
+            "src": "images/sw59-home-hazards/knife-edge-danger.jpg",
+            "alt": "A knife left near the edge of a table"
           }
         },
         {
@@ -2687,8 +2693,9 @@
             "alt": "A wet, slippery patch on the kitchen floor"
           },
           "right": {
-            "type": "text",
-            "value": "Someone could slip and hurt themselves."
+            "type": "image",
+            "src": "images/sw59-home-hazards/wet-floor-danger.jpg",
+            "alt": "A wet, slippery patch on the kitchen floor"
           }
         },
         {
@@ -2699,8 +2706,9 @@
             "alt": "A cupboard door left open at head height"
           },
           "right": {
-            "type": "text",
-            "value": "Someone could bump their head on the open door."
+            "type": "image",
+            "src": "images/sw59-home-hazards/open-cupboard-danger.jpg",
+            "alt": "A cupboard door left open at head height"
           }
         }
       ],
