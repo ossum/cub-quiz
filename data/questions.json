@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-28T19:46:16.337Z",
+  "version": "2026-10-28T19:50:16.337Z",
   "questions": [
     {
       "id": "sw-best-meetings-1",
@@ -2903,7 +2903,7 @@
           "id": "pair-1",
           "left": {
             "type": "text",
-            "value": "1"
+            "value": "Label 1"
           },
           "right": {
             "type": "text",
@@ -2914,7 +2914,7 @@
           "id": "pair-2",
           "left": {
             "type": "text",
-            "value": "2"
+            "value": "Label 2"
           },
           "right": {
             "type": "text",
@@ -2925,7 +2925,7 @@
           "id": "pair-3",
           "left": {
             "type": "text",
-            "value": "3"
+            "value": "Label 3"
           },
           "right": {
             "type": "text",
@@ -2936,7 +2936,7 @@
           "id": "pair-4",
           "left": {
             "type": "text",
-            "value": "4"
+            "value": "Label 4"
           },
           "right": {
             "type": "text",
@@ -2947,7 +2947,7 @@
           "id": "pair-1793216246110",
           "left": {
             "type": "text",
-            "value": "5"
+            "value": "Label 5"
           },
           "right": {
             "type": "text",
@@ -2958,7 +2958,7 @@
           "id": "pair-1793216333806",
           "left": {
             "type": "text",
-            "value": "6"
+            "value": "Label 6"
           },
           "right": {
             "type": "text",
@@ -2973,7 +2973,7 @@
       "type": "image-pairs",
       "question": "Name the parts of the flag",
       "explanation": "",
-      "image": "images/flag-parts-pole.jpg",
+      "image": "images/flags/flag-parts-pole.jpg",
       "imageAlt": "",
       "advancementId": "GW-57",
       "allowReversal": true,
@@ -2984,7 +2984,7 @@
           "id": "pair-1",
           "left": {
             "type": "text",
-            "value": "1"
+            "value": "Label 1"
           },
           "right": {
             "type": "text",
@@ -2995,7 +2995,7 @@
           "id": "pair-2",
           "left": {
             "type": "text",
-            "value": "2"
+            "value": "Label 2"
           },
           "right": {
             "type": "text",
@@ -3006,7 +3006,7 @@
           "id": "pair-3",
           "left": {
             "type": "text",
-            "value": "3"
+            "value": "Label 3"
           },
           "right": {
             "type": "text",
@@ -3017,7 +3017,7 @@
           "id": "pair-4",
           "left": {
             "type": "text",
-            "value": "4"
+            "value": "Label 4"
           },
           "right": {
             "type": "text",
