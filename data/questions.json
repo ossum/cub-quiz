@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-28T05:45:49.521M",
+  "version": "2026-10-28T19:46:16.337Z",
   "questions": [
     {
       "id": "sw-best-meetings-1",
@@ -68,7 +68,7 @@
       "advancementId": "SW-55",
       "question": "Which Jungle Book character is shown here?",
       "image": "images/jungle-characters/baloo.jpg",
-      "imageAlt": "A friendly bear",
+      "imageAlt": "A friendly illustrated bear waving",
       "options": [
         "Baloo",
         "Bagheera",
@@ -268,7 +268,7 @@
           },
           "right": {
             "type": "text",
-            "value": "Ties a parcel or bandage"
+            "value": "Ties a parcel"
           }
         },
         {
@@ -304,7 +304,7 @@
           },
           "right": {
             "type": "text",
-            "value": "Stopper knot"
+            "value": "Stops a rope slipping through"
           }
         }
       ],
@@ -396,7 +396,7 @@
           },
           "right": {
             "type": "text",
-            "value": "Joins ropes of different sizes. Used on flags"
+            "value": "Joins ropes of different sizes"
           }
         },
         {
@@ -420,7 +420,7 @@
           },
           "right": {
             "type": "text",
-            "value": "Makes a fixed loop. Good for rescue!"
+            "value": "Makes a fixed loop"
           }
         },
         {
@@ -432,7 +432,7 @@
           },
           "right": {
             "type": "text",
-            "value": "Shortens a rope. Good for guy-lines"
+            "value": "Shortens a rope"
           }
         }
       ],
@@ -659,15 +659,17 @@
     },
     {
       "id": "sw-trail-sign-party-split-up-1",
-      "type": "multiple-choice",
       "programme": "SW",
-      "advancementId": "SW-43",
+      "type": "multiple-choice",
       "question": "Which trail sign means: Party split up?",
+      "explanation": "This trail sign means: Party split up.",
+      "image": "",
+      "imageAlt": "",
       "options": [
         {
           "id": "party-split-up",
           "image": "images/trail-signs/party-split-up.png",
-          "alt": "Party split up"
+          "alt": "Group split up"
         },
         {
           "id": "message-this-way",
@@ -686,7 +688,7 @@
         }
       ],
       "answer": "party-split-up",
-      "explanation": "This trail sign means: Party split up."
+      "advancementId": "SW-43"
     },
     {
       "id": "sw-trail-sign-message-this-way-1",
@@ -1295,7 +1297,7 @@
           },
           "right": {
             "type": "text",
-            "value": "Wolf pack leader"
+            "value": "Wolf Pack Leader"
           }
         },
         {
@@ -1307,6 +1309,17 @@
           "right": {
             "type": "text",
             "value": "Mother wolf"
+          }
+        },
+        {
+          "id": "name-rama-wolf",
+          "left": {
+            "type": "text",
+            "value": "Rama"
+          },
+          "right": {
+            "type": "text",
+            "value": "Water Buffalo"
           }
         },
         {
@@ -1387,17 +1400,6 @@
           }
         },
         {
-          "id": "name-rama-mysa",
-          "left": {
-            "type": "text",
-            "value": "Rama and Mysa"
-          },
-          "right": {
-            "type": "text",
-            "value": "Water buffaloes"
-          }
-        },
-        {
           "id": "name-chil-rann",
           "left": {
             "type": "text",
@@ -1405,7 +1407,7 @@
           },
           "right": {
             "type": "text",
-            "value": "Kite, jungle messenger bird"
+            "value": "Kite, the jungle messenger bird"
           }
         },
         {
@@ -1420,21 +1422,10 @@
           }
         },
         {
-          "id": "name-tha",
-          "left": {
-            "type": "text",
-            "value": "Tha"
-          },
-          "right": {
-            "type": "text",
-            "value": "First elephant"
-          }
-        },
-        {
           "id": "name-mao-mor",
           "left": {
             "type": "text",
-            "value": "Mao or Mor"
+            "value": "Mao"
           },
           "right": {
             "type": "text",
@@ -2563,9 +2554,8 @@
             "alt": "Toaster cord hanging over the table edge"
           },
           "right": {
-            "type": "image",
-            "src": "images/sw59-home-hazards/toaster-cord-danger.jpg",
-            "alt": "Toaster cord hanging over the table edge"
+            "type": "text",
+            "value": "The hot toaster could be pulled down and burn someone."
           }
         },
         {
@@ -2576,9 +2566,8 @@
             "alt": "A hot pot handle sticking out from the stove"
           },
           "right": {
-            "type": "image",
-            "src": "images/sw59-home-hazards/pot-handle-danger.jpg",
-            "alt": "A hot pot handle sticking out from the stove"
+            "type": "text",
+            "value": "Someone could knock the pot over and be burned by hot food."
           }
         },
         {
@@ -2589,9 +2578,8 @@
             "alt": "An oven door left open"
           },
           "right": {
-            "type": "image",
-            "src": "images/sw59-home-hazards/open-oven-danger.jpg",
-            "alt": "An oven door left open"
+            "type": "text",
+            "value": "Someone could trip over it or touch the hot oven."
           }
         },
         {
@@ -2602,9 +2590,8 @@
             "alt": "Water spilled beside an electrical appliance"
           },
           "right": {
-            "type": "image",
-            "src": "images/sw59-home-hazards/water-electric-danger.jpg",
-            "alt": "Water spilled beside an electrical appliance"
+            "type": "text",
+            "value": "Water near electricity could cause an electric shock."
           }
         },
         {
@@ -2615,9 +2602,8 @@
             "alt": "Medicine and cleaning products left where a child can reach"
           },
           "right": {
-            "type": "image",
-            "src": "images/sw59-home-hazards/chemicals-reachable-danger.jpg",
-            "alt": "Medicine and cleaning products left where a child can reach"
+            "type": "text",
+            "value": "A child could swallow them and be poisoned."
           }
         },
         {
@@ -2628,9 +2614,8 @@
             "alt": "A knife left near the edge of a table"
           },
           "right": {
-            "type": "image",
-            "src": "images/sw59-home-hazards/knife-edge-danger.jpg",
-            "alt": "A knife left near the edge of a table"
+            "type": "text",
+            "value": "The knife could fall and cut someone."
           }
         },
         {
@@ -2641,9 +2626,8 @@
             "alt": "A wet, slippery patch on the kitchen floor"
           },
           "right": {
-            "type": "image",
-            "src": "images/sw59-home-hazards/wet-floor-danger.jpg",
-            "alt": "A wet, slippery patch on the kitchen floor"
+            "type": "text",
+            "value": "Someone could slip and hurt themselves."
           }
         },
         {
@@ -2654,9 +2638,8 @@
             "alt": "A cupboard door left open at head height"
           },
           "right": {
-            "type": "image",
-            "src": "images/sw59-home-hazards/open-cupboard-danger.jpg",
-            "alt": "A cupboard door left open at head height"
+            "type": "text",
+            "value": "Someone could bump their head on the open door."
           }
         }
       ],
@@ -2738,7 +2721,7 @@
           "alt": "Two finger sign in air with left hand"
         }
       ],
-      "answer": "choice-2",
+      "answer": "choice-1",
       "advancementId": "MEM-5"
     },
     {
@@ -2862,7 +2845,7 @@
           },
           "right": {
             "type": "text",
-            "value": "Useful for quick gear repairs or securing a bandage"
+            "value": "Quick clothing repairs or securing a bandage"
           }
         },
         {
@@ -2899,6 +2882,146 @@
           "right": {
             "type": "text",
             "value": "A small amount of money for emergencies"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gw-flag-parts-01",
+      "programme": "GW",
+      "type": "image-pairs",
+      "question": "Name the parts of the flag",
+      "explanation": "",
+      "image": "images/flags/flag-parts.jpg",
+      "imageAlt": "",
+      "advancementId": "GW-57",
+      "allowReversal": true,
+      "sampleSize": 3,
+      "optionCount": 5,
+      "pairs": [
+        {
+          "id": "pair-1",
+          "left": {
+            "type": "text",
+            "value": "1"
+          },
+          "right": {
+            "type": "text",
+            "value": "toggle"
+          }
+        },
+        {
+          "id": "pair-2",
+          "left": {
+            "type": "text",
+            "value": "2"
+          },
+          "right": {
+            "type": "text",
+            "value": "hoist tape"
+          }
+        },
+        {
+          "id": "pair-3",
+          "left": {
+            "type": "text",
+            "value": "3"
+          },
+          "right": {
+            "type": "text",
+            "value": "fly"
+          }
+        },
+        {
+          "id": "pair-4",
+          "left": {
+            "type": "text",
+            "value": "4"
+          },
+          "right": {
+            "type": "text",
+            "value": "fly end"
+          }
+        },
+        {
+          "id": "pair-1793216246110",
+          "left": {
+            "type": "text",
+            "value": "5"
+          },
+          "right": {
+            "type": "text",
+            "value": "hoist"
+          }
+        },
+        {
+          "id": "pair-1793216333806",
+          "left": {
+            "type": "text",
+            "value": "6"
+          },
+          "right": {
+            "type": "text",
+            "value": "strop"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gw-flag-pole-10",
+      "programme": "GW",
+      "type": "image-pairs",
+      "question": "Name the parts of the flag",
+      "explanation": "",
+      "image": "images/flag-parts-pole.jpg",
+      "imageAlt": "",
+      "advancementId": "GW-57",
+      "allowReversal": true,
+      "sampleSize": 4,
+      "optionCount": 4,
+      "pairs": [
+        {
+          "id": "pair-1",
+          "left": {
+            "type": "text",
+            "value": "1"
+          },
+          "right": {
+            "type": "text",
+            "value": "Pulley"
+          }
+        },
+        {
+          "id": "pair-2",
+          "left": {
+            "type": "text",
+            "value": "2"
+          },
+          "right": {
+            "type": "text",
+            "value": "Halyard"
+          }
+        },
+        {
+          "id": "pair-3",
+          "left": {
+            "type": "text",
+            "value": "3"
+          },
+          "right": {
+            "type": "text",
+            "value": "Pole"
+          }
+        },
+        {
+          "id": "pair-4",
+          "left": {
+            "type": "text",
+            "value": "4"
+          },
+          "right": {
+            "type": "text",
+            "value": "Cleat"
           }
         }
       ]
