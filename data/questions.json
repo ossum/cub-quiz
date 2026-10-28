@@ -68,7 +68,7 @@
       "advancementId": "SW-55",
       "question": "Which Jungle Book character is shown here?",
       "image": "images/jungle-characters/baloo.jpg",
-      "imageAlt": "A friendly illustrated bear waving",
+      "imageAlt": "A friendly bear",
       "options": [
         "Baloo",
         "Bagheera",
@@ -268,7 +268,7 @@
           },
           "right": {
             "type": "text",
-            "value": "Ties a parcel"
+            "value": "Ties a parcel or bandage"
           }
         },
         {
@@ -304,7 +304,7 @@
           },
           "right": {
             "type": "text",
-            "value": "Stops a rope slipping through"
+            "value": "Stopper knot"
           }
         }
       ],
@@ -396,7 +396,7 @@
           },
           "right": {
             "type": "text",
-            "value": "Joins ropes of different sizes"
+            "value": "Joins ropes of different sizes. Used on flags"
           }
         },
         {
@@ -420,7 +420,7 @@
           },
           "right": {
             "type": "text",
-            "value": "Makes a fixed loop"
+            "value": "Makes a fixed loop. Good for rescue!"
           }
         },
         {
@@ -432,7 +432,7 @@
           },
           "right": {
             "type": "text",
-            "value": "Shortens a rope"
+            "value": "Shortens a rope. Good for guy-lines"
           }
         }
       ],

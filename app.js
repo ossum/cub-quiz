@@ -315,7 +315,7 @@ function renderMatchItem(item, side, indexInColumn) {
   const fallback = side === 'left' ? `Picture ${indexInColumn + 1}` : `Possible match ${indexInColumn + 1}`;
   const label = item.text || item.alt || fallback;
   const content = item.image
-    ? `<img src="${escapeAttribute(item.image)}" alt="${escapeAttribute(item.alt || fallback)}"><span>${fallback}</span>`
+    ? `<img src="${escapeAttribute(item.image)}" alt="${escapeAttribute(item.alt || fallback)}">`
     : `<span class="match-item-text">${escapeHtml(item.text || fallback)}</span>`;
   return `<button class="match-item ${item.text ? 'match-item-choice' : ''}" type="button" data-match-side="${side}" data-item-id="${escapeAttribute(item.id)}" aria-label="${escapeAttribute(label)}">${content}</button>`;
 }
