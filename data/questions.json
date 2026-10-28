@@ -2803,6 +2803,105 @@
           }
         }
       ]
+    },
+    {
+      "id": "sw-emergency-kit-contents",
+      "programme": "SW",
+      "type": "image-pairs",
+      "question": "Emergency kit contents",
+      "explanation": "",
+      "image": "",
+      "imageAlt": "",
+      "advancementId": "SW-69",
+      "allowReversal": true,
+      "sampleSize": 4,
+      "optionCount": 4,
+      "pairs": [
+        {
+          "id": "pair-1",
+          "left": {
+            "type": "image",
+            "src": "images/plasters.jpg",
+            "alt": "Plasters"
+          },
+          "right": {
+            "type": "text",
+            "value": "For small cuts, grazes, and blisters"
+          }
+        },
+        {
+          "id": "pair-2",
+          "left": {
+            "type": "image",
+            "src": "images/tweezers.jpg",
+            "alt": "Tweezers"
+          },
+          "right": {
+            "type": "text",
+            "value": "To safely remove splinters or thorns"
+          }
+        },
+        {
+          "id": "pair-3",
+          "left": {
+            "type": "image",
+            "src": "images/antiseptic-wipe.jpg",
+            "alt": "Antiseptic wipes or ointment"
+          },
+          "right": {
+            "type": "text",
+            "value": "To clean scrapes before covering them"
+          }
+        },
+        {
+          "id": "pair-4",
+          "left": {
+            "type": "image",
+            "src": "images/safety-pins.jpg",
+            "alt": "Safety Pins"
+          },
+          "right": {
+            "type": "text",
+            "value": "Useful for quick gear repairs or securing a bandage"
+          }
+        },
+        {
+          "id": "pair-1793166241225",
+          "left": {
+            "type": "image",
+            "src": "images/notepad.jpg",
+            "alt": "Notepaper and a pencil"
+          },
+          "right": {
+            "type": "text",
+            "value": "To write down notes or emergency messages"
+          }
+        },
+        {
+          "id": "pair-1793166270065",
+          "left": {
+            "type": "image",
+            "src": "images/emergency-numbers.jpg",
+            "alt": "Emergency Contact Card"
+          },
+          "right": {
+            "type": "text",
+            "value": "A small card with the Cub's name, family phone numbers, and local emergency numbers"
+          }
+        },
+        {
+          "id": "pair-1793166309099",
+          "left": {
+            "type": "image",
+            "src": "images/money.jpg",
+            "alt": "Money"
+          },
+          "right": {
+            "type": "text",
+            "value": "A small amount of money for emergencies"
+          }
+        }
+      ]
     }
   ]
 }
