@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-28T19:50:16.337Z",
+  "version": "2026-10-28T19:59",
   "questions": [
     {
       "id": "sw-best-meetings-1",
@@ -3025,6 +3025,23 @@
           }
         }
       ]
+    },
+    {
+      "id": "gw-knots-use-match-2",
+      "type": "image-dropdown",
+      "programme": "GW",
+      "advancementId": "GW-59",
+      "question": "What knot would you use for this loop?",
+      "image": "images/knots/flag-loop.jpg",
+      "imageAlt": "A flag being prepared",
+      "options": [
+        "Round turn and two half hitches",
+        "Bowline",
+        "Sheetbend",
+        "Sheepshank"
+      ],
+      "answer": "Bowline",
+      "explanation": "The bowline makes a loop that doesn't slip"
     }
   ]
 }
