@@ -1,0 +1,101 @@
+{
+  "version": "2026-10-28T11:23",
+  "questions": [
+    {
+      "id": "gw-memorygame",
+      "type": "memory-grid",
+      "programme": "GW",
+      "advancementId": "SW-13",
+      "question": "Memorise the pictures, then find each one in turn.",
+      "cells": [
+        {
+          "id": "cell-1",
+          "image": "images/memory-grid/A.png",
+          "alt": "Pawprint"
+        },
+        {
+          "id": "cell-2",
+          "image": "images/memory-grid/B.png",
+          "alt": "Three leaves"
+        },
+        {
+          "id": "cell-3",
+          "image": "images/memory-grid/C.png",
+          "alt": "Shell"
+        },
+        {
+          "id": "cell-4",
+          "image": "images/memory-grid/D.png",
+          "alt": "Feather"
+        },
+        {
+          "id": "cell-5",
+          "image": "images/memory-grid/E.png",
+          "alt": "Hibiscus flower"
+        },
+        {
+          "id": "cell-6",
+          "image": "images/memory-grid/F.png",
+          "alt": "Water drop"
+        },
+        {
+          "id": "cell-7",
+          "image": "images/memory-grid/G.png",
+          "alt": "Moon"
+        },
+        {
+          "id": "cell-8",
+          "image": "images/memory-grid/H.png",
+          "alt": "Sun"
+        },
+        {
+          "id": "cell-9",
+          "image": "images/memory-grid/I.png",
+          "alt": "Mountain"
+        },
+        {
+          "id": "cell-10",
+          "image": "images/memory-grid/J.png",
+          "alt": "Acorn"
+        },
+        {
+          "id": "cell-11",
+          "image": "images/memory-grid/K.png",
+          "alt": "Spiral vine"
+        },
+        {
+          "id": "cell-12",
+          "image": "images/memory-grid/L.png",
+          "alt": "Lotus flower"
+        },
+        {
+          "id": "cell-13",
+          "image": "images/memory-grid/M.png",
+          "alt": "Bamboo"
+        },
+        {
+          "id": "cell-14",
+          "image": "images/memory-grid/N.png",
+          "alt": "Elephant"
+        },
+        {
+          "id": "cell-15",
+          "image": "images/memory-grid/O.png",
+          "alt": "Claw marks"
+        },
+        {
+          "id": "cell-16",
+          "image": "images/memory-grid/P.png",
+          "alt": "Leaf"
+        }
+      ],
+      "explanation": "Kim's Game!",
+      "rows": 3,
+      "columns": 3,
+      "previewSeconds": 20,
+      "shuffleCells": true,
+      "recallCount": 3,
+      "randomizePrompts": true
+    }
+  ]
+}

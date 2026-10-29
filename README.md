@@ -1,6 +1,6 @@
 # Cub Quiz
 
-A reusable, static quiz for South African Cub Scouts. It uses plain HTML, CSS and JavaScript, with the advancement catalogue and question bank kept in JSON. No accounts, backend, build step, external service or dependencies are needed.
+A reusable, static quiz for South African Cub Scouts. It uses plain HTML, CSS and JavaScript, with the advancement catalogue and question banks kept in JSON. No accounts, backend, build step, external service or dependencies are needed.
 
 ## Run locally
 
@@ -28,9 +28,9 @@ The selector lists all 71 testable SW and 75 GW advancements. SW-59 now has eigh
 
 ## Add or edit questions
 
-Open **Manage questions** on the setup screen to create, search, edit, import or export questions. During a quiz, use **Edit this question** to correct the current item. Edits are kept in this browser for testing. Download the updated `questions.json` and replace the project copy to make them permanent. Images uploaded in the editor are resized to a maximum 1200 px and embedded in the exported question data. Use **Use project version** after replacing the project file to clear browser-only changes.
+Open **Manage questions** on the setup screen to create, search, edit, import or export questions. During a quiz, use **Edit this question** to correct the current item. Edits are kept in this browser for testing. Download a question or the full question bank, then merge it into a listed JSON file or add a new filename to `data/question-files.json`. Images uploaded in the editor are resized to a maximum 1200 px and embedded in the exported question data. Use **Use project version** after replacing the project file to clear browser-only changes.
 
-Edit `data/questions.json` and add an object to the `questions` array. Every question needs a unique `id`, a `type`, and `programme` (`MEM`, `SW` or `GW`). Add `advancementId` for one advancement or `advancementIds` for a shared question; its tags control which focused quizzes and random tests include it.
+Edit a JSON file listed in `data/question-files.json` and add an object to its `questions` array. The browser cannot enumerate files on static GitHub Pages, so add each question filename to that manifest to load it. Every question needs a unique `id`, a `type`, and `programme` (`MEM`, `SW` or `GW`). Add `advancementId` for one advancement or `advancementIds` for a shared question; its tags control which focused quizzes and random tests include it.
 
 ### Multiple choice
 
@@ -114,7 +114,7 @@ Store image files in `images/` and use project-relative paths. Keep JSON valid: 
 
 `data/advancements.json` contains Membership, SW and GW programmes, categories and numbered testable advancements. SW and GW category colours are Awareness green, Outdoor blue, Community yellow and Aptitude red; Membership has no category colour. Edit this file if the advancement list or colours change. SW 72 and 73 are omitted because they are not testable. SW-43 has eight picture-choice questions based on the supplied common tracking signs chart. GW-49 now has two map-symbol pools (line/area symbols and place icons), each showing four random pairs. GW-55 has a 21-entry Jungle Book name-to-animal-and-clue pool, showing four random pairs per round. GW-66 includes four matching sets for the ScoutWiki traffic signs, with 14 unique signs; the last set revisits two familiar signs to keep four pairs per round. The map-symbol PNGs are cropped from the [Cub Pro-Plan Chart 43: Map Symbols PDF](https://scoutwiki.scouts.org.za/w/images/2/26/Cub-Pro-Plan-Chart-43-Map-Symbols_%28PF%29.pdf). The traffic-sign PNGs are cropped from the [Cub Pro-Plan Chart 8: Traffic Signs PDF](https://scoutwiki.scouts.org.za/w/images/a/ac/Cub-Pro-Plan-Chart-8-Traffic-Signs_%28PF%29.pdf), listed on the [Cub Pro-Plan Charts page](https://scoutwiki.scouts.org.za/wiki/Cub_Pro-Plan_Charts).
 
-Both JSON files include a `version` value shown discreetly in the page footer. Bump that value in each file when you edit the project data. The app fetches JSON without using the browser HTTP cache, while the service worker keeps a network-fetched copy for offline use. Exported question banks receive a timestamp version automatically; bump the version in advancements.json manually when changing that file; its cache version should be bumped when changing the app shell. If the footer says “local edits + project”, browser-saved edits are retained and newly added project questions are merged in; saved edits to an existing ID continue to take precedence.
+Each question bank and the advancement catalogue includes a `version` value shown discreetly in the page footer. Bump that value in the file when you edit the project data. The app fetches JSON without using the browser HTTP cache, while the service worker keeps a network-fetched copy for offline use. Exported question banks receive a timestamp version automatically; bump the version in advancements.json manually when changing that file; its cache version should be bumped when changing the app shell. If the footer says “local edits + project”, browser-saved edits are retained and newly added project questions are merged in; saved edits to an existing ID continue to take precedence.
 
 Question content and images are stored locally. Use images you have permission to share, and keep question content free of personal information. The knot-name list follows SCOUTS South Africa Wiki’s [Leaping Wolf knot list](https://scoutwiki.scouts.org.za/wiki/Leaping_Wolf). Knot-use references include [Basic Knots](https://scoutwiki.scouts.org.za/wiki/Basic_Knots), [Reef knot](https://scoutwiki.scouts.org.za/wiki/Reef_knot), [Fisherman’s knot](https://scoutwiki.scouts.org.za/wiki/Fisherman%27s_knot), [Round Turn and 2 Half Hitches](https://scoutwiki.scouts.org.za/wiki/Round_Turn_and_2_Half_Hitches), and [Figure of eight knot](https://scoutwiki.scouts.org.za/wiki/Figure_of_Eight_knot). All question images use PNG files and are displayed without cropping. The supplied Bowline JPG has been converted to PNG without cropping. For the other seven knots, each filename has a clearly marked PNG placeholder for a leader to replace with an accurate knot picture. Knot practice uses four-knot matching rounds for uses and names in each programme. Each round is linked to all four related advancement numbers, with short matching choices to reduce reading.
 
@@ -126,7 +126,7 @@ Question content and images are stored locally. Use images you have permission t
 - `question-editor.js` — leader question bank manager, editor, browser storage and JSON import/export.
 - `manifest.webmanifest` and `service-worker.js` — installable app details and offline cache.
 - `data/advancements.json` — editable programmes and advancement catalogue.
-- `data/questions.json` — editable tagged question bank.
+- `data/question-files.json` — manifest listing question-bank JSON files loaded by the quiz. Add new JSON filenames here. `data/questions.json` and `data/questions.x.json` are currently listed; duplicate IDs use the first listed file.
 - `images/` — local question images, including PNG question images, the matching example, and knot-image placeholders ready to replace.
 
 ## Before publishing

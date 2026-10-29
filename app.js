@@ -27,27 +27,61 @@ const shuffle = (items) => {
 
 async function loadData() {
   try {
-    const [questionResponse, advancementResponse] = await Promise.all([
-      fetch('./data/questions.json', { cache: 'no-store' }),
+    const [manifestResponse, advancementResponse] = await Promise.all([
+      fetch('./data/question-files.json', { cache: 'no-store' }),
       fetch('./data/advancements.json', { cache: 'no-store' })
     ]);
-    if (!questionResponse.ok || !advancementResponse.ok) throw new Error('The quiz files could not be found.');
-    const questionData = await questionResponse.json();
-    const advancementData = await advancementResponse.json();
+    if (!manifestResponse.ok || !advancementResponse.ok) throw new Error('The quiz data manifest or advancement file could not be found.');
+    const [manifest, advancementData] = await Promise.all([manifestResponse.json(), advancementResponse.json()]);
+    if (!Array.isArray(manifest.files) || !manifest.files.length) throw new Error('The question file manifest must list at least one JSON file.');
+    const fileNames = [...new Set(manifest.files.filter((name) => typeof name === 'string' && /^[a-z0-9][a-z0-9._-]*\.json$/i.test(name) && !['advancements.json', 'question-files.json'].includes(name.toLowerCase())))];
+    if (!fileNames.length) throw new Error('The question file manifest contains no valid question JSON filenames.');
+    const results = await Promise.all(fileNames.map(async (name) => {
+      try {
+        const response = await fetch(`./data/${encodeURIComponent(name)}`, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        if (!data || !Array.isArray(data.questions)) throw new Error('Missing questions array');
+        return { name, data };
+      } catch (error) {
+        console.warn(`Skipping invalid question file ${name}:`, error.message);
+        return null;
+      }
+    }));
+    const questionFiles = results.filter(Boolean);
+    if (!questionFiles.length) throw new Error('None of the listed question files could be loaded as question banks.');
+    catalogue = advancementData.programmes;
+    const validAdvancements = new Set(catalogue.flatMap((programme) => programme.categories.flatMap((category) => category.advancements.map((item) => item.id))));
+    const projectQuestions = [];
+    const seenIds = new Set();
+    const versions = [];
+    for (const { name, data } of questionFiles) {
+      versions.push(`${name} ${data.version || 'unversioned'}`);
+      for (const raw of data.questions) {
+        const question = normalizePairQuestion(migrateLegacyImageMatch(raw));
+        const advancementIds = Array.isArray(question?.advancementIds) ? question.advancementIds : [question?.advancementId];
+        const supportedTypes = ['multiple-choice', 'image-dropdown', 'image-option', 'image-pairs', 'image-match', 'memory-grid', 'ordering'];
+        if (!question || typeof question.id !== 'string' || !question.id || !supportedTypes.includes(question.type) || !['MEM', 'SW', 'GW'].includes(question.programme) || !advancementIds.length || advancementIds.some((id) => !validAdvancements.has(id))) {
+          console.warn(`Skipping invalid question record from ${name}.`, question?.id || question);
+          continue;
+        }
+        if (seenIds.has(question.id)) { console.warn(`Ignoring duplicate question ID ${question.id} from ${name}; an earlier manifest file takes priority.`); continue; }
+        seenIds.add(question.id);
+        projectQuestions.push(question);
+      }
+    }
     const questionOverride = readQuestionBankOverride();
     questionOverrideVersion = questionOverride?.version || '';
-    const projectQuestions = questionData.questions.map(migrateLegacyImageMatch).map(normalizePairQuestion);
     if (questionOverride) {
-      const overrideQuestions = questionOverride.questions.map(migrateLegacyImageMatch).map(normalizePairQuestion);
+      const overrideQuestions = questionOverride.questions.map((question) => normalizePairQuestion(migrateLegacyImageMatch(question)));
       const overrideIds = new Set(overrideQuestions.map((question) => question.id));
       bank = [...overrideQuestions, ...projectQuestions.filter((question) => !overrideIds.has(question.id))];
     } else bank = projectQuestions;
     servedDataVersions = {
-      questions: questionOverride ? `local edits${questionOverride.version ? ` ${questionOverride.version}` : ''} + project ${questionData.version || 'unversioned'}` : questionData.version || 'unversioned',
+      questions: questionOverride ? `local edits${questionOverride.version ? ` ${questionOverride.version}` : ''} + ${versions.join(', ')}` : versions.join(', '),
       advancements: advancementData.version || 'unversioned'
     };
     renderDataVersion();
-    catalogue = advancementData.programmes;
     if (!Array.isArray(bank) || !Array.isArray(catalogue) || !catalogue.length) throw new Error('The quiz data is not in the expected format.');
     const firstAvailable = bank.find((question) => question.programme === selection.programme);
     selection.advancementId = firstAvailable?.advancementId || firstAvailable?.advancementIds?.[0] || '';
@@ -55,7 +89,7 @@ async function loadData() {
   } catch (error) {
     const openedAsFile = window.location.protocol === 'file:';
     const localDiagnostic = ['localhost', '127.0.0.1'].includes(window.location.hostname) ? `<pre style="white-space:pre-wrap;text-align:left;font-size:11px;color:#7b4e26;background:#fff8e8;padding:10px;border-radius:8px;overflow-wrap:anywhere">${escapeHtml(error?.stack || String(error))}</pre>` : '';
-    app.innerHTML = `<div class="results"><div class="result-icon" aria-hidden="true">!</div><p class="eyebrow">OOPS! THE TRAIL IS BLOCKED</p><h2>We couldn’t load the quiz.</h2><p class="summary">${openedAsFile ? 'Open the project through a local web server (for example, VS Code Live Server). Browsers block the question files when index.html is opened directly.' : 'Check that data/questions.json and data/advancements.json are in the project, then refresh the page.'}</p>${localDiagnostic}<button class="primary" onclick="location.reload()">Try again</button></div>`;
+    app.innerHTML = `<div class="results"><div class="result-icon" aria-hidden="true">!</div><p class="eyebrow">OOPS! THE TRAIL IS BLOCKED</p><h2>We couldn’t load the quiz.</h2><p class="summary">${openedAsFile ? 'Open the project through a local web server (for example, VS Code Live Server). Browsers block the question files when index.html is opened directly.' : 'Check that data/question-files.json lists valid question files in the data folder, and that data/advancements.json is present.'}</p>${localDiagnostic}<button class="primary" onclick="location.reload()">Try again</button></div>`;
   }
 }
 

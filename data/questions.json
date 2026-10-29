@@ -2027,12 +2027,12 @@
           "alt": "Leaf"
         }
       ],
-      "explanation": "These are pictograms extracted from the nature cipher. Replace them with Pack pictures when ready.",
-      "rows": 4,
-      "columns": 4,
-      "previewSeconds": 20,
+      "explanation": "Kim's Game!",
+      "rows": 3,
+      "columns": 3,
+      "previewSeconds": 30,
       "shuffleCells": true,
-      "recallCount": 3,
+      "recallCount": 2,
       "randomizePrompts": true
     },
     {
@@ -2721,7 +2721,7 @@
           "alt": "Two finger sign in air with left hand"
         }
       ],
-      "answer": "choice-1",
+      "answer": "choice-2",
       "advancementId": "MEM-5"
     },
     {
@@ -3010,7 +3010,7 @@
           },
           "right": {
             "type": "text",
-            "value": "Pole"
+            "value": "Flag pole"
           }
         },
         {

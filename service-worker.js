@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cub-quiz-pwa-v18';
+const CACHE_NAME = 'cub-quiz-pwa-v19';
 const SHELL_FILES = [
   './',
   './index.html',
@@ -7,7 +7,7 @@ const SHELL_FILES = [
   './style.css',
   './manifest.webmanifest',
   './data/advancements.json',
-  './data/questions.json',
+  './data/question-files.json',
   './images/app-icon-192.png',
   './images/app-icon-512.png',
   './images/badges/burrowup.png',
@@ -19,7 +19,7 @@ self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
     await cache.addAll(SHELL_FILES.map((path) => new Request(new URL(path, self.registration.scope), { cache: 'reload' })));
-    await cacheQuestionImages(cache, await fetch(new URL('./data/questions.json', self.registration.scope), { cache: 'no-cache' }));
+    await cacheQuestionFiles(cache);
     await self.skipWaiting();
   })());
 });
@@ -49,7 +49,7 @@ self.addEventListener('fetch', (event) => {
       const response = await fetch(request, { cache: 'no-cache' });
       if (response.ok) {
         await cache.put(request, response.clone());
-        if (url.pathname.endsWith('/data/questions.json')) await cacheQuestionImages(cache, response.clone());
+        if (/\/data\/[^/]+\.json$/i.test(url.pathname) && !url.pathname.endsWith('/advancements.json')) await cacheQuestionImages(cache, response.clone());
       }
       return response;
     } catch {
@@ -60,6 +60,25 @@ self.addEventListener('fetch', (event) => {
     }
   })());
 });
+
+
+async function cacheQuestionFiles(cache) {
+  try {
+    const manifestResponse = await fetch(new URL('./data/question-files.json', self.registration.scope), { cache: 'no-cache' });
+    if (!manifestResponse.ok) return;
+    const manifest = await manifestResponse.json();
+    const names = [...new Set((manifest.files || []).filter((name) => typeof name === 'string' && /^[a-z0-9][a-z0-9._-]*\.json$/i.test(name) && !['advancements.json', 'question-files.json'].includes(name.toLowerCase())))];
+    await Promise.all(names.map(async (name) => {
+      try {
+        const request = new Request(new URL(`./data/${encodeURIComponent(name)}`, self.registration.scope), { cache: 'reload' });
+        const response = await fetch(request);
+        if (!response.ok) return;
+        await cache.put(request, response.clone());
+        await cacheQuestionImages(cache, response.clone());
+      } catch (error) { console.warn(`Could not cache question bank ${name}.`, error); }
+    }));
+  } catch (error) { console.warn('Question banks could not be cached for offline use.', error); }
+}
 
 async function cacheQuestionImages(cache, response) {
   if (!response?.ok) return;
