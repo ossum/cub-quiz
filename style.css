@@ -38,3 +38,5 @@
 @media(max-width:680px){.choice-icon.badge-icon{width:38px;height:38px;flex-basis:38px}.combined-badges{height:36px;gap:0}.combined-badges img{width:27px;height:34px}}
 
 .match-item:not(.match-item-choice){min-height:84px}.match-item:not(.match-item-choice) img{height:72px}@media(max-width:680px){.match-item:not(.match-item-choice){min-height:72px}.match-item:not(.match-item-choice) img{height:60px}}
+
+.certificate-tools{display:grid;justify-items:center;gap:8px;max-width:420px;margin:0 auto 25px;padding:18px;border:1px solid #e1e9dc;border-radius:16px;background:#f8faf5}.certificate-tools label{font-weight:900;color:#40584a}.certificate-tools .editor-input{margin:0;text-align:center}.certificate-tools .primary{font-size:14px;padding:12px 18px}.certificate-tools .primary:disabled{opacity:.45;cursor:not-allowed}.certificate-tools small{color:#78857b;font-size:12px}.certificate-data{display:none}.editor-save-actions{display:flex;align-items:center;gap:10px}@media(max-width:680px){.editor-save-row{align-items:stretch;flex-direction:column}.editor-save-actions{flex-direction:column;align-items:stretch}.editor-save-actions>*{width:100%}}

@@ -595,9 +595,10 @@ function advanceQuestion() {
 
 function renderChallengeResults() {
   const programme = getProgramme();
-  app.innerHTML = `<div class="results challenge-results"><div class="result-icon" aria-hidden="true">♥</div><p class="eyebrow">CHALLENGE COMPLETE</p><h2>Keep up the great work!</h2><p class="score">${score} successful ${score === 1 ? 'answer' : 'answers'}</p><p class="challenge-lives-summary">Lives remaining: ${challengeState.lives} of ${challengeState.totalLives}</p><p class="summary">${escapeHtml(programme.name)} Challenge Mode<br>You answered ${challengeState.questionsAnswered} ${challengeState.questionsAnswered === 1 ? 'question' : 'questions'}.</p><div class="result-actions"><button class="primary" id="restart">Play again <span aria-hidden="true">↻</span></button><button class="secondary" id="change-test">Choose another test</button></div></div>`;
+  app.innerHTML = `<div class="results challenge-results"><div class="result-icon" aria-hidden="true">♥</div><p class="eyebrow">CHALLENGE COMPLETE</p><h2>Keep up the great work!</h2><p class="score">${score} successful ${score === 1 ? 'answer' : 'answers'}</p><p class="challenge-lives-summary">Lives remaining: ${challengeState.lives} of ${challengeState.totalLives}</p><p class="summary">${escapeHtml(programme.name)} Challenge Mode<br>You answered ${challengeState.questionsAnswered} ${challengeState.questionsAnswered === 1 ? 'question' : 'questions'}.</p>${renderCertificateControls(`${programme.name} Challenge`, `${score} successful answers`, `Lives remaining: ${challengeState.lives} of ${challengeState.totalLives}`)}<div class="result-actions"><button class="primary" id="restart">Play again <span aria-hidden="true">↻</span></button><button class="secondary" id="change-test">Choose another test</button></div></div>`;
   document.querySelector('#restart').addEventListener('click', startQuiz);
   document.querySelector('#change-test').addEventListener('click', renderSetup);
+  wireCertificateDownload();
 }
 
 function renderResults() {
@@ -609,9 +610,52 @@ function renderResults() {
   let badge = '✦';
   if (percent === 1) { message = 'A perfect round! You’re ready to share your Cub knowledge.'; badge = '★'; }
   else if (percent >= .7) message = 'Great work! You know your stuff. Keep that curiosity going.';
-  app.innerHTML = `<div class="results"><div class="result-icon" aria-hidden="true">${badge}</div><p class="eyebrow">ADVENTURE COMPLETE</p><h2>${percent >= .7 ? 'Well done, Cub!' : 'Nice exploring!'}</h2><p class="score">${score} out of ${questions.length} stars</p><p class="summary">${escapeHtml(context)}<br>${message}</p><div class="result-actions"><button class="primary" id="restart">Play again <span aria-hidden="true">↻</span></button><button class="secondary" id="change-test">Choose another test</button></div></div>`;
+  app.innerHTML = `<div class="results"><div class="result-icon" aria-hidden="true">${badge}</div><p class="eyebrow">ADVENTURE COMPLETE</p><h2>${percent >= .7 ? 'Well done, Cub!' : 'Nice exploring!'}</h2><p class="score">${score} out of ${questions.length} stars</p><p class="summary">${escapeHtml(context)}<br>${message}</p>${renderCertificateControls(context, `${score} out of ${questions.length} stars`, '')}<div class="result-actions"><button class="primary" id="restart">Play again <span aria-hidden="true">↻</span></button><button class="secondary" id="change-test">Choose another test</button></div></div>`;
   document.querySelector('#restart').addEventListener('click', startQuiz);
   document.querySelector('#change-test').addEventListener('click', renderSetup);
+  wireCertificateDownload();
+}
+
+function renderCertificateControls(testName, scoreLine, detail) {
+  return `<div class="certificate-tools"><label for="certificate-name">Your name</label><input id="certificate-name" class="editor-input" maxlength="50" autocomplete="name" placeholder="Enter your name"><button class="primary" id="download-certificate" type="button" disabled>Download certificate image</button><small>Downloads a shareable PNG with your score.</small><span class="certificate-data" data-test-name="${escapeAttribute(testName)}" data-score-line="${escapeAttribute(scoreLine)}" data-detail="${escapeAttribute(detail)}"></span></div>`;
+}
+function wireCertificateDownload() {
+  const nameInput = document.querySelector('#certificate-name');
+  const button = document.querySelector('#download-certificate');
+  if (!nameInput || !button) return;
+  nameInput.addEventListener('input', () => { button.disabled = !nameInput.value.trim(); });
+  button.addEventListener('click', () => downloadCertificate(nameInput.value.trim()));
+}
+function downloadCertificate(name) {
+  if (!name) return;
+  const certificate = document.querySelector('.certificate-data');
+  const canvas = document.createElement('canvas');
+  canvas.width = 1600; canvas.height = 1100;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#eef3e9'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#fffdf6'; ctx.fillRect(70, 70, 1460, 960);
+  ctx.strokeStyle = '#2e7655'; ctx.lineWidth = 12; ctx.strokeRect(95, 95, 1410, 910);
+  ctx.strokeStyle = '#c8ec8b'; ctx.lineWidth = 3; ctx.strokeRect(115, 115, 1370, 870);
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#2e7655'; ctx.font = 'bold 34px Arial'; ctx.fillText('CUB SKILLS QUIZ', 800, 230);
+  ctx.fillStyle = '#173f35'; ctx.font = 'bold 76px Georgia'; ctx.fillText('Certificate of Achievement', 800, 355);
+  ctx.fillStyle = '#68776c'; ctx.font = '32px Arial'; ctx.fillText('This certifies that', 800, 455);
+  ctx.fillStyle = '#173f35'; ctx.font = 'bold 68px Arial';
+  let displayName = name;
+  while (ctx.measureText(displayName).width > 1260 && displayName.length > 3) displayName = `${displayName.slice(0, -2)}…`;
+  ctx.fillText(displayName, 800, 560);
+  ctx.strokeStyle = '#9abb79'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(310, 590); ctx.lineTo(1290, 590); ctx.stroke();
+  ctx.fillStyle = '#53675b'; ctx.font = '34px Arial'; ctx.fillText('completed', 800, 675);
+  ctx.fillStyle = '#173f35'; ctx.font = 'bold 42px Arial'; ctx.fillText(certificate.dataset.testName, 800, 740);
+  ctx.fillStyle = '#779650'; ctx.font = 'bold 56px Georgia'; ctx.fillText(certificate.dataset.scoreLine, 800, 825);
+  if (certificate.dataset.detail) { ctx.fillStyle = '#68776c'; ctx.font = '28px Arial'; ctx.fillText(certificate.dataset.detail, 800, 880); }
+  ctx.fillStyle = '#829086'; ctx.font = '24px Arial'; ctx.fillText(new Date().toLocaleDateString(), 800, 950);
+  canvas.toBlob((blob) => {
+    if (!blob) return;
+    const url = URL.createObjectURL(blob); const link = document.createElement('a');
+    link.href = url; link.download = `cub-skills-certificate-${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.png`; link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }, 'image/png');
 }
 
 app.addEventListener('click', (event) => {

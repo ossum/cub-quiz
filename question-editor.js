@@ -144,11 +144,12 @@ function renderQuestionEditor(question, returnTarget = 'manager') {
       <section class="editor-type-panel" data-type-panel="memory-grid" ${type === 'memory-grid' ? '' : 'hidden'}>
         <h2>Memory grid</h2><div class="editor-form-grid"><label>Rows<input class="editor-input" name="memoryRows" type="number" min="1" max="10" value="${memoryRows}"></label><label>Columns<input class="editor-input" name="memoryColumns" type="number" min="1" max="10" value="${memoryColumns}"></label><label>Picture display time (seconds)<input class="editor-input" name="memoryPreviewSeconds" type="number" min="1" max="120" value="${memoryPreviewSeconds}"></label><label class="editor-radio"><input type="checkbox" name="memoryShuffle" ${memoryShuffle ? 'checked' : ''}> Shuffle picture positions each round</label></div><p class="editor-note">Enter one path per square, from top-left to bottom-right. The number of paths must equal rows × columns. The app can choose random pictures and order each round, or use the fixed squares below. Placeholder paths use A.png through P.png in images/memory-grid/.</p><label>Grid images (paths)<textarea class="editor-input" name="memoryImages" rows="10">${escapeHtml(memoryPaths.join('\n'))}</textarea></label><div class="editor-form-grid"><label>Pictures to recall each round<input class="editor-input" name="memoryRecallCount" type="number" min="1" max="100" value="${memoryRecallCount}"></label><label class="editor-radio"><input type="checkbox" name="memoryRandomizePrompts" ${memoryRandomizePrompts ? 'checked' : ''}> Randomize target pictures and their order each round</label></div><label data-fixed-memory-sequence ${memoryRandomizePrompts ? 'hidden' : ''}>Fixed target squares (only used when random targets are off; numbers follow the original grid order)<input class="editor-input" name="memorySequence" value="${escapeAttribute(memorySequence.join(', '))}" placeholder="3, 7, 13"></label>
       </section>
-      <div class="editor-save-row"><p id="editor-error" role="alert"></p><button class="primary" type="submit">Save question <span aria-hidden="true">✓</span></button></div>
+      <div class="editor-save-row"><p id="editor-error" role="alert"></p><div class="editor-save-actions"><button class="secondary" id="download-one-question" type="button">Download this question (.json)</button><button class="primary" type="submit">Save question <span aria-hidden="true">✓</span></button></div></div>
     </form>
   </div>`;
   document.querySelector('#cancel-question-editor').addEventListener('click', cancelQuestionEditor);
   document.querySelector('#question-editor-form').addEventListener('submit', saveQuestionFromEditor);
+  document.querySelector('#download-one-question').addEventListener('click', downloadCurrentQuestion);
   document.querySelector('#editor-question-type').addEventListener('change', (event) => {
     const draft = readQuestionEditorForm(); draft.type = event.target.value;
     if (['multiple-choice', 'image-option'].includes(draft.type)) { draft.options = ['Option 1', 'Option 2', 'Option 3', 'Option 4']; draft.answer = ''; }
@@ -346,6 +347,20 @@ function saveQuestionFromEditor(event) {
   else { servedDataVersions.questions = `local edits ${questionOverrideVersion}`; renderDataVersion(); }
   if (questionEditorReturnTarget === 'quiz') { questions[index] = question; renderQuestion(); } else renderQuestionManager();
 }
+
+function downloadCurrentQuestion() {
+  const draft = readQuestionEditorForm();
+  const question = questionFromEditorDraft(draft);
+  const error = validateEditorDraft(draft, question);
+  const errorSlot = document.querySelector('#editor-error');
+  if (error) { errorSlot.textContent = error; return; }
+  const blob = new Blob([`${JSON.stringify({ version: new Date().toISOString(), questions: [question] }, null, 2)}\n`], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url; link.download = `${question.id.replace(/[^a-z0-9_-]+/gi, '-')}.json`; link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
 function cancelQuestionEditor() { if (questionEditorReturnTarget === 'quiz') renderQuestion(); else renderQuestionManager(); }
 function downloadQuestionBank() {
   const version = new Date().toISOString();
