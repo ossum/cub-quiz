@@ -2,6 +2,7 @@
   "version": "2026-10-29.1",
   "files": [
     "questions.json",
-    "question-gw-memory.json"
+    "question-gw-memory.json",
+    "sw-nature-cipher-pool.json"
   ]
 }

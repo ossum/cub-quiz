@@ -1,0 +1,164 @@
+{
+  "version": "2026-11-08T19:56:08.235Z",
+  "questions": [
+    {
+      "id": "sw-nature-cipher-pool",
+      "programme": "SW",
+      "type": "image-pairs",
+      "question": "Which code spells this word?",
+      "explanation": "",
+      "image": "images/codes/nature-cipher/CIPHER.png",
+      "imageAlt": "Nature cipher key",
+      "advancementId": "SW-14",
+      "allowReversal": true,
+      "sampleSize": 4,
+      "optionCount": 4,
+      "pairs": [
+        {
+          "id": "nature-bat",
+          "left": {
+            "type": "text",
+            "value": "bat"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/BAT.png",
+            "alt": "Nature cipher spelling bat"
+          }
+        },
+        {
+          "id": "nature-bug",
+          "left": {
+            "type": "text",
+            "value": "bug"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/BUG.png",
+            "alt": "Nature cipher spelling bug"
+          }
+        },
+        {
+          "id": "nature-cap",
+          "left": {
+            "type": "text",
+            "value": "cap"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/CAP.png",
+            "alt": "Nature cipher spelling cap"
+          }
+        },
+        {
+          "id": "nature-cat",
+          "left": {
+            "type": "text",
+            "value": "cat"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/CAT.png",
+            "alt": "Nature cipher spelling cat"
+          }
+        },
+        {
+          "id": "nature-cub",
+          "left": {
+            "type": "text",
+            "value": "cub"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/CUB.png",
+            "alt": "Nature cipher spelling cub"
+          }
+        },
+        {
+          "id": "nature-den",
+          "left": {
+            "type": "text",
+            "value": "den"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/DEN.png",
+            "alt": "Nature cipher spelling den"
+          }
+        },
+        {
+          "id": "nature-fun",
+          "left": {
+            "type": "text",
+            "value": "fun"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/FUN.png",
+            "alt": "Nature cipher spelling fun"
+          }
+        },
+        {
+          "id": "nature-hug",
+          "left": {
+            "type": "text",
+            "value": "hug"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/HUG.png",
+            "alt": "Nature cipher spelling hug"
+          }
+        },
+        {
+          "id": "nature-map",
+          "left": {
+            "type": "text",
+            "value": "map"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/MAP.png",
+            "alt": "Nature cipher spelling map"
+          }
+        },
+        {
+          "id": "nature-mud",
+          "left": {
+            "type": "text",
+            "value": "mud"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/MUD.png",
+            "alt": "Nature cipher spelling mud"
+          }
+        },
+        {
+          "id": "nature-sap",
+          "left": {
+            "type": "text",
+            "value": "sap"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/SAP.png",
+            "alt": "Nature cipher spelling sap"
+          }
+        },
+        {
+          "id": "nature-sun",
+          "left": {
+            "type": "text",
+            "value": "sun"
+          },
+          "right": {
+            "type": "image",
+            "src": "images/codes/nature-cipher/SUN.png",
+            "alt": "Nature cipher spelling sun"
+          }
+        }
+      ]
+    }
+  ]
+}
