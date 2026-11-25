@@ -6,7 +6,7 @@ let questions = [];
 let index = 0;
 let score = 0;
 let locked = false;
-let selection = { programme: 'SW', mode: 'advancement', advancementId: '', randomQuestionCount: 15, challengeLives: 3 };
+let selection = { programme: 'SW', mode: 'advancement', advancementId: '', badgeCategoryId: '', randomQuestionCount: 15, challengeLives: 3 };
 let challengeState = null;
 let matchState = null;
 let pairOptionState = null;
@@ -117,21 +117,34 @@ function getAdvancement(id = selection.advancementId, programmeId = selection.pr
 }
 
 function questionsForSelection() {
-  return bank.filter((question) => (selection.programme === 'BOTH' || question.programme === selection.programme) &&
-    (['random', 'challenge'].includes(selection.mode) || question.advancementId === selection.advancementId || question.advancementIds?.includes(selection.advancementId)));
+  return bank.filter((question) => {
+    if (selection.programme !== 'BOTH' && question.programme !== selection.programme) return false;
+    if (['random', 'challenge'].includes(selection.mode)) return true;
+    if (selection.programme === 'INT') {
+      const badge = catalogue.find((programme) => programme.id === 'INT')?.categories.find((category) => category.id === selection.badgeCategoryId);
+      const badgeTaskIds = new Set((badge?.advancements || []).map((task) => task.id));
+      const questionTaskIds = question.advancementIds || [question.advancementId];
+      return questionTaskIds.some((id) => badgeTaskIds.has(id));
+    }
+    return question.advancementId === selection.advancementId || question.advancementIds?.includes(selection.advancementId);
+  });
 }
 
 function renderSetup() {
   const programme = getProgramme();
   if (!programme) return;
   const availableCount = questionsForSelection().length;
-  const selected = getAdvancement();
-  const groups = (programme.categories || []).map((category) => `<optgroup label="${escapeHtml(category.name)}${category.color ? ` • ${escapeHtml(category.color)}` : ''}">
+  const selected = selection.programme === 'INT'
+    ? programme.categories.find((category) => category.id === selection.badgeCategoryId)
+    : getAdvancement();
+  const groups = selection.programme === 'INT'
+    ? programme.categories.map((category) => `<option value="${escapeAttribute(category.id)}" ${category.id === selection.badgeCategoryId ? 'selected' : ''}>${escapeHtml(category.name)}</option>`).join('')
+    : (programme.categories || []).map((category) => `<optgroup label="${escapeHtml(category.name)}${category.color ? ` • ${escapeHtml(category.color)}` : ''}">
     ${category.advancements.map((advancement) => `<option value="${advancement.id}" ${advancement.id === selection.advancementId ? 'selected' : ''}>${advancement.number}. ${escapeHtml(advancement.name)}</option>`).join('')}
   </optgroup>`).join('');
 
   app.innerHTML = `<div class="setup">
-    <div class="setup-heading"><p class="eyebrow">YOUR NEXT CUB ADVENTURE</p><h1>Choose a Badge</h1><p>${selection.programme === 'BOTH' ? 'Mix Membership, Silver Wolf, Gold Wolf and Interest Badge questions in one random test or Challenge mode.' : `Practise one task, take a random ${programme.name} test, or try Challenge mode.`}</p></div>
+    <div class="setup-heading"><p class="eyebrow">YOUR NEXT CUB ADVENTURE</p><h1>Choose a Badge</h1><p>${selection.programme === 'BOTH' ? 'Mix Membership, Silver Wolf, Gold Wolf and Interest Badge questions in one random test or Challenge mode.' : selection.programme === 'INT' ? 'Choose an interest badge to practise, or take a random Interest Badge test.' : `Practise one advancement, take a random ${programme.name} test, or try Challenge mode.`}</p></div>
     <div class="step-label"><span>1</span> Choose a badge group</div>
     <div class="choice-row" role="group" aria-label="Choose a badge">
       ${catalogue.map((option) => { const badge = { MEM: 'wosm.png', SW: 'silverwolf.png', GW: 'goldwolf.png' }[option.id]; const itemCount = option.categories.reduce((sum, category) => sum + category.advancements.length, 0); const countLabel = option.id === 'INT' ? `${itemCount} tasks` : `${itemCount} advancements`; const badgeIcon = option.id === 'INT' ? '<span class="choice-icon interest-badge-icon" aria-hidden="true">🎣</span>' : `<span class="choice-icon badge-icon"><img src="images/badges/${badge}" alt="${escapeAttribute(option.name)} badge"></span>`; return `<button class="choice-button ${option.id === programme.id ? 'selected' : ''}" data-programme="${option.id}" aria-pressed="${option.id === programme.id}">${badgeIcon}<span><strong>${escapeHtml(option.name)}</strong><small>${option.id} • ${countLabel}</small></span></button>`; }).join('')}
@@ -139,27 +152,35 @@ function renderSetup() {
     </div>
     <div class="step-label"><span>2</span> Choose your quiz</div>
     <div class="mode-row" role="group" aria-label="Choose quiz type">
-      ${selection.programme === 'BOTH' ? '' : `<button class="mode-button ${selection.mode === 'advancement' ? 'selected' : ''}" data-mode="advancement" aria-pressed="${selection.mode === 'advancement'}"><strong>${selection.programme === 'INT' ? 'One task' : 'One advancement'}</strong><small>Focus on one numbered skill or topic.</small></button>`}
+      ${selection.programme === 'BOTH' ? '' : `<button class="mode-button ${selection.mode === 'advancement' ? 'selected' : ''}" data-mode="advancement" aria-pressed="${selection.mode === 'advancement'}"><strong>${selection.programme === 'INT' ? 'One Badge' : 'One advancement'}</strong><small>${selection.programme === 'INT' ? 'Choose one interest badge and practise its tasks.' : 'Focus on one numbered skill or topic.'}</small></button>`}
       <button class="mode-button ${selection.mode === 'random' ? 'selected' : ''}" data-mode="random" aria-pressed="${selection.mode === 'random'}"><strong>Random ${selection.programme === 'BOTH' ? 'all badges' : programme.id} test</strong><small>Choose up to 15 shuffled questions${selection.programme === 'BOTH' ? ' from all badge groups' : ''}.</small></button>
       <button class="mode-button ${selection.mode === 'challenge' ? 'selected' : ''}" data-mode="challenge" aria-pressed="${selection.mode === 'challenge'}"><strong>Challenge mode</strong><small>Keep going${selection.programme === 'BOTH' ? ' through all badge groups' : ''}; a wrong answer costs a life.</small></button>
     </div>
     ${selection.mode === 'random' ? `<div class="random-count-picker"><label for="random-question-count">Questions in this test</label><div><input id="random-question-count" type="number" min="1" max="${Math.max(1, availableCount)}" value="${Math.min(selection.randomQuestionCount || 15, availableCount || 15)}" ${availableCount ? '' : 'disabled'}><span>of ${availableCount} available</span></div><small>We’ll choose a fresh random set each time.</small></div>` : ''}
     ${selection.mode === 'challenge' ? `<div class="random-count-picker challenge-lives-picker"><label for="challenge-lives">Starting lives</label><div><input id="challenge-lives" type="number" min="1" max="10" value="${selection.challengeLives || 3}"><span>Choose 1–10 lives</span></div><small>Correct answers add to your score. The challenge ends when no lives remain.</small></div>` : ''}
-    ${selection.mode === 'advancement' ? `<div class="advancement-picker"><label for="advancement-select">3 Choose ${selection.programme === 'INT' ? 'a task' : 'an advancement'}</label><select id="advancement-select">${groups}</select>
-      ${selected ? `<div class="category-hint">${selected.category.color ? `<span class="colour-dot" style="--category-colour:${colours[selected.category.color]}"></span><span>${selected.category.name}</span><span class="hint-separator">•</span><span>${selected.category.color}</span>` : `<span>${escapeHtml(selected.category.name)}</span>`}</div>` : ''}
+    ${selection.mode === 'advancement' ? `<div class="advancement-picker"><label for="advancement-select">3 Choose ${selection.programme === 'INT' ? 'a badge' : 'an advancement'}</label><select id="advancement-select">${groups}</select>
+      ${selected ? `<div class="category-hint">${selection.programme === 'INT' ? `<span>${escapeHtml(selected.name)} badge</span><span class="hint-separator">•</span><span>${selected.advancements.length} tasks</span>` : selected.category.color ? `<span class="colour-dot" style="--category-colour:${colours[selected.category.color]}"></span><span>${selected.category.name}</span><span class="hint-separator">•</span><span>${selected.category.color}</span>` : `<span>${escapeHtml(selected.category.name)}</span>`}</div>` : ''}
     </div>` : ''}
-    <div class="setup-bottom"><p class="question-count">${availableCount ? `${availableCount} ${availableCount === 1 ? 'question' : 'questions'} ready` : 'No questions added for this choice yet'}</p><div class="setup-actions"><button class="secondary" id="manage-questions">Manage questions</button><button class="primary" id="start" ${!availableCount || (selection.mode === 'advancement' && !selection.advancementId) ? 'disabled' : ''}>Start ${selection.mode === 'challenge' ? 'challenge' : selection.mode === 'random' ? `${selection.programme === 'BOTH' ? 'all badges' : programme.id} test` : 'quiz'} <span aria-hidden="true">→</span></button></div></div>
+    <div class="setup-bottom"><p class="question-count">${availableCount ? `${availableCount} ${availableCount === 1 ? 'question' : 'questions'} ready` : 'No questions added for this choice yet'}</p><div class="setup-actions"><button class="secondary" id="manage-questions">Manage questions</button><button class="primary" id="start" ${!availableCount || (selection.mode === 'advancement' && !(selection.programme === 'INT' ? selection.badgeCategoryId : selection.advancementId)) ? 'disabled' : ''}>Start ${selection.mode === 'challenge' ? 'challenge' : selection.mode === 'random' ? `${selection.programme === 'BOTH' ? 'all badges' : programme.id} test` : 'quiz'} <span aria-hidden="true">→</span></button></div></div>
   </div>`;
 
   app.querySelectorAll('[data-programme]').forEach((button) => button.addEventListener('click', () => {
     selection.programme = button.dataset.programme;
     if (selection.programme === 'BOTH') {
       selection.advancementId = '';
+      selection.badgeCategoryId = '';
       if (selection.mode === 'advancement') selection.mode = 'random';
     } else {
-      const firstQuestion = bank.find((question) => question.programme === selection.programme);
-      const firstAdvancement = catalogue.find((item) => item.id === selection.programme)?.categories.flatMap((category) => category.advancements)[0];
-      selection.advancementId = firstQuestion?.advancementId || firstQuestion?.advancementIds?.[0] || firstAdvancement?.id || '';
+      const selectedProgramme = catalogue.find((item) => item.id === selection.programme);
+      if (selection.programme === 'INT') {
+        selection.badgeCategoryId = selectedProgramme?.categories[0]?.id || '';
+        selection.advancementId = '';
+      } else {
+        selection.badgeCategoryId = '';
+        const firstQuestion = bank.find((question) => question.programme === selection.programme);
+        const firstAdvancement = selectedProgramme?.categories.flatMap((category) => category.advancements)[0];
+        selection.advancementId = firstQuestion?.advancementId || firstQuestion?.advancementIds?.[0] || firstAdvancement?.id || '';
+      }
     }
     renderSetup();
   }));
@@ -177,7 +198,8 @@ function renderSetup() {
     event.target.value = selection.randomQuestionCount;
   });
   document.querySelector('#advancement-select')?.addEventListener('change', (event) => {
-    selection.advancementId = event.target.value;
+    if (selection.programme === 'INT') selection.badgeCategoryId = event.target.value;
+    else selection.advancementId = event.target.value;
     renderSetup();
   });
   document.querySelector('#manage-questions').addEventListener('click', () => renderQuestionManager());
@@ -206,7 +228,15 @@ function startQuiz() {
 
 function renderEmptySelection() {
   const advancement = getAdvancement();
-  app.innerHTML = `<div class="results"><div class="result-icon" aria-hidden="true">✎</div><p class="eyebrow">QUESTION BANK IN PROGRESS</p><h2>We haven’t added these questions yet.</h2><p class="summary">${selection.mode !== 'advancement' ? `There are no ${selection.programme === 'BOTH' ? 'Membership, Silver Wolf, Gold Wolf or Interest Badge' : getProgramme().name} questions in the bank yet.` : `${escapeHtml(getProgramme().name)} ${advancement.number}: ${escapeHtml(advancement.name)} is ready for questions.`} Ask your Cub leader to add questions for this topic.</p><button class="primary" id="back-to-setup">Choose another challenge</button></div>`;
+  const selectedBadge = selection.programme === 'INT'
+    ? catalogue.find((programme) => programme.id === 'INT')?.categories.find((category) => category.id === selection.badgeCategoryId)
+    : null;
+  const emptyMessage = selection.mode !== 'advancement'
+    ? `There are no ${selection.programme === 'BOTH' ? 'Membership, Silver Wolf, Gold Wolf or Interest Badge' : getProgramme().name} questions in the bank yet.`
+    : selection.programme === 'INT'
+      ? `${escapeHtml(selectedBadge?.name || 'This')} badge has no questions yet.`
+      : `${escapeHtml(getProgramme().name)} ${advancement.number}: ${escapeHtml(advancement.name)} is ready for questions.`;
+  app.innerHTML = `<div class="results"><div class="result-icon" aria-hidden="true">✎</div><p class="eyebrow">QUESTION BANK IN PROGRESS</p><h2>We haven’t added these questions yet.</h2><p class="summary">${emptyMessage} Ask your Cub leader to add questions for this topic.</p><button class="primary" id="back-to-setup">Choose another challenge</button></div>`;
   document.querySelector('#back-to-setup').addEventListener('click', renderSetup);
 }
 

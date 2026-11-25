@@ -1,55 +1,90 @@
 {
-  "version": "2026-11-25.1",
+  "version": "2026-11-26.1",
   "questions": [
     {
       "id": "int-fishing-fish-galjoen",
       "type": "multiple-choice",
       "programme": "INT",
       "advancementId": "INT-FISH-1",
-      "question": "Which fish is South Africa’s national fish?",
-      "options": ["Galjoen", "Kob", "Elf (shad)", "Hottentot"],
+      "question": "Which fish is shown?",
+      "image": "images/fishing/galjoen.jpg",
+      "imageAlt": "A galjoen swimming above a rocky reef.",
+      "options": [
+        "Galjoen",
+        "Hottentot",
+        "Elf (shad)",
+        "Kob"
+      ],
       "answer": "Galjoen",
-      "explanation": "The galjoen is South Africa’s national fish. Its colour can look darker near rocks and more silvery over sand."
+      "explanation": "This is a galjoen, South Africa’s national fish."
     },
     {
       "id": "int-fishing-fish-blacktail",
       "type": "multiple-choice",
       "programme": "INT",
       "advancementId": "INT-FISH-1",
-      "question": "Which fish has a dark patch at the base of its tail?",
-      "options": ["Blacktail", "Galjoen", "Kob", "Elf (shad)"],
+      "question": "Which fish is shown?",
+      "image": "images/fishing/blacktail.jpg",
+      "imageAlt": "A blacktail seabream photographed underwater.",
+      "options": [
+        "Blacktail",
+        "Galjoen",
+        "Kob",
+        "Elf (shad)"
+      ],
       "answer": "Blacktail",
-      "explanation": "The blacktail is a small, silvery fish with a noticeable dark patch where its tail begins."
+      "explanation": "This is a blacktail, also called Cape white seabream."
     },
     {
       "id": "int-fishing-fish-hottentot",
       "type": "multiple-choice",
       "programme": "INT",
       "advancementId": "INT-FISH-1",
-      "question": "Which fish is plump and deep-bodied, with a bluish-grey to bronze colour?",
-      "options": ["Hottentot", "Elf (shad)", "Kob", "Blacktail"],
+      "question": "Which fish is shown?",
+      "image": "images/fishing/hottentot.jpg",
+      "imageAlt": "A hottentot seabream swimming over a reef.",
+      "options": [
+        "Hottentot",
+        "Blacktail",
+        "Galjoen",
+        "Kob"
+      ],
       "answer": "Hottentot",
-      "explanation": "Hottentot are deep-bodied fish often found around Western Cape rocky reefs and kelp beds."
+      "explanation": "This is a hottentot seabream, a fish found around the Cape."
     },
     {
       "id": "int-fishing-fish-elf",
       "type": "multiple-choice",
       "programme": "INT",
       "advancementId": "INT-FISH-1",
-      "question": "Elf, also called shad, is usually what kind of fish?",
-      "options": ["A streamlined, silvery fish with sharp teeth", "A flat fish with both eyes on one side", "A round fish covered in spines", "A fish with a dark patch at the base of its tail"],
-      "answer": "A streamlined, silvery fish with sharp teeth",
-      "explanation": "Elf (shad) has a streamlined silver body, a blue-green sheen along its back and sharp teeth."
+      "question": "Which fish is shown?",
+      "image": "images/fishing/shad.jpg",
+      "imageAlt": "Two silver elf, also called shad, fish.",
+      "options": [
+        "Elf (shad)",
+        "Hottentot",
+        "Blacktail",
+        "Galjoen"
+      ],
+      "answer": "Elf (shad)",
+      "explanation": "This is an elf, also called shad."
     },
     {
       "id": "int-fishing-fish-kob",
       "type": "multiple-choice",
       "programme": "INT",
       "advancementId": "INT-FISH-1",
-      "question": "Which local fish is also commonly called kabeljou?",
-      "options": ["Kob", "Blacktail", "Hottentot", "Galjoen"],
+      "question": "Which fish is shown?",
+      "image": "images/fishing/kob.jpg",
+      "imageAlt": "A dusky kob swimming in an aquarium.",
+      "options": [
+        "Kob",
+        "Elf (shad)",
+        "Blacktail",
+        "Galjoen"
+      ],
       "answer": "Kob",
-      "explanation": "Kob is also known as kabeljou. Fish names can vary between places and languages."
+      "explanation": "This is a dusky kob, also known as kabeljou."
     },
     {
       "id": "int-fishing-rule-permit",
@@ -57,7 +92,12 @@
       "programme": "INT",
       "advancementId": "INT-FISH-2",
       "question": "Before recreational sea fishing, what should you do with an adult?",
-      "options": ["Make sure you have the correct permit and permission", "Go fishing first and check later", "Use someone else’s permit without asking", "Fish anywhere if you only keep one fish"],
+      "options": [
+        "Make sure you have the correct permit and permission",
+        "Go fishing first and check later",
+        "Use someone else’s permit without asking",
+        "Fish anywhere if you only keep one fish"
+      ],
       "answer": "Make sure you have the correct permit and permission",
       "explanation": "Recreational fishing requires the correct permit. An adult can help check which permit and permissions apply."
     },
@@ -67,7 +107,12 @@
       "programme": "INT",
       "advancementId": "INT-FISH-2",
       "question": "Why should an adult check the current fishing rules before a trip?",
-      "options": ["Different fish and places can have different limits and seasons", "The rules only apply to boats", "Every fish has the same size limit", "There are no rules when fishing from the shore"],
+      "options": [
+        "Different fish and places can have different limits and seasons",
+        "The rules only apply to boats",
+        "Every fish has the same size limit",
+        "There are no rules when fishing from the shore"
+      ],
       "answer": "Different fish and places can have different limits and seasons",
       "explanation": "Rules can include which fish may be caught, minimum sizes, daily limits, closed seasons and restricted areas. Check the current official rules with an adult."
     },
@@ -77,7 +122,12 @@
       "programme": "INT",
       "advancementId": "INT-FISH-2",
       "question": "You see a sign saying fishing is not allowed here. What should you do?",
-      "options": ["Follow the sign and fish somewhere permitted", "Fish quickly before anyone notices", "Move the sign out of the way", "Fish there if you release the fish"],
+      "options": [
+        "Follow the sign and fish somewhere permitted",
+        "Fish quickly before anyone notices",
+        "Move the sign out of the way",
+        "Fish there if you release the fish"
+      ],
       "answer": "Follow the sign and fish somewhere permitted",
       "explanation": "Some areas are protected or closed to fishing. Follow signs and check area rules with an adult."
     },
@@ -87,7 +137,12 @@
       "programme": "INT",
       "advancementId": "INT-FISH-2",
       "question": "An adult finds that a fish is below the legal size. What should happen?",
-      "options": ["Return it to the water as the rules say", "Keep it because it is a good catch", "Give it to another person to keep", "Hide it in the bait box"],
+      "options": [
+        "Return it to the water as the rules say",
+        "Keep it because it is a good catch",
+        "Give it to another person to keep",
+        "Hide it in the bait box"
+      ],
       "answer": "Return it to the water as the rules say",
       "explanation": "Minimum sizes help protect fish. Follow the current rules and an adult’s instructions for releasing a fish safely."
     },
@@ -97,7 +152,12 @@
       "programme": "INT",
       "advancementId": "INT-FISH-2",
       "question": "Can you sell fish caught on a recreational fishing permit?",
-      "options": ["No, recreational catch may not be sold", "Yes, if you sell only one", "Yes, if a friend sells it for you", "Only if the fish is small"],
+      "options": [
+        "No, recreational catch may not be sold",
+        "Yes, if you sell only one",
+        "Yes, if a friend sells it for you",
+        "Only if the fish is small"
+      ],
       "answer": "No, recreational catch may not be sold",
       "explanation": "Fish caught under a recreational fishing permit are for personal use and may not be sold."
     },
@@ -106,50 +166,135 @@
       "type": "multiple-choice",
       "programme": "INT",
       "advancementId": "INT-FISH-3",
-      "question": "Another family is already fishing nearby. What is the courteous thing to do?",
-      "options": ["Give them space and ask politely before setting up close", "Cast your line across theirs", "Shout at them to move", "Leave your gear across their spot"],
-      "answer": "Give them space and ask politely before setting up close",
-      "explanation": "Sharing the shore politely helps everyone fish safely and enjoy the day."
+      "question": "Someone is already fishing nearby. What should you do?",
+      "options": [
+        "Find a spot with plenty of space",
+        "Cast across their line",
+        "Stand right beside them",
+        "Crowd their favourite spot"
+      ],
+      "answer": "Find a spot with plenty of space",
+      "explanation": "Give other fishers room and keep lines from crossing."
+    },
+    {
+      "id": "int-fishing-courtesy-cast",
+      "type": "multiple-choice",
+      "programme": "INT",
+      "advancementId": "INT-FISH-3",
+      "question": "Before you cast, what should you check?",
+      "options": [
+        "Behind you for people, pets and trees",
+        "Only whether your bait is shiny",
+        "If anyone is watching",
+        "Nothing; cast quickly"
+      ],
+      "answer": "Behind you for people, pets and trees",
+      "explanation": "Look all around before swinging your rod."
+    },
+    {
+      "id": "int-fishing-courtesy-quiet",
+      "type": "multiple-choice",
+      "programme": "INT",
+      "advancementId": "INT-FISH-3",
+      "question": "How should you act near other fishers?",
+      "options": [
+        "Use a quiet voice and walk carefully",
+        "Shout and stomp",
+        "Play loud music",
+        "Run between people"
+      ],
+      "answer": "Use a quiet voice and walk carefully",
+      "explanation": "Quiet voices and gentle footsteps are considerate and avoid disturbing fish."
+    },
+    {
+      "id": "int-fishing-courtesy-tackle",
+      "type": "multiple-choice",
+      "programme": "INT",
+      "advancementId": "INT-FISH-3",
+      "question": "What should you do with hooks when you are not using them?",
+      "options": [
+        "Put them away safely",
+        "Leave them on the ground",
+        "Hide them in the sand",
+        "Leave the tackle box open"
+      ],
+      "answer": "Put them away safely",
+      "explanation": "Keep sharp hooks and tackle organised so nobody steps on them."
     },
     {
       "id": "int-fishing-courtesy-litter",
       "type": "multiple-choice",
       "programme": "INT",
       "advancementId": "INT-FISH-3",
-      "question": "What should you do with used line, hooks and food wrappers?",
-      "options": ["Pack them out and put them in a bin", "Leave them under a rock", "Throw them into the sea", "Bury them in the sand"],
-      "answer": "Pack them out and put them in a bin",
-      "explanation": "Fishing line and hooks can hurt wildlife and people. Leave the beach cleaner than you found it."
+      "question": "What should you do with loose line and wrappers?",
+      "options": [
+        "Pack them out and use a bin",
+        "Leave them for the next person",
+        "Throw them in the water",
+        "Bury them in the sand"
+      ],
+      "answer": "Pack them out and use a bin",
+      "explanation": "Loose line can trap birds and other wildlife. Leave the place clean."
     },
     {
-      "id": "int-fishing-courtesy-hooks",
+      "id": "int-fishing-courtesy-release",
       "type": "multiple-choice",
       "programme": "INT",
       "advancementId": "INT-FISH-3",
-      "question": "How can you keep people safe when carrying a fishing rod with a hook?",
-      "options": ["Keep the hook secured and point the rod away from people", "Swing the rod around to show your catch", "Let the hook dangle near someone’s clothes", "Run with the rod behind you"],
-      "answer": "Keep the hook secured and point the rod away from people",
-      "explanation": "Hooks are sharp. Ask an adult for help handling them and keep them away from people."
-    },
-    {
-      "id": "int-fishing-courtesy-swimmers",
-      "type": "multiple-choice",
-      "programme": "INT",
-      "advancementId": "INT-FISH-3",
-      "question": "People are swimming where you planned to cast. What should you do?",
-      "options": ["Choose a safe place away from swimmers", "Cast over the swimmers", "Ask them to watch for your line", "Cast only when they turn around"],
-      "answer": "Choose a safe place away from swimmers",
-      "explanation": "Keep hooks and lines well away from swimmers. Follow beach signs and an adult’s directions."
+      "question": "You are releasing a fish. What is a gentle way to handle it?",
+      "options": [
+        "Wet your hands and keep it in the water",
+        "Hold it tightly with dry hands",
+        "Keep it out of water for a long time",
+        "Drop it onto the rocks"
+      ],
+      "answer": "Wet your hands and keep it in the water",
+      "explanation": "Wet hands and gentle handling help protect the fish. Follow an adult’s instructions."
     },
     {
       "id": "int-fishing-courtesy-wildlife",
       "type": "multiple-choice",
       "programme": "INT",
       "advancementId": "INT-FISH-3",
-      "question": "You see seabirds feeding near your fishing spot. What is a kind choice?",
-      "options": ["Keep hooks, bait and line away from the birds", "Throw a hooked bait toward them", "Leave loose line for them to find", "Chase them to make them fly"],
-      "answer": "Keep hooks, bait and line away from the birds",
-      "explanation": "Birds can be injured by hooks and tangled line. Keep your gear tidy and ask an adult for help if wildlife is in danger."
+      "question": "Birds or swimmers are near your casting spot. What should you do?",
+      "options": [
+        "Choose a different safe spot",
+        "Cast near them carefully",
+        "Ask them to watch for your hook",
+        "Throw bait toward the birds"
+      ],
+      "answer": "Choose a different safe spot",
+      "explanation": "Keep hooks, bait and lines well away from people and wildlife."
+    },
+    {
+      "id": "int-fishing-courtesy-ramp",
+      "type": "multiple-choice",
+      "programme": "INT",
+      "advancementId": "INT-FISH-3",
+      "question": "People are using the boat ramp. What should you do?",
+      "options": [
+        "Wait your turn",
+        "Push in front",
+        "Leave your gear across the ramp",
+        "Hurry them along"
+      ],
+      "answer": "Wait your turn",
+      "explanation": "Be patient and give people room to load and unload."
+    },
+    {
+      "id": "int-fishing-courtesy-boat",
+      "type": "multiple-choice",
+      "programme": "INT",
+      "advancementId": "INT-FISH-3",
+      "question": "You are paddling past people who are fishing. What should you do?",
+      "options": [
+        "Slow down and steer wide",
+        "Paddle close and make big waves",
+        "Cross their fishing lines",
+        "Shout as you pass"
+      ],
+      "answer": "Slow down and steer wide",
+      "explanation": "Move slowly and leave plenty of space around other fishers."
     }
   ]
 }
