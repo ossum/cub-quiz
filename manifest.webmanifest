@@ -2,7 +2,7 @@
   "id": "./",
   "name": "Cub Skills Quiz",
   "short_name": "Cub Skills",
-  "description": "Membership, Silver Wolf and Gold Wolf practice quizzes for Cubs.",
+  "description": "Membership, Silver Wolf, Gold Wolf and Interest Badge practice quizzes for Cubs.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

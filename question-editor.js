@@ -55,7 +55,7 @@ function writeQuestionBankOverride() {
   catch { return false; }
 }
 function defaultEditorQuestion() {
-  const programme = ['MEM', 'SW', 'GW'].includes(selection.programme) ? selection.programme : 'SW';
+  const programme = catalogue.some((item) => item.id === selection.programme) ? selection.programme : 'SW';
   const advancementId = catalogue.find((item) => item.id === programme)?.categories[0]?.advancements[0]?.id || `${programme}-1`;
   return { id: `${programme.toLowerCase()}-question-${Date.now()}`, type: 'multiple-choice', programme, advancementId, question: '', options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'], answer: '', explanation: '' };
 }
@@ -63,7 +63,7 @@ function questionAdvancementLabel(question) {
   return (question.advancementIds || [question.advancementId]).filter(Boolean).map((id) => {
     for (const programme of catalogue) for (const category of programme.categories) {
       const item = category.advancements.find((advancement) => advancement.id === id);
-      if (item) return `${programme.id} ${item.number}`;
+      if (item) return programme.id === 'INT' ? `${programme.id} ${category.name} ${item.number}` : `${programme.id} ${item.number}`;
     }
     return id;
   }).join(', ');
@@ -292,7 +292,7 @@ function questionFromEditorDraft(draft) {
 }
 function validateEditorDraft(draft, question) {
   if (!question.id || !question.question) return 'Add a question ID and question text.';
-  if (!['MEM', 'SW', 'GW'].includes(question.programme)) return 'Choose Membership, SW or GW.';
+  if (!catalogue.some((programme) => programme.id === question.programme)) return 'Choose a badge group.';
   if (!draft.advancementIds.length) return 'Add at least one advancement ID.';
   const validIds = catalogue.flatMap((p) => p.categories.flatMap((category) => category.advancements.map((item) => item.id)));
   if (draft.advancementIds.some((id) => !validIds.includes(id))) return 'One or more advancement IDs are not in the catalogue.';

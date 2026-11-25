@@ -1,7 +1,8 @@
 {
-  "version": "2026-10-29.1",
+  "version": "2026-11-25.1",
   "files": [
     "questions.json",
+    "question-interest-fishing.json",
     "question-gw-memory.json",
     "sw-nature-cipher-pool.json"
   ]
